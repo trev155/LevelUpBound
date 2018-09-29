@@ -33,11 +33,11 @@ public class ExplosionManager : MonoBehaviour {
     /*
      * Wrapper functions for the Explode Coroutine. 
      */
-    public void TriggerTile(int row, int col) {
+    public void ExplodeTile(int row, int col) {
         StartCoroutine(Explode(row, col));
     }
 
-    public void TriggerTileRow(int row) {
+    public void ExplodeRow(int row) {
         StartCoroutine(Explode(row, 0));
         StartCoroutine(Explode(row, 1));
         StartCoroutine(Explode(row, 2));
@@ -45,7 +45,7 @@ public class ExplosionManager : MonoBehaviour {
         StartCoroutine(Explode(row, 4));
     }
 
-    public void TriggerTileColumn(int col) {
+    public void ExplodeColumn(int col) {
         StartCoroutine(Explode(0, col));
         StartCoroutine(Explode(1, col));
         StartCoroutine(Explode(2, col));
@@ -53,7 +53,7 @@ public class ExplosionManager : MonoBehaviour {
         StartCoroutine(Explode(4, col));
     }
 
-    public void TriggerTileDiagonalBottomLeft() {
+    public void ExplodeDiagonalBottomLeft() {
         StartCoroutine(Explode(4, 0));
         StartCoroutine(Explode(3, 1));
         StartCoroutine(Explode(2, 2));
@@ -61,7 +61,7 @@ public class ExplosionManager : MonoBehaviour {
         StartCoroutine(Explode(0, 4));
     }
 
-    public void TriggerTileDiagonalTopLeft() {
+    public void ExplodeTileDiagonalTopLeft() {
         StartCoroutine(Explode(0, 0));
         StartCoroutine(Explode(1, 1));
         StartCoroutine(Explode(2, 2));
@@ -69,12 +69,12 @@ public class ExplosionManager : MonoBehaviour {
         StartCoroutine(Explode(4, 4));
     }
 
-    public void TriggerPlus() {
-        TriggerTileColumn(2);
-        TriggerTileRow(2);
+    public void ExplodePlus() {
+        ExplodeColumn(2);
+        ExplodeRow(2);
     }
 
-    public void TriggerFourSquare(int section) {
+    public void ExplodeFourSquare(int section) {
         if (section == 0) {
             StartCoroutine(Explode(0, 0));
             StartCoroutine(Explode(0, 1));
