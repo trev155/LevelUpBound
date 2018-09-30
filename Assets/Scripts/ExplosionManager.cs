@@ -2,12 +2,15 @@
 using System.Collections;
 
 public class ExplosionManager : MonoBehaviour {
-    // Cooldown time for the explosion "animation"
+    // constants
     private const float explosionCooldown = 0.1f;
 
     // Reference to the game grid
     public MainGrid mainGrid;
     private GameObject[][] gameGrid;
+
+    // Reference to audio manager
+    public AudioManager audioManager;
 
 
     /*
@@ -91,6 +94,7 @@ public class ExplosionManager : MonoBehaviour {
      * Exploding the tile, means to destroy any unit on that tile.
      */
     private IEnumerator Explode(int row, int col) {
+        audioManager.overlordExplosion.Play();
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
         gameGrid[row][col].GetComponent<SpriteRenderer>().sortingOrder = 100;
         yield return new WaitForSeconds(explosionCooldown);

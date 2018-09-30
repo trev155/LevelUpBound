@@ -2,15 +2,20 @@
 using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
+    // Fields
     public float speed;
-    public float distance;
-
-    void Start () {}
+    public float distance;  
 	
+    /*
+     * Called on every frame.
+     */
 	void Update () {
         Movement();
     }
 
+    /*
+     * Listen for cross platform inputs.
+     */
     private void Movement() {
         if (CrossPlatformInputManager.GetButton("UpButton") || Input.GetAxisRaw("Vertical") > 0) {
             Debug.Log("Up Button");
