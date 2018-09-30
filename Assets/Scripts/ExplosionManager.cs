@@ -23,68 +23,68 @@ public class ExplosionManager : MonoBehaviour {
     /*
      * Wrapper functions for the Explode Coroutine. 
      */
-    public void ExplodeTile(int row, int col) {
-        StartCoroutine(Explode(row, col));
+    public void ExplodeTile(int row, int col, string explosionCode) {
+        StartCoroutine(Explode(row, col, explosionCode));
     }
 
-    public void ExplodeRow(int row) {
-        StartCoroutine(Explode(row, 0));
-        StartCoroutine(Explode(row, 1));
-        StartCoroutine(Explode(row, 2));
-        StartCoroutine(Explode(row, 3));
-        StartCoroutine(Explode(row, 4));
+    public void ExplodeRow(int row, string explosionCode) {
+        StartCoroutine(Explode(row, 0, explosionCode));
+        StartCoroutine(Explode(row, 1, explosionCode));
+        StartCoroutine(Explode(row, 2, explosionCode));
+        StartCoroutine(Explode(row, 3, explosionCode));
+        StartCoroutine(Explode(row, 4, explosionCode));
     }
 
-    public void ExplodeColumn(int col) {
-        StartCoroutine(Explode(0, col));
-        StartCoroutine(Explode(1, col));
-        StartCoroutine(Explode(2, col));
-        StartCoroutine(Explode(3, col));
-        StartCoroutine(Explode(4, col));
+    public void ExplodeColumn(int col, string explosionCode) {
+        StartCoroutine(Explode(0, col, explosionCode));
+        StartCoroutine(Explode(1, col, explosionCode));
+        StartCoroutine(Explode(2, col, explosionCode));
+        StartCoroutine(Explode(3, col, explosionCode));
+        StartCoroutine(Explode(4, col, explosionCode));
     }
 
-    public void ExplodeDiagonalBottomLeft() {
-        StartCoroutine(Explode(4, 0));
-        StartCoroutine(Explode(3, 1));
-        StartCoroutine(Explode(2, 2));
-        StartCoroutine(Explode(1, 3));
-        StartCoroutine(Explode(0, 4));
+    public void ExplodeDiagonalBottomLeft(string explosionCode) {
+        StartCoroutine(Explode(4, 0, explosionCode));
+        StartCoroutine(Explode(3, 1, explosionCode));
+        StartCoroutine(Explode(2, 2, explosionCode));
+        StartCoroutine(Explode(1, 3, explosionCode));
+        StartCoroutine(Explode(0, 4, explosionCode));
     }
 
-    public void ExplodeTileDiagonalTopLeft() {
-        StartCoroutine(Explode(0, 0));
-        StartCoroutine(Explode(1, 1));
-        StartCoroutine(Explode(2, 2));
-        StartCoroutine(Explode(3, 3));
-        StartCoroutine(Explode(4, 4));
+    public void ExplodeTileDiagonalTopLeft(string explosionCode) {
+        StartCoroutine(Explode(0, 0, explosionCode));
+        StartCoroutine(Explode(1, 1, explosionCode));
+        StartCoroutine(Explode(2, 2, explosionCode));
+        StartCoroutine(Explode(3, 3, explosionCode));
+        StartCoroutine(Explode(4, 4, explosionCode));
     }
 
-    public void ExplodePlus() {
-        ExplodeColumn(2);
-        ExplodeRow(2);
+    public void ExplodePlus(string explosionCode) {
+        ExplodeColumn(2, explosionCode);
+        ExplodeRow(2, explosionCode);
     }
 
-    public void ExplodeFourSquare(int section) {
+    public void ExplodeFourSquare(int section, string explosionCode) {
         if (section == 0) {
-            StartCoroutine(Explode(0, 0));
-            StartCoroutine(Explode(0, 1));
-            StartCoroutine(Explode(1, 0));
-            StartCoroutine(Explode(1, 1));
+            StartCoroutine(Explode(0, 0, explosionCode));
+            StartCoroutine(Explode(0, 1, explosionCode));
+            StartCoroutine(Explode(1, 0, explosionCode));
+            StartCoroutine(Explode(1, 1, explosionCode));
         } else if (section == 1) {
-            StartCoroutine(Explode(0, 3));
-            StartCoroutine(Explode(0, 4));
-            StartCoroutine(Explode(1, 3));
-            StartCoroutine(Explode(1, 4));
+            StartCoroutine(Explode(0, 3, explosionCode));
+            StartCoroutine(Explode(0, 4, explosionCode));
+            StartCoroutine(Explode(1, 3, explosionCode));
+            StartCoroutine(Explode(1, 4, explosionCode));
         } else if (section == 2) {
-            StartCoroutine(Explode(3, 0));
-            StartCoroutine(Explode(3, 1));
-            StartCoroutine(Explode(4, 0));
-            StartCoroutine(Explode(4, 1));
+            StartCoroutine(Explode(3, 0, explosionCode));
+            StartCoroutine(Explode(3, 1, explosionCode));
+            StartCoroutine(Explode(4, 0, explosionCode));
+            StartCoroutine(Explode(4, 1, explosionCode));
         } else if (section == 3) {
-            StartCoroutine(Explode(3, 3));
-            StartCoroutine(Explode(3, 4));
-            StartCoroutine(Explode(4, 3));
-            StartCoroutine(Explode(4, 4));
+            StartCoroutine(Explode(3, 3, explosionCode));
+            StartCoroutine(Explode(3, 4, explosionCode));
+            StartCoroutine(Explode(4, 3, explosionCode));
+            StartCoroutine(Explode(4, 4, explosionCode));
         }
     }
 
@@ -93,8 +93,8 @@ public class ExplosionManager : MonoBehaviour {
      * What this means, is to generate a sprite at that tile, and "explode" that tile.
      * Exploding the tile, means to destroy any unit on that tile.
      */
-    private IEnumerator Explode(int row, int col) {
-        audioManager.overlordExplosion.Play();
+    private IEnumerator Explode(int row, int col, string explosionCode) {
+        audioManager.PlaySoundEffect(explosionCode);
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
         gameGrid[row][col].GetComponent<SpriteRenderer>().sortingOrder = 100;
         yield return new WaitForSeconds(explosionCooldown);

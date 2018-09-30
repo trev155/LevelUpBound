@@ -55,25 +55,31 @@ public class LevelConstructor : MonoBehaviour {
 
         while (true) {
             foreach (string line in commands) {
+                string[] lineSplitBySpace = line.Split(' ');
+                string explosionCode = "";
+                if (lineSplitBySpace.Length > 1) {
+                    explosionCode = lineSplitBySpace[1];
+                }
+
                 if (line.StartsWith("R")) {
                     int row = int.Parse(line.Substring(1, 1));
-                    em.ExplodeRow(row);
+                    em.ExplodeRow(row, explosionCode);
                 } else if (line.StartsWith("C")) {
                     int col = int.Parse(line.Substring(1, 1));
-                    em.ExplodeColumn(col);
+                    em.ExplodeColumn(col, explosionCode);
                 } else if (line.StartsWith("FS")) {
                     int square = int.Parse(line.Substring(2, 1));
-                    em.ExplodeFourSquare(square);
+                    em.ExplodeFourSquare(square, explosionCode);
                 } else if (line.StartsWith("PLUS")) {
-                    em.ExplodePlus();
+                    em.ExplodePlus(explosionCode);
                 } else if (line.StartsWith("DIAG0")) {
-                    em.ExplodeDiagonalBottomLeft();
+                    em.ExplodeDiagonalBottomLeft(explosionCode);
                 } else if (line.StartsWith("DIAG1")) {
-                    em.ExplodeTileDiagonalTopLeft();
+                    em.ExplodeTileDiagonalTopLeft(explosionCode);
                 } else if (line.StartsWith("T")) {
                     int row = int.Parse(line.Substring(1, 1));
                     int col = int.Parse(line.Substring(3, 1));
-                    em.ExplodeTile(row, col);
+                    em.ExplodeTile(row, col, explosionCode);
                 } else if (line.StartsWith("W")) {
                     float time = int.Parse(line.Substring(1)) / 1000.0f;
                     yield return new WaitForSeconds(time);
