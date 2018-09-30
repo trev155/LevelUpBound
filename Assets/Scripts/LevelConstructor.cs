@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 
-public class LevelCollection : MonoBehaviour {
+public class LevelConstructor : MonoBehaviour {
     // Script that manages generating the explosions
     public ExplosionManager em;
     // Reference to the game grid
@@ -26,14 +26,14 @@ public class LevelCollection : MonoBehaviour {
      */
     public IEnumerator LoadLevelFromFilepath(string levelFilepath) {
         StreamReader inputStream = new StreamReader(levelFilepath);
-        List<string> lines = new List<string>();
+        List<string> commands = new List<string>();
         while (!inputStream.EndOfStream) {
             string line = inputStream.ReadLine();
-            lines.Add(line);
+            commands.Add(line);
         }
         inputStream.Close();
 
-        IEnumerator level = LevelConstructor(lines);
+        IEnumerator level = BuildLevel(commands);
         return level;
     }
 
@@ -43,7 +43,7 @@ public class LevelCollection : MonoBehaviour {
      * The Level is constructed by reading a list of string commands.
      * These commands are all pre-formatted so they can be interpreted properly.
      */
-    private IEnumerator LevelConstructor(List<string> commands) {
+    private IEnumerator BuildLevel(List<string> commands) {
         if (commands.Count == 0) {
             Debug.Log("Command list was empty, stop.");
             yield break;
@@ -106,7 +106,6 @@ public class LevelCollection : MonoBehaviour {
             if (line.StartsWith("W")) {
                 int wallRow = int.Parse(line.Substring(1, 1));
                 int wallCol = int.Parse(line.Substring(3, 1));
-                // create the wall prefab at the specified position
                 Instantiate(wallPrefab, gameGrid[wallRow][wallCol].transform);
             }
         }

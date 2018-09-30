@@ -2320,7 +2320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d5f9cd03631874e815257d0bf1ca11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Levels: {fileID: 1857752046}
+  levelConstructor: {fileID: 1857752046}
 --- !u!1 &1099513968
 GameObject:
   m_ObjectHideFlags: 0
@@ -4523,7 +4523,7 @@ GameObject:
   - component: {fileID: 1857752045}
   - component: {fileID: 1857752046}
   m_Layer: 0
-  m_Name: LevelCollection
+  m_Name: LevelConstructor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

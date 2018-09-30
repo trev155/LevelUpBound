@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour {
     private const string EXTERNAL_OBJECT_TYPE = "external";
 
     // Collection of all Levels
-    public LevelCollection Levels;
+    public LevelConstructor levelConstructor;
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
@@ -73,18 +73,18 @@ public class LevelManager : MonoBehaviour {
 
         // Load the current level data
         string levelFilepath = util.GetFilepathString(currentLevel, gameMode, levelPrefix, LEVEL_OBJECT_TYPE);
-        currentLevelCoroutine = Levels.LoadLevelFromFilepath(levelFilepath);
+        currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
 
         // Check if there are any other things we need to initialize for this level
         string externalsFilepath = util.GetFilepathString(currentLevel, gameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
         if (levelsWithExternals.Contains(currentLevel)) {
-            Levels.LoadExternalObjects(externalsFilepath);
+            levelConstructor.LoadExternalObjects(externalsFilepath);
         }
 
         // TODO - handle filenotfound exceptions
 
         // Start the current level
-        Levels.StartCoroutine(currentLevelCoroutine);
+        levelConstructor.StartCoroutine(currentLevelCoroutine);
 
         Debug.Log("Current Level: " + currentLevel);
     }
@@ -93,7 +93,7 @@ public class LevelManager : MonoBehaviour {
      * Stop the current level. 
      */
     private void StopLevel() {
-        Levels.StopCoroutine(currentLevelCoroutine);
+        levelConstructor.StopCoroutine(currentLevelCoroutine);
     }
 
     /*
@@ -101,7 +101,7 @@ public class LevelManager : MonoBehaviour {
      */
     public void AdvanceLevel() {
         StopLevel();
-        Levels.RemoveExternalObjects();
+        levelConstructor.RemoveExternalObjects();
         currentLevel += 1;
         StartCoroutine(PauseBetweenLevels());
         PlayLevel();
