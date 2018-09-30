@@ -4,12 +4,28 @@ using System.IO;
 using System.Collections.Generic;
 
 public class LevelCollection : MonoBehaviour {
+    // Script that manages generating the explosions
     public ExplosionManager em;
+    // Reference to the game grid
+    public MainGrid mainGrid;
+    private GameObject[][] gameGrid;
+    // Wall prefab
+    public Transform wallPrefab;
 
-    public IEnumerator LoadLevelFromFile(string filename) {
-        string prefix = "./Assets/Scripts/Levels";
-        string fullFilePath = prefix + "/" + filename;
-        StreamReader inputStream = new StreamReader(fullFilePath);
+
+    /*
+     * Initialization.
+     */
+    void Awake() {
+        gameGrid = mainGrid.GetGameGrid();
+    }
+
+    /*
+     * Load a level coroutine from a given filepath.
+     * The filepath points to a file containing level directives. We use this data to construct a Level coroutine.
+     */
+    public IEnumerator LoadLevelFromFilepath(string levelFilepath) {
+        StreamReader inputStream = new StreamReader(levelFilepath);
         List<string> lines = new List<string>();
         while (!inputStream.EndOfStream) {
             string line = inputStream.ReadLine();
@@ -63,4 +79,37 @@ public class LevelCollection : MonoBehaviour {
             }
         }
     }
+
+    /*
+     * For some levels, there are external objects that we need to implement.
+     * Specifically - walls and keys.
+     * 
+     * Read this data from an external file.
+     */
+    public void LoadExternalObjects(string externalsFilepath) {
+        StreamReader inputStream = new StreamReader(externalsFilepath);
+        List<string> lines = new List<string>();
+        while (!inputStream.EndOfStream) {
+            string line = inputStream.ReadLine();
+            lines.Add(line);
+        }
+        inputStream.Close();
+
+        ConstructExternalObjects(lines);
+    }
+
+    /*
+     * Construct external objects.
+     */
+    public void ConstructExternalObjects(List<string> data) {
+        foreach (string line in data) {
+            if (line.StartsWith("W")) {
+                int wallRow = int.Parse(line.Substring(1, 1));
+                int wallCol = int.Parse(line.Substring(3, 1));
+                // create the wall prefab at the specified position
+                // Instantiate(wallPrefab, gameGrid[wallRow][wallCol].transform);
+            }
+        }
+    }
+        
 }

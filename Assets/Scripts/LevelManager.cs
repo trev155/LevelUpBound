@@ -9,40 +9,82 @@ using UnityEngine;
 using System.Collections;
 
 public class LevelManager : MonoBehaviour {
+    // Constants
+    private const string LEVEL_CLASSIC_PREFIX = "./Assets/Scripts/Levels/Classic";
+    private const string LEVEL_CUSTOM_PREFIX = "./Assets/Scripts/Levels/Custom";
+    private const string EXTERNALS_CLASSIC_PREFIX = "./Assets/Scripts/ExternalObjects/Classic";
+    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets/Scripts/ExternalObjects/Custom";
+    private const string LEVEL_OBJECT_TYPE = "level";
+    private const string EXTERNAL_OBJECT_TYPE = "external";
+
     // Collection of all Levels
     public LevelCollection Levels;
 
+    // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 1;
+    private int currentLevel = 7;
 
-    public void Start() {
+    // Keep track of the game mode selected
+    private string gameMode;
+
+    // Utility functions
+    Util util = new Util();
+
+
+    /*
+     * Initialization
+     */
+    void Awake() {
+        gameMode = "classic";
+        // gameMode = "custom";
+
         PlayLevel();
     }
 
-    // Play the current level.
+    /*
+     * Play the current level.
+     */
     private void PlayLevel() {
-        string filename = "LS";
-        if (currentLevel < 100) {
-            filename += "0";
-            if (currentLevel < 10) {
-                filename += "0";
-            }
+        // File locations to read from depends on the game mode
+        string levelPrefix = "";
+        string externalsPrefix = "";
+        if (gameMode.Equals("classic")) {
+            levelPrefix = LEVEL_CLASSIC_PREFIX;
+            externalsPrefix = EXTERNALS_CLASSIC_PREFIX;
+        } else if (gameMode.Equals("custom")) {
+            levelPrefix = LEVEL_CUSTOM_PREFIX;
+            externalsPrefix = EXTERNALS_CUSTOM_PREFIX;
         }
-        filename += currentLevel;
-        
-        // TODO handle file not found error 
 
-        currentLevelCoroutine = Levels.LoadLevelFromFile(filename);
-        Debug.Log(currentLevelCoroutine);
+        // Load the current level data
+        string levelFilepath = util.GetFilepathString(currentLevel, gameMode, levelPrefix, LEVEL_OBJECT_TYPE);
+        currentLevelCoroutine = Levels.LoadLevelFromFilepath(levelFilepath);
+
+        // Check if there are any other things we need to initialize for this level
+        string externalsFilepath = util.GetFilepathString(currentLevel, gameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
+        if (currentLevel == 7) {
+            // TODO make this part cleaner
+            Levels.LoadExternalObjects(externalsFilepath);
+        }
+
+        // TODO - handle filenotfound exceptions
+
+        // Start the current level
         Levels.StartCoroutine(currentLevelCoroutine);
+
+        Debug.Log("Current Level: " + currentLevel);
     }
 
-    // Stop the current level. 
+    /*
+     * Stop the current level. 
+     */
     private void StopLevel() {
         Levels.StopCoroutine(currentLevelCoroutine);
     }
 
-    // Level completed. Stop the current level, and start the next one.
+    /*
+     * Level completed. Stop the current level, and start the next one.
+     */
     public void AdvanceLevel() {
         StopLevel();
         currentLevel += 1;
@@ -50,6 +92,9 @@ public class LevelManager : MonoBehaviour {
         PlayLevel();
     }
 
+    /*
+     * Wait for some time.
+     */
     private IEnumerator PauseBetweenLevels() {
         yield return new WaitForSeconds(2.0f);
     }

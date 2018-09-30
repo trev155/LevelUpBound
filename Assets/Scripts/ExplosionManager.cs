@@ -2,32 +2,19 @@
 using System.Collections;
 
 public class ExplosionManager : MonoBehaviour {
-    public GameObject MainGrid;
+    // Cooldown time for the explosion "animation"
+    private const float explosionCooldown = 0.1f;
+
+    // Reference to the game grid
+    public MainGrid mainGrid;
     private GameObject[][] gameGrid;
-    
-    private readonly int dimension = 5;
-    private readonly float explosionCooldown = 0.1f;
 
-    private AudioSource audioData;
 
-    private void Awake() {
-        // Initialize the gameGrid array
-        gameGrid = new GameObject[dimension][];
-        for (int i = 0; i < dimension; i++) {
-            gameGrid[i] = new GameObject[dimension];
-        }
-
-        // Populate the gameGrid array
-        int childIndex = 0;
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                gameGrid[i][j] = MainGrid.transform.GetChild(childIndex).gameObject;
-                childIndex++;
-            }
-        }
-
-        // Get audio component
-        audioData = GetComponent<AudioSource>();
+    /*
+     * Initialization
+     */
+    void Awake() {
+        gameGrid = mainGrid.GetGameGrid();
     }
 
     /*
@@ -104,7 +91,6 @@ public class ExplosionManager : MonoBehaviour {
      * Exploding the tile, means to destroy any unit on that tile.
      */
     private IEnumerator Explode(int row, int col) {
-        audioData.Play(0);
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
         gameGrid[row][col].GetComponent<SpriteRenderer>().sortingOrder = 100;
         yield return new WaitForSeconds(explosionCooldown);
