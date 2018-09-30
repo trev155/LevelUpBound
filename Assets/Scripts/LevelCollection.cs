@@ -1,299 +1,66 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
+using System.Collections.Generic;
 
 public class LevelCollection : MonoBehaviour {
     public ExplosionManager em;
 
-    public IEnumerator Level1() {
-        while (true) {
-            em.ExplodeRow(0);
-            yield return new WaitForSeconds(0.3f);
-            em.ExplodeRow(1);
-            yield return new WaitForSeconds(0.3f);
-            em.ExplodeRow(2);
-            yield return new WaitForSeconds(0.3f);
-            em.ExplodeRow(3);
-            yield return new WaitForSeconds(0.3f);
-            em.ExplodeRow(4);
-            yield return new WaitForSeconds(1.2f);
+    public IEnumerator LoadLevelFromFile(string filename) {
+        string prefix = "./Assets/Scripts/Levels";
+        string fullFilePath = prefix + "/" + filename;
+        StreamReader inputStream = new StreamReader(fullFilePath);
+        List<string> lines = new List<string>();
+        while (!inputStream.EndOfStream) {
+            string line = inputStream.ReadLine();
+            lines.Add(line);
         }
+        inputStream.Close();
+
+        IEnumerator level = LevelConstructor(lines);
+        return level;
     }
 
-    public IEnumerator Level2() {
-        while (true) {
-            em.ExplodeFourSquare(0);
-            em.ExplodeFourSquare(1);
-            em.ExplodeFourSquare(2);
-            em.ExplodeFourSquare(3);
-            yield return new WaitForSeconds(1.5f);
-            em.ExplodePlus();
-            yield return new WaitForSeconds(1.5f);            
+    /*
+     * The LevelConstructor is responsible for creating a Level. 
+     * It returns a Coroutine, which loops an obstacle sequence.
+     * The Level is constructed by reading a list of string commands.
+     * These commands are all pre-formatted so they can be interpreted properly.
+     */
+    private IEnumerator LevelConstructor(List<string> commands) {
+        if (commands.Count == 0) {
+            Debug.Log("Command list was empty, stop.");
+            yield break;
         }
-    }
 
-    public IEnumerator Level3() {
         while (true) {
-            em.ExplodeColumn(4);
-            yield return new WaitForSeconds(0.7f);
-            em.ExplodeColumn(3);
-            yield return new WaitForSeconds(0.7f);
-            em.ExplodeColumn(2);
-            yield return new WaitForSeconds(0.7f);
-            em.ExplodeColumn(1);
-            yield return new WaitForSeconds(0.7f);
-            em.ExplodeColumn(0);
-            yield return new WaitForSeconds(0.7f);
-        }
-    }
-
-    public IEnumerator Level4() {
-        while (true) {
-            em.ExplodeTile(0, 0);
-            em.ExplodeTile(0, 4);
-            em.ExplodeTile(4, 0);
-            em.ExplodeTile(4, 4);
-            yield return new WaitForSeconds(0.2f);
-            em.ExplodeTile(1, 1);
-            em.ExplodeTile(1, 3);
-            em.ExplodeTile(3, 1);
-            em.ExplodeTile(3, 3);
-            yield return new WaitForSeconds(0.2f);
-            em.ExplodeTile(2, 2);
-            yield return new WaitForSeconds(2.0f);
-        }
-    }
-
-    public IEnumerator Level5() {
-        while (true) {
-            em.ExplodeRow(0);
-            em.ExplodeRow(4);
-            yield return new WaitForSeconds(0.5f);
-            em.ExplodeRow(1);
-            em.ExplodeRow(3);
-            yield return new WaitForSeconds(1.2f);
-            em.ExplodeRow(2);
-            yield return new WaitForSeconds(2.0f);
-        }
-    }
-
-    public IEnumerator Level6() {
-        while (true) {
-            em.ExplodeTile(4, 0);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(3, 1);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(4, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(3, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 1);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 0);
-            yield return new WaitForSeconds(0.3f);
-            em.ExplodeTile(0, 1);
-            em.ExplodeTile(0, 2);
-            em.ExplodeTile(0, 3);
-            em.ExplodeTile(4, 1);
-            em.ExplodeTile(4, 2);
-            em.ExplodeTile(4, 3);
-            em.ExplodeTile(1, 0);
-            em.ExplodeTile(2, 0);
-            em.ExplodeTile(3, 0);
-            em.ExplodeTile(1, 4);
-            em.ExplodeTile(2, 4);
-            em.ExplodeTile(3, 4);
-            yield return new WaitForSeconds(3.0f);
-        }
-    }
-
-    // TODO this level requires walls
-    public IEnumerator Level7() {
-        while (true) {
-            em.ExplodeTile(0, 0);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    // TODO this level requires the vaccum
-    public IEnumerator Level8() {
-        while (true) {
-            em.ExplodeTile(0, 0);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-    
-    public IEnumerator Level9() {
-        while (true) {
-            em.ExplodeRow(0);
-            em.ExplodeRow(4);
-            em.ExplodeColumn(0);
-            em.ExplodeColumn(4);
-            yield return new WaitForSeconds(1.0f);
-            em.ExplodeRow(0);
-            em.ExplodeTile(1, 1);
-            em.ExplodeTile(1, 3);
-            em.ExplodeTile(2, 2);
-            yield return new WaitForSeconds(2.0f);
-        }
-    }
-
-    // TODO this level requires walls
-    public IEnumerator Level10() {
-        while (true) {
-            em.ExplodeTile(0, 0);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    // TODO this level requires walls
-    public IEnumerator Level11() {
-        while (true) {
-            em.ExplodeTile(0, 0);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    public IEnumerator Level12() {
-        while (true) {
-            em.ExplodeTile(4, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(3, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 1);
-            em.ExplodeTile(0, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 0);
-            em.ExplodeTile(0, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 0);
-            em.ExplodeTile(1, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 0);
-            em.ExplodeTile(2, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(3, 0);
-            em.ExplodeTile(3, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(4, 0);
-            em.ExplodeTile(4, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(4, 1);
-            em.ExplodeTile(4, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(3, 1);
-            em.ExplodeTile(3, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 1);
-            em.ExplodeTile(2, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 1);
-            em.ExplodeTile(1, 3);
-            yield return new WaitForSeconds(0.8f);
-        }
-    }
-
-    // TODO this level requires walls
-    public IEnumerator Level13() {
-        while (true) {
-            em.ExplodeTile(0, 0);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    public IEnumerator Level14() {
-        while (true) {
-            em.ExplodeTile(2, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 1);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 0);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 0);
-            em.ExplodeTile(1, 0);
-            em.ExplodeTile(3, 0);
-            em.ExplodeTile(4, 0);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 1);
-            em.ExplodeTile(1, 1);
-            em.ExplodeTile(3, 1);
-            em.ExplodeTile(4, 1);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 2);
-            em.ExplodeTile(1, 2);
-            em.ExplodeTile(3, 2);
-            em.ExplodeTile(4, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 3);
-            em.ExplodeTile(1, 3);
-            em.ExplodeTile(3, 3);
-            em.ExplodeTile(4, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 4);
-            em.ExplodeTile(1, 4);
-            em.ExplodeTile(3, 4);
-            em.ExplodeTile(4, 4);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    public IEnumerator Level15() {
-        while (true) {
-            em.ExplodeTile(0, 4);
-            em.ExplodeTile(4, 0);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 3);
-            em.ExplodeTile(4, 1);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 2);
-            em.ExplodeTile(4, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 1);
-            em.ExplodeTile(4, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(0, 0);
-            em.ExplodeTile(4, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 0);
-            em.ExplodeTile(3, 4);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 1);
-            em.ExplodeTile(3, 3);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 2);
-            em.ExplodeTile(3, 2);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 3);
-            em.ExplodeTile(3, 1);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(1, 4);
-            em.ExplodeTile(3, 0);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 4);
-            em.ExplodeTile(2, 0);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 3);
-            em.ExplodeTile(2, 1);
-            yield return new WaitForSeconds(0.1f);
-            em.ExplodeTile(2, 2);
-            yield return new WaitForSeconds(1.2f);
+            foreach (string line in commands) {
+                if (line.StartsWith("R")) {
+                    int row = int.Parse(line.Substring(1, 1));
+                    em.ExplodeRow(row);
+                } else if (line.StartsWith("C")) {
+                    int col = int.Parse(line.Substring(1, 1));
+                    em.ExplodeColumn(col);
+                } else if (line.StartsWith("FS")) {
+                    int square = int.Parse(line.Substring(2, 1));
+                    em.ExplodeFourSquare(square);
+                } else if (line.StartsWith("PLUS")) {
+                    em.ExplodePlus();
+                } else if (line.StartsWith("DIAG0")) {
+                    em.ExplodeDiagonalBottomLeft();
+                } else if (line.StartsWith("DIAG1")) {
+                    em.ExplodeTileDiagonalTopLeft();
+                } else if (line.StartsWith("T")) {
+                    int row = int.Parse(line.Substring(1, 1));
+                    int col = int.Parse(line.Substring(3, 1));
+                    em.ExplodeTile(row, col);
+                } else if (line.StartsWith("W")) {
+                    float time = int.Parse(line.Substring(1)) / 1000.0f;
+                    yield return new WaitForSeconds(time);
+                } else {
+                    Debug.Log("Unrecognizable command. This shouldn't happen, but is not fatal.");
+                }
+            }
         }
     }
 }
