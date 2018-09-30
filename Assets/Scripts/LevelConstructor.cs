@@ -25,6 +25,10 @@ public class LevelConstructor : MonoBehaviour {
      * The filepath points to a file containing level directives. We use this data to construct a Level coroutine.
      */
     public IEnumerator LoadLevelFromFilepath(string levelFilepath) {
+        if (!File.Exists(levelFilepath)) {
+            Debug.Log("Filepath not found. This indicates the level does not exist: " + levelFilepath);
+            return null;
+        }
         StreamReader inputStream = new StreamReader(levelFilepath);
         List<string> commands = new List<string>();
         while (!inputStream.EndOfStream) {

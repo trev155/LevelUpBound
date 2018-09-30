@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 10;
+    private int currentLevel = 15;
 
     // Keep track of the game mode selected
     private string gameMode;
@@ -74,6 +74,9 @@ public class LevelManager : MonoBehaviour {
         // Load the current level data
         string levelFilepath = util.GetFilepathString(currentLevel, gameMode, levelPrefix, LEVEL_OBJECT_TYPE);
         currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
+        if (currentLevelCoroutine == null) {
+            return;
+        }
 
         // Check if there are any other things we need to initialize for this level
         string externalsFilepath = util.GetFilepathString(currentLevel, gameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
