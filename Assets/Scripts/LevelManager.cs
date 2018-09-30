@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour {
     /*
      * Initialization
      */
-    void Awake() {
+    void Start() {
         gameMode = "classic";
         // gameMode = "custom";
 
