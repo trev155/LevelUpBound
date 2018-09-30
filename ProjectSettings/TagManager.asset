@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameTile
+  - External
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
     // Constants
@@ -22,7 +23,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 7;
+    private int currentLevel = 10;
 
     // Keep track of the game mode selected
     private string gameMode;
@@ -30,9 +31,23 @@ public class LevelManager : MonoBehaviour {
     // Utility functions
     Util util = new Util();
 
+    // Levels that require external objects
+    HashSet<int> levelsWithExternals = new HashSet<int>();
+
 
     /*
-     * Initialization
+     * Initialization.
+     */
+    private void Awake() {
+        // TODO probably should read these levels from file, and they will be different for the 2 game modes
+        int[] levelsWithExternalsArr = { 7, 10, 11, 13 };
+        foreach (int i in levelsWithExternalsArr) {
+            levelsWithExternals.Add(i);
+        }
+    }
+
+    /*
+     * Startup.
      */
     void Start() {
         gameMode = "classic";
@@ -62,8 +77,7 @@ public class LevelManager : MonoBehaviour {
 
         // Check if there are any other things we need to initialize for this level
         string externalsFilepath = util.GetFilepathString(currentLevel, gameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
-        if (currentLevel == 7) {
-            // TODO make this part cleaner
+        if (levelsWithExternals.Contains(currentLevel)) {
             Levels.LoadExternalObjects(externalsFilepath);
         }
 
@@ -87,6 +101,7 @@ public class LevelManager : MonoBehaviour {
      */
     public void AdvanceLevel() {
         StopLevel();
+        Levels.RemoveExternalObjects();
         currentLevel += 1;
         StartCoroutine(PauseBetweenLevels());
         PlayLevel();

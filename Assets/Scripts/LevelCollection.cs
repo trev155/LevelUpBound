@@ -107,9 +107,19 @@ public class LevelCollection : MonoBehaviour {
                 int wallRow = int.Parse(line.Substring(1, 1));
                 int wallCol = int.Parse(line.Substring(3, 1));
                 // create the wall prefab at the specified position
-                // Instantiate(wallPrefab, gameGrid[wallRow][wallCol].transform);
+                Instantiate(wallPrefab, gameGrid[wallRow][wallCol].transform);
             }
         }
     }
-        
+
+    /*
+     * Remove all external objects.
+     */
+     public void RemoveExternalObjects() {
+        GameObject[] gameObjectsToRemove;
+        gameObjectsToRemove = GameObject.FindGameObjectsWithTag("External");
+        foreach (GameObject obj in gameObjectsToRemove) {
+            Destroy(obj);
+        }
+    }   
 }
