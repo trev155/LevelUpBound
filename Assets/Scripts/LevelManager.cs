@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 1;
+    private int currentLevel = 15;
 
     // Keep track of the game mode selected
     private string gameMode;
@@ -34,25 +34,34 @@ public class LevelManager : MonoBehaviour {
     // Levels that require external objects
     HashSet<int> levelsWithExternals = new HashSet<int>();
 
-
     /*
      * Initialization.
      */
     private void Awake() {
+        // gameMode = "classic";
+        gameMode = "custom";
+
         // TODO probably should read these levels from file, and they will be different for the 2 game modes
-        int[] levelsWithExternalsArr = { 7, 10, 11, 13 };
-        foreach (int i in levelsWithExternalsArr) {
-            levelsWithExternals.Add(i);
+        if (gameMode.Equals("classic")) {
+            levelsWithExternals.Add(7);
+            levelsWithExternals.Add(10);
+            levelsWithExternals.Add(11);
+            levelsWithExternals.Add(13);
+        } else if (gameMode.Equals("custom")) {
+            levelsWithExternals.Add(11);
+            levelsWithExternals.Add(12);
+            levelsWithExternals.Add(13);
+            levelsWithExternals.Add(14);
+            levelsWithExternals.Add(15);
         }
+        
     }
+
 
     /*
      * Startup.
      */
     void Start() {
-        gameMode = "classic";
-        // gameMode = "custom";
-
         PlayLevel();
     }
 
