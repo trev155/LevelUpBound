@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour {
     private const string LEVEL_CLASSIC_PREFIX = "./Assets/Data/Levels/Classic";
     private const string LEVEL_CUSTOM_PREFIX = "./Assets/Data/Levels/Custom";
     private const string EXTERNALS_CLASSIC_PREFIX = "./Assets/Data/ExternalObjects/Classic";
-    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets/Data/ExternalObjects/Custom";
+    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets//ExternalObjects/Custom";
     private const string LEVEL_OBJECT_TYPE = "level";
     private const string EXTERNAL_OBJECT_TYPE = "external";
 
@@ -38,6 +38,10 @@ public class LevelManager : MonoBehaviour {
      * Initialization.
      */
     private void Awake() {
+        if (gameMode == null) {
+            gameMode = "classic";
+        }
+
         // TODO probably should read these levels from file, and they will be different for the 2 game modes
         if (gameMode.Equals("classic")) {
             levelsWithExternals.Add(7);
@@ -51,7 +55,6 @@ public class LevelManager : MonoBehaviour {
             levelsWithExternals.Add(14);
             levelsWithExternals.Add(15);
         }
-        
     }
 
 

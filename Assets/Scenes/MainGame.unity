@@ -4544,6 +4544,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainGrid: {fileID: 1659473013}
   audioManager: {fileID: 2059849658}
+  explosionArchonPrefab: {fileID: 4497394074330666, guid: 9e588141307509a40b5d838841d466fb,
+    type: 2}
+  explosionObserverPrefab: {fileID: 4407363501834000, guid: fee3d493109abea42915605923fac598,
+    type: 2}
+  explosionReaverPrefab: {fileID: 4100766453817870, guid: 78351939d4a659340a5f90d9e033003c,
+    type: 2}
+  explosionScoutPrefab: {fileID: 4497394074330666, guid: 9e588141307509a40b5d838841d466fb,
+    type: 2}
+  explosionDtPrefab: {fileID: 4497394074330666, guid: 9e588141307509a40b5d838841d466fb,
+    type: 2}
+  explosionZealotPrefab: {fileID: 4497394074330666, guid: 9e588141307509a40b5d838841d466fb,
+    type: 2}
+  explosionOverlordPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+    type: 2}
 --- !u!1 &1848348956
 GameObject:
   m_ObjectHideFlags: 0
@@ -7665,9 +7679,9 @@ MonoBehaviour:
   archonExplosion: {fileID: 1590178434}
   observerExplosion: {fileID: 206246346}
   reaverExplosion: {fileID: 1713685569}
-  scoutExplosion: {fileID: 0}
-  darktempExplosion: {fileID: 0}
-  zealotExplosion: {fileID: 0}
+  scoutExplosion: {fileID: 1874185629}
+  darktempExplosion: {fileID: 2067487944}
+  zealotExplosion: {fileID: 887897824}
   overlordExplosion: {fileID: 1945208902}
 --- !u!1 &2067487942
 GameObject:

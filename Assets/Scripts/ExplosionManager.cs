@@ -12,6 +12,15 @@ public class ExplosionManager : MonoBehaviour {
     // Reference to audio manager
     public AudioManager audioManager;
 
+    // Explosion sprite prefabs
+    public Transform explosionArchonPrefab;
+    public Transform explosionObserverPrefab;
+    public Transform explosionReaverPrefab;
+    public Transform explosionScoutPrefab;
+    public Transform explosionDtPrefab;
+    public Transform explosionZealotPrefab;
+    public Transform explosionOverlordPrefab;
+
 
     /*
      * Initialization
@@ -96,9 +105,41 @@ public class ExplosionManager : MonoBehaviour {
     private IEnumerator Explode(int row, int col, string explosionCode) {
         audioManager.PlaySoundEffect(explosionCode);
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
-        gameGrid[row][col].GetComponent<SpriteRenderer>().sortingOrder = 100;
+        Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
         yield return new WaitForSeconds(explosionCooldown);
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = false;
-        gameGrid[row][col].GetComponent<SpriteRenderer>().sortingOrder = 0;
+        Destroy(explosion.gameObject);
+    }
+
+
+    private Transform InstantiateUnit(string code, Transform location) {
+        Transform explosion;
+        switch (code) {
+            case "AR":
+                explosion = Instantiate(explosionArchonPrefab, location);
+                break;
+            case "OB":
+                explosion = Instantiate(explosionObserverPrefab, location);
+                break;
+            case "RV":
+                explosion = Instantiate(explosionReaverPrefab, location);
+                break;
+            case "SC":
+                explosion = Instantiate(explosionScoutPrefab, location);
+                break;
+            case "DT":
+                explosion = Instantiate(explosionDtPrefab, location);
+                break;
+            case "ZL":
+                explosion = Instantiate(explosionZealotPrefab, location);
+                break;
+            case "OV":
+                explosion = Instantiate(explosionOverlordPrefab, location);
+                break;
+            default:
+                explosion = Instantiate(explosionArchonPrefab, location);
+                break;
+        }
+        return explosion;
     }
 }
