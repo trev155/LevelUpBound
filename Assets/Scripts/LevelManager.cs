@@ -11,10 +11,10 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
     // Constants
-    private const string LEVEL_CLASSIC_PREFIX = "./Assets/Scripts/Levels/Classic";
-    private const string LEVEL_CUSTOM_PREFIX = "./Assets/Scripts/Levels/Custom";
-    private const string EXTERNALS_CLASSIC_PREFIX = "./Assets/Scripts/ExternalObjects/Classic";
-    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets/Scripts/ExternalObjects/Custom";
+    private const string LEVEL_CLASSIC_PREFIX = "./Assets/Data/Levels/Classic";
+    private const string LEVEL_CUSTOM_PREFIX = "./Assets/Data/Levels/Custom";
+    private const string EXTERNALS_CLASSIC_PREFIX = "./Assets/Data/ExternalObjects/Classic";
+    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets/Data/ExternalObjects/Custom";
     private const string LEVEL_OBJECT_TYPE = "level";
     private const string EXTERNAL_OBJECT_TYPE = "external";
 
@@ -23,10 +23,10 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 15;
+    private int currentLevel = 1;
 
     // Keep track of the game mode selected
-    private string gameMode;
+    private string gameMode = GameContext.GameMode;
 
     // Utility functions
     Util util = new Util();
@@ -38,9 +38,6 @@ public class LevelManager : MonoBehaviour {
      * Initialization.
      */
     private void Awake() {
-        // gameMode = "classic";
-        gameMode = "custom";
-
         // TODO probably should read these levels from file, and they will be different for the 2 game modes
         if (gameMode.Equals("classic")) {
             levelsWithExternals.Add(7);
