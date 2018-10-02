@@ -9,8 +9,10 @@ public class LevelConstructor : MonoBehaviour {
     // Reference to the game grid
     public MainGrid mainGrid;
     private GameObject[][] gameGrid;
-    // Wall prefab
+    // Wall prefabs
     public Transform wallPrefab;
+    public Transform smallWallLeftPrefab;
+    public Transform smallWallRightPrefab;
 
 
     /*
@@ -113,10 +115,20 @@ public class LevelConstructor : MonoBehaviour {
      */
     public void ConstructExternalObjects(List<string> data) {
         foreach (string line in data) {
+            int wallRow; 
+            int wallCol;
             if (line.StartsWith("W")) {
-                int wallRow = int.Parse(line.Substring(1, 1));
-                int wallCol = int.Parse(line.Substring(3, 1));
+                wallRow = int.Parse(line.Substring(1, 1));
+                wallCol = int.Parse(line.Substring(3, 1));
                 Instantiate(wallPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("SWL")) {
+                wallRow = int.Parse(line.Substring(3, 1));
+                wallCol = int.Parse(line.Substring(5, 1));
+                Instantiate(smallWallLeftPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("SWR")) {
+                wallRow = int.Parse(line.Substring(3, 1));
+                wallCol = int.Parse(line.Substring(5, 1));
+                Instantiate(smallWallRightPrefab, gameGrid[wallRow][wallCol].transform);
             }
         }
     }

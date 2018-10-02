@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 1;
+    private int currentLevel = 16;
 
     // Keep track of the game mode selected
     private string gameMode = GameContext.GameMode;
@@ -48,6 +48,7 @@ public class LevelManager : MonoBehaviour {
             levelsWithExternals.Add(10);
             levelsWithExternals.Add(11);
             levelsWithExternals.Add(13);
+            levelsWithExternals.Add(16);
         } else if (gameMode.Equals("custom")) {
             levelsWithExternals.Add(11);
             levelsWithExternals.Add(12);
