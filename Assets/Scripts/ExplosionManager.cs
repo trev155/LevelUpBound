@@ -121,6 +121,10 @@ public class ExplosionManager : MonoBehaviour {
             case "OB":
                 explosion = Instantiate(explosionObserverPrefab, location);
                 break;
+            case "OBV":
+                explosion = Instantiate(explosionObserverPrefab, location);
+                Vaccum();
+                break;
             case "RV":
                 explosion = Instantiate(explosionReaverPrefab, location);
                 break;
@@ -141,5 +145,13 @@ public class ExplosionManager : MonoBehaviour {
                 break;
         }
         return explosion;
+    }
+
+    private void Vaccum() {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 playerPosition = player.transform.position;
+        if (playerPosition.x > -2.7 && playerPosition.x < 2.7 && playerPosition.y > -2.7 && playerPosition.y < 2.7) {
+            player.transform.position = Vector2.MoveTowards(player.transform.position, new Vector2(gameGrid[2][2].transform.position.x, gameGrid[2][2].transform.position.y), Time.deltaTime * 12);
+        }
     }
 }

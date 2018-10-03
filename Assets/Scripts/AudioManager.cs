@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour {
                 archonExplosion.Play();
                 break;
             case "OB":
+            case "OBV":
                 observerExplosion.Play();
                 break;
             case "RV":
