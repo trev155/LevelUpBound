@@ -77,7 +77,7 @@ public class LevelConstructor : MonoBehaviour {
                 } else if (line.StartsWith("DIAG0")) {
                     em.ExplodeDiagonalBottomLeft(explosionCode);
                 } else if (line.StartsWith("DIAG1")) {
-                    em.ExplodeTileDiagonalTopLeft(explosionCode);
+                    em.ExplodeDiagonalTopLeft(explosionCode);
                 } else if (line.StartsWith("T")) {
                     int row = int.Parse(line.Substring(1, 1));
                     int col = int.Parse(line.Substring(3, 1));

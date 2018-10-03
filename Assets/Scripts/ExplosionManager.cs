@@ -14,13 +14,30 @@ public class ExplosionManager : MonoBehaviour {
 
     // Explosion sprite prefabs
     public Transform explosionArchonPrefab;
+    public Transform explosionDarkArchonPrefab;
+    public Transform explosionDefilerPrefab;
+    public Transform explosionDevourerPrefab;
+    public Transform explosionDragoonPrefab;
+    public Transform explosionDropshipPrefab;
+    public Transform explosionDtempPrefab;
+    public Transform explosionGuardianPrefab;
+    public Transform explosionHydraPrefab;
+    public Transform explosionLurkerPrefab;
+    public Transform explosionMarinePrefab;
     public Transform explosionObserverPrefab;
+    public Transform explosionOverlordPrefab;
+    public Transform explosionProbePrefab;
+    public Transform explosionQueenPrefab;
     public Transform explosionReaverPrefab;
     public Transform explosionScoutPrefab;
-    public Transform explosionDtPrefab;
+    public Transform explosionScvPrefab;
+    public Transform explosionShuttlePrefab;
+    public Transform explosionTankPrefab;
+    public Transform explosionUltraliskPrefab;
+    public Transform explosionValkPrefab;
+    public Transform explosionVesselPrefab;
+    public Transform explosionWraithPrefab;
     public Transform explosionZealotPrefab;
-    public Transform explosionOverlordPrefab;
-
 
     /*
      * Initialization
@@ -52,7 +69,7 @@ public class ExplosionManager : MonoBehaviour {
         StartCoroutine(Explode(4, col, explosionCode));
     }
 
-    public void ExplodeDiagonalBottomLeft(string explosionCode) {
+    public void ExplodeDiagonalTopLeft(string explosionCode) {
         StartCoroutine(Explode(4, 0, explosionCode));
         StartCoroutine(Explode(3, 1, explosionCode));
         StartCoroutine(Explode(2, 2, explosionCode));
@@ -60,7 +77,7 @@ public class ExplosionManager : MonoBehaviour {
         StartCoroutine(Explode(0, 4, explosionCode));
     }
 
-    public void ExplodeTileDiagonalTopLeft(string explosionCode) {
+    public void ExplodeDiagonalBottomLeft(string explosionCode) {
         StartCoroutine(Explode(0, 0, explosionCode));
         StartCoroutine(Explode(1, 1, explosionCode));
         StartCoroutine(Explode(2, 2, explosionCode));
@@ -118,6 +135,36 @@ public class ExplosionManager : MonoBehaviour {
             case "AR":
                 explosion = Instantiate(explosionArchonPrefab, location);
                 break;
+            case "DA":
+                explosion = Instantiate(explosionDarkArchonPrefab, location);
+                break;
+            case "DF":
+                explosion = Instantiate(explosionDefilerPrefab, location);
+                break;
+            case "DV":
+                explosion = Instantiate(explosionDevourerPrefab, location);
+                break;
+            case "DG":
+                explosion = Instantiate(explosionDragoonPrefab, location);
+                break;
+            case "DS":
+                explosion = Instantiate(explosionDropshipPrefab, location);
+                break;
+            case "DT":
+                explosion = Instantiate(explosionDtempPrefab, location);
+                break;
+            case "GD":
+                explosion = Instantiate(explosionGuardianPrefab, location);
+                break;
+            case "HY":
+                explosion = Instantiate(explosionHydraPrefab, location);
+                break;
+            case "LU":
+                explosion = Instantiate(explosionLurkerPrefab, location);
+                break;
+            case "MA":
+                explosion = Instantiate(explosionMarinePrefab, location);
+                break;
             case "OB":
                 explosion = Instantiate(explosionObserverPrefab, location);
                 break;
@@ -125,20 +172,44 @@ public class ExplosionManager : MonoBehaviour {
                 explosion = Instantiate(explosionObserverPrefab, location);
                 Vaccum();
                 break;
+            case "OV":
+                explosion = Instantiate(explosionOverlordPrefab, location);
+                break;
+            case "PB":
+                explosion = Instantiate(explosionProbePrefab, location);
+                break;
+            case "QU":
+                explosion = Instantiate(explosionQueenPrefab, location);
+                break;
             case "RV":
                 explosion = Instantiate(explosionReaverPrefab, location);
                 break;
             case "SC":
                 explosion = Instantiate(explosionScoutPrefab, location);
                 break;
-            case "DT":
-                explosion = Instantiate(explosionDtPrefab, location);
+            case "SV":
+                explosion = Instantiate(explosionScvPrefab, location);
+                break;
+            case "SH":
+                explosion = Instantiate(explosionShuttlePrefab, location);
+                break;
+            case "TK":
+                explosion = Instantiate(explosionTankPrefab, location);
+                break;
+            case "UL":
+                explosion = Instantiate(explosionUltraliskPrefab, location);
+                break;
+            case "VK":
+                explosion = Instantiate(explosionValkPrefab, location);
+                break;
+            case "VS":
+                explosion = Instantiate(explosionVesselPrefab, location);
+                break;
+            case "WR":
+                explosion = Instantiate(explosionWraithPrefab, location);
                 break;
             case "ZL":
                 explosion = Instantiate(explosionZealotPrefab, location);
-                break;
-            case "OV":
-                explosion = Instantiate(explosionOverlordPrefab, location);
                 break;
             default:
                 explosion = Instantiate(explosionArchonPrefab, location);
