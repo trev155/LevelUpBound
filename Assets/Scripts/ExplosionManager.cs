@@ -33,6 +33,7 @@ public class ExplosionManager : MonoBehaviour {
     public Transform explosionScvPrefab;
     public Transform explosionShuttlePrefab;
     public Transform explosionTankPrefab;
+    public Transform explosionTankSiegePrefab;
     public Transform explosionUltraliskPrefab;
     public Transform explosionValkPrefab;
     public Transform explosionVesselPrefab;
@@ -195,6 +196,9 @@ public class ExplosionManager : MonoBehaviour {
                 break;
             case "TK":
                 explosion = Instantiate(explosionTankPrefab, location);
+                break;
+            case "TS":
+                explosion = Instantiate(explosionTankSiegePrefab, location);
                 break;
             case "UL":
                 explosion = Instantiate(explosionUltraliskPrefab, location);

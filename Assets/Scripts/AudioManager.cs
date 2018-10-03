@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource scvExplosion;
     public AudioSource shuttleExplosion;
     public AudioSource tankExplosion;
+    public AudioSource tankSiegeExplosion;
     public AudioSource ultraliskExplosion;
     public AudioSource valkExplosion;
     public AudioSource vesselExplosion;
@@ -48,6 +49,7 @@ public class AudioManager : MonoBehaviour {
         scvExplosion = this.transform.GetChild(0).Find("Scv").GetComponent<AudioSource>();
         shuttleExplosion = this.transform.GetChild(0).Find("Shuttle").GetComponent<AudioSource>();
         tankExplosion = this.transform.GetChild(0).Find("Tank").GetComponent<AudioSource>();
+        tankSiegeExplosion = this.transform.GetChild(0).Find("TankSiege").GetComponent<AudioSource>();
         ultraliskExplosion = this.transform.GetChild(0).Find("Ultralisk").GetComponent<AudioSource>();
         valkExplosion = this.transform.GetChild(0).Find("Valk").GetComponent<AudioSource>();
         vesselExplosion = this.transform.GetChild(0).Find("Vessel").GetComponent<AudioSource>();
@@ -107,11 +109,17 @@ public class AudioManager : MonoBehaviour {
             case "SC":
                 scoutExplosion.Play();
                 break;
+            case "SV":
+                scvExplosion.Play();
+                break;
             case "SH":
                 shuttleExplosion.Play();
                 break;
             case "TK":
                 tankExplosion.Play();
+                break;
+            case "TS":
+                tankSiegeExplosion.Play();
                 break;
             case "UL":
                 ultraliskExplosion.Play();
