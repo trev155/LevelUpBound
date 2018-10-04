@@ -83,6 +83,8 @@
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
+    <None Include="Assets\Data\ExternalObjects\classicExternalsList.txt" />
+    <None Include="Assets\Data\ExternalObjects\customExternalsList.txt" />
     <None Include="Assets\Imported\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Trevor/Documents/LevelUpBound/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

@@ -8,6 +8,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class LevelManager : MonoBehaviour {
     // Constants
@@ -15,6 +16,8 @@ public class LevelManager : MonoBehaviour {
     private const string LEVEL_CUSTOM_PREFIX = "./Assets/Data/Levels/Custom";
     private const string EXTERNALS_CLASSIC_PREFIX = "./Assets/Data/ExternalObjects/Classic";
     private const string EXTERNALS_CUSTOM_PREFIX = "./Assets//ExternalObjects/Custom";
+    private const string LEVELS_WITH_EXTERNALS_CLASSIC = "./Assets/Data/ExternalObjects/classicExternalsList.txt";
+    private const string LEVELS_WITH_EXTERNALS_CUSTOM = "./Assets/Data/ExternalObjects/customExternalsList.txt";
     private const string LEVEL_OBJECT_TYPE = "level";
     private const string EXTERNAL_OBJECT_TYPE = "external";
 
@@ -23,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 16;
+    private int currentLevel = 1;
 
     // Keep track of the game mode selected
     private string gameMode = GameContext.GameMode;
@@ -38,24 +41,22 @@ public class LevelManager : MonoBehaviour {
      * Initialization.
      */
     private void Awake() {
+        // default game mode
         if (gameMode == null) {
             gameMode = "classic";
         }
 
-        // TODO probably should read these levels from file, and they will be different for the 2 game modes
-        if (gameMode.Equals("classic")) {
-            levelsWithExternals.Add(7);
-            levelsWithExternals.Add(10);
-            levelsWithExternals.Add(11);
-            levelsWithExternals.Add(13);
-            levelsWithExternals.Add(16);
-            levelsWithExternals.Add(22);
-        } else if (gameMode.Equals("custom")) {
-            levelsWithExternals.Add(11);
-            levelsWithExternals.Add(12);
-            levelsWithExternals.Add(13);
-            levelsWithExternals.Add(14);
-            levelsWithExternals.Add(15);
+        // load data regarding which levels have external objects
+        string datafile = "";
+        if (gameMode == "classic") {
+            datafile = LEVELS_WITH_EXTERNALS_CLASSIC;
+        } else if (gameMode == "custom") {
+            datafile = LEVELS_WITH_EXTERNALS_CUSTOM;
+        }
+        StreamReader inputStream = new StreamReader(datafile);
+        while (!inputStream.EndOfStream) {
+            string line = inputStream.ReadLine();
+            levelsWithExternals.Add(int.Parse(line));
         }
     }
 
