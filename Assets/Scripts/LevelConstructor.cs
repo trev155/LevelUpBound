@@ -11,9 +11,10 @@ public class LevelConstructor : MonoBehaviour {
     private GameObject[][] gameGrid;
     // Wall prefabs
     public Transform wallPrefab;
-    public Transform smallWallLeftPrefab;
-    public Transform smallWallRightPrefab;
-
+    public Transform smallWallBottomLeftPrefab;
+    public Transform smallWallBottomRightPrefab;
+    public Transform smallWallTopLeftPrefab;
+    public Transform smallWallTopRightPrefab;
 
     /*
      * Initialization.
@@ -121,14 +122,22 @@ public class LevelConstructor : MonoBehaviour {
                 wallRow = int.Parse(line.Substring(1, 1));
                 wallCol = int.Parse(line.Substring(3, 1));
                 Instantiate(wallPrefab, gameGrid[wallRow][wallCol].transform);
-            } else if (line.StartsWith("SWL")) {
-                wallRow = int.Parse(line.Substring(3, 1));
-                wallCol = int.Parse(line.Substring(5, 1));
-                Instantiate(smallWallLeftPrefab, gameGrid[wallRow][wallCol].transform);
-            } else if (line.StartsWith("SWR")) {
-                wallRow = int.Parse(line.Substring(3, 1));
-                wallCol = int.Parse(line.Substring(5, 1));
-                Instantiate(smallWallRightPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("SWBL")) {
+                wallRow = int.Parse(line.Substring(4, 1));
+                wallCol = int.Parse(line.Substring(6, 1));
+                Instantiate(smallWallBottomLeftPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("SWBR")) {
+                wallRow = int.Parse(line.Substring(4, 1));
+                wallCol = int.Parse(line.Substring(6, 1));
+                Instantiate(smallWallBottomRightPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("SWTL")) {
+                wallRow = int.Parse(line.Substring(4, 1));
+                wallCol = int.Parse(line.Substring(6, 1));
+                Instantiate(smallWallTopLeftPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("SWTR")) {
+                wallRow = int.Parse(line.Substring(4, 1));
+                wallCol = int.Parse(line.Substring(6, 1));
+                Instantiate(smallWallTopRightPrefab, gameGrid[wallRow][wallCol].transform);
             }
         }
     }

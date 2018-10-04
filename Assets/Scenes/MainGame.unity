@@ -6863,9 +6863,13 @@ MonoBehaviour:
   em: {fileID: 1743551674}
   mainGrid: {fileID: 1659473013}
   wallPrefab: {fileID: 4605398366574656, guid: 910a4d6e95eebc241b1dc1e1bc02866e, type: 2}
-  smallWallLeftPrefab: {fileID: 4605398366574656, guid: cefe12b80b1f485438d9b46950e33e4e,
+  smallWallBottomLeftPrefab: {fileID: 4605398366574656, guid: cefe12b80b1f485438d9b46950e33e4e,
     type: 2}
-  smallWallRightPrefab: {fileID: 4605398366574656, guid: 9960650fe6a20084d9d7d72c74586adb,
+  smallWallBottomRightPrefab: {fileID: 4605398366574656, guid: 9960650fe6a20084d9d7d72c74586adb,
+    type: 2}
+  smallWallTopLeftPrefab: {fileID: 4605398366574656, guid: 51512c78a8ae4df479039d46a4dc0645,
+    type: 2}
+  smallWallTopRightPrefab: {fileID: 4605398366574656, guid: b75ff81a8ca08134c88c337aed52a9d5,
     type: 2}
 --- !u!1 &1874185627
 GameObject:

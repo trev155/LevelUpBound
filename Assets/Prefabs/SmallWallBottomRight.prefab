@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212777111113808194}
   - component: {fileID: 61771609466860954}
   m_Layer: 0
-  m_Name: SmallWallRight
+  m_Name: SmallWallBottomRight
   m_TagString: External
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
