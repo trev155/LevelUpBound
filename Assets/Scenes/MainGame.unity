@@ -6871,6 +6871,8 @@ MonoBehaviour:
     type: 2}
   smallWallTopRightPrefab: {fileID: 4605398366574656, guid: b75ff81a8ca08134c88c337aed52a9d5,
     type: 2}
+  movingObjectPrefab: {fileID: 4065769450059900, guid: a8368ab544a56b1409b8c6d5a31b6a10,
+    type: 2}
 --- !u!1 &1874185627
 GameObject:
   m_ObjectHideFlags: 0

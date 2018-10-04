@@ -15,6 +15,7 @@ public class LevelConstructor : MonoBehaviour {
     public Transform smallWallBottomRightPrefab;
     public Transform smallWallTopLeftPrefab;
     public Transform smallWallTopRightPrefab;
+    public Transform movingObjectPrefab;
 
     /*
      * Initialization.
@@ -138,6 +139,13 @@ public class LevelConstructor : MonoBehaviour {
                 wallRow = int.Parse(line.Substring(4, 1));
                 wallCol = int.Parse(line.Substring(6, 1));
                 Instantiate(smallWallTopRightPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("MV")) {
+                string[] tokens = line.Split(' ');
+                Transform obj = Instantiate(movingObjectPrefab, gameGrid[int.Parse(tokens[1].Substring(0, 1))][int.Parse(tokens[1].Substring(2, 1))].transform);
+                MovingObject m = obj.gameObject.GetComponent<MovingObject>();
+                string[] waypoints = new string[] { tokens[1], tokens[2], tokens[3], tokens[4] };
+                m.SetWaypoints(waypoints);
+                m.StartMovement();
             }
         }
     }
