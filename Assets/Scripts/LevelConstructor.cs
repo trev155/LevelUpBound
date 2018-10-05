@@ -9,13 +9,14 @@ public class LevelConstructor : MonoBehaviour {
     // Reference to the game grid
     public MainGrid mainGrid;
     private GameObject[][] gameGrid;
-    // Wall prefabs
+    // External objects
     public Transform wallPrefab;
     public Transform smallWallBottomLeftPrefab;
     public Transform smallWallBottomRightPrefab;
     public Transform smallWallTopLeftPrefab;
     public Transform smallWallTopRightPrefab;
     public Transform movingObjectPrefab;
+    public Transform keyPrefab;
 
     /*
      * Initialization.
@@ -146,6 +147,14 @@ public class LevelConstructor : MonoBehaviour {
                 string[] waypoints = new string[] { tokens[1], tokens[2], tokens[3], tokens[4] };
                 m.SetWaypoints(waypoints);
                 m.StartMovement();
+            } else if (line.StartsWith("K")) {
+                int row = int.Parse(line.Substring(1, 1));
+                int col = int.Parse(line.Substring(3, 1));
+                wallRow = int.Parse(line.Substring(5, 1));
+                wallCol = int.Parse(line.Substring(7, 1));
+                Transform obj = Instantiate(keyPrefab, gameGrid[row][col].transform);
+                Key key = obj.gameObject.GetComponent<Key>();
+                key.InitData(wallRow, wallCol);
             }
         }
     }

@@ -6876,6 +6876,7 @@ MonoBehaviour:
     type: 2}
   movingObjectPrefab: {fileID: 4065769450059900, guid: a8368ab544a56b1409b8c6d5a31b6a10,
     type: 2}
+  keyPrefab: {fileID: 4600401022766964, guid: e648751cc2eea87438660761f130359c, type: 2}
 --- !u!1 &1874185627
 GameObject:
   m_ObjectHideFlags: 0

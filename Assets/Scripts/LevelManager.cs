@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 35;
+    private int currentLevel = 39;
 
     // Keep track of the game mode selected
     private string gameMode = GameContext.GameMode;
