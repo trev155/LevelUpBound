@@ -20,6 +20,7 @@ public class ExplosionManager : MonoBehaviour {
     public Transform explosionDragoonPrefab;
     public Transform explosionDropshipPrefab;
     public Transform explosionDtempPrefab;
+    public Transform explosionFirebatPrefab;
     public Transform explosionGuardianPrefab;
     public Transform explosionHtempPrefab;
     public Transform explosionHydraPrefab;
@@ -154,6 +155,9 @@ public class ExplosionManager : MonoBehaviour {
                 break;
             case "DT":
                 explosion = Instantiate(explosionDtempPrefab, location);
+                break;
+            case "FB":
+                explosion = Instantiate(explosionFirebatPrefab, location);
                 break;
             case "GD":
                 explosion = Instantiate(explosionGuardianPrefab, location);

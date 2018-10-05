@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource dragoonExplosion;
     public AudioSource dropshipExplosion;
     public AudioSource dtempExplosion;
+    public AudioSource firebatExplosion;
     public AudioSource guardianExplosion;
     public AudioSource htempExplosion;
     public AudioSource hydraExplosion;
@@ -36,6 +37,7 @@ public class AudioManager : MonoBehaviour {
         dragoonExplosion = this.transform.GetChild(0).Find("Dragoon").GetComponent<AudioSource>();
         dropshipExplosion = this.transform.GetChild(0).Find("Dropship").GetComponent<AudioSource>();
         dtempExplosion = this.transform.GetChild(0).Find("DarkTemplar").GetComponent<AudioSource>();
+        firebatExplosion = this.transform.GetChild(0).Find("Firebat").GetComponent<AudioSource>();
         guardianExplosion = this.transform.GetChild(0).Find("Guardian").GetComponent<AudioSource>();
         htempExplosion = this.transform.GetChild(0).Find("Htemp").GetComponent<AudioSource>();
         hydraExplosion = this.transform.GetChild(0).Find("Hydra").GetComponent<AudioSource>();
@@ -78,6 +80,9 @@ public class AudioManager : MonoBehaviour {
                 break;
             case "DT":
                 dtempExplosion.Play();
+                break;
+            case "FB":
+                firebatExplosion.Play();
                 break;
             case "GD":
                 guardianExplosion.Play();
