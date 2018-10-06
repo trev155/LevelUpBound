@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour {
     private const string LEVEL_CLASSIC_PREFIX = "./Assets/Data/Levels/Classic";
     private const string LEVEL_CUSTOM_PREFIX = "./Assets/Data/Levels/Custom";
     private const string EXTERNALS_CLASSIC_PREFIX = "./Assets/Data/ExternalObjects/Classic";
-    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets//ExternalObjects/Custom";
+    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets/Data/ExternalObjects/Custom";
     private const string LEVELS_WITH_EXTERNALS_CLASSIC = "./Assets/Data/ExternalObjects/classicExternalsList.txt";
     private const string LEVELS_WITH_EXTERNALS_CUSTOM = "./Assets/Data/ExternalObjects/customExternalsList.txt";
     private const string LEVEL_OBJECT_TYPE = "level";
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 50;
+    private int currentLevel = 26;
 
     // Keep track of the game mode selected
     private string gameMode = GameContext.GameMode;
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
     private void Awake() {
         // default game mode
         if (gameMode == null) {
-            gameMode = "classic";
+            gameMode = "custom";
         }
 
         // load data regarding which levels have external objects
