@@ -128,11 +128,35 @@ public class ExplosionManager : MonoBehaviour {
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
         yield return new WaitForSeconds(explosionCooldown);
+        StartCoroutine(FadeOutAndDestroy(explosion.gameObject)) ;
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = false;
-        Destroy(explosion.gameObject);
+        
     }
 
+    /*
+     * Given a Game object, fade out the object by reducing its alpha property repeatedly.
+     * After its alpha hits 0, destroy the game object.
+     */
+    IEnumerator FadeOutAndDestroy(GameObject explosionGameObject) {
+        SpriteRenderer spriteRenderer = explosionGameObject.GetComponent<SpriteRenderer>();
 
+        float fadeOutTime = 0.2f;
+        Color tmpColor = spriteRenderer.color;
+        while (tmpColor.a > 0f) {
+            tmpColor.a -= Time.deltaTime / fadeOutTime;
+            spriteRenderer.color = tmpColor;
+            if (tmpColor.a <= 0f) {
+                tmpColor.a = 0f;
+            }
+            yield return null;
+        }
+        spriteRenderer.color = tmpColor;
+        Destroy(explosionGameObject);
+    }
+
+    /*
+     * Instantiate a prefab of the unit corresponding to the string code at specified location.
+     */
     private Transform InstantiateUnit(string code, Transform location) {
         Transform explosion;
         switch (code) {
@@ -234,6 +258,10 @@ public class ExplosionManager : MonoBehaviour {
         return explosion;
     }
 
+    /*
+     * Vaccum feature, first pass. 
+     * When this is called, find the Player and pull it towards the middle tile.
+     */
     private void Vaccum() {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector3 playerPosition = player.transform.position;
