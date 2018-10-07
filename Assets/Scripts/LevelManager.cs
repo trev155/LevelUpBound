@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 50;
+    private int currentLevel = 1;
 
     // Keep track of the game mode selected
     private string gameMode = GameContext.GameMode;
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
     private void Awake() {
         // default game mode
         if (gameMode == null) {
-            gameMode = "custom";
+            gameMode = "classic";
         }
 
         // load data regarding which levels have external objects

@@ -140,7 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &87695664
 AudioSource:
@@ -264,7 +264,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &156565081
 AudioSource:
@@ -623,9 +623,9 @@ RectTransform:
   m_Father: {fileID: 256746881}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 97, y: -546}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -283, y: 118}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &192814666
@@ -910,7 +910,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &208449793
 AudioSource:
@@ -1346,7 +1346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &277258167
 AudioSource:
@@ -1799,7 +1799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &365883017
 AudioSource:
@@ -1930,9 +1930,9 @@ RectTransform:
   m_Father: {fileID: 256746881}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 197, y: -646}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -183, y: 18}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386830689
@@ -2224,9 +2224,9 @@ RectTransform:
   m_Father: {fileID: 256746881}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 297, y: -546}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -83, y: 118}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &484808749
@@ -2464,7 +2464,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &650487902
 AudioSource:
@@ -3041,7 +3041,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &733135947
 AudioSource:
@@ -3289,6 +3289,7 @@ Transform:
   - {fileID: 887897823}
   - {fileID: 1945208901}
   - {fileID: 1613564856}
+  - {fileID: 1313694033}
   - {fileID: 1905184142}
   - {fileID: 650487901}
   - {fileID: 1702829297}
@@ -3755,7 +3756,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1147266376
 AudioSource:
@@ -4706,6 +4707,130 @@ Transform:
   m_Father: {fileID: 1319790588}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1313694032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1313694033}
+  - component: {fileID: 1313694034}
+  m_Layer: 0
+  m_Name: Medic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1313694033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1313694032}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 880793272}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1313694034
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1313694032}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d3d8a9c07642f6f40a8236a7633368b2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1319790587
 GameObject:
   m_ObjectHideFlags: 0
@@ -5675,7 +5800,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1665568230
 AudioSource:
@@ -5913,7 +6038,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1702829298
 AudioSource:
@@ -6161,7 +6286,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1734495706
 AudioSource:
@@ -6300,61 +6425,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainGrid: {fileID: 1659473013}
   audioManager: {fileID: 2059849658}
-  explosionArchonPrefab: {fileID: 4497394074330666, guid: 9e588141307509a40b5d838841d466fb,
+  explosionArchonPrefab: {fileID: 4407363501834000, guid: 90cdb9af5868aae49a43b4fbd06efa66,
     type: 2}
-  explosionDarkArchonPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionDarkArchonPrefab: {fileID: 4407363501834000, guid: 0193f40bf162a7848b46fe3d71cac7e3,
     type: 2}
-  explosionDefilerPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionDefilerPrefab: {fileID: 4407363501834000, guid: 12de7e5b32fb3e941a1597079c70af2e,
     type: 2}
-  explosionDevourerPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionDevourerPrefab: {fileID: 4407363501834000, guid: e75184894549f6f49b303be0b755801c,
     type: 2}
-  explosionDragoonPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionDragoonPrefab: {fileID: 4407363501834000, guid: c8a344ce073e9d746ae9d6f5fa19835c,
     type: 2}
-  explosionDropshipPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionDropshipPrefab: {fileID: 4407363501834000, guid: 8623c500a12e73345a036a67ef0286cb,
     type: 2}
-  explosionDtempPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionDtempPrefab: {fileID: 4407363501834000, guid: 9b8e7e279ce0165438c9c85dc0cf4617,
     type: 2}
-  explosionFirebatPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionFirebatPrefab: {fileID: 4407363501834000, guid: 3f835fbeaa4f7bd4c8ab2d5f3d1ca4ec,
     type: 2}
-  explosionGuardianPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionGuardianPrefab: {fileID: 4407363501834000, guid: 28a308ee51a3c9a4a836479df240998b,
     type: 2}
-  explosionHtempPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionHtempPrefab: {fileID: 4407363501834000, guid: 1f2b6cbd5489b5b43bf1a0fbb33a84d9,
     type: 2}
-  explosionHydraPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionHydraPrefab: {fileID: 4407363501834000, guid: b32f4e928bff80541b7bb72cd333a170,
     type: 2}
-  explosionLurkerPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionLurkerPrefab: {fileID: 4407363501834000, guid: 6afea59efafb2bb429d82de1b403fd63,
     type: 2}
-  explosionMarinePrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionMarinePrefab: {fileID: 4407363501834000, guid: 963309e4f1247d34da775df112f34a72,
     type: 2}
-  explosionObserverPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionMedicPrefab: {fileID: 0}
+  explosionObserverPrefab: {fileID: 4407363501834000, guid: 7eb49b404d326854398623d920fcbe63,
     type: 2}
-  explosionOverlordPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionOverlordPrefab: {fileID: 4407363501834000, guid: de9eaa7ff4d5a1e41892ff4f4034c5c5,
     type: 2}
-  explosionProbePrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionProbePrefab: {fileID: 4407363501834000, guid: f6f9063acec6e7540a50dd4e3f1b7d82,
     type: 2}
-  explosionQueenPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionQueenPrefab: {fileID: 4407363501834000, guid: 4a9eaf7e35a2c2a48bf58e40d0aa54bf,
     type: 2}
-  explosionReaverPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionReaverPrefab: {fileID: 4407363501834000, guid: a8367e2540ad9dd4aa0d2c38018ec11c,
     type: 2}
-  explosionScoutPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionScoutPrefab: {fileID: 4407363501834000, guid: 2dc8bcebf1a7ed946bf567f57bc69bce,
     type: 2}
-  explosionScvPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionScvPrefab: {fileID: 4407363501834000, guid: 11f786e24a52b654bb5bbd231c8e3355,
     type: 2}
-  explosionShuttlePrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionShuttlePrefab: {fileID: 4407363501834000, guid: 57db937e9557e3f468c602e39339b747,
     type: 2}
-  explosionTankPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionTankPrefab: {fileID: 4407363501834000, guid: 2cdb2caba8f285a448ba4cec86fcaa96,
     type: 2}
-  explosionTankSiegePrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionTankSiegePrefab: {fileID: 4407363501834000, guid: a2a1fa05d4ec04c47a3c576c70f1d7f6,
     type: 2}
-  explosionUltraliskPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionUltraliskPrefab: {fileID: 4407363501834000, guid: bbc0361a63e804642ad050b6d487deee,
     type: 2}
-  explosionValkPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionValkPrefab: {fileID: 4407363501834000, guid: 25b46c89152334e4489437e9c728bddd,
     type: 2}
-  explosionVesselPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionVesselPrefab: {fileID: 4407363501834000, guid: 4cbf99aa7b4251746a92eb99bb11bc58,
     type: 2}
-  explosionWraithPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionWraithPrefab: {fileID: 4407363501834000, guid: a20211fb6a6c7764e95c959ea2480491,
     type: 2}
-  explosionZealotPrefab: {fileID: 4179186371564674, guid: f1b558008cc924a488d207341992271d,
+  explosionZealotPrefab: {fileID: 4407363501834000, guid: 81a8f4c268b431b4d8ff199ec4fba817,
     type: 2}
 --- !u!1 &1818946422
 GameObject:
@@ -6690,9 +6816,9 @@ RectTransform:
   m_Father: {fileID: 256746881}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 197, y: -446}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -183, y: 218}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1851137613
@@ -6853,7 +6979,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1854864702
 AudioSource:
@@ -7269,7 +7395,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1905184143
 AudioSource:
@@ -9853,7 +9979,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2035087020
 AudioSource:
@@ -10117,6 +10243,7 @@ MonoBehaviour:
   hydraExplosion: {fileID: 887897824}
   lurkerExplosion: {fileID: 1945208902}
   marineExplosion: {fileID: 1613564857}
+  medicExplosion: {fileID: 0}
   observerExplosion: {fileID: 1905184143}
   overlordExplosion: {fileID: 650487902}
   probeExplosion: {fileID: 1702829298}
@@ -10397,7 +10524,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880793272}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2085379979
 AudioSource:

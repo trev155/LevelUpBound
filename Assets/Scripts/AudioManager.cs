@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource hydraExplosion;
     public AudioSource lurkerExplosion;
     public AudioSource marineExplosion;
+    public AudioSource medicExplosion;
     public AudioSource observerExplosion;
     public AudioSource overlordExplosion;
     public AudioSource probeExplosion;
@@ -43,6 +44,7 @@ public class AudioManager : MonoBehaviour {
         hydraExplosion = this.transform.GetChild(0).Find("Hydra").GetComponent<AudioSource>();
         lurkerExplosion = this.transform.GetChild(0).Find("Lurker").GetComponent<AudioSource>();
         marineExplosion = this.transform.GetChild(0).Find("Marine").GetComponent<AudioSource>();
+        medicExplosion = this.transform.GetChild(0).Find("Marine").GetComponent<AudioSource>();
         observerExplosion = this.transform.GetChild(0).Find("Observer").GetComponent<AudioSource>();
         overlordExplosion = this.transform.GetChild(0).Find("Overlord").GetComponent<AudioSource>();
         probeExplosion = this.transform.GetChild(0).Find("Probe").GetComponent<AudioSource>();
@@ -98,6 +100,9 @@ public class AudioManager : MonoBehaviour {
                 break;
             case "MA":
                 marineExplosion.Play();
+                break;
+            case "ME":
+                medicExplosion.Play();
                 break;
             case "OB":
             case "OBV":
