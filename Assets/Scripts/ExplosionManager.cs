@@ -128,7 +128,7 @@ public class ExplosionManager : MonoBehaviour {
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
         yield return new WaitForSeconds(explosionCooldown);
-        StartCoroutine(FadeOutAndDestroy(explosion.gameObject)) ;
+        StartCoroutine(FadeOutAndDestroy(explosion.gameObject));
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = false;
         
     }

@@ -12,12 +12,12 @@ using System.IO;
 
 public class LevelManager : MonoBehaviour {
     // Constants
-    private const string LEVEL_CLASSIC_PREFIX = "./Assets/Data/Levels/Classic";
-    private const string LEVEL_CUSTOM_PREFIX = "./Assets/Data/Levels/Custom";
-    private const string EXTERNALS_CLASSIC_PREFIX = "./Assets/Data/ExternalObjects/Classic";
-    private const string EXTERNALS_CUSTOM_PREFIX = "./Assets/Data/ExternalObjects/Custom";
-    private const string LEVELS_WITH_EXTERNALS_CLASSIC = "./Assets/Data/ExternalObjects/classicExternalsList.txt";
-    private const string LEVELS_WITH_EXTERNALS_CUSTOM = "./Assets/Data/ExternalObjects/customExternalsList.txt";
+    private const string LEVEL_CLASSIC_PREFIX = "Data/Levels/Classic";
+    private const string LEVEL_CUSTOM_PREFIX = "Data/Levels/Custom";
+    private const string EXTERNALS_CLASSIC_PREFIX = "Data/ExternalObjects/Classic";
+    private const string EXTERNALS_CUSTOM_PREFIX = "Data/ExternalObjects/Custom";
+    private const string LEVELS_WITH_EXTERNALS_CLASSIC = "Data/ExternalObjects/classicExternalsList";
+    private const string LEVELS_WITH_EXTERNALS_CUSTOM = "Data/ExternalObjects/customExternalsList";
     private const string LEVEL_OBJECT_TYPE = "level";
     private const string EXTERNAL_OBJECT_TYPE = "external";
 
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 10;
+    private int currentLevel = 1;
 
     // Keep track of the game mode selected
     private string gameMode = GameContext.GameMode;
@@ -53,13 +53,13 @@ public class LevelManager : MonoBehaviour {
         } else if (gameMode == "custom") {
             datafile = LEVELS_WITH_EXTERNALS_CUSTOM;
         }
-        StreamReader inputStream = new StreamReader(datafile);
-        while (!inputStream.EndOfStream) {
-            string line = inputStream.ReadLine();
-            levelsWithExternals.Add(int.Parse(line));
+
+        TextAsset externalLevelsTextAsset = Resources.Load<TextAsset>(datafile);
+        string[] externalLevelsLines = externalLevelsTextAsset.text.Split('\n');
+        foreach (string line in externalLevelsLines) {
+            levelsWithExternals.Add(int.Parse(line.Trim()));
         }
     }
-
 
     /*
      * Startup.
@@ -83,7 +83,7 @@ public class LevelManager : MonoBehaviour {
             externalsPrefix = EXTERNALS_CUSTOM_PREFIX;
         }
 
-        // Load the current level data
+        // Load the current level data 
         string levelFilepath = util.GetFilepathString(currentLevel, gameMode, levelPrefix, LEVEL_OBJECT_TYPE);
         currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
         if (currentLevelCoroutine == null) {
@@ -95,12 +95,10 @@ public class LevelManager : MonoBehaviour {
         if (levelsWithExternals.Contains(currentLevel)) {
             levelConstructor.LoadExternalObjects(externalsFilepath);
         }
-
-        // TODO - handle filenotfound exceptions
-
+        
         // Start the current level
         levelConstructor.StartCoroutine(currentLevelCoroutine);
-
+        
         Debug.Log("Current Level: " + currentLevel);
     }
 

@@ -65,6 +65,8 @@ public class AudioManager : MonoBehaviour {
     public void PlaySoundEffect(string code) {
         switch (code) {
             case "AR":
+                archonExplosion.Play();
+                break;
             case "DA":
                 archonExplosion.Play();
                 break;
@@ -105,6 +107,8 @@ public class AudioManager : MonoBehaviour {
                 medicExplosion.Play();
                 break;
             case "OB":
+                observerExplosion.Play();
+                break;
             case "OBV":
                 observerExplosion.Play();
                 break;
@@ -151,7 +155,7 @@ public class AudioManager : MonoBehaviour {
                 zealotExplosion.Play();
                 break;
             default:
-                Debug.Log("Unrecognized audio code. This is not fatal.");
+                Debug.Log("Unrecognized audio code. " + code + " This is not fatal.");
                 break;
         }
     }

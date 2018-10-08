@@ -30,17 +30,12 @@ public class LevelConstructor : MonoBehaviour {
      * The filepath points to a file containing level directives. We use this data to construct a Level coroutine.
      */
     public IEnumerator LoadLevelFromFilepath(string levelFilepath) {
-        if (!File.Exists(levelFilepath)) {
-            Debug.Log("Filepath not found. This indicates the level does not exist: " + levelFilepath);
-            return null;
-        }
-        StreamReader inputStream = new StreamReader(levelFilepath);
         List<string> commands = new List<string>();
-        while (!inputStream.EndOfStream) {
-            string line = inputStream.ReadLine();
-            commands.Add(line);
+        TextAsset levelTextAsset = Resources.Load<TextAsset>(levelFilepath);
+        string[] levelLines = levelTextAsset.text.Split('\n');
+        foreach (string line in levelLines) {
+            commands.Add(line.Trim());
         }
-        inputStream.Close();
 
         IEnumerator level = BuildLevel(commands);
         return level;
@@ -102,13 +97,12 @@ public class LevelConstructor : MonoBehaviour {
      * Read this data from an external file.
      */
     public void LoadExternalObjects(string externalsFilepath) {
-        StreamReader inputStream = new StreamReader(externalsFilepath);
         List<string> lines = new List<string>();
-        while (!inputStream.EndOfStream) {
-            string line = inputStream.ReadLine();
-            lines.Add(line);
+        TextAsset externalsTextAsset = Resources.Load<TextAsset>(externalsFilepath);
+        string[] externalsList = externalsTextAsset.text.Split('\n');
+        foreach (string line in externalsList) {
+            lines.Add(line.Trim());
         }
-        inputStream.Close();
 
         ConstructExternalObjects(lines);
     }

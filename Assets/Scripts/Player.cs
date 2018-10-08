@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     /*
      * Called on every frame.
      */
-	void Update () {
+	void Update() {
         Movement();
     }
 
