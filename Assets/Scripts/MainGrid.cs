@@ -7,7 +7,6 @@ public class MainGrid : MonoBehaviour {
     // Size of the square grid
     private const int DIMENSION = 5;
 
-
     /*
      * Initialize the gameGrid array.
      * The gameGrid is an array of arrays. 

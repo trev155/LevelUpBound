@@ -13,13 +13,15 @@ public class MovingObject : MonoBehaviour {
     // whether we should start moving the object
     private bool startMovement = false;
 
+    // Player respawn point
+    public Transform respawnPoint;
+
     /*
      * Detect if making contact with the Player.
      */
     void OnTriggerStay2D(Collider2D other) {
-        Transform RespawnPoint = GameObject.Find("Spawn").transform;
         if (other.tag == "Player") {
-            other.transform.position = RespawnPoint.position;
+            other.transform.position = respawnPoint.position;
         }
     }
 
@@ -64,11 +66,6 @@ public class MovingObject : MonoBehaviour {
      * Move between the waypoints.
      */
     private void Movement() {
-        Debug.Log(objectWaypoints[0]);
-        Debug.Log(objectWaypoints[1]);
-        Debug.Log(objectWaypoints[2]);
-        Debug.Log(objectWaypoints[3]);
-
         transform.position = Vector2.MoveTowards(transform.position, objectWaypoints[currentWaypointIndex].position, Time.deltaTime * speed);
 
         // if reached destination, update waypoint

@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  respawnPoint: {fileID: 4890392794008676, guid: 17df68d220e3fa542a8a42be6e046798,
+    type: 2}
 --- !u!212 &212672999306222378
 SpriteRenderer:
   m_ObjectHideFlags: 1

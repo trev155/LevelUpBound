@@ -8,7 +8,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 
 public class LevelManager : MonoBehaviour {
     // Constants
@@ -23,26 +22,20 @@ public class LevelManager : MonoBehaviour {
 
     // Level construction manager object
     public LevelConstructor levelConstructor;
+    // UI Management
+    public UserInterfaceManager UImanager;
 
     // Keep track of the current level's coroutine so that we can stop it when we need to
     private IEnumerator currentLevelCoroutine;
-
     // Utility functions
     Util util = new Util();
-
     // Levels that require external objects
     HashSet<int> levelsWithExternals = new HashSet<int>();
-
-    // objects
-    private UIManager UImanager;
 
     /*
      * Initialization.
      */
     private void Awake() {
-        // Init objects
-        UImanager = GameObject.Find("UIManager").GetComponent<UIManager>();
-
         // default game mode
         if (GameContext.GameMode == null) {
             GameContext.GameMode = "classic";
@@ -107,7 +100,9 @@ public class LevelManager : MonoBehaviour {
         // Start the current level
         levelConstructor.StartCoroutine(currentLevelCoroutine);
 
+        // Update the UI
         UImanager.UpdateLevelText();
+        UImanager.UpdateGameModeText();
         Debug.Log("Current Level: " + GameContext.CurrentLevel);
     }
 

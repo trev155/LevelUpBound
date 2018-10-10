@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 
 public class Key : MonoBehaviour {
+    // Reference to the coordinates of the wall that this key unlocks (destroys)
     private int wallToDestroyX;
     private int wallToDestroyY;
+
+    // Reference to the Main Grid
+    private MainGrid mainGrid;
     private GameObject[][] gameGrid;
 
     /*
      * Initialization
      */
     private void Awake() {
-        MainGrid mainGrid = GameObject.Find("MainGrid").GetComponent<MainGrid>();
+        mainGrid = GameObject.FindGameObjectWithTag("MainGrid").GetComponent<MainGrid>();
         gameGrid = mainGrid.GetGameGrid();
     }
 
