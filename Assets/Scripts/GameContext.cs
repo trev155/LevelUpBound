@@ -3,4 +3,5 @@
  */
 public static class GameContext {
     public static string GameMode { get; set; }
+    public static int CurrentLevel { get; set; }
 }

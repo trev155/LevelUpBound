@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.IO;
 using System.Collections.Generic;
 
 public class LevelConstructor : MonoBehaviour {

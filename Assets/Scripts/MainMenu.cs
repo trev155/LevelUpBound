@@ -3,6 +3,7 @@
 public class MainMenu : MonoBehaviour {
     private void ChooseMode(string mode) {
         GameContext.GameMode = mode;
+        GameContext.CurrentLevel = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 

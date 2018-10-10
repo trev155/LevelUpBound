@@ -21,15 +21,11 @@ public class LevelManager : MonoBehaviour {
     private const string LEVEL_OBJECT_TYPE = "level";
     private const string EXTERNAL_OBJECT_TYPE = "external";
 
-    // Collection of all Levels
+    // Level construction manager object
     public LevelConstructor levelConstructor;
 
-    // Keep track of the current level
+    // Keep track of the current level's coroutine so that we can stop it when we need to
     private IEnumerator currentLevelCoroutine;
-    private int currentLevel = 1;
-
-    // Keep track of the game mode selected
-    private string gameMode = GameContext.GameMode;
 
     // Utility functions
     Util util = new Util();
@@ -37,20 +33,32 @@ public class LevelManager : MonoBehaviour {
     // Levels that require external objects
     HashSet<int> levelsWithExternals = new HashSet<int>();
 
+    // objects
+    private UIManager UImanager;
+
     /*
      * Initialization.
      */
     private void Awake() {
+        // Init objects
+        UImanager = GameObject.Find("UIManager").GetComponent<UIManager>();
+
         // default game mode
-        if (gameMode == null) {
-            gameMode = "classic";
+        if (GameContext.GameMode == null) {
+            GameContext.GameMode = "classic";
         }
+
+        // default level
+        if (GameContext.CurrentLevel < 1) {
+            GameContext.CurrentLevel = 1;
+        }
+        
 
         // load data regarding which levels have external objects
         string datafile = "";
-        if (gameMode == "classic") {
+        if (GameContext.GameMode == "classic") {
             datafile = LEVELS_WITH_EXTERNALS_CLASSIC;
-        } else if (gameMode == "custom") {
+        } else if (GameContext.GameMode == "custom") {
             datafile = LEVELS_WITH_EXTERNALS_CUSTOM;
         }
 
@@ -75,31 +83,32 @@ public class LevelManager : MonoBehaviour {
         // File locations to read from depends on the game mode
         string levelPrefix = "";
         string externalsPrefix = "";
-        if (gameMode.Equals("classic")) {
+        if (GameContext.GameMode.Equals("classic")) {
             levelPrefix = LEVEL_CLASSIC_PREFIX;
             externalsPrefix = EXTERNALS_CLASSIC_PREFIX;
-        } else if (gameMode.Equals("custom")) {
+        } else if (GameContext.GameMode.Equals("custom")) {
             levelPrefix = LEVEL_CUSTOM_PREFIX;
             externalsPrefix = EXTERNALS_CUSTOM_PREFIX;
         }
 
         // Load the current level data 
-        string levelFilepath = util.GetFilepathString(currentLevel, gameMode, levelPrefix, LEVEL_OBJECT_TYPE);
+        string levelFilepath = util.GetFilepathString(GameContext.CurrentLevel, GameContext.GameMode, levelPrefix, LEVEL_OBJECT_TYPE);
         currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
         if (currentLevelCoroutine == null) {
             return;
         }
 
         // Check if there are any other things we need to initialize for this level
-        string externalsFilepath = util.GetFilepathString(currentLevel, gameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
-        if (levelsWithExternals.Contains(currentLevel)) {
+        string externalsFilepath = util.GetFilepathString(GameContext.CurrentLevel, GameContext.GameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
+        if (levelsWithExternals.Contains(GameContext.CurrentLevel)) {
             levelConstructor.LoadExternalObjects(externalsFilepath);
         }
         
         // Start the current level
         levelConstructor.StartCoroutine(currentLevelCoroutine);
-        
-        Debug.Log("Current Level: " + currentLevel);
+
+        UImanager.UpdateLevelText();
+        Debug.Log("Current Level: " + GameContext.CurrentLevel);
     }
 
     /*
@@ -115,7 +124,7 @@ public class LevelManager : MonoBehaviour {
     public void AdvanceLevel() {
         StopLevel();
         levelConstructor.RemoveExternalObjects();
-        currentLevel += 1;
+        GameContext.CurrentLevel += 1;
         StartCoroutine(PauseBetweenLevels());
         PlayLevel();
     }
