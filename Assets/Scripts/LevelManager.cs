@@ -46,7 +46,6 @@ public class LevelManager : MonoBehaviour {
             GameContext.CurrentLevel = 1;
         }
         
-
         // load data regarding which levels have external objects
         string datafile = "";
         if (GameContext.GameMode == "classic") {

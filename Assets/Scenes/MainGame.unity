@@ -2671,6 +2671,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1683401817739710, guid: 17df68d220e3fa542a8a42be6e046798, type: 2}
+      propertyPath: m_TagString
+      value: RespawnPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17df68d220e3fa542a8a42be6e046798, type: 2}
   m_IsPrefabAsset: 0
@@ -3939,11 +3943,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RespawnPoint: {fileID: 1137202535}
---- !u!4 &1137202535 stripped
+--- !u!1 &1137202534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1683401817739710, guid: 17df68d220e3fa542a8a42be6e046798,
+    type: 2}
+  m_PrefabInternal: {fileID: 630086138}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137202535}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: RespawnPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1137202535
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 4890392794008676, guid: 17df68d220e3fa542a8a42be6e046798,
     type: 2}
   m_PrefabInternal: {fileID: 630086138}
+  m_GameObject: {fileID: 1137202534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1147266374
 GameObject:
   m_ObjectHideFlags: 0
