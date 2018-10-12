@@ -14,4 +14,8 @@ public class MainMenu : MonoBehaviour {
     public void ChooseCustomMode() {
         ChooseMode("custom");
     }
+
+    public void LevelSelector() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelector");
+    }
 }

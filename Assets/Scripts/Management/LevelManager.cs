@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 
         // default level
         if (GameContext.CurrentLevel < 1) {
-            GameContext.CurrentLevel = 27;
+            GameContext.CurrentLevel = 1;
         }
         
         // load data regarding which levels have external objects
