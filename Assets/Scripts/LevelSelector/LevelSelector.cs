@@ -1,10 +1,7 @@
 ﻿/*
- * The Level Selector, in its current form, starts the game at a specified level, with a specified game mode.
- * In the future, I would like this to be a single level selection. That is, after reaching the goal, we 
- * go back to the level selector.
- * 
- * Right now, the level selector is a "page" with many buttons. Each button represents a level. When pressed,
- * we take the user to the specified level. 
+ * The level selector is a "page" with many buttons. 
+ * Each button represents a level. 
+ * When pressed, we take the user to the specified level. 
  */
 
 using UnityEngine;
@@ -131,6 +128,7 @@ public class LevelSelector : MonoBehaviour {
     private void PlayLevel(string mode, int level) {
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = level;
+        GameContext.PreviousPageContext = "LevelSelector";
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 

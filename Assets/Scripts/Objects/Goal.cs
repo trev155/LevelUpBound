@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * The Goal is where the Player is trying to move towards.
+ * When the Player reaches the Goal, go to the next level.
+ */
+using UnityEngine;
 
 public class Goal : MonoBehaviour {
     public LevelManager levelManager;

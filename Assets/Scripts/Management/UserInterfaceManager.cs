@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * Class that manages the UI on the Game Page.
+ * Doesn't handle the arrow control buttons.
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UserInterfaceManager : MonoBehaviour {
@@ -6,7 +11,7 @@ public class UserInterfaceManager : MonoBehaviour {
     public Text currentGameModeLabel;
 
     public void BackButtonPressed() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        GameContext.LoadPreviousPage();
     }
 
     public void UpdateLevelText() {
