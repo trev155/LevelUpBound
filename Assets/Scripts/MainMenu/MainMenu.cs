@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/*
+ * Class that handles MainMenu actions.
+ */
+using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
     private void ChooseMode(string mode) {

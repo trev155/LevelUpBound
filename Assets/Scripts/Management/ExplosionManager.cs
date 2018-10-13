@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+ * This class handles the generation and display of our explosions.
+ * An explosion involes the instantiation of a prefab, which is essentially just an image sprite.
+ * Additionally, the explosion turns the Box Collider of the tile on, killing a Player object touching the tile.
+ * A sound effect is also played every time an explosion is generated.
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class ExplosionManager : MonoBehaviour {
@@ -124,7 +131,7 @@ public class ExplosionManager : MonoBehaviour {
      * Exploding the tile, means to destroy any unit on that tile.
      */
     private IEnumerator Explode(int row, int col, string explosionCode) {
-        audioManager.PlaySoundEffect(explosionCode);
+        audioManager.PlayExplosionAudio(explosionCode);
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
         yield return new WaitForSeconds(explosionCooldown);

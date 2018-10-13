@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
     /*
      * Called on every frame.
      */
-    void Update() {
+    private void Update() {
         PreventZRotation();
         Movement();
     }
@@ -61,7 +61,11 @@ public class Player : MonoBehaviour {
      */
     public void Death() {
         Debug.Log("Player Death");
+
         Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
         playerTransform.transform.position = respawnPoint.transform.position;
+        audioManager.PlayPlayerDeathAudio();
     }
 }

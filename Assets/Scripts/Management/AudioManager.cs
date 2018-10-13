@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+ * Class that handles all things audio related.
+ */
+using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
+    // Explosions
     public AudioSource archonExplosion;
     public AudioSource defilerExplosion;
     public AudioSource devourerExplosion;
@@ -29,8 +33,13 @@ public class AudioManager : MonoBehaviour {
     public AudioSource vesselExplosion;
     public AudioSource wraithExplosion;
     public AudioSource zealotExplosion;
+
+    // Other audio
+    public AudioSource playerDeath;
     
-    
+    /*
+     * Initialization
+     */
     private void Awake() {
         archonExplosion = this.transform.GetChild(0).Find("Archon").GetComponent<AudioSource>();
         defilerExplosion = this.transform.GetChild(0).Find("Defiler").GetComponent<AudioSource>();
@@ -60,9 +69,14 @@ public class AudioManager : MonoBehaviour {
         vesselExplosion = this.transform.GetChild(0).Find("Vessel").GetComponent<AudioSource>();
         wraithExplosion = this.transform.GetChild(0).Find("Wraith").GetComponent<AudioSource>();
         zealotExplosion = this.transform.GetChild(0).Find("Zealot").GetComponent<AudioSource>();
+
+        playerDeath = this.transform.Find("PlayerDeath").GetComponent<AudioSource>();
     }
 
-    public void PlaySoundEffect(string code) {
+    /*
+     * Play an Explosion sound effect, given a 2-character code.
+     */
+    public void PlayExplosionAudio(string code) {
         switch (code) {
             case "AR":
                 archonExplosion.Play();
@@ -158,5 +172,12 @@ public class AudioManager : MonoBehaviour {
                 Debug.Log("Unrecognized audio code. " + code + " This is not fatal.");
                 break;
         }
+    }
+
+    /*
+     * Play player death sound.
+     */
+    public void PlayPlayerDeathAudio() {
+        playerDeath.Play();
     }
 }
