@@ -40,6 +40,7 @@ public class LevelSelector : MonoBehaviour {
         currentGameModeSelection = "classic";
         SetGameModeText();
         currentPage = 1;
+        BlurArrow();
         maxPages = ComputeMaxPages();
         maxLevels = GetMaxLevelsForGameMode();
 
@@ -115,6 +116,11 @@ public class LevelSelector : MonoBehaviour {
             return;
         }
         Debug.Log("Current Page: " + currentPage);
+        if (currentPage == 1 || currentPage == maxPages) {
+            BlurArrow();
+        } else {
+            UnblurArrows();
+        }
         RemoveLevelButtons();
         CreateLevelButtons();
     }
@@ -189,5 +195,39 @@ public class LevelSelector : MonoBehaviour {
      */ 
     private void SetGameModeText() {
         gameModeText.text = currentGameModeSelection;
+    }
+
+    /*
+     * Blur out a scroll arrow if we are at the leftmost or rightmost page.
+     * Blurring means to reduce the alpha property of the image.
+     */ 
+    private void BlurArrow() {
+        if (currentPage == 1) {
+            Image image = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
+            Color tempColor = image.color;
+            tempColor.a = 0.1f;
+            image.color = tempColor;
+        }
+        if (currentPage == maxPages) {
+            Image image = GameObject.Find("ScrollRightButton").GetComponent<Image>();
+            Color tempColor = image.color;
+            tempColor.a = 0.1f;
+            image.color = tempColor;
+        }
+    }
+
+    /*
+     * Unblur both scroll arrows. Set alpha property of image back to 1.
+     */
+    private void UnblurArrows() {
+        Image imageLeft = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
+        Color tempColorLeft = imageLeft.color;
+        tempColorLeft.a = 1.0f;
+        imageLeft.color = tempColorLeft;
+        
+        Image imageRight = GameObject.Find("ScrollRightButton").GetComponent<Image>();
+        Color tempColorRight = imageRight.color;
+        tempColorRight.a = 1.0f;
+        imageRight.color = tempColorRight;   
     }
 }
