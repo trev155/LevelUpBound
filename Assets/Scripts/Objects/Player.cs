@@ -4,7 +4,10 @@ using UnityStandardAssets.CrossPlatformInput;
 public class Player : MonoBehaviour {
     // Fields
     public float speed;
-    public float distance;  
+    public float distance;
+
+    // When the player dies, it will go to this position
+    public Transform respawnPoint;
 	
     /*
      * Called on every frame.
@@ -33,5 +36,14 @@ public class Player : MonoBehaviour {
             Debug.Log("Left Button");
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x - distance, transform.position.y), Time.deltaTime * speed);
         }
+    }
+
+    /*
+     * Player death handling.
+     */
+    public void Death() {
+        Debug.Log("Player Death");
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform.transform.position = respawnPoint.transform.position;
     }
 }

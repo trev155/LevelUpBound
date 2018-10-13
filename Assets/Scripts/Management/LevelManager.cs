@@ -40,10 +40,9 @@ public class LevelManager : MonoBehaviour {
         if (GameContext.GameMode == null) {
             GameContext.GameMode = "classic";
         }
-
         // default level
         if (GameContext.CurrentLevel < 1) {
-            GameContext.CurrentLevel = 1;
+            GameContext.CurrentLevel = 7;
         }
         
         // load data regarding which levels have external objects

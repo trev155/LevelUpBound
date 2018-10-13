@@ -13,13 +13,15 @@ public class MovingObject : MonoBehaviour {
     // whether we should start moving the object
     private bool startMovement = false;
 
+    // Reference to the Player
+    public Player player;
+
     /*
      * Detect if making contact with the Player.
      */
     void OnTriggerStay2D(Collider2D other) {
-        Transform respawnPoint = GameObject.FindGameObjectWithTag("RespawnPoint").GetComponent<Transform>();
         if (other.tag == "Player") {
-            other.transform.position = respawnPoint.position;
+            player.Death();
         }
     }
 
