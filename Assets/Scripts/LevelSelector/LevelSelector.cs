@@ -5,10 +5,6 @@
  * 
  * Right now, the level selector is a "page" with many buttons. Each button represents a level. When pressed,
  * we take the user to the specified level. 
- * 
- * The buttons are named like,
- * "Level_XX"
- * where XX is a number (always at least 2 digits, could be 3).
  */
 
 using UnityEngine;
@@ -34,25 +30,33 @@ public class LevelSelector : MonoBehaviour {
 
     // Other objects
     private Util util = new Util();
+    public Text gameModeText;
 
-    private void Awake() {
-        // ...
-    }
-
+    /*
+     * Initialization of propreties
+     */
     private void Start() {
         // default settings
         currentGameModeSelection = "classic";
+        SetGameModeText();
         currentPage = 1;
         maxPages = ComputeMaxPages();
         maxLevels = GetMaxLevelsForGameMode();
 
-        InstantiateLevelButtons();   
+        CreateLevelButtons();   
     }
 
-    private void InstantiateLevelButtons() {
+    /*
+     * Instantiate level buttons. There are predefined transforms with tag "LevelButtonPosition". 
+     */
+    private void CreateLevelButtons() {
+        Debug.Log("Creating Level Buttons");
         int numberOfLevelButtons;
         if (currentPage == maxPages) {
             numberOfLevelButtons = maxLevels % LEVELS_PER_PAGE;
+            if (numberOfLevelButtons == 0) {
+                numberOfLevelButtons = LEVELS_PER_PAGE;
+            }
         } else {
             numberOfLevelButtons = LEVELS_PER_PAGE;
         }
@@ -63,34 +67,25 @@ public class LevelSelector : MonoBehaviour {
         for (int buttonPositionIndex = 0; buttonPositionIndex < numberOfLevelButtons; buttonPositionIndex++) {
             Transform levelButtonInstance = Instantiate(levelButtonPrefab, levelButtonPositions[buttonPositionIndex]);
             levelButtonInstance.gameObject.name = "Level_" + util.GetLevelString(nextLevel);
-            levelButtonInstance.gameObject.GetComponent<Button>().onClick.AddListener(Selection);
+            levelButtonInstance.gameObject.GetComponent<Button>().onClick.AddListener(LevelButtonOnClick);
+            Text levelButtonText = levelButtonInstance.GetChild(0).GetComponent<Text>();
+            levelButtonText.text = nextLevel.ToString();
             nextLevel += 1;
         }
     }
 
+    /*
+     * Remove all level buttons from the scene. Level buttons have a tag of "LevelButton".
+     * This should be called whenever we scroll to a new page, where we want to get rid of the current level buttons
+     * before displaying new ones.
+     */
     private void RemoveLevelButtons() {
-        // remove all level buttons before instantiating new ones
+        Debug.Log("Removing all Level Buttons");
+        GameObject[] allLevelButtons = GameObject.FindGameObjectsWithTag("LevelButton");
+        foreach (GameObject levelButton in allLevelButtons) {
+            Destroy(levelButton);
+        }
     }
-
-    /*
-     * This function will play a level by switching scenes to the specified level and game mode.
-     */
-    private void PlayLevel(string mode, int level) {
-        GameContext.GameMode = mode;
-        GameContext.CurrentLevel = level;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
-    }
-
-    /*
-     * Button Handler
-     */
-    public void Selection() {
-        string levelName = EventSystem.current.currentSelectedGameObject.name.Split('_')[1];
-        int selectedLevel = int.Parse(levelName);
-        
-        PlayLevel(currentGameModeSelection, selectedLevel);
-    }
-
 
     public void ScrollPageLeft() {
         Debug.Log("Scroll Page Left");
@@ -104,20 +99,48 @@ public class LevelSelector : MonoBehaviour {
 
     /*
      * Called when the "left" or "right" button is pressed.
+     * If we are on the leftmost or the rightmost page, disable the button.
      */
     private void ScrollPage(string direction) {
         if (direction == "left") {
-            currentPage -= 1;
+            if (currentPage != 1) {
+                currentPage -= 1;
+            }
         } else if (direction == "right") {
-            currentPage += 1;
+            if (currentPage != maxPages) {
+                currentPage += 1;
+            }
+        } else {
+            Debug.Log("Unknown scroll direction");
+            return;
         }
-
+        Debug.Log("Current Page: " + currentPage);
         RemoveLevelButtons();
-        InstantiateLevelButtons();
+        CreateLevelButtons();
+    }
+
+
+    /*
+     * This function will play a level by switching scenes to the specified level and game mode.
+     */
+    private void PlayLevel(string mode, int level) {
+        GameContext.GameMode = mode;
+        GameContext.CurrentLevel = level;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 
     /*
-     * Called when the game mode toggle button is pressed.
+     * Button Handler for when any Level Button on the Canvas is clicked.
+     */
+    public void LevelButtonOnClick() {
+        string levelName = EventSystem.current.currentSelectedGameObject.name.Split('_')[1];
+        int selectedLevel = int.Parse(levelName);
+        
+        PlayLevel(currentGameModeSelection, selectedLevel);
+    }
+
+    /*
+     * Button Handler for when the game mode toggle is clicked.
      */
      public void ToggleGameMode() {
         if (currentGameModeSelection == "classic") {
@@ -125,13 +148,9 @@ public class LevelSelector : MonoBehaviour {
         } else if (currentGameModeSelection == "custom") {
             currentGameModeSelection = "classic";
         }
+        SetGameModeText();
         maxPages = ComputeMaxPages();
         maxLevels = GetMaxLevelsForGameMode();
-
-        // TODO change the UI text as well
-
-
-
     }
 
     /*
@@ -146,7 +165,6 @@ public class LevelSelector : MonoBehaviour {
         } else {
             maxPages = -1;
         }
-        Debug.Log("Max Pages: " + maxPages);
         return maxPages;
     }
 
@@ -166,7 +184,10 @@ public class LevelSelector : MonoBehaviour {
         return maxLevels;
     }
 
-    public string getGameMode() {
-        return currentGameModeSelection;
+    /*
+     * Set game mode text according to the current state.
+     */ 
+    private void SetGameModeText() {
+        gameModeText.text = currentGameModeSelection;
     }
 }
