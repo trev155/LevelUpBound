@@ -6,13 +6,22 @@ public class Player : MonoBehaviour {
     public float speed;
     public float distance;
 
-    // When the player dies, it will go to this position
+    // Objects to keep track of
     public Transform respawnPoint;
-	
+    private Transform playerTransform;
+
+    /*
+     * Initialization
+     */
+    private void Awake() {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     /*
      * Called on every frame.
      */
-	void Update() {
+    void Update() {
+        PreventZRotation();
         Movement();
     }
 
@@ -35,6 +44,15 @@ public class Player : MonoBehaviour {
         if (CrossPlatformInputManager.GetButton("LeftButton") || Input.GetAxisRaw("Horizontal") < 0) {
             Debug.Log("Left Button");
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x - distance, transform.position.y), Time.deltaTime * speed);
+        }
+    }
+
+    /*
+     * Prevent Z-axis rotation.
+     */
+    private void PreventZRotation() {
+        if (playerTransform.rotation.z != 0) {
+            playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.x, playerTransform.rotation.y, 0);
         }
     }
 
