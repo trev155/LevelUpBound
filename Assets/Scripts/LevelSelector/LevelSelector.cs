@@ -13,6 +13,9 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Linq;
+
 
 public class LevelSelector : MonoBehaviour {
     // Constants
@@ -21,13 +24,52 @@ public class LevelSelector : MonoBehaviour {
     private const int LEVELS_PER_PAGE = 20;
 
     // Store state of current selections
-    private string currentGameModeSelection = "classic";
-    private int currentPage = 1;
-    private int maxPages;
+    private string currentGameModeSelection;
+    private int maxLevels;
+    private int currentPage;
+    private float maxPages;
 
+    // prefabs
+    public Transform levelButtonPrefab;
+
+    // Other objects
+    private Util util = new Util();
 
     private void Awake() {
+        // ...
+    }
+
+    private void Start() {
+        // default settings
+        currentGameModeSelection = "classic";
+        currentPage = 1;
         maxPages = ComputeMaxPages();
+        maxLevels = GetMaxLevelsForGameMode();
+
+        InstantiateLevelButtons();   
+    }
+
+    private void InstantiateLevelButtons() {
+        int numberOfLevelButtons;
+        if (currentPage == maxPages) {
+            numberOfLevelButtons = maxLevels % LEVELS_PER_PAGE;
+        } else {
+            numberOfLevelButtons = LEVELS_PER_PAGE;
+        }
+
+        int startingLevel = ((currentPage - 1) * LEVELS_PER_PAGE) + 1;
+        int nextLevel = startingLevel;
+        Transform[] levelButtonPositions = GameObject.FindGameObjectsWithTag("LevelButtonPosition").Select(gameObject => gameObject.transform).OrderBy(gameObject => gameObject.name).ToArray();
+        for (int buttonPositionIndex = 0; buttonPositionIndex < numberOfLevelButtons; buttonPositionIndex++) {
+            Transform levelButtonInstance = Instantiate(levelButtonPrefab, levelButtonPositions[buttonPositionIndex]);
+            levelButtonInstance.gameObject.name = "Level_" + util.GetLevelString(nextLevel);
+            levelButtonInstance.gameObject.GetComponent<Button>().onClick.AddListener(Selection);
+            nextLevel += 1;
+        }
+    }
+
+    private void RemoveLevelButtons() {
+        // remove all level buttons before instantiating new ones
     }
 
     /*
@@ -43,14 +85,10 @@ public class LevelSelector : MonoBehaviour {
      * Button Handler
      */
     public void Selection() {
-        Debug.Log(EventSystem.current.currentSelectedGameObject);
-
-        // get level name
         string levelName = EventSystem.current.currentSelectedGameObject.name.Split('_')[1];
         int selectedLevel = int.Parse(levelName);
-
-        PlayLevel(currentGameModeSelection, selectedLevel);
         
+        PlayLevel(currentGameModeSelection, selectedLevel);
     }
 
 
@@ -73,13 +111,9 @@ public class LevelSelector : MonoBehaviour {
         } else if (direction == "right") {
             currentPage += 1;
         }
-    }
 
-    /*
-     * Whenever we scroll pages, we are going to rename the button names.
-     */
-    private void RenameButtons() {
-
+        RemoveLevelButtons();
+        InstantiateLevelButtons();
     }
 
     /*
@@ -91,23 +125,48 @@ public class LevelSelector : MonoBehaviour {
         } else if (currentGameModeSelection == "custom") {
             currentGameModeSelection = "classic";
         }
-        
+        maxPages = ComputeMaxPages();
+        maxLevels = GetMaxLevelsForGameMode();
+
         // TODO change the UI text as well
 
-        // TODO when game mode is changed, go back to page 1
-     }
+
+
+    }
 
     /*
      * Compute max pages for the current game mode.
      */
-     private int ComputeMaxPages() {
-        Debug.Log(MAX_LEVELS_CLASSIC / LEVELS_PER_PAGE);
+     private float ComputeMaxPages() {
+        float maxPages;
         if (currentGameModeSelection == "classic") {
-            return MAX_LEVELS_CLASSIC / LEVELS_PER_PAGE;
+            maxPages = Mathf.Ceil(MAX_LEVELS_CLASSIC / (float) LEVELS_PER_PAGE);
         } else if (currentGameModeSelection == "custom") {
-            return MAX_LEVELS_CUSTOM / LEVELS_PER_PAGE;
+            maxPages = Mathf.Ceil(MAX_LEVELS_CUSTOM / (float) LEVELS_PER_PAGE);
         } else {
-            return 0;
+            maxPages = -1;
         }
+        Debug.Log("Max Pages: " + maxPages);
+        return maxPages;
+    }
+
+    /*
+     * Get the number of levels for the currently selected game mode.
+     */
+    private int GetMaxLevelsForGameMode() {
+        int maxLevels;
+        if (currentGameModeSelection == "classic") {
+            maxLevels = MAX_LEVELS_CLASSIC;
+        } else if (currentGameModeSelection == "custom") {
+            maxLevels = MAX_LEVELS_CUSTOM;
+        } else {
+            Debug.Log("Invalid game mode selection, returning -1");
+            maxLevels = -1;
+        }
+        return maxLevels;
+    }
+
+    public string getGameMode() {
+        return currentGameModeSelection;
     }
 }

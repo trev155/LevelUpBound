@@ -9,6 +9,8 @@ TagManager:
   - Key
   - MainGrid
   - RespawnPoint
+  - LevelButton
+  - LevelButtonPosition
   layers:
   - Default
   - TransparentFX
