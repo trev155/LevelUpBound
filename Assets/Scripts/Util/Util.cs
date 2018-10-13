@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class Util {
+public static class Util {
     /*
      * Filepath: eg) /Assets/Scripts/Levels/LS008
      */
-    public string GetFilepathString(int level, string gameMode, string prefix, string objectType) {
+    public static string GetFilepathString(int level, string gameMode, string prefix, string objectType) {
         string filepathString = prefix + "/" + GetFilenameString(level, gameMode, objectType);
         return filepathString;
     }
@@ -12,7 +12,7 @@ public class Util {
     /*
      * Filename: eg) LS037, LC009, OS010, OC023
      */
-    public string GetFilenameString(int level, string gameMode, string objectType) {
+    public static string GetFilenameString(int level, string gameMode, string objectType) {
         string filePrefix = "";
         if (objectType.Equals("level")) {
             filePrefix += "L";
@@ -36,7 +36,7 @@ public class Util {
     /*
      * Level strings: eg) 003, 012, 132
      */
-    public string GetLevelString(int level) {
+    public static string GetLevelString(int level) {
         string levelString = "";
         if (level < 100) {
             levelString += "0";
@@ -47,7 +47,4 @@ public class Util {
         levelString += level;
         return levelString;
     }
-
-
-
 }

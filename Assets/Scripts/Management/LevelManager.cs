@@ -27,8 +27,6 @@ public class LevelManager : MonoBehaviour {
 
     // Keep track of the current level's coroutine so that we can stop it when we need to
     private IEnumerator currentLevelCoroutine;
-    // Utility functions
-    Util util = new Util();
     // Levels that require external objects
     HashSet<int> levelsWithExternals = new HashSet<int>();
 
@@ -83,14 +81,14 @@ public class LevelManager : MonoBehaviour {
         }
 
         // Load the current level data 
-        string levelFilepath = util.GetFilepathString(GameContext.CurrentLevel, GameContext.GameMode, levelPrefix, LEVEL_OBJECT_TYPE);
+        string levelFilepath = Util.GetFilepathString(GameContext.CurrentLevel, GameContext.GameMode, levelPrefix, LEVEL_OBJECT_TYPE);
         currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
         if (currentLevelCoroutine == null) {
             return;
         }
 
         // Check if there are any other things we need to initialize for this level
-        string externalsFilepath = util.GetFilepathString(GameContext.CurrentLevel, GameContext.GameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
+        string externalsFilepath = Util.GetFilepathString(GameContext.CurrentLevel, GameContext.GameMode, externalsPrefix, EXTERNAL_OBJECT_TYPE);
         if (levelsWithExternals.Contains(GameContext.CurrentLevel)) {
             levelConstructor.LoadExternalObjects(externalsFilepath);
         }
