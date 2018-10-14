@@ -227,4 +227,11 @@ public class LevelSelector : MonoBehaviour {
         tempColorRight.a = 1.0f;
         imageRight.color = tempColorRight;   
     }
+
+    /*
+    * Back button handler
+    */
+    public void BackButton() {
+        GameContext.LoadPreviousPage();
+    }
 }

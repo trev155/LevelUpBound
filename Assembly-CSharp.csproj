@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\Objects\MainGrid.cs" />
     <Compile Include="Assets\Scripts\Objects\MovingObject.cs" />
     <Compile Include="Assets\Scripts\Objects\Player.cs" />
+    <Compile Include="Assets\Scripts\Options\Options.cs" />
     <Compile Include="Assets\Scripts\Util\Util.cs" />
     <None Include="Assets\Resources\Data\Levels\Custom\LC047.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\LS034.txt" />
