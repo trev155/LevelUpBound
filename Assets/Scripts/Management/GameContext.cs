@@ -16,7 +16,7 @@ public static class GameContext {
      */
     static GameContext() {
         GameMode = "classic";
-        CurrentLevel = 1;
+        CurrentLevel = 7;
         PreviousPageContext = "MainMenu";
         AudioEnabled = true;
     }
