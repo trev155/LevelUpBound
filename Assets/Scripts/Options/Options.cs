@@ -21,7 +21,6 @@ public class Options : MonoBehaviour {
         GameContext.LoadPreviousPage();
     }
 
-
     /*
      * When the scene is initialized, decide whether to show the AudioEnabled or the AudioDisabled image.
      */

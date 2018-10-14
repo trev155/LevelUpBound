@@ -33,9 +33,9 @@ public class LevelSelector : MonoBehaviour {
      */
     private void Start() {
         // default settings
-        currentGameModeSelection = "classic";
+        currentGameModeSelection = GameContext.LevelSelectionMode;
         SetGameModeText();
-        currentPage = 1;
+        currentPage = GameContext.LevelSelectionPage;
         BlurArrow();
         maxPages = ComputeMaxPages();
         maxLevels = GetMaxLevelsForGameMode();
@@ -129,6 +129,9 @@ public class LevelSelector : MonoBehaviour {
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = level;
         GameContext.PreviousPageContext = "LevelSelector";
+        GameContext.LevelSelection = true;
+        GameContext.LevelSelectionPage = currentPage;
+        GameContext.LevelSelectionMode = currentGameModeSelection;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 

@@ -21,10 +21,13 @@ public class UserInterfaceManager : MonoBehaviour {
     }
 
     /*
-     * Back button handler
+     * Back button handler. If we came from the LevelSelector, the back button should go back to the MainMenu.
      */
     public void BackButtonPressed() {
         GameContext.LoadPreviousPage();
+        if (GameContext.PreviousPageContext == "LevelSelector") {
+            GameContext.PreviousPageContext = "MainMenu";
+        }
     }
 
     /* 

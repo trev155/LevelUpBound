@@ -1,6 +1,7 @@
 ﻿/*
  * The Goal is where the Player is trying to move towards.
  * When the Player reaches the Goal, go to the next level.
+ * If the level was played from the LevelSelector, go back to the LevelSelector scene.
  */
 using UnityEngine;
 
@@ -11,6 +12,12 @@ public class Goal : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
+            if (GameContext.LevelSelection) {
+                GameContext.LoadPreviousPage();
+                GameContext.PreviousPageContext = "MainMenu";
+                return;
+            }
+
             other.transform.position = RespawnPoint.position;
             levelManager.AdvanceLevel();
             UIManager.UpdateLevelText();

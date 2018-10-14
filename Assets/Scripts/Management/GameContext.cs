@@ -5,11 +5,20 @@ using UnityEngine;
 using System;
 
 public static class GameContext {
-    // Global Variables
+    // Game data
     public static string GameMode { get; set; }
     public static int CurrentLevel { get; set; }
+
+    // Used for the Back button
     public static string PreviousPageContext { get; set; }
+
+    // Audio controls
     public static bool AudioEnabled { get; set; }
+
+    // For the level selection page
+    public static bool LevelSelection { get; set; }
+    public static int LevelSelectionPage { get; set; }
+    public static string LevelSelectionMode { get; set; }
     
     /*
      * Static Constructor = Default Values
@@ -19,6 +28,9 @@ public static class GameContext {
         CurrentLevel = 1;
         PreviousPageContext = "MainMenu";
         AudioEnabled = true;
+        LevelSelection = false;
+        LevelSelectionPage = 1;
+        LevelSelectionMode = "classic";
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};

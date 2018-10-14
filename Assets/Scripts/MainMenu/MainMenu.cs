@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour {
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = 1;
         GameContext.PreviousPageContext = "MainMenu";
+        GameContext.LevelSelection = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 
