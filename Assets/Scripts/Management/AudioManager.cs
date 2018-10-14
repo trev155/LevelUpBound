@@ -77,6 +77,10 @@ public class AudioManager : MonoBehaviour {
      * Play an Explosion sound effect, given a 2-character code.
      */
     public void PlayExplosionAudio(string code) {
+        if (!GameContext.AudioEnabled) {
+            return;
+        }
+
         switch (code) {
             case "AR":
                 archonExplosion.Play();
@@ -178,6 +182,10 @@ public class AudioManager : MonoBehaviour {
      * Play player death sound.
      */
     public void PlayPlayerDeathAudio() {
+        if (!GameContext.AudioEnabled) {
+            return;
+        }
+
         playerDeath.Play();
     }
 }

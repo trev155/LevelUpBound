@@ -9,7 +9,18 @@ public static class GameContext {
     public static string GameMode { get; set; }
     public static int CurrentLevel { get; set; }
     public static string PreviousPageContext { get; set; }
+    public static bool AudioEnabled { get; set; }
     
+    /*
+     * Static Constructor = Default Values
+     */
+    static GameContext() {
+        GameMode = "classic";
+        CurrentLevel = 11;
+        PreviousPageContext = "MainMenu";
+        AudioEnabled = true;
+    }
+
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};
 
     /* 

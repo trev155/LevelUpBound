@@ -33,16 +33,7 @@ public class LevelManager : MonoBehaviour {
     /*
      * Initialization.
      */
-    private void Awake() {
-        // default game mode
-        if (GameContext.GameMode == null) {
-            GameContext.GameMode = "classic";
-        }
-        // default level
-        if (GameContext.CurrentLevel < 1) {
-            GameContext.CurrentLevel = 7;
-        }
-        
+    private void Awake() {        
         // load data regarding which levels have external objects
         string datafile = "";
         if (GameContext.GameMode == "classic") {
