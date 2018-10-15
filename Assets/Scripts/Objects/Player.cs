@@ -6,6 +6,8 @@ public class Player : MonoBehaviour {
     public float speed;
     public float distance;
 
+    private bool stopping = false;
+
     // Objects to keep track of
     public Transform respawnPoint;
     private Transform playerTransform;
