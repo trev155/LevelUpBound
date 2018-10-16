@@ -1,12 +1,17 @@
-﻿using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+﻿/*
+ * Class that handles Player controls, and anything else related to the Player.
+ */
+using UnityEngine;
 
 public class Player : MonoBehaviour {
     // Fields
     public float speed;
     public float distance;
 
-    private bool stopping = false;
+    public bool enableMoveUp;
+    public bool enableMoveDown;
+    public bool enableMoveLeft;
+    public bool enableMoveRight;
 
     // Objects to keep track of
     public Transform respawnPoint;
@@ -17,6 +22,10 @@ public class Player : MonoBehaviour {
      */
     private void Awake() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        enableMoveUp = false;
+        enableMoveDown = false;
+        enableMoveLeft = false;
+        enableMoveRight = false;
     }
 
     /*
@@ -28,25 +37,54 @@ public class Player : MonoBehaviour {
     }
 
     /*
-     * Listen for cross platform inputs.
+     * Movement controls.
      */
     private void Movement() {
-        if (CrossPlatformInputManager.GetButton("UpButton") || Input.GetAxisRaw("Vertical") > 0) {
-            Debug.Log("Up Button");
+        if (enableMoveUp || Input.GetAxisRaw("Vertical") > 0) {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + distance), Time.deltaTime * speed);
         }
-        if (CrossPlatformInputManager.GetButton("DownButton") || Input.GetAxisRaw("Vertical") < 0) {
-            Debug.Log("Down Button");
+        if (enableMoveDown || Input.GetAxisRaw("Vertical") < 0) {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y - distance), Time.deltaTime * speed);
         }
-        if (CrossPlatformInputManager.GetButton("RightButton") || Input.GetAxisRaw("Horizontal") > 0) {
-            Debug.Log("Right Button");
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + distance, transform.position.y), Time.deltaTime * speed);
-        }
-        if (CrossPlatformInputManager.GetButton("LeftButton") || Input.GetAxisRaw("Horizontal") < 0) {
-            Debug.Log("Left Button");
+        if (enableMoveLeft || Input.GetAxisRaw("Horizontal") < 0) {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x - distance, transform.position.y), Time.deltaTime * speed);
         }
+        if (enableMoveRight || Input.GetAxisRaw("Horizontal") > 0) {
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + distance, transform.position.y), Time.deltaTime * speed);
+        }
+    }
+
+    // Button event handlers
+    public void StartMoveUp() {
+        enableMoveUp = true;
+    }
+
+    public void StopMoveUp() {
+        enableMoveUp = false;
+    }
+
+    public void StartMoveDown() {
+        enableMoveDown = true;
+    }
+
+    public void StopMoveDown() {
+        enableMoveDown = false;
+    }
+
+    public void StartMoveLeft() {
+        enableMoveLeft = true;
+    }
+
+    public void StopMoveLeft() {
+        enableMoveLeft = false;
+    }
+
+    public void StartMoveRight() {
+        enableMoveRight = true;
+    }
+
+    public void StopMoveRight() {
+        enableMoveRight = false;
     }
 
     /*
@@ -71,3 +109,5 @@ public class Player : MonoBehaviour {
         audioManager.PlayPlayerDeathAudio();
     }
 }
+
+    

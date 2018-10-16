@@ -19,6 +19,7 @@ public static class GameContext {
     public static bool LevelSelection { get; set; }
     public static int LevelSelectionPage { get; set; }
     public static string LevelSelectionMode { get; set; }
+    public static bool StopMovement { get; set; }
     
     /*
      * Static Constructor = Default Values
