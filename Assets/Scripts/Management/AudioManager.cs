@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour {
         hydraExplosion = this.transform.GetChild(0).Find("Hydra").GetComponent<AudioSource>();
         lurkerExplosion = this.transform.GetChild(0).Find("Lurker").GetComponent<AudioSource>();
         marineExplosion = this.transform.GetChild(0).Find("Marine").GetComponent<AudioSource>();
-        medicExplosion = this.transform.GetChild(0).Find("Marine").GetComponent<AudioSource>();
+        medicExplosion = this.transform.GetChild(0).Find("Medic").GetComponent<AudioSource>();
         observerExplosion = this.transform.GetChild(0).Find("Observer").GetComponent<AudioSource>();
         overlordExplosion = this.transform.GetChild(0).Find("Overlord").GetComponent<AudioSource>();
         probeExplosion = this.transform.GetChild(0).Find("Probe").GetComponent<AudioSource>();
