@@ -31,9 +31,12 @@ public class ExplosionManager : MonoBehaviour {
     public Transform explosionGuardianPrefab;
     public Transform explosionHtempPrefab;
     public Transform explosionHydraPrefab;
+    public Transform explosionInfestedTerranPrefab;
+    public Transform explosionKakaruPrefab;
     public Transform explosionLurkerPrefab;
     public Transform explosionMarinePrefab;
     public Transform explosionMedicPrefab;
+    public Transform explosionMutaliskPrefab;
     public Transform explosionObserverPrefab;
     public Transform explosionOverlordPrefab;
     public Transform explosionProbePrefab;
@@ -200,6 +203,12 @@ public class ExplosionManager : MonoBehaviour {
             case "HY":
                 explosion = Instantiate(explosionHydraPrefab, location);
                 break;
+            case "IT":
+                explosion = Instantiate(explosionInfestedTerranPrefab, location);
+                break;
+            case "KA":
+                explosion = Instantiate(explosionKakaruPrefab, location);
+                break;
             case "LU":
                 explosion = Instantiate(explosionLurkerPrefab, location);
                 break;
@@ -208,6 +217,9 @@ public class ExplosionManager : MonoBehaviour {
                 break;
             case "ME":
                 explosion = Instantiate(explosionMedicPrefab, location);
+                break;
+            case "MU":
+                explosion = Instantiate(explosionMutaliskPrefab, location);
                 break;
             case "OB":
                 explosion = Instantiate(explosionObserverPrefab, location);

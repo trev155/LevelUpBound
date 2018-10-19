@@ -15,9 +15,12 @@ public class AudioManager : MonoBehaviour {
     public AudioSource guardianExplosion;
     public AudioSource htempExplosion;
     public AudioSource hydraExplosion;
+    public AudioSource infestedTerranExplosion;
+    public AudioSource kakaruExplosion;
     public AudioSource lurkerExplosion;
     public AudioSource marineExplosion;
     public AudioSource medicExplosion;
+    public AudioSource mutaliskExplosion;
     public AudioSource observerExplosion;
     public AudioSource overlordExplosion;
     public AudioSource probeExplosion;
@@ -51,9 +54,12 @@ public class AudioManager : MonoBehaviour {
         guardianExplosion = this.transform.GetChild(0).Find("Guardian").GetComponent<AudioSource>();
         htempExplosion = this.transform.GetChild(0).Find("Htemp").GetComponent<AudioSource>();
         hydraExplosion = this.transform.GetChild(0).Find("Hydra").GetComponent<AudioSource>();
+        infestedTerranExplosion = this.transform.GetChild(0).Find("InfestedTerran").GetComponent<AudioSource>();
+        kakaruExplosion = this.transform.GetChild(0).Find("Kakaru").GetComponent<AudioSource>();
         lurkerExplosion = this.transform.GetChild(0).Find("Lurker").GetComponent<AudioSource>();
         marineExplosion = this.transform.GetChild(0).Find("Marine").GetComponent<AudioSource>();
         medicExplosion = this.transform.GetChild(0).Find("Medic").GetComponent<AudioSource>();
+        mutaliskExplosion = this.transform.GetChild(0).Find("Mutalisk").GetComponent<AudioSource>();
         observerExplosion = this.transform.GetChild(0).Find("Observer").GetComponent<AudioSource>();
         overlordExplosion = this.transform.GetChild(0).Find("Overlord").GetComponent<AudioSource>();
         probeExplosion = this.transform.GetChild(0).Find("Probe").GetComponent<AudioSource>();
@@ -115,6 +121,12 @@ public class AudioManager : MonoBehaviour {
             case "HY":
                 hydraExplosion.Play();
                 break;
+            case "IT":
+                infestedTerranExplosion.Play();
+                break;
+            case "KA":
+                kakaruExplosion.Play();
+                break;
             case "LU":
                 lurkerExplosion.Play();
                 break;
@@ -123,6 +135,9 @@ public class AudioManager : MonoBehaviour {
                 break;
             case "ME":
                 medicExplosion.Play();
+                break;
+            case "MU":
+                mutaliskExplosion.Play();
                 break;
             case "OB":
                 observerExplosion.Play();
