@@ -15,16 +15,10 @@ public enum Mode {
 }
 
 public static class GameMode {
-    private const string LEVEL_CLASSIC_PREFIX = "Data/Levels/Classic";
-    private const string LEVEL_CUSTOM_PREFIX = "Data/Levels/Custom";
-    private const string EXTERNALS_CLASSIC_PREFIX = "Data/ExternalObjects/Classic";
-    private const string EXTERNALS_CUSTOM_PREFIX = "Data/ExternalObjects/Custom";
-    private const string LEVELS_WITH_EXTERNALS_CLASSIC = "Data/ExternalObjects/classicExternalsList";
-    private const string LEVELS_WITH_EXTERNALS_CUSTOM = "Data/ExternalObjects/customExternalsList";
-    private const string LEVEL_OBJECT_TYPE = "level";
-    private const string EXTERNAL_OBJECT_TYPE = "external";
-
     private static Dictionary<Mode, string> ModeNames = new Dictionary<Mode, string>();
+    private static Dictionary<Mode, string> LevelPrefixes = new Dictionary<Mode, string>();
+    private static Dictionary<Mode, string> ExternalPrefixes = new Dictionary<Mode, string>();
+    private static Dictionary<Mode, string> ExternalListPaths = new Dictionary<Mode, string>();
 
     static GameMode() {
         // String names for game modes
@@ -35,11 +29,25 @@ public static class GameMode {
         ModeNames.Add(Mode.CHALLENGE, "Challenge");
 
         // Locations of the level files
+        LevelPrefixes.Add(Mode.TUTORIAL, "Data/Levels/Tutorial");
+        LevelPrefixes.Add(Mode.EASY, "Data/Levels/Easy");
+        LevelPrefixes.Add(Mode.CLASSIC, "Data/Levels/Classic");
+        LevelPrefixes.Add(Mode.CUSTOM, "Data/Levels/Custom");
+        LevelPrefixes.Add(Mode.CHALLENGE, "Data/Levels/Challenge");
 
         // Locations of the externals files
+        ExternalPrefixes.Add(Mode.TUTORIAL, "Data/ExternalObjects/Tutorial");
+        ExternalPrefixes.Add(Mode.EASY, "Data/ExternalObjects/Easy");
+        ExternalPrefixes.Add(Mode.CLASSIC, "Data/ExternalObjects/Classic");
+        ExternalPrefixes.Add(Mode.CUSTOM, "Data/ExternalObjects/Custom");
+        ExternalPrefixes.Add(Mode.CHALLENGE, "Data/ExternalObjects/Challenge");
 
         // Locations of the external lists
-
+        ExternalListPaths.Add(Mode.TUTORIAL, "Data/ExternalObjects/classicExternalsList");
+        ExternalListPaths.Add(Mode.EASY, "Data/ExternalObjects/easyExternalsList");
+        ExternalListPaths.Add(Mode.CLASSIC, "Data/ExternalObjects/classicExternalsList");
+        ExternalListPaths.Add(Mode.CUSTOM, "Data/ExternalObjects/customExternalsList");
+        ExternalListPaths.Add(Mode.CHALLENGE, "Data/ExternalObjects/challengeExternalsList");
     }
 
     public static string GetName(Mode mode) {
@@ -51,8 +59,31 @@ public static class GameMode {
         }
     }
 
-    public static string GetExternalsFilepath(Mode mode) {
+    public static string GetLevelPrefix(Mode mode) {
+        try {
+            return LevelPrefixes[mode];
+        } catch (KeyNotFoundException e) {
+            Debug.Log(e);
+            return null;
+        }
+    }
 
+    public static string GetExternalPrefix(Mode mode) {
+        try {
+            return ExternalPrefixes[mode];
+        } catch (KeyNotFoundException e) {
+            Debug.Log(e);
+            return null;
+        }
+    }
+
+    public static string GetExternalListPath(Mode mode) {
+        try {
+            return ExternalListPaths[mode];
+        } catch (KeyNotFoundException e) {
+            Debug.Log(e);
+            return null;
+        }
     }
 
 }

@@ -41,7 +41,6 @@ public static class GameContext {
      * If no page exists, load a default page.
      */
     public static void LoadPreviousPage() {
-        Debug.Log(PreviousPageContext);
         if (PreviousPageContext == null || PreviousPageContext == "") {
             Debug.Log("Previous Page Context not set. Loading Default Page");
             UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");

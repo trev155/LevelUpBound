@@ -1,0 +1,6 @@
+R0 DA
+R1 DA
+R2 DA
+R3 DA
+R4 DA
+W3000
