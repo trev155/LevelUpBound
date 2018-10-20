@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/*
+ * A page where the user can set various options, such as volume and theme.
+ */
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Options : MonoBehaviour {

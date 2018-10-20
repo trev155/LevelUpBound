@@ -32,10 +32,26 @@ public class MainMenu : MonoBehaviour {
     }
 
     /*
+    * Load the Instructions page.
+    */
+    public void Instructions() {
+        GameContext.PreviousPageContext = "MainMenu";
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Instructions");
+    }
+
+    /*
      * Load the Options scene.
      */
     public void Options() {
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
+    }
+    
+    /*
+     * Load the About page.
+     */
+    public void About() {
+        GameContext.PreviousPageContext = "MainMenu";
+        UnityEngine.SceneManagement.SceneManager.LoadScene("About");
     }
 }

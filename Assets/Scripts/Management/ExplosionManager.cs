@@ -134,13 +134,13 @@ public class ExplosionManager : MonoBehaviour {
      * Exploding the tile, means to destroy any unit on that tile.
      */
     private IEnumerator Explode(int row, int col, string explosionCode) {
-        audioManager.PlayExplosionAudio(explosionCode);
-        gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
-        yield return new WaitForSeconds(explosionCooldown);
+        audioManager.PlayExplosionAudio(explosionCode);
         StartCoroutine(FadeOutAndDestroy(explosion.gameObject));
+
+        gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
+        yield return new WaitForSeconds(explosionCooldown);
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = false;
-        
     }
 
     /*
