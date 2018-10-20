@@ -10,11 +10,15 @@ public class Options : MonoBehaviour {
     public Image audioEnabledImage;
     public Image audioDisabledImage;
 
+    public Slider volumeSlider;
+
     /*
      * Initialization
      */
     private void Awake() {
         InitializeAudioUI();
+        SetInitialVolume();
+        volumeSlider.onValueChanged.AddListener(delegate { VolumeSliderChanged(); });
     }
 
     /*
@@ -53,5 +57,24 @@ public class Options : MonoBehaviour {
             audioDisabledImage.gameObject.SetActive(false);
         }
         GameContext.AudioEnabled = !GameContext.AudioEnabled;
+    }
+
+    /*
+     * Set the initial value of the volume slider based on the game context.
+     */
+    private void SetInitialVolume() {
+        volumeSlider.value = GameContext.CurrentVolume;
+    }
+
+    /*
+     * Function should be called whenever the volume slider changes.
+     * Change the volume global variable to the slider value.
+     * Since audio is played on different scenes, we have to set volume levels
+     * of all audio sources on each scene during scene loads. That means
+     * there is minimal work to do here.
+     * Also, the only place where volume can be set right now is on this page.
+     */
+    public void VolumeSliderChanged() {
+        GameContext.CurrentVolume = volumeSlider.value;
     }
 }

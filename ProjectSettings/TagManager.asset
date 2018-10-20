@@ -11,6 +11,7 @@ TagManager:
   - RespawnPoint
   - LevelButton
   - LevelButtonPosition
+  - Audio
   layers:
   - Default
   - TransparentFX

@@ -42,7 +42,26 @@ public class AudioManager : MonoBehaviour {
     // Other audio
     public AudioSource playerDeath;
     public AudioSource debris;
-    
+
+    /*
+     * Initialization.
+     */
+    private void Awake() {
+        InitializeVolumeLevels();
+    }
+
+    /*
+     * Initialize volume levels.
+     * Since this will be used in multiple classes, refactor this out later on.
+     */
+    private void InitializeVolumeLevels() {    
+        GameObject[] allAudioObjects = GameObject.FindGameObjectsWithTag("Audio");
+        foreach (GameObject audioObject in allAudioObjects) {
+            AudioSource audioSource = audioObject.GetComponent<AudioSource>();
+            audioSource.volume = GameContext.CurrentVolume;
+        }
+    }
+
     /*
      * Play an Explosion sound effect, given a 2-character code.
      */

@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 87695664}
   m_Layer: 0
   m_Name: Shuttle
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 113707351}
   m_Layer: 0
   m_Name: Scourge
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 156565081}
   m_Layer: 0
   m_Name: Vessel
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1201,7 +1201,7 @@ GameObject:
   - component: {fileID: 206246346}
   m_Layer: 0
   m_Name: Dragoon
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1359,7 +1359,7 @@ GameObject:
   - component: {fileID: 208449793}
   m_Layer: 0
   m_Name: Zealot
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1686,7 +1686,7 @@ GameObject:
   - component: {fileID: 277258167}
   m_Layer: 0
   m_Name: Queen
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2169,7 +2169,7 @@ GameObject:
   - component: {fileID: 365883017}
   m_Layer: 0
   m_Name: Valk
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2293,7 +2293,7 @@ GameObject:
   - component: {fileID: 431485386}
   m_Layer: 0
   m_Name: InfestedTerran
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2546,7 +2546,7 @@ GameObject:
   - component: {fileID: 443113209}
   m_Layer: 0
   m_Name: Defiler
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3434,7 +3434,7 @@ GameObject:
   - component: {fileID: 650487902}
   m_Layer: 0
   m_Name: Overlord
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3558,7 +3558,7 @@ GameObject:
   - component: {fileID: 667273402}
   m_Layer: 0
   m_Name: Firebat
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3783,7 +3783,7 @@ GameObject:
   - component: {fileID: 733135947}
   m_Layer: 0
   m_Name: Tank
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4484,7 +4484,7 @@ GameObject:
   - component: {fileID: 887897824}
   m_Layer: 0
   m_Name: Hydra
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5147,7 +5147,7 @@ GameObject:
   - component: {fileID: 1127350685}
   m_Layer: 0
   m_Name: Debris
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5276,7 +5276,7 @@ GameObject:
   - component: {fileID: 1147266376}
   m_Layer: 0
   m_Name: Reaver
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5827,7 +5827,7 @@ GameObject:
   - component: {fileID: 1233515110}
   m_Layer: 0
   m_Name: PlayerDeath
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6153,7 +6153,7 @@ GameObject:
   - component: {fileID: 1313694034}
   m_Layer: 0
   m_Name: Medic
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6815,7 +6815,7 @@ GameObject:
   - component: {fileID: 1494564500}
   m_Layer: 0
   m_Name: Kakaru
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7068,7 +7068,7 @@ GameObject:
   - component: {fileID: 1579810083}
   m_Layer: 0
   m_Name: Mutalisk
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7192,7 +7192,7 @@ GameObject:
   - component: {fileID: 1590178434}
   m_Layer: 0
   m_Name: Archon
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7316,7 +7316,7 @@ GameObject:
   - component: {fileID: 1613564857}
   m_Layer: 0
   m_Name: Marine
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7763,7 +7763,7 @@ GameObject:
   - component: {fileID: 1665568230}
   m_Layer: 0
   m_Name: Wraith
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8036,7 +8036,7 @@ GameObject:
   - component: {fileID: 1702829298}
   m_Layer: 0
   m_Name: Probe
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8289,7 +8289,7 @@ GameObject:
   - component: {fileID: 1713685569}
   m_Layer: 0
   m_Name: Dropship
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8413,7 +8413,7 @@ GameObject:
   - component: {fileID: 1734495706}
   m_Layer: 0
   m_Name: Scv
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8643,7 +8643,7 @@ GameObject:
   - component: {fileID: 1818946424}
   m_Layer: 0
   m_Name: Devourer
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8829,7 +8829,7 @@ GameObject:
   - component: {fileID: 1854864702}
   m_Layer: 0
   m_Name: TankSiege
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9136,7 +9136,7 @@ GameObject:
   - component: {fileID: 1874185629}
   m_Layer: 0
   m_Name: Guardian
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9260,7 +9260,7 @@ GameObject:
   - component: {fileID: 1887577177}
   m_Layer: 0
   m_Name: Drone
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9384,7 +9384,7 @@ GameObject:
   - component: {fileID: 1905184143}
   m_Layer: 0
   m_Name: Observer
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9736,7 +9736,7 @@ GameObject:
   - component: {fileID: 1945208902}
   m_Layer: 0
   m_Name: Lurker
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9860,7 +9860,7 @@ GameObject:
   - component: {fileID: 1950080867}
   m_Layer: 0
   m_Name: Htemp
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10230,7 +10230,7 @@ GameObject:
   - component: {fileID: 2035087020}
   m_Layer: 0
   m_Name: Scout
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10429,7 +10429,7 @@ GameObject:
   - component: {fileID: 2067487944}
   m_Layer: 0
   m_Name: DarkTemplar
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10584,7 +10584,7 @@ GameObject:
   - component: {fileID: 2085379979}
   m_Layer: 0
   m_Name: Ultralisk
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
