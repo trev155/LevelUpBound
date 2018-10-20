@@ -160,6 +160,7 @@
     <None Include="Assets\Resources\Data\Levels\Classic\LS036.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Custom\OC042.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Custom\OC021.txt" />
+    <None Include="Assets\Resources\Data\ExternalObjects\Classic\OS100.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Custom\OC013.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\OS092.txt" />
     <None Include="Assets\Resources\Data\Levels\Custom\LC004.txt" />

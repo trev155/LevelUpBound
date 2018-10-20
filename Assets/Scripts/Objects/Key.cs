@@ -9,12 +9,17 @@ public class Key : MonoBehaviour {
     private MainGrid mainGrid;
     private GameObject[][] gameGrid;
 
+    // Reference to audio management
+    private AudioManager audioManager;
+
     /*
      * Initialization
      */
     private void Awake() {
         mainGrid = GameObject.FindGameObjectWithTag("MainGrid").GetComponent<MainGrid>();
         gameGrid = mainGrid.GetGameGrid();
+
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     /*
@@ -24,6 +29,7 @@ public class Key : MonoBehaviour {
         if (other.tag == "Player") {
             Destroy(gameObject);
             Destroy(gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("Wall(Clone)").gameObject);
+            audioManager.PlayWallDestroyAudio();
         }
     }
 
