@@ -10,7 +10,8 @@ using System.Collections;
 
 public class ExplosionManager : MonoBehaviour {
     // constants
-    private const float explosionCooldown = 0.1f;
+    private const float EXPLOSION_COOLDOWN = 0.1f;
+    private const float FADE_OUT_TIME = 0.4f;
 
     // Reference to the game grid
     public MainGrid mainGrid;
@@ -139,7 +140,7 @@ public class ExplosionManager : MonoBehaviour {
         StartCoroutine(FadeOutAndDestroy(explosion.gameObject));
 
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
-        yield return new WaitForSeconds(explosionCooldown);
+        yield return new WaitForSeconds(EXPLOSION_COOLDOWN);
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = false;
     }
 
@@ -150,10 +151,9 @@ public class ExplosionManager : MonoBehaviour {
     IEnumerator FadeOutAndDestroy(GameObject explosionGameObject) {
         SpriteRenderer spriteRenderer = explosionGameObject.GetComponent<SpriteRenderer>();
 
-        float fadeOutTime = 0.2f;
         Color tmpColor = spriteRenderer.color;
         while (tmpColor.a > 0f) {
-            tmpColor.a -= Time.deltaTime / fadeOutTime;
+            tmpColor.a -= Time.deltaTime / FADE_OUT_TIME;
             spriteRenderer.color = tmpColor;
             if (tmpColor.a <= 0f) {
                 tmpColor.a = 0f;

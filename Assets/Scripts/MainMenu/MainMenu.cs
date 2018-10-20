@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour {
     /*
      * Initialize globals and start the game. Loads the MainGame scene.
      */
-    private void ChooseMode(string mode) {
+    private void ChooseMode(Mode mode) {
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = 1;
         GameContext.PreviousPageContext = "MainMenu";
@@ -16,11 +16,23 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void ChooseClassicMode() {
-        ChooseMode("classic");
+        ChooseMode(Mode.CLASSIC);
     }
 
     public void ChooseCustomMode() {
-        ChooseMode("custom");
+        ChooseMode(Mode.CUSTOM);
+    }
+
+    public void ChooseEasyMode() {
+        ChooseMode(Mode.EASY);
+    }
+
+    public void ChooseTutorialMode() {
+        ChooseMode(Mode.TUTORIAL);
+    }
+
+    public void ChooseChallengeode() {
+        ChooseMode(Mode.CHALLENGE);
     }
 
     /*
@@ -29,6 +41,14 @@ public class MainMenu : MonoBehaviour {
     public void LevelSelector() {
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelector");
+    }
+
+    /*
+     * Load the Level Editor scene.
+     */
+    public void LevelEditor() {
+        GameContext.PreviousPageContext = "MainMenu";
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelEditor");
     }
 
     /*

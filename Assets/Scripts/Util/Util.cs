@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿/*
+ * Various utility functions that don't particularly belong anywhere else.
+ */
+using UnityEngine;
 
 public static class Util {
     /*
      * Filepath: eg) /Assets/Scripts/Levels/LS008
      */
-    public static string GetFilepathString(int level, string gameMode, string prefix, string objectType) {
+    public static string GetFilepathString(int level, Mode gameMode, string prefix, string objectType) {
         string filepathString = prefix + "/" + GetFilenameString(level, gameMode, objectType);
         return filepathString;
     }
@@ -12,7 +15,7 @@ public static class Util {
     /*
      * Filename: eg) LS037, LC009, OS010, OC023
      */
-    public static string GetFilenameString(int level, string gameMode, string objectType) {
+    public static string GetFilenameString(int level, Mode gameMode, string objectType) {
         string filePrefix = "";
         if (objectType.Equals("level")) {
             filePrefix += "L";
@@ -22,9 +25,9 @@ public static class Util {
             Debug.Log("Unknown game mode. This should not happen.");
         }
 
-        if (gameMode.Equals("classic")) {
+        if (gameMode == Mode.CLASSIC) {
             filePrefix += "S";
-        } else if (gameMode.Equals("custom")) {
+        } else if (gameMode == Mode.CUSTOM) {
             filePrefix += "C";
         } else {
             Debug.Log("Unknown game mode. This should not happen.");

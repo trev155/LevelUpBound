@@ -36,9 +36,9 @@ public class LevelManager : MonoBehaviour {
     private void Awake() {        
         // load data regarding which levels have external objects
         string datafile = "";
-        if (GameContext.GameMode == "classic") {
+        if (GameContext.GameMode == Mode.CLASSIC) {
             datafile = LEVELS_WITH_EXTERNALS_CLASSIC;
-        } else if (GameContext.GameMode == "custom") {
+        } else if (GameContext.GameMode == Mode.CUSTOM) {
             datafile = LEVELS_WITH_EXTERNALS_CUSTOM;
         }
 
@@ -63,10 +63,10 @@ public class LevelManager : MonoBehaviour {
         // File locations to read from depends on the game mode
         string levelPrefix = "";
         string externalsPrefix = "";
-        if (GameContext.GameMode.Equals("classic")) {
+        if (GameContext.GameMode == Mode.CLASSIC) {
             levelPrefix = LEVEL_CLASSIC_PREFIX;
             externalsPrefix = EXTERNALS_CLASSIC_PREFIX;
-        } else if (GameContext.GameMode.Equals("custom")) {
+        } else if (GameContext.GameMode == Mode.CUSTOM) {
             levelPrefix = LEVEL_CUSTOM_PREFIX;
             externalsPrefix = EXTERNALS_CUSTOM_PREFIX;
         }

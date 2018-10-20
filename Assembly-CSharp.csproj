@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Management\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Management\ExplosionManager.cs" />
     <Compile Include="Assets\Scripts\Management\GameContext.cs" />
+    <Compile Include="Assets\Scripts\Management\GameMode.cs" />
     <Compile Include="Assets\Scripts\Management\LevelConstructor.cs" />
     <Compile Include="Assets\Scripts\Management\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Management\UserInterfaceManager.cs" />

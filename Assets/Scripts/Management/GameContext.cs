@@ -6,7 +6,7 @@ using System;
 
 public static class GameContext {
     // Game data
-    public static string GameMode { get; set; }
+    public static Mode GameMode { get; set; }
     public static int CurrentLevel { get; set; }
 
     // Used for the Back button
@@ -18,20 +18,20 @@ public static class GameContext {
     // For the level selection page
     public static bool LevelSelection { get; set; }
     public static int LevelSelectionPage { get; set; }
-    public static string LevelSelectionMode { get; set; }
+    public static Mode LevelSelectionMode { get; set; }
     public static bool StopMovement { get; set; }
     
     /*
      * Static Constructor = Default Values
      */
     static GameContext() {
-        GameMode = "classic";
+        GameMode = Mode.CLASSIC;
         CurrentLevel = 100;
         PreviousPageContext = "MainMenu";
         AudioEnabled = true;
         LevelSelection = false;
         LevelSelectionPage = 1;
-        LevelSelectionMode = "classic";
+        LevelSelectionMode = Mode.CLASSIC;
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};

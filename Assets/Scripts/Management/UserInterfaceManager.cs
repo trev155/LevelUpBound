@@ -41,7 +41,7 @@ public class UserInterfaceManager : MonoBehaviour {
      * Set game mode text.
      */
     public void UpdateGameModeText() {
-        currentGameModeLabel.text = "Game Mode: " + GameContext.GameMode;
+        currentGameModeLabel.text = "Game Mode: " + GameMode.GetName(GameContext.GameMode);
     }
 
     /*

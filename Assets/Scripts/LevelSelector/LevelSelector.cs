@@ -17,7 +17,7 @@ public class LevelSelector : MonoBehaviour {
     private const int LEVELS_PER_PAGE = 20;
 
     // Store state of current selections
-    private string currentGameModeSelection;
+    private Mode currentGameModeSelection;
     private int maxLevels;
     private int currentPage;
     private float maxPages;
@@ -125,7 +125,7 @@ public class LevelSelector : MonoBehaviour {
     /*
      * This function will play a level by switching scenes to the specified level and game mode.
      */
-    private void PlayLevel(string mode, int level) {
+    private void PlayLevel(Mode mode, int level) {
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = level;
         GameContext.PreviousPageContext = "LevelSelector";
@@ -148,11 +148,12 @@ public class LevelSelector : MonoBehaviour {
     /*
      * Button Handler for when the game mode toggle is clicked.
      */
-     public void ToggleGameMode() {
-        if (currentGameModeSelection == "classic") {
-            currentGameModeSelection = "custom";
-        } else if (currentGameModeSelection == "custom") {
-            currentGameModeSelection = "classic";
+    public void ToggleGameMode() {
+        Debug.Log(currentGameModeSelection);
+        if (currentGameModeSelection == Mode.CLASSIC) {
+            currentGameModeSelection = Mode.CUSTOM;
+        } else if (currentGameModeSelection == Mode.CUSTOM) {
+            currentGameModeSelection = Mode.CLASSIC;
         }
         SetGameModeText();
         maxPages = ComputeMaxPages();
@@ -164,9 +165,9 @@ public class LevelSelector : MonoBehaviour {
      */
      private float ComputeMaxPages() {
         float maxPages;
-        if (currentGameModeSelection == "classic") {
+        if (currentGameModeSelection == Mode.CLASSIC) {
             maxPages = Mathf.Ceil(MAX_LEVELS_CLASSIC / (float) LEVELS_PER_PAGE);
-        } else if (currentGameModeSelection == "custom") {
+        } else if (currentGameModeSelection == Mode.CUSTOM) {
             maxPages = Mathf.Ceil(MAX_LEVELS_CUSTOM / (float) LEVELS_PER_PAGE);
         } else {
             maxPages = -1;
@@ -179,9 +180,9 @@ public class LevelSelector : MonoBehaviour {
      */
     private int GetMaxLevelsForGameMode() {
         int maxLevels;
-        if (currentGameModeSelection == "classic") {
+        if (currentGameModeSelection == Mode.CLASSIC) {
             maxLevels = MAX_LEVELS_CLASSIC;
-        } else if (currentGameModeSelection == "custom") {
+        } else if (currentGameModeSelection == Mode.CUSTOM) {
             maxLevels = MAX_LEVELS_CUSTOM;
         } else {
             Debug.Log("Invalid game mode selection, returning -1");
@@ -194,7 +195,7 @@ public class LevelSelector : MonoBehaviour {
      * Set game mode text according to the current state.
      */ 
     private void SetGameModeText() {
-        gameModeText.text = currentGameModeSelection;
+        gameModeText.text = GameMode.GetName(currentGameModeSelection);
     }
 
     /*
