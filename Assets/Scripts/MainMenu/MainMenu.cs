@@ -38,7 +38,7 @@ public class MainMenu : MonoBehaviour {
         ChooseMode(Mode.TUTORIAL);
     }
 
-    public void ChooseChallengeode() {
+    public void ChooseChallengeMode() {
         ChooseMode(Mode.CHALLENGE);
     }
 
@@ -80,5 +80,13 @@ public class MainMenu : MonoBehaviour {
     public void About() {
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("About");
+    }
+
+    /*
+     * Exit the application.
+     */
+    public void ExitApp() {
+        Debug.Log("Exiting the Application");
+        Application.Quit();
     }
 }
