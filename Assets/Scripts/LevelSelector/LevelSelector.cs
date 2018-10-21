@@ -12,17 +12,9 @@ using System.Linq;
 
 public class LevelSelector : MonoBehaviour {
     // Constants
-    private const int MAX_LEVELS_TUTORIAL = 5;
-    private const int MAX_LEVELS_EASY = 50;
-    private const int MAX_LEVELS_CLASSIC = 100;
-    private const int MAX_LEVELS_ADVANCED = 100;
-    private const int MAX_LEVELS_CHALLENGE = 10;
-    
     private const int LEVELS_PER_PAGE = 20;
 
-    // Store state of current selections
-    private Mode currentGameModeSelection;
-    private int maxLevels;
+    // Fields
     private int currentPage;
     private float maxPages;
 
@@ -32,23 +24,19 @@ public class LevelSelector : MonoBehaviour {
     // Reference objects
     public Text gameModeText;
 
-    private void Awake() {
-        Theme.SetTheme();
-    }
-
     /*
-     * Initialization of propreties
+     * Initialization
      */
-    private void Start() {
-        // default settings
-        currentGameModeSelection = GameContext.LevelSelectionMode;
-        SetGameModeText();
+    private void Awake() {
+        // Initialize fields
         currentPage = GameContext.LevelSelectionPage;
-        BlurArrow();
         maxPages = ComputeMaxPages();
-        maxLevels = GetMaxLevelsForGameMode();
 
-        CreateLevelButtons();   
+        // UI related
+        Theme.SetTheme();
+        BlurArrows();
+        SetGameModeText();
+        CreateLevelButtons();
     }
 
     /*
@@ -58,7 +46,7 @@ public class LevelSelector : MonoBehaviour {
         Debug.Log("Creating Level Buttons");
         int numberOfLevelButtons;
         if (currentPage == maxPages) {
-            numberOfLevelButtons = maxLevels % LEVELS_PER_PAGE;
+            numberOfLevelButtons = GameMode.GetNumberOfLevels(GameContext.GameMode) % LEVELS_PER_PAGE;
             if (numberOfLevelButtons == 0) {
                 numberOfLevelButtons = LEVELS_PER_PAGE;
             }
@@ -121,7 +109,7 @@ public class LevelSelector : MonoBehaviour {
         }
         Debug.Log("Current Page: " + currentPage);
         if (currentPage == 1 || currentPage == maxPages) {
-            BlurArrow();
+            BlurArrows();
         } else {
             UnblurArrows();
         }
@@ -139,7 +127,7 @@ public class LevelSelector : MonoBehaviour {
         GameContext.PreviousPageContext = "LevelSelector";
         GameContext.LevelSelection = true;
         GameContext.LevelSelectionPage = currentPage;
-        GameContext.LevelSelectionMode = currentGameModeSelection;
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 
@@ -150,7 +138,7 @@ public class LevelSelector : MonoBehaviour {
         string levelName = EventSystem.current.currentSelectedGameObject.name.Split('_')[1];
         int selectedLevel = int.Parse(levelName);
         
-        PlayLevel(currentGameModeSelection, selectedLevel);
+        PlayLevel(GameContext.GameMode, selectedLevel);
     }
 
     /*
@@ -159,59 +147,49 @@ public class LevelSelector : MonoBehaviour {
      * - Tutorial, Easy, Classic, Advanced, Challenge
      */
     public void ToggleGameMode() {
-        if (currentGameModeSelection == Mode.CLASSIC) {
-            currentGameModeSelection = Mode.ADVANCED;
-        } else if (currentGameModeSelection == Mode.ADVANCED) {
-            currentGameModeSelection = Mode.CLASSIC;
+        Debug.Log(GameContext.GameMode);
+        if (GameContext.GameMode == Mode.EASY) {
+            GameContext.GameMode = Mode.CLASSIC;
+        } else if (GameContext.GameMode == Mode.CLASSIC) {
+            GameContext.GameMode = Mode.ADVANCED;
+        } else if (GameContext.GameMode == Mode.ADVANCED) {
+            GameContext.GameMode = Mode.CHALLENGE;
+        } else if (GameContext.GameMode == Mode.CHALLENGE) {
+            GameContext.GameMode = Mode.EASY;
         }
+
+        // Refresh
         SetGameModeText();
         maxPages = ComputeMaxPages();
-        maxLevels = GetMaxLevelsForGameMode();
+        currentPage = 1;
+
+        RemoveLevelButtons();
+        CreateLevelButtons();
+        UnblurArrows();
+        BlurArrows();
     }
 
     /*
      * Compute max pages for the current game mode.
      */
      private float ComputeMaxPages() {
-        float maxPages;
-        if (currentGameModeSelection == Mode.CLASSIC) {
-            maxPages = Mathf.Ceil(MAX_LEVELS_CLASSIC / (float) LEVELS_PER_PAGE);
-        } else if (currentGameModeSelection == Mode.ADVANCED) {
-            maxPages = Mathf.Ceil(MAX_LEVELS_ADVANCED / (float) LEVELS_PER_PAGE);
-        } else {
-            maxPages = -1;
-        }
+        int numLevels = GameMode.GetNumberOfLevels(GameContext.GameMode);
+        float maxPages = Mathf.Ceil(numLevels / (float)LEVELS_PER_PAGE);
         return maxPages;
-    }
-
-    /*
-     * Get the number of levels for the currently selected game mode.
-     */
-    private int GetMaxLevelsForGameMode() {
-        int maxLevels;
-        if (currentGameModeSelection == Mode.CLASSIC) {
-            maxLevels = MAX_LEVELS_CLASSIC;
-        } else if (currentGameModeSelection == Mode.ADVANCED) {
-            maxLevels = MAX_LEVELS_ADVANCED;
-        } else {
-            Debug.Log("Invalid game mode selection, returning -1");
-            maxLevels = -1;
-        }
-        return maxLevels;
     }
 
     /*
      * Set game mode text according to the current state.
      */ 
     private void SetGameModeText() {
-        gameModeText.text = GameMode.GetName(currentGameModeSelection);
+        gameModeText.text = GameMode.GetName(GameContext.GameMode);
     }
 
     /*
      * Blur out a scroll arrow if we are at the leftmost or rightmost page.
      * Blurring means to reduce the alpha property of the image.
      */ 
-    private void BlurArrow() {
+    private void BlurArrows() {
         if (currentPage == 1) {
             Image image = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
             Color tempColor = image.color;

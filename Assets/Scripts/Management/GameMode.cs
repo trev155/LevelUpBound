@@ -19,6 +19,7 @@ public static class GameMode {
     private static Dictionary<Mode, string> LevelPrefixes = new Dictionary<Mode, string>();
     private static Dictionary<Mode, string> ExternalPrefixes = new Dictionary<Mode, string>();
     private static Dictionary<Mode, string> ExternalListPaths = new Dictionary<Mode, string>();
+    private static Dictionary<Mode, int> LevelCounts = new Dictionary<Mode, int>();
 
     static GameMode() {
         // String names for game modes
@@ -48,6 +49,13 @@ public static class GameMode {
         ExternalListPaths.Add(Mode.CLASSIC, "Data/ExternalObjects/classicExternalsList");
         ExternalListPaths.Add(Mode.ADVANCED, "Data/ExternalObjects/advancedExternalsList");
         ExternalListPaths.Add(Mode.CHALLENGE, "Data/ExternalObjects/challengeExternalsList");
+
+        // Number of levels per game mode
+        LevelCounts.Add(Mode.TUTORIAL, 5);
+        LevelCounts.Add(Mode.EASY, 50);
+        LevelCounts.Add(Mode.CLASSIC, 100);
+        LevelCounts.Add(Mode.ADVANCED, 100);
+        LevelCounts.Add(Mode.CHALLENGE, 10);
     }
 
     public static string GetName(Mode mode) {
@@ -83,6 +91,15 @@ public static class GameMode {
         } catch (KeyNotFoundException e) {
             Debug.Log(e);
             return null;
+        }
+    }
+
+    public static int GetNumberOfLevels(Mode mode) {
+        try {
+            return LevelCounts[mode];
+        } catch (KeyNotFoundException e) {
+            Debug.Log(e);
+            return -1;
         }
     }
 
