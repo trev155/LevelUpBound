@@ -10,7 +10,7 @@ public enum Mode {
     TUTORIAL,
     EASY,
     CLASSIC,
-    CUSTOM,
+    ADVANCED,
     CHALLENGE
 }
 
@@ -25,28 +25,28 @@ public static class GameMode {
         ModeNames.Add(Mode.TUTORIAL, "Tutorial");
         ModeNames.Add(Mode.EASY, "Easy");
         ModeNames.Add(Mode.CLASSIC, "Classic");
-        ModeNames.Add(Mode.CUSTOM, "Custom");
+        ModeNames.Add(Mode.ADVANCED, "Advanced");
         ModeNames.Add(Mode.CHALLENGE, "Challenge");
 
         // Locations of the level files
         LevelPrefixes.Add(Mode.TUTORIAL, "Data/Levels/Tutorial");
         LevelPrefixes.Add(Mode.EASY, "Data/Levels/Easy");
         LevelPrefixes.Add(Mode.CLASSIC, "Data/Levels/Classic");
-        LevelPrefixes.Add(Mode.CUSTOM, "Data/Levels/Custom");
+        LevelPrefixes.Add(Mode.ADVANCED, "Data/Levels/Advanced");
         LevelPrefixes.Add(Mode.CHALLENGE, "Data/Levels/Challenge");
 
         // Locations of the externals files
         ExternalPrefixes.Add(Mode.TUTORIAL, "Data/ExternalObjects/Tutorial");
         ExternalPrefixes.Add(Mode.EASY, "Data/ExternalObjects/Easy");
         ExternalPrefixes.Add(Mode.CLASSIC, "Data/ExternalObjects/Classic");
-        ExternalPrefixes.Add(Mode.CUSTOM, "Data/ExternalObjects/Custom");
+        ExternalPrefixes.Add(Mode.ADVANCED, "Data/ExternalObjects/Advanced");
         ExternalPrefixes.Add(Mode.CHALLENGE, "Data/ExternalObjects/Challenge");
 
         // Locations of the external lists
         ExternalListPaths.Add(Mode.TUTORIAL, "Data/ExternalObjects/classicExternalsList");
         ExternalListPaths.Add(Mode.EASY, "Data/ExternalObjects/easyExternalsList");
         ExternalListPaths.Add(Mode.CLASSIC, "Data/ExternalObjects/classicExternalsList");
-        ExternalListPaths.Add(Mode.CUSTOM, "Data/ExternalObjects/customExternalsList");
+        ExternalListPaths.Add(Mode.ADVANCED, "Data/ExternalObjects/advancedExternalsList");
         ExternalListPaths.Add(Mode.CHALLENGE, "Data/ExternalObjects/challengeExternalsList");
     }
 

@@ -12,8 +12,12 @@ using System.Linq;
 
 public class LevelSelector : MonoBehaviour {
     // Constants
+    private const int MAX_LEVELS_TUTORIAL = 5;
+    private const int MAX_LEVELS_EASY = 50;
     private const int MAX_LEVELS_CLASSIC = 100;
-    private const int MAX_LEVELS_CUSTOM = 100;
+    private const int MAX_LEVELS_ADVANCED = 100;
+    private const int MAX_LEVELS_CHALLENGE = 10;
+    
     private const int LEVELS_PER_PAGE = 20;
 
     // Store state of current selections
@@ -151,11 +155,13 @@ public class LevelSelector : MonoBehaviour {
 
     /*
      * Button Handler for when the game mode toggle is clicked.
+     * The game modes are:
+     * - Tutorial, Easy, Classic, Advanced, Challenge
      */
     public void ToggleGameMode() {
         if (currentGameModeSelection == Mode.CLASSIC) {
-            currentGameModeSelection = Mode.CUSTOM;
-        } else if (currentGameModeSelection == Mode.CUSTOM) {
+            currentGameModeSelection = Mode.ADVANCED;
+        } else if (currentGameModeSelection == Mode.ADVANCED) {
             currentGameModeSelection = Mode.CLASSIC;
         }
         SetGameModeText();
@@ -170,8 +176,8 @@ public class LevelSelector : MonoBehaviour {
         float maxPages;
         if (currentGameModeSelection == Mode.CLASSIC) {
             maxPages = Mathf.Ceil(MAX_LEVELS_CLASSIC / (float) LEVELS_PER_PAGE);
-        } else if (currentGameModeSelection == Mode.CUSTOM) {
-            maxPages = Mathf.Ceil(MAX_LEVELS_CUSTOM / (float) LEVELS_PER_PAGE);
+        } else if (currentGameModeSelection == Mode.ADVANCED) {
+            maxPages = Mathf.Ceil(MAX_LEVELS_ADVANCED / (float) LEVELS_PER_PAGE);
         } else {
             maxPages = -1;
         }
@@ -185,8 +191,8 @@ public class LevelSelector : MonoBehaviour {
         int maxLevels;
         if (currentGameModeSelection == Mode.CLASSIC) {
             maxLevels = MAX_LEVELS_CLASSIC;
-        } else if (currentGameModeSelection == Mode.CUSTOM) {
-            maxLevels = MAX_LEVELS_CUSTOM;
+        } else if (currentGameModeSelection == Mode.ADVANCED) {
+            maxLevels = MAX_LEVELS_ADVANCED;
         } else {
             Debug.Log("Invalid game mode selection, returning -1");
             maxLevels = -1;

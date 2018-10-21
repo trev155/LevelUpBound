@@ -26,8 +26,8 @@ public class MainMenu : MonoBehaviour {
         ChooseMode(Mode.CLASSIC);
     }
 
-    public void ChooseCustomMode() {
-        ChooseMode(Mode.CUSTOM);
+    public void ChooseAdvancedMode() {
+        ChooseMode(Mode.ADVANCED);
     }
 
     public void ChooseEasyMode() {
