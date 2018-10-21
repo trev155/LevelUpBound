@@ -13,7 +13,7 @@ public static class Theme {
      */
     public static void SetTheme() {
         string themeName = GameContext.Theme;
-        Debug.Log("Changing theme to: " + themeName);
+        Debug.Log("Setting theme to: " + themeName);
 
         // Determine what the new color should be
         Color32 newColor;

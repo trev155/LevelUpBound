@@ -153,7 +153,6 @@ public class LevelSelector : MonoBehaviour {
      * Button Handler for when the game mode toggle is clicked.
      */
     public void ToggleGameMode() {
-        Debug.Log(currentGameModeSelection);
         if (currentGameModeSelection == Mode.CLASSIC) {
             currentGameModeSelection = Mode.CUSTOM;
         } else if (currentGameModeSelection == Mode.CUSTOM) {
