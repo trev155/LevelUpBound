@@ -18,6 +18,7 @@ public class UserInterfaceManager : MonoBehaviour {
      */
     private void Awake() {
         InitializeAudioUI();
+        Theme.SetTheme();
     }
 
     /*

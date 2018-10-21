@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\About\About.cs" />
     <Compile Include="Assets\Scripts\Instructions\Instructions.cs" />
+    <Compile Include="Assets\Scripts\LevelEditor\LevelEditor.cs" />
     <Compile Include="Assets\Scripts\LevelSelector\LevelSelector.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Management\AudioManager.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Scripts\Objects\MovingObject.cs" />
     <Compile Include="Assets\Scripts\Objects\Player.cs" />
     <Compile Include="Assets\Scripts\Options\Options.cs" />
+    <Compile Include="Assets\Scripts\Options\Theme.cs" />
     <Compile Include="Assets\Scripts\Util\Util.cs" />
     <None Include="Assets\Resources\Data\ExternalObjects\Custom\014.txt" />
     <None Include="Assets\Resources\Data\Levels\Custom\032.txt" />

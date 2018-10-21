@@ -1989,7 +1989,7 @@ GameObject:
   - component: {fileID: 1977690344}
   - component: {fileID: 1977690343}
   m_Layer: 0
-  m_Name: BackgroundImage
+  m_Name: BackgroundPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2025,7 +2025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4, g: 0.6698113, b: 0.6698113, a: 1}
+  m_Color: {r: 0.74509805, g: 0.43137255, b: 0.5882353, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

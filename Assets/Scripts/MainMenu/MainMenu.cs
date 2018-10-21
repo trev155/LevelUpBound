@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
     /*
+     * Initialization
+     */
+    private void Awake() {
+        Theme.SetTheme();
+    }
+
+    /*
      * Initialize globals and start the game. Loads the MainGame scene.
      */
     private void ChooseMode(Mode mode) {

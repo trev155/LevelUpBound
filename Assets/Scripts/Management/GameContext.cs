@@ -21,6 +21,9 @@ public static class GameContext {
     public static int LevelSelectionPage { get; set; }
     public static Mode LevelSelectionMode { get; set; }
     public static bool StopMovement { get; set; }
+
+    // Theme Selection
+    public static string Theme { get; set; }
     
     /*
      * Static Constructor = Default Values
@@ -34,6 +37,8 @@ public static class GameContext {
         LevelSelection = false;
         LevelSelectionPage = 1;
         LevelSelectionMode = Mode.CLASSIC;
+        Theme = "Normal";
+
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};

@@ -28,6 +28,10 @@ public class LevelSelector : MonoBehaviour {
     // Reference objects
     public Text gameModeText;
 
+    private void Awake() {
+        Theme.SetTheme();
+    }
+
     /*
      * Initialization of propreties
      */

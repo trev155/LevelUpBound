@@ -19,6 +19,7 @@ public class Options : MonoBehaviour {
         InitializeAudioUI();
         SetInitialVolume();
         volumeSlider.onValueChanged.AddListener(delegate { VolumeSliderChanged(); });
+        Theme.SetTheme();
     }
 
     /*
@@ -77,4 +78,26 @@ public class Options : MonoBehaviour {
     public void VolumeSliderChanged() {
         GameContext.CurrentVolume = volumeSlider.value;
     }
+
+    // Theme Button handlers
+    public void SetNormalTheme() {
+        GameContext.Theme = "Normal";
+        Theme.SetTheme();
+    }
+
+    public void SetLightTheme() {
+        GameContext.Theme = "Light";
+        Theme.SetTheme();
+    }
+
+    public void SetDarkTheme() {
+        GameContext.Theme = "Dark";
+        Theme.SetTheme();
+    }
+
+    public void SetVibrantTheme() {
+        GameContext.Theme = "Vibrant";
+        Theme.SetTheme();
+    }
+
 }
