@@ -16,6 +16,7 @@ public class Options : MonoBehaviour {
      * Initialization
      */
     private void Awake() {
+        AspectRatioManager.AdjustScreen();
         InitializeAudioUI();
         SetInitialVolume();
         volumeSlider.onValueChanged.AddListener(delegate { VolumeSliderChanged(); });

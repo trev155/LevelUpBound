@@ -28,11 +28,17 @@ public class LevelSelector : MonoBehaviour {
      * Initialization
      */
     private void Awake() {
-        // Initialize fields
+        AspectRatioManager.AdjustScreen();
+
         currentPage = GameContext.LevelSelectionPage;
         maxPages = ComputeMaxPages();
+    }
 
-        // UI related
+    /*
+     * Initialization
+     */
+    private void Start() {
+        // UI related, depends on earlier Awake() calls
         Theme.SetTheme();
         BlurArrows();
         SetGameModeText();

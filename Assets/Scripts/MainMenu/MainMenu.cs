@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour {
      * Initialization
      */
     private void Awake() {
+        AspectRatioManager.AdjustScreen();
         Theme.SetTheme();
     }
 

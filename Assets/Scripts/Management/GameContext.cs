@@ -28,7 +28,7 @@ public static class GameContext {
      * Static Constructor = Default Values
      */
     static GameContext() {
-        GameMode = Mode.CLASSIC;
+        GameMode = Mode.EASY;
         CurrentLevel = 1;
         PreviousPageContext = "MainMenu";
         AudioEnabled = true;

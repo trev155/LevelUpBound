@@ -2,7 +2,6 @@
  * Class that manages the UI on the Game Page (MainGame scene).
  * Doesn't handle the arrow control buttons.
  */
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +16,7 @@ public class UserInterfaceManager : MonoBehaviour {
      * Initialization
      */
     private void Awake() {
+        AspectRatioManager.AdjustScreen();
         InitializeAudioUI();
         Theme.SetTheme();
     }

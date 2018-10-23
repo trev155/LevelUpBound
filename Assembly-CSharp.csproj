@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\LevelEditor\LevelEditor.cs" />
     <Compile Include="Assets\Scripts\LevelSelector\LevelSelector.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Management\AspectRatioManager.cs" />
     <Compile Include="Assets\Scripts\Management\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Management\ExplosionManager.cs" />
     <Compile Include="Assets\Scripts\Management\GameContext.cs" />

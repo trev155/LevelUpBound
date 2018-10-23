@@ -9,6 +9,7 @@ public class LevelEditor : MonoBehaviour {
      * Initialization
      */
     private void Awake() {
+        AspectRatioManager.AdjustScreen();
         Theme.SetTheme();
     }
 

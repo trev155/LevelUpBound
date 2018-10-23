@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Instructions : MonoBehaviour {
     private void Awake() {
+        AspectRatioManager.AdjustScreen();
         Theme.SetTheme();
     }
 
