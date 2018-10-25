@@ -44,7 +44,7 @@ public static class GameMode {
         ExternalPrefixes.Add(Mode.CHALLENGE, "Data/ExternalObjects/Challenge");
 
         // Locations of the external lists
-        ExternalListPaths.Add(Mode.TUTORIAL, "Data/ExternalObjects/classicExternalsList");
+        ExternalListPaths.Add(Mode.TUTORIAL, "Data/ExternalObjects/tutorialExternalsList");
         ExternalListPaths.Add(Mode.EASY, "Data/ExternalObjects/easyExternalsList");
         ExternalListPaths.Add(Mode.CLASSIC, "Data/ExternalObjects/classicExternalsList");
         ExternalListPaths.Add(Mode.ADVANCED, "Data/ExternalObjects/advancedExternalsList");

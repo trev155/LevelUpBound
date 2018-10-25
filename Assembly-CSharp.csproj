@@ -133,6 +133,7 @@
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\063.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\064.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\061.txt" />
+    <None Include="Assets\Resources\Data\ExternalObjects\Tutorial\005.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\007.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\004.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\013.txt" />
@@ -220,6 +221,7 @@
     <None Include="Assets\Resources\Data\Levels\Advanced\016.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\tutorialExternalsList.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\039.txt" />
+    <None Include="Assets\Resources\Data\ExternalObjects\Tutorial\004.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\054.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\008.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\038.txt" />
@@ -241,6 +243,7 @@
     <None Include="Assets\Resources\Data\Levels\Easy\009.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\057.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\034.txt" />
+    <None Include="Assets\Resources\Data\ExternalObjects\Tutorial\003.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\004.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\065.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\025.txt" />
@@ -264,7 +267,10 @@
     <None Include="Assets\Resources\Data\Levels\Advanced\024.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\005.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\060.txt" />
+    <None Include="Assets\Resources\Data\Levels\Tutorial\002.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\023.txt" />
+    <None Include="Assets\Resources\Data\Levels\Tutorial\005.txt" />
+    <None Include="Assets\Resources\Data\Levels\Tutorial\004.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\042.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\042.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\027.txt" />
@@ -355,6 +361,7 @@
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\058.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\097.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\022.txt" />
+    <None Include="Assets\Resources\Data\Levels\Tutorial\003.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\023.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\035.txt" />
     <Reference Include="UnityEditor.StandardEvents">
