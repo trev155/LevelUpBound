@@ -7,8 +7,9 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour {
     public LevelManager levelManager;
-    public Transform RespawnPoint;
+    public AudioManager audioManager;
     public UserInterfaceManager UIManager;
+    public Transform RespawnPoint;
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
@@ -18,6 +19,7 @@ public class Goal : MonoBehaviour {
                 return;
             }
 
+            audioManager.LevelComplete();
             other.transform.position = RespawnPoint.position;
             levelManager.AdvanceLevel();
             UIManager.UpdateLevelText();

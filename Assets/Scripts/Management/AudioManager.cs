@@ -1,5 +1,8 @@
 ﻿/*
  * Class that handles all things audio related for the main game.
+ * 
+ * There will be audio in other scenes for sure, but not as much as the main game scene needs to handle.
+ * For other scenes, audio will be attached to the scenes' respective manager objects.
  */
 using UnityEngine;
 
@@ -42,6 +45,8 @@ public class AudioManager : MonoBehaviour {
     // Other audio
     public AudioSource playerDeath;
     public AudioSource debris;
+    public AudioSource levelup;
+    public AudioSource keyPickup;
 
     /*
      * Initialization.
@@ -202,5 +207,27 @@ public class AudioManager : MonoBehaviour {
         }
 
         debris.Play();
+    }
+
+    /*
+     * Level completion (in main game modes)
+     */
+     public void LevelComplete() {
+        if (!GameContext.AudioEnabled) {
+            return;
+        }
+
+        levelup.Play();
+     }
+
+    /*
+     * Key pickup sound.
+     */
+     public void KeyPickup() {
+        if (!GameContext.AudioEnabled) {
+            return;
+        }
+
+        keyPickup.Play();
     }
 }

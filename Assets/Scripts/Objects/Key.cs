@@ -18,18 +18,20 @@ public class Key : MonoBehaviour {
     private void Awake() {
         mainGrid = GameObject.FindGameObjectWithTag("MainGrid").GetComponent<MainGrid>();
         gameGrid = mainGrid.GetGameGrid();
-
+        
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     /*
      * When the Player touches the Key, remove the key and the wall that the key refers to.
      */
-    void OnTriggerStay2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
+            audioManager.KeyPickup();
             Destroy(gameObject);
-            Destroy(gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)").gameObject);
+            
             audioManager.PlayWallDestroyAudio();
+            Destroy(gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)").gameObject);
         }
     }
 
@@ -40,5 +42,4 @@ public class Key : MonoBehaviour {
         wallToDestroyX = x;
         wallToDestroyY = y;
     }
-
 }
