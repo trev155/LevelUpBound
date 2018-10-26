@@ -9184,6 +9184,8 @@ MonoBehaviour:
   em: {fileID: 1743551674}
   mainGrid: {fileID: 1659473013}
   wallPrefab: {fileID: 4605398366574656, guid: 910a4d6e95eebc241b1dc1e1bc02866e, type: 2}
+  lockedWallPrefab: {fileID: 4605398366574656, guid: d5a783f4788a36449bd26ade46ecda0e,
+    type: 2}
   smallWallBottomLeftPrefab: {fileID: 4605398366574656, guid: cefe12b80b1f485438d9b46950e33e4e,
     type: 2}
   smallWallBottomRightPrefab: {fileID: 4605398366574656, guid: 9960650fe6a20084d9d7d72c74586adb,

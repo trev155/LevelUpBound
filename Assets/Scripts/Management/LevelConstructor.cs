@@ -10,6 +10,7 @@ public class LevelConstructor : MonoBehaviour {
     private GameObject[][] gameGrid;
     // External objects
     public Transform wallPrefab;
+    public Transform lockedWallPrefab;
     public Transform smallWallBottomLeftPrefab;
     public Transform smallWallBottomRightPrefab;
     public Transform smallWallTopLeftPrefab;
@@ -117,6 +118,10 @@ public class LevelConstructor : MonoBehaviour {
                 wallRow = int.Parse(line.Substring(1, 1));
                 wallCol = int.Parse(line.Substring(3, 1));
                 Instantiate(wallPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("LW")) {
+                wallRow = int.Parse(line.Substring(2, 1));
+                wallCol = int.Parse(line.Substring(4, 1));
+                Instantiate(lockedWallPrefab, gameGrid[wallRow][wallCol].transform);
             } else if (line.StartsWith("SWBL")) {
                 wallRow = int.Parse(line.Substring(4, 1));
                 wallCol = int.Parse(line.Substring(6, 1));

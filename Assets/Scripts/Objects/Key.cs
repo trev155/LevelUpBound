@@ -28,7 +28,7 @@ public class Key : MonoBehaviour {
     void OnTriggerStay2D(Collider2D other) {
         if (other.tag == "Player") {
             Destroy(gameObject);
-            Destroy(gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("Wall(Clone)").gameObject);
+            Destroy(gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)").gameObject);
             audioManager.PlayWallDestroyAudio();
         }
     }
