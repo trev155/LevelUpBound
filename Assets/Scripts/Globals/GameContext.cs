@@ -23,7 +23,10 @@ public static class GameContext {
 
     // Theme Selection
     public static string Theme { get; set; }
-    
+
+    // Player Control Scheme
+    public static ControlMode ControlScheme { get; set; }
+
     /*
      * Static Constructor = Default Values
      */
@@ -36,6 +39,7 @@ public static class GameContext {
         LevelSelection = false;
         LevelSelectionPage = 1;
         Theme = "Normal";
+        ControlScheme = ControlMode.ARROW;
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};

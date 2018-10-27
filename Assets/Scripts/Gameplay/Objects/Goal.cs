@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         // Level cleared
         if (other.tag == "Player") {
-            audioManager.LevelComplete();
+            audioManager.PlayLevelCompleteSound();
 
             // Check if last level. If so, display the celebration modal.
             if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
@@ -36,6 +36,12 @@ public class Goal : MonoBehaviour {
             other.transform.position = RespawnPoint.position;
             levelManager.AdvanceLevel();
             mainGame.UpdateLevelText();
+
+            if (GameContext.ControlScheme == ControlMode.CLICK) {
+                // Stop movement
+                PlayerControl control = other.gameObject.GetComponent<PlayerControl>();
+                control.clickMoveActive = false;
+            }
         }
     }
 }

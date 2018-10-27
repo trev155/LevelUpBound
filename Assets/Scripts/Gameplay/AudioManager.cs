@@ -212,7 +212,7 @@ public class AudioManager : MonoBehaviour {
     /*
      * Level completion (in main game modes)
      */
-     public void LevelComplete() {
+     public void PlayLevelCompleteSound() {
         if (!GameContext.AudioEnabled) {
             return;
         }
@@ -223,7 +223,7 @@ public class AudioManager : MonoBehaviour {
     /*
      * Key pickup sound.
      */
-     public void KeyPickup() {
+     public void PlayKeyPickupSound() {
         if (!GameContext.AudioEnabled) {
             return;
         }

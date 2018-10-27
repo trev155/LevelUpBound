@@ -9,8 +9,9 @@ public class Options : MonoBehaviour {
     public Text audioText;
     public Image audioEnabledImage;
     public Image audioDisabledImage;
-
     public Slider volumeSlider;
+    public Image controlSchemeArrowImage;
+    public Image controlSchemeClickImage;
 
     /*
      * Initialization
@@ -21,6 +22,7 @@ public class Options : MonoBehaviour {
         SetInitialVolume();
         volumeSlider.onValueChanged.AddListener(delegate { VolumeSliderChanged(); });
         Theme.SetTheme();
+        SetControlSchemeImage();
     }
 
     /*
@@ -101,4 +103,30 @@ public class Options : MonoBehaviour {
         Theme.SetTheme();
     }
 
+    // Control Scheme Buttons
+    public void SetArrowControls() {
+        GameContext.ControlScheme = ControlMode.ARROW;
+        SetControlSchemeImage();
+        Debug.Log(GameContext.ControlScheme);
+    }
+
+    public void SetClickControls() {
+        GameContext.ControlScheme = ControlMode.CLICK;
+        SetControlSchemeImage();
+        Debug.Log(GameContext.ControlScheme);
+    }
+
+    /*
+     * Set the Image sprite for the control scheme.
+     */
+    private void SetControlSchemeImage() {
+        if (GameContext.ControlScheme == ControlMode.ARROW) {
+            controlSchemeArrowImage.gameObject.SetActive(true);
+            controlSchemeClickImage.gameObject.SetActive(false);
+        }
+        if (GameContext.ControlScheme == ControlMode.CLICK) {
+            controlSchemeArrowImage.gameObject.SetActive(false);
+            controlSchemeClickImage.gameObject.SetActive(true);
+        }
+    }
 }
