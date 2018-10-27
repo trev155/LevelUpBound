@@ -3,7 +3,6 @@
  * Each button represents a level. 
  * When pressed, we take the user to the specified level. 
  */
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -65,7 +64,7 @@ public class LevelSelector : MonoBehaviour {
         Transform[] levelButtonPositions = GameObject.FindGameObjectsWithTag("LevelButtonPosition").Select(gameObject => gameObject.transform).OrderBy(gameObject => gameObject.name).ToArray();
         for (int buttonPositionIndex = 0; buttonPositionIndex < numberOfLevelButtons; buttonPositionIndex++) {
             Transform levelButtonInstance = Instantiate(levelButtonPrefab, levelButtonPositions[buttonPositionIndex]);
-            levelButtonInstance.gameObject.name = "Level_" + Util.GetLevelString(nextLevel);
+            levelButtonInstance.gameObject.name = "Level_" + LevelString.GetLevelString(nextLevel);
             levelButtonInstance.gameObject.GetComponent<Button>().onClick.AddListener(LevelButtonOnClick);
             Text levelButtonText = levelButtonInstance.GetChild(0).GetComponent<Text>();
             levelButtonText.text = nextLevel.ToString();

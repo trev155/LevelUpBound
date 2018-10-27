@@ -1,11 +1,10 @@
 ﻿/*
- * Various utility functions that don't particularly belong anywhere else.
+ * Utility functions for constructing level filepaths / strings.
  */
-
-public static class Util {
+public static class LevelString {
     /*
-     * Filepath: eg) /Assets/Scripts/Levels/008
-     */
+    * Filepath: eg) /Assets/Scripts/Levels/008
+    */
     public static string GetFilepathString(int level, string prefix) {
         string filepathString = prefix + "/" + GetLevelString(level);
         return filepathString;

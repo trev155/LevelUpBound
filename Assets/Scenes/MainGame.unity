@@ -7902,7 +7902,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1738531754}
-        m_MethodName: CloseModalWindow
+        m_MethodName: CloseModalWindowAndGoBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9429,7 +9429,7 @@ GameObject:
   - component: {fileID: 1738531752}
   - component: {fileID: 1738531754}
   m_Layer: 5
-  m_Name: ModalWindow
+  m_Name: ModalWindowVictory
   m_TagString: Modal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

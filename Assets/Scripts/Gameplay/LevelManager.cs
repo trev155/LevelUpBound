@@ -56,14 +56,14 @@ public class LevelManager : MonoBehaviour {
         string externalPrefix = GameMode.GetExternalPrefix(GameContext.GameMode);
 
         // Load the current level data 
-        string levelFilepath = Util.GetFilepathString(GameContext.CurrentLevel, levelPrefix);
+        string levelFilepath = LevelString.GetFilepathString(GameContext.CurrentLevel, levelPrefix);
         currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
         if (currentLevelCoroutine == null) {
             return;
         }
 
         // Check if there are any other things we need to initialize for this level
-        string externalsFilepath = Util.GetFilepathString(GameContext.CurrentLevel, externalPrefix);
+        string externalsFilepath = LevelString.GetFilepathString(GameContext.CurrentLevel, externalPrefix);
         if (levelsWithExternals.Contains(GameContext.CurrentLevel)) {
             levelConstructor.LoadExternalObjects(externalsFilepath);
         }
@@ -102,5 +102,4 @@ public class LevelManager : MonoBehaviour {
     private IEnumerator PauseBetweenLevels() {
         yield return new WaitForSeconds(2.0f);
     }
-
 }

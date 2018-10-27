@@ -17,7 +17,7 @@ public class Goal : MonoBehaviour {
             if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
                 modalWindow.SetActive(true);
                 Modal modal = modalWindow.GetComponent<Modal>();
-                modal.SetModalText();
+                modal.SetModalTextVictory();
                 levelManager.StopLevel();
                 // TODO also stop all other actions
                 return;
