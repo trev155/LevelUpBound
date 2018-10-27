@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour {
     // Level construction manager object
     public LevelConstructor levelConstructor;
     // UI Management
-    public UserInterfaceManager UImanager;
+    public MainGame mainGame;
 
     // Keep track of the current level's coroutine so that we can stop it when we need to
     private IEnumerator currentLevelCoroutine;
@@ -72,8 +72,8 @@ public class LevelManager : MonoBehaviour {
         levelConstructor.StartCoroutine(currentLevelCoroutine);
 
         // Update the UI
-        UImanager.UpdateLevelText();
-        UImanager.UpdateGameModeText();
+        mainGame.UpdateLevelText();
+        mainGame.UpdateGameModeText();
 
         Debug.Log("Current Level: " + GameContext.CurrentLevel);
     }

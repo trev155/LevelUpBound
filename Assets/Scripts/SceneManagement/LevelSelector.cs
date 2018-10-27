@@ -31,6 +31,7 @@ public class LevelSelector : MonoBehaviour {
 
         currentPage = GameContext.LevelSelectionPage;
         maxPages = ComputeMaxPages();
+        GameContext.GameMode = Mode.EASY;
     }
 
     /*

@@ -6,13 +6,15 @@ using UnityEngine;
 public class Goal : MonoBehaviour {
     public LevelManager levelManager;
     public AudioManager audioManager;
-    public UserInterfaceManager UIManager;
+    public MainGame mainGame;
     public Transform RespawnPoint;
     public GameObject modalWindow;
 
     void OnTriggerEnter2D(Collider2D other) {
         // Level cleared
         if (other.tag == "Player") {
+            audioManager.LevelComplete();
+
             // Check if last level. If so, display the celebration modal.
             if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
                 modalWindow.SetActive(true);
@@ -31,10 +33,9 @@ public class Goal : MonoBehaviour {
             }
 
             // Advance level
-            audioManager.LevelComplete();
             other.transform.position = RespawnPoint.position;
             levelManager.AdvanceLevel();
-            UIManager.UpdateLevelText();
+            mainGame.UpdateLevelText();
         }
     }
 }

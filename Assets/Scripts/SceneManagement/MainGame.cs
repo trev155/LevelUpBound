@@ -1,11 +1,10 @@
 ﻿/*
- * Class that manages the UI on the Game Page (MainGame scene).
- * Doesn't handle the arrow control buttons.
+ * Class that manages general MainGame things, such as user interface.
  */
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UserInterfaceManager : MonoBehaviour {
+public class MainGame : MonoBehaviour {
     // Fields
     public Text currentLevelLabel;
     public Text currentGameModeLabel;

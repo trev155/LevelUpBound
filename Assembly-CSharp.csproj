@@ -79,9 +79,9 @@
     <Compile Include="Assets\Scripts\SceneManagement\Instructions.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\LevelEditor.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\LevelSelector.cs" />
+    <Compile Include="Assets\Scripts\SceneManagement\MainGame.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\MainMenu.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\Options.cs" />
-    <Compile Include="Assets\Scripts\SceneManagement\UserInterfaceManager.cs" />
     <Compile Include="Assets\Scripts\Util\LevelString.cs" />
     <Compile Include="Assets\Scripts\Util\Modal.cs" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\014.txt" />
