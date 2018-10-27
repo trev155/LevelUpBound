@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Management\GameMode.cs" />
     <Compile Include="Assets\Scripts\Management\LevelConstructor.cs" />
     <Compile Include="Assets\Scripts\Management\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Management\Modal.cs" />
     <Compile Include="Assets\Scripts\Management\UserInterfaceManager.cs" />
     <Compile Include="Assets\Scripts\Objects\ExplodableTile.cs" />
     <Compile Include="Assets\Scripts\Objects\Goal.cs" />

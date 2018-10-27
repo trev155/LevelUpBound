@@ -1,7 +1,5 @@
 ﻿/*
- * The Goal is where the Player is trying to move towards.
- * When the Player reaches the Goal, go to the next level.
- * If the level was played from the LevelSelector, go back to the LevelSelector scene.
+ * When the Player reaches the Goal, handle appropriately.
  */
 using UnityEngine;
 
@@ -10,15 +8,29 @@ public class Goal : MonoBehaviour {
     public AudioManager audioManager;
     public UserInterfaceManager UIManager;
     public Transform RespawnPoint;
+    public GameObject modalWindow;
 
     void OnTriggerEnter2D(Collider2D other) {
+        // Level cleared
         if (other.tag == "Player") {
+            // Check if last level. If so, display the celebration modal.
+            if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
+                modalWindow.SetActive(true);
+                Modal modal = modalWindow.GetComponent<Modal>();
+                modal.SetModalText();
+                levelManager.StopLevel();
+                // TODO also stop all other actions
+                return;
+            }
+            
+            // Check if this level was played from the level selection page. If so, go back to there.
             if (GameContext.LevelSelection) {
                 GameContext.LoadPreviousPage();
                 GameContext.PreviousPageContext = "MainMenu";
                 return;
             }
 
+            // Advance level
             audioManager.LevelComplete();
             other.transform.position = RespawnPoint.position;
             levelManager.AdvanceLevel();

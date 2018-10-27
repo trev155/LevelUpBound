@@ -102,5 +102,4 @@ public static class GameMode {
             return -1;
         }
     }
-
 }

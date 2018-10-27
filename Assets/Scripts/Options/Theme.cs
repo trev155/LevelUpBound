@@ -18,7 +18,7 @@ public static class Theme {
         // Determine what the new color should be
         Color32 newColor;
         if (themeName.Equals("Normal")) {
-            newColor = new Color32(190, 110, 150, 255);
+            newColor = new Color32(0, 190, 230, 255);
         } else if (themeName.Equals("Light")) {
             newColor = new Color32(204, 204, 250, 255);
         } else if (themeName.Equals("Dark")) {

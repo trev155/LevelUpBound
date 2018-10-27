@@ -81,7 +81,7 @@ public class LevelManager : MonoBehaviour {
     /*
      * Stop the current level. 
      */
-    private void StopLevel() {
+    public void StopLevel() {
         levelConstructor.StopCoroutine(currentLevelCoroutine);
     }
 

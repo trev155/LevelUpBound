@@ -12,6 +12,7 @@ TagManager:
   - LevelButton
   - LevelButtonPosition
   - Audio
+  - Modal
   layers:
   - Default
   - TransparentFX
