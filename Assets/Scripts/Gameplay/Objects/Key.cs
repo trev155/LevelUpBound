@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿/*
+ * A Key is an object that when the player touches, a "door" is unlocked.
+ */
+using UnityEngine;
 
 public class Key : MonoBehaviour {
     // Reference to the coordinates of the wall that this key unlocks (destroys)
     private int wallToDestroyX;
     private int wallToDestroyY;
+
+    // For double walls, we replace with single wall
+    public Transform lockedWallPrefab;
 
     // Reference to the Main Grid
     private MainGrid mainGrid;
@@ -23,15 +29,27 @@ public class Key : MonoBehaviour {
     }
 
     /*
-     * When the Player touches the Key, remove the key and the wall that the key refers to.
+     * When the Player touches the Key, unlock the door/lock that the key refers to.
      */
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
             audioManager.KeyPickup();
             Destroy(gameObject);
             
-            audioManager.PlayWallDestroyAudio();
-            Destroy(gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)").gameObject);
+            audioManager.PlayWallUnlockAudio();
+            bool isDouble = false;
+            Transform lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)");
+            if (lockedWall == null) {
+                lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("DoubleLockedWall(Clone)");
+                isDouble = true;
+            }
+            
+            if (!isDouble) {
+                Destroy(lockedWall.gameObject);
+            } else {
+                Destroy(lockedWall.gameObject);
+                Instantiate(lockedWallPrefab, gameGrid[wallToDestroyX][wallToDestroyY].transform);
+            }
         }
     }
 

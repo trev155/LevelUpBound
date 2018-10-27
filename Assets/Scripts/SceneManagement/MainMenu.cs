@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour {
     private void Awake() {
         AspectRatioManager.AdjustScreen();
         Theme.SetTheme();
+
+        // For the LevelSelector, want to set default page to Easy
+        GameContext.GameMode = Mode.EASY;
+        GameContext.LevelSelectionPage = 1;
     }
 
     /*

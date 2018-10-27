@@ -201,7 +201,7 @@ public class AudioManager : MonoBehaviour {
     /*
      * Wall destruction.
      */
-    public void PlayWallDestroyAudio() {
+    public void PlayWallUnlockAudio() {
         if (!GameContext.AudioEnabled) {
             return;
         }

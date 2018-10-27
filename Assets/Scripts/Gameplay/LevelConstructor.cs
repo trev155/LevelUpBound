@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * The LevelConstructor is responsible for reading files and constructing
+ * a level coroutine based on the file contents.
+ */
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,6 +15,7 @@ public class LevelConstructor : MonoBehaviour {
     // External objects
     public Transform wallPrefab;
     public Transform lockedWallPrefab;
+    public Transform doubleLockedWallPrefab;
     public Transform smallWallBottomLeftPrefab;
     public Transform smallWallBottomRightPrefab;
     public Transform smallWallTopLeftPrefab;
@@ -122,6 +127,10 @@ public class LevelConstructor : MonoBehaviour {
                 wallRow = int.Parse(line.Substring(2, 1));
                 wallCol = int.Parse(line.Substring(4, 1));
                 Instantiate(lockedWallPrefab, gameGrid[wallRow][wallCol].transform);
+            } else if (line.StartsWith("DLW")) {
+                wallRow = int.Parse(line.Substring(3, 1));
+                wallCol = int.Parse(line.Substring(5, 1));
+                Instantiate(doubleLockedWallPrefab, gameGrid[wallRow][wallCol].transform);
             } else if (line.StartsWith("SWBL")) {
                 wallRow = int.Parse(line.Substring(4, 1));
                 wallCol = int.Parse(line.Substring(6, 1));

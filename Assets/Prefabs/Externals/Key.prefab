@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da35e3378668c29409f36be2cabae1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedWallPrefab: {fileID: 4605398366574656, guid: d5a783f4788a36449bd26ade46ecda0e,
+    type: 2}
 --- !u!212 &212945126226848040
 SpriteRenderer:
   m_ObjectHideFlags: 1
