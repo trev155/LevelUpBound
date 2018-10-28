@@ -2,6 +2,7 @@
  * This class handles the Player Controls.
  */
 using UnityEngine;
+using System.Collections;
 
 public enum ControlMode {
     ARROW,
@@ -10,7 +11,7 @@ public enum ControlMode {
 
 public class PlayerControl : MonoBehaviour {
     // fields for arrow controls
-    public float arrowSpeed = 1.5f;
+    public float arrowSpeed;
     private readonly float distance = 1.0f;
     private bool enableMoveUp;
     private bool enableMoveDown;
@@ -18,12 +19,16 @@ public class PlayerControl : MonoBehaviour {
     private bool enableMoveRight;
 
     // fields for click controls
-    public float clickSpeed = 2.0f;
+    public float clickSpeed;
     public bool clickMoveActive;
     private Vector3 touchDestination;
 
     // Objects
     private Transform playerTransform;
+
+    // Click circle
+    public Transform clickCircleLocation;
+    public Transform clickCirclePrefab;
 
     /* 
      * Initialization
@@ -134,16 +139,42 @@ public class PlayerControl : MonoBehaviour {
             Vector3 touchPoint = Camera.main.ScreenToWorldPoint(touch.position);
             touchPoint.z = 0.0f;
             touchDestination = touchPoint;
+
+            // Visual Indication
+            clickCircleLocation.position = touchPoint;
+            GameObject circle = Instantiate(clickCirclePrefab, clickCircleLocation).gameObject;
+            StartCoroutine(FadeOutAndDestroy(circle));
+            
             Debug.Log("Touch - Set New Destination at: " + touchDestination);
         }
 
         if (clickMoveActive) {
-            Debug.Log("Movement to: " + touchDestination);
             transform.position = Vector3.MoveTowards(transform.position, touchDestination, Time.deltaTime * clickSpeed);
             if (transform.position.Equals(touchDestination)) {
                 Debug.Log("Reached destination at " + touchDestination);
                 clickMoveActive = false;
             }
         }
+    }
+
+    /*
+     * Given a Game object, fade out the object by reducing its alpha property repeatedly.
+     * After its alpha hits 0, destroy the game object.
+     */
+    IEnumerator FadeOutAndDestroy(GameObject explosionGameObject) {
+        float fadeOutTime = 1.0f;
+        SpriteRenderer spriteRenderer = explosionGameObject.GetComponent<SpriteRenderer>();
+
+        Color tmpColor = spriteRenderer.color;
+        while (tmpColor.a > 0f) {
+            tmpColor.a -= Time.deltaTime / fadeOutTime;
+            spriteRenderer.color = tmpColor;
+            if (tmpColor.a <= 0f) {
+                tmpColor.a = 0f;
+            }
+            yield return null;
+        }
+        spriteRenderer.color = tmpColor;
+        Destroy(explosionGameObject);
     }
 }

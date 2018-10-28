@@ -87,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 1}
+  m_Size: {x: 0.75, y: 0.9}
   m_EdgeRadius: 0
 --- !u!114 &114753536251049034
 MonoBehaviour:
@@ -115,6 +115,8 @@ MonoBehaviour:
   arrowSpeed: 2
   clickSpeed: 2
   clickMoveActive: 0
+  clickCircleLocation: {fileID: 0}
+  clickCirclePrefab: {fileID: 0}
 --- !u!212 &212906897324777900
 SpriteRenderer:
   m_ObjectHideFlags: 1

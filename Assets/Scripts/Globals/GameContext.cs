@@ -39,7 +39,7 @@ public static class GameContext {
         LevelSelection = false;
         LevelSelectionPage = 1;
         Theme = "Normal";
-        ControlScheme = ControlMode.ARROW;
+        ControlScheme = ControlMode.CLICK;
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};
