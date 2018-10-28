@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Gameplay\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ExplosionManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\LevelConstructor.cs" />
     <Compile Include="Assets\Scripts\Gameplay\LevelManager.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Objects\Player.cs" />
     <Compile Include="Assets\Scripts\Gameplay\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\Globals\AspectRatioManager.cs" />
+    <Compile Include="Assets\Scripts\Globals\AudioSingleton.cs" />
     <Compile Include="Assets\Scripts\Globals\GameContext.cs" />
     <Compile Include="Assets\Scripts\Globals\GameMode.cs" />
     <Compile Include="Assets\Scripts\Globals\Theme.cs" />

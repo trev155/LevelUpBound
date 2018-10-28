@@ -17,9 +17,6 @@ public class ExplosionManager : MonoBehaviour {
     public MainGrid mainGrid;
     private GameObject[][] gameGrid;
 
-    // Reference to audio manager
-    public AudioManager audioManager;
-
     // Explosion sprite prefabs
     public Transform explosionArchonPrefab;
     public Transform explosionDarkArchonPrefab;
@@ -136,7 +133,7 @@ public class ExplosionManager : MonoBehaviour {
      */
     private IEnumerator Explode(int row, int col, string explosionCode) {
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
-        audioManager.PlayExplosionAudio(explosionCode);
+        AudioSingleton.Instance.PlayExplosion(explosionCode);
         StartCoroutine(FadeOutAndDestroy(explosion.gameObject));
 
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;

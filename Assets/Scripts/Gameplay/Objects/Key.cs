@@ -15,17 +15,12 @@ public class Key : MonoBehaviour {
     private MainGrid mainGrid;
     private GameObject[][] gameGrid;
 
-    // Reference to audio management
-    private AudioManager audioManager;
-
     /*
      * Initialization
      */
     private void Awake() {
         mainGrid = GameObject.FindGameObjectWithTag("MainGrid").GetComponent<MainGrid>();
         gameGrid = mainGrid.GetGameGrid();
-        
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     /*
@@ -33,10 +28,10 @@ public class Key : MonoBehaviour {
      */
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
-            audioManager.PlayKeyPickupSound();
+            AudioSingleton.Instance.PlaySound(AudioSingleton.KEY_PICKUP);
             Destroy(gameObject);
-            
-            audioManager.PlayWallUnlockAudio();
+
+            AudioSingleton.Instance.PlaySound(AudioSingleton.WALL_UNLOCK);
             bool isDouble = false;
             Transform lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)");
             if (lockedWall == null) {

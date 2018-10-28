@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour {
     public LevelManager levelManager;
-    public AudioManager audioManager;
     public MainGame mainGame;
     public Transform RespawnPoint;
     public GameObject modalWindow;
@@ -13,7 +12,7 @@ public class Goal : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         // Level cleared
         if (other.tag == "Player") {
-            audioManager.PlayLevelCompleteSound();
+            AudioSingleton.Instance.PlaySound(AudioSingleton.LEVEL_UP);
 
             // Check if last level. If so, display the celebration modal.
             if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {

@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour {
      * Initialize globals and start the game. Loads the MainGame scene.
      */
     private void ChooseMode(Mode mode) {
+        AudioSingleton.Instance.PlaySound(AudioSingleton.BUTTON_DING);
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = 1;
         GameContext.PreviousPageContext = "MainMenu";
@@ -51,6 +52,7 @@ public class MainMenu : MonoBehaviour {
      * Load the LevelSelector scene.
      */
     public void LevelSelector() {
+        AudioSingleton.Instance.PlaySound(AudioSingleton.BUTTON_DING);
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelector");
     }
@@ -59,6 +61,7 @@ public class MainMenu : MonoBehaviour {
      * Load the Level Editor scene.
      */
     public void LevelEditor() {
+        AudioSingleton.Instance.PlaySound(AudioSingleton.BUTTON_DING);
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("LevelEditor");
     }
@@ -67,6 +70,7 @@ public class MainMenu : MonoBehaviour {
     * Load the Instructions page.
     */
     public void Instructions() {
+        AudioSingleton.Instance.PlaySound(AudioSingleton.BUTTON_DING);
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("Instructions");
     }
@@ -75,6 +79,7 @@ public class MainMenu : MonoBehaviour {
      * Load the Options scene.
      */
     public void Options() {
+        AudioSingleton.Instance.PlaySound(AudioSingleton.BUTTON_DING);
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
     }
@@ -83,6 +88,7 @@ public class MainMenu : MonoBehaviour {
      * Load the About page.
      */
     public void About() {
+        AudioSingleton.Instance.PlaySound(AudioSingleton.BUTTON_DING);
         GameContext.PreviousPageContext = "MainMenu";
         UnityEngine.SceneManagement.SceneManager.LoadScene("About");
     }
@@ -91,6 +97,7 @@ public class MainMenu : MonoBehaviour {
      * Exit the application.
      */
     public void ExitApp() {
+        AudioSingleton.Instance.PlaySound(AudioSingleton.BUTTON_DING);
         Debug.Log("Exiting the Application");
         Application.Quit();
     }

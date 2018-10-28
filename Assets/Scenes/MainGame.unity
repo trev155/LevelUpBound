@@ -844,7 +844,7 @@ Prefab:
         type: 2}
       propertyPath: audioManager
       value: 
-      objectReference: {fileID: 2059849658}
+      objectReference: {fileID: 0}
     - target: {fileID: 114397925984520772, guid: 236666d1f0136d94ebd76b1ec4d46083,
         type: 2}
       propertyPath: UIManager
@@ -1530,7 +1530,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 81923798}
-  - {fileID: 2059849657}
   - {fileID: 1743551673}
   - {fileID: 2079819476}
   - {fileID: 1032509807}
@@ -2260,6 +2259,238 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4715250387977864, guid: ea4e38a3a59ef1646ab2701534b27d38,
     type: 2}
   m_PrefabInternal: {fileID: 307257814}
+--- !u!1 &317067024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317067027}
+  - component: {fileID: 317067026}
+  - component: {fileID: 317067028}
+  - component: {fileID: 317067025}
+  m_Layer: 0
+  m_Name: AudioManagement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &317067025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317067024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e948aec66d17baf4aa104d40cc9c95e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &317067026
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317067024}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &317067027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317067024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &317067028
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317067024}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &340745104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,233 +2840,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1001 &434528938
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 207401186}
-    m_Modifications:
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: archonExplosion
-      value: 
-      objectReference: {fileID: 1590178434}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: defilerExplosion
-      value: 
-      objectReference: {fileID: 443113209}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: devourerExplosion
-      value: 
-      objectReference: {fileID: 1818946424}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: dragoonExplosion
-      value: 
-      objectReference: {fileID: 206246346}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: dropshipExplosion
-      value: 
-      objectReference: {fileID: 1713685569}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: droneExplosion
-      value: 
-      objectReference: {fileID: 1887577177}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: dtempExplosion
-      value: 
-      objectReference: {fileID: 2067487944}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: firebatExplosion
-      value: 
-      objectReference: {fileID: 667273402}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: guardianExplosion
-      value: 
-      objectReference: {fileID: 1874185629}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: htempExplosion
-      value: 
-      objectReference: {fileID: 1950080867}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: hydraExplosion
-      value: 
-      objectReference: {fileID: 887897824}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: infestedTerranExplosion
-      value: 
-      objectReference: {fileID: 431485386}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: kakaruExplosion
-      value: 
-      objectReference: {fileID: 1494564500}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: lurkerExplosion
-      value: 
-      objectReference: {fileID: 1945208902}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: marineExplosion
-      value: 
-      objectReference: {fileID: 1613564857}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: medicExplosion
-      value: 
-      objectReference: {fileID: 1313694034}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: mutaliskExplosion
-      value: 
-      objectReference: {fileID: 1579810083}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: observerExplosion
-      value: 
-      objectReference: {fileID: 1905184143}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: overlordExplosion
-      value: 
-      objectReference: {fileID: 650487902}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: probeExplosion
-      value: 
-      objectReference: {fileID: 1702829298}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: queenExplosion
-      value: 
-      objectReference: {fileID: 277258167}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: reaverExplosion
-      value: 
-      objectReference: {fileID: 1147266376}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: scourgeExplosion
-      value: 
-      objectReference: {fileID: 113707351}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: scoutExplosion
-      value: 
-      objectReference: {fileID: 2035087020}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: scvExplosion
-      value: 
-      objectReference: {fileID: 1734495706}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: shuttleExplosion
-      value: 
-      objectReference: {fileID: 87695664}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: tankExplosion
-      value: 
-      objectReference: {fileID: 733135947}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: tankSiegeExplosion
-      value: 
-      objectReference: {fileID: 1854864702}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: ultraliskExplosion
-      value: 
-      objectReference: {fileID: 2085379979}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: valkExplosion
-      value: 
-      objectReference: {fileID: 365883017}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: vesselExplosion
-      value: 
-      objectReference: {fileID: 156565081}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: wraithExplosion
-      value: 
-      objectReference: {fileID: 1665568230}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: zealotExplosion
-      value: 
-      objectReference: {fileID: 208449793}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: playerDeath
-      value: 
-      objectReference: {fileID: 1233515110}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: debris
-      value: 
-      objectReference: {fileID: 1127350685}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: levelup
-      value: 
-      objectReference: {fileID: 719713058}
-    - target: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-        type: 2}
-      propertyPath: keyPickup
-      value: 
-      objectReference: {fileID: 911133495}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5d2299233babf164b96bfd004ee87264, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1001 &435564874
 Prefab:
   m_ObjectHideFlags: 0
@@ -5722,7 +5726,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 207401186}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1032509808
 MonoBehaviour:
@@ -9785,7 +9789,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 207401186}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1743551674
 MonoBehaviour:
@@ -9799,7 +9803,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainGrid: {fileID: 1659473013}
-  audioManager: {fileID: 2059849658}
   explosionArchonPrefab: {fileID: 4407363501834000, guid: 90cdb9af5868aae49a43b4fbd06efa66,
     type: 2}
   explosionDarkArchonPrefab: {fileID: 4407363501834000, guid: 0193f40bf162a7848b46fe3d71cac7e3,
@@ -10335,7 +10338,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 207401186}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1857752046
 MonoBehaviour:
@@ -10765,7 +10768,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 207401186}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1911021483
 MonoBehaviour:
@@ -11595,86 +11598,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &2059849656
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1846314098616028, guid: 5d2299233babf164b96bfd004ee87264,
-    type: 2}
-  m_PrefabInternal: {fileID: 434528938}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2059849657}
-  - component: {fileID: 2059849658}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2059849657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4032070450875510, guid: 5d2299233babf164b96bfd004ee87264,
-    type: 2}
-  m_PrefabInternal: {fileID: 434528938}
-  m_GameObject: {fileID: 2059849656}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 207401186}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2059849658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114967685039314808, guid: 5d2299233babf164b96bfd004ee87264,
-    type: 2}
-  m_PrefabInternal: {fileID: 434528938}
-  m_GameObject: {fileID: 2059849656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b37a507d82d9b345a6c722eef225ecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  archonExplosion: {fileID: 1590178434}
-  defilerExplosion: {fileID: 443113209}
-  devourerExplosion: {fileID: 1818946424}
-  dragoonExplosion: {fileID: 206246346}
-  dropshipExplosion: {fileID: 1713685569}
-  droneExplosion: {fileID: 1887577177}
-  dtempExplosion: {fileID: 2067487944}
-  firebatExplosion: {fileID: 667273402}
-  guardianExplosion: {fileID: 1874185629}
-  htempExplosion: {fileID: 1950080867}
-  hydraExplosion: {fileID: 887897824}
-  infestedTerranExplosion: {fileID: 431485386}
-  kakaruExplosion: {fileID: 1494564500}
-  lurkerExplosion: {fileID: 1945208902}
-  marineExplosion: {fileID: 1613564857}
-  medicExplosion: {fileID: 1313694034}
-  mutaliskExplosion: {fileID: 1579810083}
-  observerExplosion: {fileID: 1905184143}
-  overlordExplosion: {fileID: 650487902}
-  probeExplosion: {fileID: 1702829298}
-  queenExplosion: {fileID: 277258167}
-  reaverExplosion: {fileID: 1147266376}
-  scourgeExplosion: {fileID: 113707351}
-  scoutExplosion: {fileID: 2035087020}
-  scvExplosion: {fileID: 1734495706}
-  shuttleExplosion: {fileID: 87695664}
-  tankExplosion: {fileID: 733135947}
-  tankSiegeExplosion: {fileID: 1854864702}
-  ultraliskExplosion: {fileID: 2085379979}
-  valkExplosion: {fileID: 365883017}
-  vesselExplosion: {fileID: 156565081}
-  wraithExplosion: {fileID: 1665568230}
-  zealotExplosion: {fileID: 208449793}
-  playerDeath: {fileID: 1233515110}
-  debris: {fileID: 1127350685}
-  levelup: {fileID: 719713058}
-  keyPickup: {fileID: 911133495}
 --- !u!1 &2067487942
 GameObject:
   m_ObjectHideFlags: 0
@@ -11830,7 +11753,7 @@ Transform:
   - {fileID: 719713057}
   - {fileID: 911133494}
   m_Father: {fileID: 207401186}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2085379977
 GameObject:
