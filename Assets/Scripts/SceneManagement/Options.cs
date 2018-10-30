@@ -29,6 +29,7 @@ public class Options : MonoBehaviour {
      * Back button handler
      */
     public void BackButton() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.LoadPreviousPage();
     }
 
@@ -61,6 +62,7 @@ public class Options : MonoBehaviour {
             audioDisabledImage.gameObject.SetActive(false);
         }
         GameContext.AudioEnabled = !GameContext.AudioEnabled;
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
     }
 
     /*
@@ -84,33 +86,39 @@ public class Options : MonoBehaviour {
 
     // Theme Button handlers
     public void SetNormalTheme() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.Theme = "Normal";
         Theme.SetTheme();
     }
 
     public void SetLightTheme() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.Theme = "Light";
         Theme.SetTheme();
     }
 
     public void SetDarkTheme() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.Theme = "Dark";
         Theme.SetTheme();
     }
 
     public void SetVibrantTheme() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.Theme = "Vibrant";
         Theme.SetTheme();
     }
 
     // Control Scheme Buttons
     public void SetArrowControls() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.ControlScheme = ControlMode.ARROW;
         SetControlSchemeImage();
         Debug.Log(GameContext.ControlScheme);
     }
 
     public void SetClickControls() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.ControlScheme = ControlMode.CLICK;
         SetControlSchemeImage();
         Debug.Log(GameContext.ControlScheme);

@@ -17,6 +17,7 @@ public class LevelEditor : MonoBehaviour {
     * Back button handler
     */
     public void BackButton() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.LoadPreviousPage();
     }
 }

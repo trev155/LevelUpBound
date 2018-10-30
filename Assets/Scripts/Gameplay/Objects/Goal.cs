@@ -12,7 +12,7 @@ public class Goal : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         // Level cleared
         if (other.tag == "Player") {
-            AudioSingleton.Instance.PlaySound(AudioSingleton.LEVEL_UP);
+            AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
 
             // Check if last level. If so, display the celebration modal.
             if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {

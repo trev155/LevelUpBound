@@ -2,16 +2,17 @@
  * Singleton class that handles all audio related functions.
  * Attach this script to some game object.
  * Callers should access instances of this class using the static instance member,
- * eg) AudioSingleton.Instance.PlaySound()
+ * eg) AudioManager.Instance.PlaySound()
  */
 using UnityEngine;
 
-public class AudioSingleton : MonoBehaviour {
+public class AudioManager : MonoBehaviour {
     // Static strings to help callers
     public static readonly string WALL_UNLOCK = "Audio/debris";
-    public static readonly string BUTTON_DING = "Audio/ding";
     public static readonly string LEVEL_UP = "Audio/levelup";
     public static readonly string KEY_PICKUP = "Audio/itempickup";
+
+    public static readonly string BUTTON_DING = "Audio/ding";
 
     public static readonly string ARCHON_EXPLOSION = "Audio/explosions/archon";
     public static readonly string DEFILER_EXPLOSION = "Audio/explosions/defiler";
@@ -50,15 +51,13 @@ public class AudioSingleton : MonoBehaviour {
     public static readonly string PLAYER_DEATH = "Audio/explosions/zergling";
 
     // private instance variable, public static getter
-    private static AudioSingleton instance = null;
-    public static AudioSingleton Instance {
+    private static AudioManager instance = null;
+    public static AudioManager Instance {
         get { return instance; }
     }
 
-    // other members
-    private AudioSource audioSource;
-    private AudioSource audioSourceExplosion;
-    
+    // Audio sources
+    public AudioSource[] sources;    
 
     // initialization
     private void Awake() {
@@ -69,6 +68,9 @@ public class AudioSingleton : MonoBehaviour {
             instance = this;
         }
         DontDestroyOnLoad(this.gameObject);
+
+        // Audio sources initialize
+        sources = GetComponentsInChildren<AudioSource>();
     }
 
     // Sound methods
@@ -81,11 +83,19 @@ public class AudioSingleton : MonoBehaviour {
             return;
         }
 
-        audioSource = GetComponents<AudioSource>()[0];
-        audioSource.clip = Resources.Load<AudioClip>(path);
-        // TODO set volume to full, pitch to regular (1)
-        audioSource.Play();
-        // audioSource.PlayOneShot(audioSource.clip);
+        sources[0].clip = Resources.Load<AudioClip>(path);
+        sources[0].Play();
+    }
+
+    /*
+     * Play a UI sound effect.
+     */
+    public void PlayUISound(string path) {
+        if (!GameContext.AudioEnabled) {
+            return;
+        }
+        sources[1].clip = Resources.Load<AudioClip>(path);
+        sources[1].Play();
     }
 
     /*
@@ -212,9 +222,7 @@ public class AudioSingleton : MonoBehaviour {
                 break;
         }
 
-        audioSourceExplosion = GetComponents<AudioSource>()[1];
-        audioSourceExplosion.clip = Resources.Load<AudioClip>(path);
-        // TODO alter volume / pitch
-        audioSourceExplosion.Play();
+        sources[2].clip = Resources.Load<AudioClip>(path);
+        sources[2].Play();
     }
 }

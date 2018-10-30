@@ -28,10 +28,10 @@ public class Key : MonoBehaviour {
      */
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
-            AudioSingleton.Instance.PlaySound(AudioSingleton.KEY_PICKUP);
+            AudioManager.Instance.PlaySound(AudioManager.KEY_PICKUP);
             Destroy(gameObject);
 
-            AudioSingleton.Instance.PlaySound(AudioSingleton.WALL_UNLOCK);
+            AudioManager.Instance.PlaySound(AudioManager.WALL_UNLOCK);
             bool isDouble = false;
             Transform lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)");
             if (lockedWall == null) {

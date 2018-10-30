@@ -24,6 +24,7 @@ public class MainGame : MonoBehaviour {
      * Back button handler. If we came from the LevelSelector, the back button should go back to the MainMenu.
      */
     public void BackButtonPressed() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.LoadPreviousPage();
         if (GameContext.PreviousPageContext == "LevelSelector") {
             GameContext.PreviousPageContext = "MainMenu";
@@ -68,7 +69,7 @@ public class MainGame : MonoBehaviour {
             audioEnabledImage.gameObject.SetActive(true);
             audioDisabledImage.gameObject.SetActive(false);
         }
-
         GameContext.AudioEnabled = !GameContext.AudioEnabled;
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
     }
 }

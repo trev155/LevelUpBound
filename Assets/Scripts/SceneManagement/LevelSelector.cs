@@ -119,6 +119,7 @@ public class LevelSelector : MonoBehaviour {
         }
         RemoveLevelButtons();
         CreateLevelButtons();
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
     }
 
 
@@ -132,6 +133,7 @@ public class LevelSelector : MonoBehaviour {
         GameContext.LevelSelection = true;
         GameContext.LevelSelectionPage = currentPage;
 
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 
@@ -151,7 +153,8 @@ public class LevelSelector : MonoBehaviour {
      * - Tutorial, Easy, Classic, Advanced, Challenge
      */
     public void ToggleGameMode() {
-        Debug.Log(GameContext.GameMode);
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
         if (GameContext.GameMode == Mode.EASY) {
             GameContext.GameMode = Mode.CLASSIC;
         } else if (GameContext.GameMode == Mode.CLASSIC) {
@@ -227,6 +230,7 @@ public class LevelSelector : MonoBehaviour {
     * Back button handler
     */
     public void BackButton() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.LoadPreviousPage();
     }
 }

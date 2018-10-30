@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 
         Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         playerTransform.transform.position = respawnPoint.transform.position;
-        AudioSingleton.Instance.PlayExplosion("ZE");
+        AudioManager.Instance.PlaySound(AudioManager.PLAYER_DEATH);
 
         if (GameContext.ControlScheme == ControlMode.CLICK) {
             // Stop moving

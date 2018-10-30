@@ -133,7 +133,7 @@ public class ExplosionManager : MonoBehaviour {
      */
     private IEnumerator Explode(int row, int col, string explosionCode) {
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
-        AudioSingleton.Instance.PlayExplosion(explosionCode);
+        AudioManager.Instance.PlayExplosion(explosionCode);
         StartCoroutine(FadeOutAndDestroy(explosion.gameObject));
 
         gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
