@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * A MovingObject moves around certain predefined waypoints. If it makes 
+ * contact with the player, the player dies.
+ */
+using UnityEngine;
 
 public class MovingObject : MonoBehaviour {
     public float speed;
@@ -46,6 +50,13 @@ public class MovingObject : MonoBehaviour {
     }
 
     /*
+     * Want to call this at the start, but has to be after Awake().
+     */
+    private void Start() {
+        FlipSprite();
+    }
+
+    /*
      * Called once per frame.
      */
     private void Update() {
@@ -71,6 +82,7 @@ public class MovingObject : MonoBehaviour {
         // if reached destination, update waypoint
         if (transform.position == objectWaypoints[currentWaypointIndex].position) {
             AdvanceWaypointIndex();
+            FlipSprite();
         }
     }
 
@@ -79,5 +91,33 @@ public class MovingObject : MonoBehaviour {
      */
     private void AdvanceWaypointIndex() {
         currentWaypointIndex = (currentWaypointIndex + 1) % objectWaypoints.Length;
+    }
+
+    /*
+     * Flip sprite based on position and movement direction.
+     */
+    private void FlipSprite() {
+        // Debug.Log("Current Position: " + transform.position + " Next Position: " + objectWaypoints[currentWaypointIndex].position);
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        float currentX = transform.position.x;
+        float currentY = transform.position.y;
+        float nextX = objectWaypoints[currentWaypointIndex].position.x;
+        float nextY = objectWaypoints[currentWaypointIndex].position.y;
+        
+        if (currentX < nextX) {
+            transform.Rotate(Vector3.forward * -90);
+        }
+        if (currentX > nextX) {
+            transform.Rotate(Vector3.back * 90);
+        }
+        if (currentY < nextY) {
+            spriteRenderer.flipY = false;
+            transform.rotation = Quaternion.identity;
+        }
+        if (currentY > nextY) {
+            spriteRenderer.flipY = true;
+            transform.rotation = Quaternion.identity;
+        }
     }
 }
