@@ -1,11 +1,12 @@
 ﻿/*
  * Class that handles modal windows.
+ * This is a parent class. Every modal will have basic functions and fields defined in this class.
  */
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Modal : MonoBehaviour {
-    public Text modalText;
+public abstract class Modal : MonoBehaviour {
+    public Text modalMainText;
 
     private void Awake() {
         GameContext.ModalActive = true;
@@ -22,9 +23,5 @@ public class Modal : MonoBehaviour {
     public void CloseModalWindowAndGoBack() {
         CloseModalWindow();
         GameContext.LoadPreviousPage();
-    }
-
-    public void SetModalTextVictory() {
-        modalText.text = "Congratulations! You have beaten all of the levels for the " + GameMode.GetName(GameContext.GameMode) + " game mode!";
     }
 }

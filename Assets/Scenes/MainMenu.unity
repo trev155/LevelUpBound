@@ -312,7 +312,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2128714461}
-        m_MethodName: ExitApp
+        m_MethodName: ExitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -550,6 +550,39 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66104fbe528136b47bb77dc56f3dbb43, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &172990353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172990354}
+  m_Layer: 5
+  m_Name: ModalContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &172990354
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 172990353}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1663235414}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &211534175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2516,7 @@ RectTransform:
   - {fileID: 1548498625}
   - {fileID: 1830415862}
   - {fileID: 1769059756}
+  - {fileID: 172990354}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3047,6 +3081,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413da90bf9f1d17409d333cecd80da8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modalContainer: {fileID: 172990354}
+  modalConfirmDeny: {fileID: 114486474384001040, guid: 62601bb726f79d64c9e4078294b30695,
+    type: 2}
 --- !u!224 &2128714462
 RectTransform:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 224240977280970928}
   - component: {fileID: 222695893802184716}
   - component: {fileID: 114773936620109648}
-  - component: {fileID: 114004806433112852}
+  - component: {fileID: 114326071297185804}
   m_Layer: 5
   m_Name: ModalWindowVictory
   m_TagString: Modal
@@ -81,18 +81,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114004806433112852
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1449836293551482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8d7fadb45bd1a47b94653766f9b368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modalText: {fileID: 114098592902818578}
 --- !u!114 &114098592902818578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,7 +153,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114004806433112852}
+      - m_Target: {fileID: 114326071297185804}
         m_MethodName: CloseModalWindowAndGoBack
         m_Mode: 1
         m_Arguments:
@@ -178,6 +166,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114326071297185804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1449836293551482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745d7f4e90f20db46ad8a697b98f14ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modalMainText: {fileID: 114098592902818578}
 --- !u!114 &114414215863512802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,7 +311,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 700}
+  m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224280301554266092
 RectTransform:

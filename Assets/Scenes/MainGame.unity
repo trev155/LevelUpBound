@@ -894,7 +894,7 @@ Prefab:
         type: 2}
       propertyPath: modalWindowVictory
       value: 
-      objectReference: {fileID: 114004806433112852, guid: 78a815195121e224eb74f3ac8b664c4b,
+      objectReference: {fileID: 114326071297185804, guid: 78a815195121e224eb74f3ac8b664c4b,
         type: 2}
     - target: {fileID: 114397925984520772, guid: 236666d1f0136d94ebd76b1ec4d46083,
         type: 2}

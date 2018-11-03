@@ -85,6 +85,8 @@
     <Compile Include="Assets\Scripts\SceneManagement\Options.cs" />
     <Compile Include="Assets\Scripts\Util\LevelString.cs" />
     <Compile Include="Assets\Scripts\Util\Modal.cs" />
+    <Compile Include="Assets\Scripts\Util\ModalConfirmDeny.cs" />
+    <Compile Include="Assets\Scripts\Util\ModalVictory.cs" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\014.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\032.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\008.txt" />

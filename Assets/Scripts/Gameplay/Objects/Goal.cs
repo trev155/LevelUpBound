@@ -10,7 +10,7 @@ public class Goal : MonoBehaviour {
 
     // Modals
     public Transform modalContainer;
-    public Modal modalWindowVictory;
+    public ModalVictory modalWindowVictory;
 
     void OnTriggerEnter2D(Collider2D other) {
         // Level cleared
@@ -18,14 +18,10 @@ public class Goal : MonoBehaviour {
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
 
             // Check if last level. If so, display the celebration modal.
-            if (GameContext.CurrentLevel == 1) {
-                // if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
-
-                Modal modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<Modal>();
+            if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
+                ModalVictory modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<ModalVictory>();
                 modal.SetModalTextVictory();
-                
                 levelManager.StopLevel();
-
                 return;
             }
             
