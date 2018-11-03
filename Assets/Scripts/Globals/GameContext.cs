@@ -27,6 +27,9 @@ public static class GameContext {
     // Player Control Scheme
     public static ControlMode ControlScheme { get; set; }
 
+    // Modal Window Active
+    public static bool ModalActive { get; set; }
+
     /*
      * Static Constructor = Default Values
      */
@@ -40,6 +43,7 @@ public static class GameContext {
         LevelSelectionPage = 1;
         Theme = "Normal";
         ControlScheme = ControlMode.ARROW;
+        ModalActive = false;
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};

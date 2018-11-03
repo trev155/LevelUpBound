@@ -56,6 +56,10 @@ public class PlayerControl : MonoBehaviour {
     * Called on every frame.
     */
     private void Update() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+
         PreventZRotation();
 
         if (GameContext.ControlScheme == ControlMode.ARROW) {

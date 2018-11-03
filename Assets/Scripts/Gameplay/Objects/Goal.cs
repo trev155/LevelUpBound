@@ -7,7 +7,10 @@ public class Goal : MonoBehaviour {
     public LevelManager levelManager;
     public MainGame mainGame;
     public Transform RespawnPoint;
-    public GameObject modalWindow;
+
+    // Modals
+    public Transform modalContainer;
+    public Modal modalWindowVictory;
 
     void OnTriggerEnter2D(Collider2D other) {
         // Level cleared
@@ -15,12 +18,14 @@ public class Goal : MonoBehaviour {
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
 
             // Check if last level. If so, display the celebration modal.
-            if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
-                modalWindow.SetActive(true);
-                Modal modal = modalWindow.GetComponent<Modal>();
+            if (GameContext.CurrentLevel == 1) {
+                // if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
+
+                Modal modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<Modal>();
                 modal.SetModalTextVictory();
+                
                 levelManager.StopLevel();
-                // TODO also stop all other actions
+
                 return;
             }
             

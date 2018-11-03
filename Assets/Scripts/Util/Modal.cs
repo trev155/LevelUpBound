@@ -7,8 +7,16 @@ using UnityEngine.UI;
 public class Modal : MonoBehaviour {
     public Text modalText;
 
+    private void Awake() {
+        GameContext.ModalActive = true;
+    }
+
+    /*
+     * Main function to close the current modal window
+     */
     public void CloseModalWindow() {
         gameObject.SetActive(false);
+        GameContext.ModalActive = false;
     }
 
     public void CloseModalWindowAndGoBack() {
