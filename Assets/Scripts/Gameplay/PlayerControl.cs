@@ -10,6 +10,9 @@ public enum ControlMode {
 }
 
 public class PlayerControl : MonoBehaviour {
+    // sprite rotation
+    private float currentRotation = 0;
+
     // fields for arrow controls
     public float arrowSpeed;
     private readonly float distance = 1.0f;
@@ -61,6 +64,7 @@ public class PlayerControl : MonoBehaviour {
         }
 
         PreventZRotation();
+        transform.Rotate(Vector3.forward * currentRotation);
 
         if (GameContext.ControlScheme == ControlMode.ARROW) {
             ArrowMovement();
@@ -75,17 +79,41 @@ public class PlayerControl : MonoBehaviour {
      * Player movement
      */
     private void ArrowMovement() {
-        if (enableMoveUp || Input.GetAxisRaw("Vertical") > 0) {
+        bool up = enableMoveUp || Input.GetAxisRaw("Vertical") > 0;
+        bool down = enableMoveDown || Input.GetAxisRaw("Vertical") < 0;
+        bool left = enableMoveLeft || Input.GetAxisRaw("Horizontal") < 0;
+        bool right = enableMoveRight || Input.GetAxisRaw("Horizontal") > 0;
+
+        if (up) {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + distance), Time.deltaTime * arrowSpeed);
         }
-        if (enableMoveDown || Input.GetAxisRaw("Vertical") < 0) {
+        if (down) {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y - distance), Time.deltaTime * arrowSpeed);
         }
-        if (enableMoveLeft || Input.GetAxisRaw("Horizontal") < 0) {
+        if (left) {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x - distance, transform.position.y), Time.deltaTime * arrowSpeed);
         }
-        if (enableMoveRight || Input.GetAxisRaw("Horizontal") > 0) {
+        if (right) {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + distance, transform.position.y), Time.deltaTime * arrowSpeed);
+        }
+
+        // Rotations
+        if (up && right) {
+            currentRotation = 315;
+        } else if (right && down) {
+            currentRotation = 225;
+        } else if (down && left) {
+            currentRotation = 135;
+        } else if (left && up) {
+            currentRotation = 45;
+        } else if (up) {
+            currentRotation = 360;
+        } else if (right) {
+            currentRotation = 270;
+        } else if (down) {
+            currentRotation = 180;
+        } else if (left) {
+            currentRotation = 90;
         }
     }
 
@@ -123,15 +151,6 @@ public class PlayerControl : MonoBehaviour {
     }
 
     /*
-     * Prevent Z-axis rotation.
-     */
-    private void PreventZRotation() {
-        if (playerTransform.rotation.z != 0) {
-            playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.x, playerTransform.rotation.y, 0);
-        }
-    }
-
-    /*
      * Movement for the Click control scheme.
      */
     private void ClickMovement() {
@@ -150,10 +169,22 @@ public class PlayerControl : MonoBehaviour {
             StartCoroutine(FadeOutAndDestroy(circle));
             
             Debug.Log("Touch - Set New Destination at: " + touchDestination);
+
+            // Rotation
+            Vector2 delta = touchDestination - transform.position;
+            Quaternion look = Quaternion.LookRotation(delta);
+            float vertical = look.eulerAngles.x;
+            float horizontal = look.eulerAngles.y;
+            if (horizontal < 180) {
+                currentRotation = ((vertical + 90) % 360) * -1;
+            } else {
+                currentRotation = vertical + 90;
+            }
         }
 
         if (clickMoveActive) {
             transform.position = Vector3.MoveTowards(transform.position, touchDestination, Time.deltaTime * clickSpeed);
+
             if (transform.position.Equals(touchDestination)) {
                 Debug.Log("Reached destination at " + touchDestination);
                 clickMoveActive = false;
@@ -180,5 +211,14 @@ public class PlayerControl : MonoBehaviour {
         }
         spriteRenderer.color = tmpColor;
         Destroy(explosionGameObject);
+    }
+
+    /*
+    * Prevent Z-axis rotation.
+    */
+    private void PreventZRotation() {
+        if (playerTransform.rotation.z != 0) {
+            playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.x, playerTransform.rotation.y, 0);
+        }
     }
 }

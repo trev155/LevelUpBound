@@ -22,7 +22,7 @@ public static class AspectRatioManager {
             // 16:9 portrait
             SetBackgroundPanelDimensions(1080, 1920);
         } else {
-            Debug.Log("This aspect ratio is not supported yet");
+            Debug.Log("This aspect ratio is not supported yet: " + aspectRatio);
         }
     }
 
