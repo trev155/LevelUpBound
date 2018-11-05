@@ -198,16 +198,12 @@ public class LevelSelector : MonoBehaviour {
      */ 
     private void BlurArrows() {
         if (currentPage == 1) {
-            Image image = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
-            Color tempColor = image.color;
-            tempColor.a = 0.1f;
-            image.color = tempColor;
+            Image leftButton = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
+            Utils.GrayoutImage(leftButton);
         }
         if (currentPage == maxPages) {
-            Image image = GameObject.Find("ScrollRightButton").GetComponent<Image>();
-            Color tempColor = image.color;
-            tempColor.a = 0.1f;
-            image.color = tempColor;
+            Image rightButton = GameObject.Find("ScrollRightButton").GetComponent<Image>();
+            Utils.GrayoutImage(rightButton);
         }
     }
 
@@ -215,15 +211,11 @@ public class LevelSelector : MonoBehaviour {
      * Unblur both scroll arrows. Set alpha property of image back to 1.
      */
     private void UnblurArrows() {
-        Image imageLeft = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
-        Color tempColorLeft = imageLeft.color;
-        tempColorLeft.a = 1.0f;
-        imageLeft.color = tempColorLeft;
-        
-        Image imageRight = GameObject.Find("ScrollRightButton").GetComponent<Image>();
-        Color tempColorRight = imageRight.color;
-        tempColorRight.a = 1.0f;
-        imageRight.color = tempColorRight;   
+        Image leftButton = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
+        Utils.UndoGrayoutImage(leftButton);
+
+        Image rightButton = GameObject.Find("ScrollRightButton").GetComponent<Image>();
+        Utils.UndoGrayoutImage(rightButton);
     }
 
     /*

@@ -79,20 +79,20 @@ public class ModalPrelevelInfo : Modal {
 
         // Gray out arrows according to the page number
         if (numPages == 1) {
-            Util.GrayoutImage(forwardArrow);
-            Util.GrayoutImage(backArrow);
+            Utils.GrayoutImage(forwardArrow);
+            Utils.GrayoutImage(backArrow);
         } else if (currentPage == 1 || currentPage == numPages) {
             if (currentPage == 1) {
-                Util.GrayoutImage(backArrow);
-                Util.UndoGrayoutImage(forwardArrow);
+                Utils.GrayoutImage(backArrow);
+                Utils.UndoGrayoutImage(forwardArrow);
             }
             if (currentPage == numPages) {
-                Util.GrayoutImage(forwardArrow);
-                Util.UndoGrayoutImage(backArrow);
+                Utils.GrayoutImage(forwardArrow);
+                Utils.UndoGrayoutImage(backArrow);
             }
         } else {
-            Util.UndoGrayoutImage(forwardArrow);
-            Util.UndoGrayoutImage(backArrow);
+            Utils.UndoGrayoutImage(forwardArrow);
+            Utils.UndoGrayoutImage(backArrow);
         }
 
         // Show proceed button if we're on the last page
