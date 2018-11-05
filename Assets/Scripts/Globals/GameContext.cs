@@ -27,7 +27,7 @@ public static class GameContext {
     // Player Control Scheme
     public static ControlMode ControlScheme { get; set; }
 
-    // Modal Window Active
+    // Modal Windows
     public static bool ModalActive { get; set; }
 
     /*

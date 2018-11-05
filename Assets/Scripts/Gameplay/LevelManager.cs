@@ -24,6 +24,10 @@ public class LevelManager : MonoBehaviour {
     // Levels that require external objects
     HashSet<int> levelsWithExternals = new HashSet<int>();
 
+    // Tutorial mode requires extra support
+    public ModalTutorialInfo modalTutorialInfo;
+    public Transform modalContainer;
+
     /*
      * Initialization.
      */
@@ -44,13 +48,18 @@ public class LevelManager : MonoBehaviour {
      * Startup.
      */
     void Start() {
+        if (GameContext.GameMode == Mode.TUTORIAL) {
+            PlayTutorialLevel();
+            return;
+        }
+
         PlayLevel();
     }
 
     /*
      * Play the current level.
      */
-    private void PlayLevel() {
+    public void PlayLevel() {
         // File locations to read from depends on the game mode
         string levelPrefix = GameMode.GetLevelPrefix(GameContext.GameMode);
         string externalPrefix = GameMode.GetExternalPrefix(GameContext.GameMode);
@@ -79,6 +88,13 @@ public class LevelManager : MonoBehaviour {
     }
 
     /*
+     * Wrapper for playing a tutorial level.
+     */
+    public void PlayTutorialLevel() {
+        TutorialModeHandler();
+    }
+
+    /*
      * Stop the current level. 
      */
     public void StopLevel() {
@@ -93,6 +109,11 @@ public class LevelManager : MonoBehaviour {
         levelConstructor.RemoveExternalObjects();
         GameContext.CurrentLevel += 1;
         StartCoroutine(PauseBetweenLevels());
+
+        if (GameContext.GameMode == Mode.TUTORIAL) {
+            PlayTutorialLevel();
+            return;
+        }
         PlayLevel();
     }
 
@@ -101,5 +122,38 @@ public class LevelManager : MonoBehaviour {
      */
     private IEnumerator PauseBetweenLevels() {
         yield return new WaitForSeconds(2.0f);
+    }
+
+    /*
+     * Tutorial Mode handler
+     */
+    private void TutorialModeHandler() {
+        ModalTutorialInfo modal = Instantiate(modalTutorialInfo, modalContainer);
+        List<string> messages = new List<string>();
+        Dictionary<int, string> imageLevelToPaths = new Dictionary<int, string>();
+        if (GameContext.CurrentLevel == 1) {
+            messages.Add("Welcome to Level Up Bound! This game is a top-down arcade style game where you dodge obstacles.");
+            messages.Add("Your objective is to reach the goal circle at the top of the screen.");
+            messages.Add("Make your way to the top by tapping on the control arrows, and don't get caught in the explosions!");
+            imageLevelToPaths.Add(2, "TutorialImages/tut1-2");
+            imageLevelToPaths.Add(3, "TutorialImages/tut1-3");
+        }
+        if (GameContext.CurrentLevel == 2) {
+            messages.Add("Great work! Different levels have different explosion patterns. Try to analyze what the pattern is before you start moving!");
+        }
+        if (GameContext.CurrentLevel == 3) {
+            messages.Add("Some levels will not only have explosions, but other elements as well.");
+            messages.Add("For example, the playing field may contain walls.");
+            imageLevelToPaths.Add(2, "TutorialImages/tut3-2");
+        }
+        if (GameContext.CurrentLevel == 4) {
+            messages.Add("Key levels are also quite common. In these levels, you have to fetch the key to unlock the sealed wall.");
+            imageLevelToPaths.Add(1,"TutorialImages/tut4-1");
+        }
+        if (GameContext.CurrentLevel == 5) {
+            messages.Add("Nice! Now use your skills to complete the final level of the Tutorial.");
+        }
+        modal.Initialize(messages, imageLevelToPaths);
+        return;
     }
 }
