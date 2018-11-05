@@ -9310,6 +9310,12 @@ Prefab:
       value: 
       objectReference: {fileID: 114636649017369390, guid: edba79578cc9e844e911586314e756ce,
         type: 2}
+    - target: {fileID: 114145306154572142, guid: 008649081ccaaab4a93bcde5b0248071,
+        type: 2}
+      propertyPath: modalPrelevelInfo
+      value: 
+      objectReference: {fileID: 114636649017369390, guid: edba79578cc9e844e911586314e756ce,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 008649081ccaaab4a93bcde5b0248071, type: 2}
   m_IsPrefabAsset: 0

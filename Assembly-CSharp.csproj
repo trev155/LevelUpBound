@@ -86,7 +86,7 @@
     <Compile Include="Assets\Scripts\Util\LevelString.cs" />
     <Compile Include="Assets\Scripts\Util\Modal.cs" />
     <Compile Include="Assets\Scripts\Util\ModalConfirmDeny.cs" />
-    <Compile Include="Assets\Scripts\Util\ModalTutorialInfo.cs" />
+    <Compile Include="Assets\Scripts\Util\ModalPrelevelInfo.cs" />
     <Compile Include="Assets\Scripts\Util\ModalVictory.cs" />
     <Compile Include="Assets\Scripts\Util\Util.cs" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\014.txt" />

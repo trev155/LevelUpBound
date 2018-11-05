@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class ModalTutorialInfo : Modal {
+public class ModalPrelevelInfo : Modal {
     // References to game objects
     public Image pageImage;
     public Image backArrow;

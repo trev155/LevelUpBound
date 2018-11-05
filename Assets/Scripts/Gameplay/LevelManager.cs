@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour {
     HashSet<int> levelsWithExternals = new HashSet<int>();
 
     // Tutorial mode requires extra support
-    public ModalTutorialInfo modalTutorialInfo;
+    public ModalPrelevelInfo modalPrelevelInfo;
     public Transform modalContainer;
 
     /*
@@ -128,7 +128,7 @@ public class LevelManager : MonoBehaviour {
      * Tutorial Mode handler
      */
     private void TutorialModeHandler() {
-        ModalTutorialInfo modal = Instantiate(modalTutorialInfo, modalContainer);
+        ModalPrelevelInfo modal = Instantiate(modalPrelevelInfo, modalContainer);
         List<string> messages = new List<string>();
         Dictionary<int, string> imageLevelToPaths = new Dictionary<int, string>();
         if (GameContext.CurrentLevel == 1) {

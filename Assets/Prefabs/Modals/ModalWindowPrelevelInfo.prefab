@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114663203308231762}
   - component: {fileID: 114636649017369390}
   m_Layer: 5
-  m_Name: ModalWindowTutorialInfo
+  m_Name: ModalWindowPrelevelInfo
   m_TagString: Modal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,6 +289,10 @@ MonoBehaviour:
   backArrow: {fileID: 114911053637414858}
   forwardArrow: {fileID: 114162798493997554}
   proceedButton: {fileID: 114335898009898006}
+  currentPage: 1
+  numPages: 0
+  messages: []
+  levelManager: {fileID: 0}
 --- !u!114 &114663203308231762
 MonoBehaviour:
   m_ObjectHideFlags: 1
