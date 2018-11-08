@@ -99,6 +99,7 @@
     <None Include="Assets\Resources\Data\Levels\Challenge\004.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\084.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\096.txt" />
+    <None Include="Assets\Resources\Data\ExternalObjects\Challenge\005.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\079.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\056.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\002.txt" />
@@ -136,6 +137,7 @@
     <None Include="Assets\Resources\Data\Levels\Classic\071.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\021.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Easy\032.txt" />
+    <None Include="Assets\Resources\Data\Levels\Challenge\006.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\048.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\011.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\033.txt" />
@@ -160,6 +162,7 @@
     <None Include="Assets\Resources\Data\Levels\Easy\004.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\017.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\031.txt" />
+    <None Include="Assets\Resources\Data\Levels\Challenge\005.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\043.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\031.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\045.txt" />
@@ -224,6 +227,7 @@
     <None Include="Assets\Resources\Data\Levels\Advanced\036.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\025.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Easy\030.txt" />
+    <None Include="Assets\Resources\Data\Levels\Challenge\008.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\009.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\010.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\023.txt" />
@@ -267,6 +271,7 @@
     <None Include="Assets\Resources\Data\Levels\Easy\015.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\018.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\041.txt" />
+    <None Include="Assets\Resources\Data\ExternalObjects\Challenge\007.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\046.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\016.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\018.txt" />
@@ -325,6 +330,7 @@
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\024.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\078.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\006.txt" />
+    <None Include="Assets\Resources\Data\ExternalObjects\Challenge\008.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\024.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\044.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\066.txt" />
@@ -397,6 +403,7 @@
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\056.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\043.txt" />
     <None Include="Assets\Resources\Data\Levels\Classic\019.txt" />
+    <None Include="Assets\Resources\Data\Levels\Challenge\007.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\071.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\006.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\041.txt" />
