@@ -16,6 +16,9 @@ public static class GameContext {
     public static bool AudioEnabled { get; set; }
     public static float CurrentVolume { get; set; }
 
+    // Main Menu game selection
+    public static Mode MainMenuGameMode { get; set; }
+
     // For the level selection page
     public static bool LevelSelection { get; set; }
     public static int LevelSelectionPage { get; set; }
@@ -34,11 +37,12 @@ public static class GameContext {
      * Static Constructor = Default Values
      */
     static GameContext() {
-        GameMode = Mode.EASY;
+        GameMode = Mode.CLASSIC;
         CurrentLevel = 1;
         PreviousPageContext = "MainMenu";
         AudioEnabled = true;
         CurrentVolume = 0.6f;
+        MainMenuGameMode = Mode.EASY;
         LevelSelection = false;
         LevelSelectionPage = 1;
         Theme = "Normal";

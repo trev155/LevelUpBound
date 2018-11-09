@@ -108,6 +108,7 @@ public class ModalPrelevelInfo : Modal {
         if (currentPage == numPages) {
             return;
         }
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         currentPage += 1;
         SetContents();
     }
@@ -116,6 +117,7 @@ public class ModalPrelevelInfo : Modal {
         if (currentPage == 1) {
             return;
         }
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         currentPage -= 1;
         SetContents();
     }

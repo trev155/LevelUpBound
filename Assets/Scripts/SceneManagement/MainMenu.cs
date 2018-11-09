@@ -9,53 +9,101 @@ public class MainMenu : MonoBehaviour {
     public Transform modalContainer;
     public ModalConfirmDeny modalConfirmDeny;
     private ModalConfirmDeny modal;
-    
+
+    // Game Mode Selection
+    public Text gameModeSelectedText;
+    public Image leftArrow;
+    public Image rightArrow;
+
     /*
      * Initialization
      */
     private void Awake() {
         AspectRatioManager.AdjustScreen();
         Theme.SetTheme();
-
-        // For the LevelSelector, want to set default page to Easy
-        GameContext.GameMode = Mode.EASY;
-        GameContext.LevelSelectionPage = 1;
     }
 
     /*
+     * Initialization, after Awake()
+     */
+    private void Start() {
+        // Game Mode Selector
+        SetGameModeSelectedModeText();
+        BlurArrows();
+    }
+
+    /*
+     * Play Button.
      * Initialize globals and start the game. Loads the MainGame scene.
      */
-    private void ChooseMode(Mode mode) {
+    public void Play() {
         if (GameContext.ModalActive) {
             return;
         }
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.GameMode = mode;
+        GameContext.GameMode = GameContext.MainMenuGameMode;
         GameContext.CurrentLevel = 1;
         GameContext.PreviousPageContext = "MainMenu";
         GameContext.LevelSelection = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
+   
+    public void ScrollLeft() {
+        if (GameContext.MainMenuGameMode == Mode.TUTORIAL) {
+            return;
+        }
 
-    public void ChooseClassicMode() {
-        ChooseMode(Mode.CLASSIC);
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        if (GameContext.MainMenuGameMode == Mode.CHALLENGE) {
+            GameContext.MainMenuGameMode = Mode.ADVANCED;
+        } else if (GameContext.MainMenuGameMode == Mode.ADVANCED) {
+            GameContext.MainMenuGameMode = Mode.CLASSIC;
+        } else if (GameContext.MainMenuGameMode == Mode.CLASSIC) {
+            GameContext.MainMenuGameMode = Mode.EASY;
+        } else if (GameContext.MainMenuGameMode == Mode.EASY) {
+            GameContext.MainMenuGameMode = Mode.TUTORIAL;
+        }
+
+        SetGameModeSelectedModeText();
+        BlurArrows();
     }
 
-    public void ChooseAdvancedMode() {
-        ChooseMode(Mode.ADVANCED);
+    public void ScrollRight() {
+        if (GameContext.MainMenuGameMode == Mode.CHALLENGE) {
+            return;
+        }
+
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        if (GameContext.MainMenuGameMode == Mode.TUTORIAL) {
+            GameContext.MainMenuGameMode = Mode.EASY;
+        } else if (GameContext.MainMenuGameMode == Mode.EASY) {
+            GameContext.MainMenuGameMode = Mode.CLASSIC;
+        } else if (GameContext.MainMenuGameMode == Mode.CLASSIC) {
+            GameContext.MainMenuGameMode = Mode.ADVANCED;
+        } else if (GameContext.MainMenuGameMode == Mode.ADVANCED) {
+            GameContext.MainMenuGameMode = Mode.CHALLENGE;
+        } 
+
+        SetGameModeSelectedModeText();
+        BlurArrows();
     }
 
-    public void ChooseEasyMode() {
-        ChooseMode(Mode.EASY);
+    private void SetGameModeSelectedModeText() {
+        gameModeSelectedText.text = GameMode.GetName(GameContext.MainMenuGameMode);
     }
 
-    public void ChooseTutorialMode() {
-        ChooseMode(Mode.TUTORIAL);
-    }
-
-    public void ChooseChallengeMode() {
-        ChooseMode(Mode.CHALLENGE);
+    private void BlurArrows() {
+        Utils.UndoGrayoutImage(leftArrow);
+        Utils.UndoGrayoutImage(rightArrow);
+        if (GameContext.MainMenuGameMode == Mode.TUTORIAL) {
+            Utils.GrayoutImage(leftArrow);
+        }
+        if (GameContext.MainMenuGameMode == Mode.CHALLENGE) {
+            Utils.GrayoutImage(rightArrow);
+        }
     }
 
     /*

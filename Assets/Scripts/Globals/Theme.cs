@@ -31,7 +31,7 @@ public static class Theme {
         }
 
         // Set the background color to the new color. For the MainGame scene, we use the Main Camera
-        Debug.Log(SceneManager.GetActiveScene().name);
+        // Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name == "MainGame") {
             Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
             camera.backgroundColor = newColor;

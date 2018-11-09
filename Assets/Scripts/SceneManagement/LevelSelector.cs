@@ -27,17 +27,22 @@ public class LevelSelector : MonoBehaviour {
      * Initialization
      */
     private void Awake() {
-        AspectRatioManager.AdjustScreen();        
+        AspectRatioManager.AdjustScreen();
+        Theme.SetTheme();
     }
 
     /*
-     * Initialization
+     * Initialization.
+     * Depends on earlier Awake() calls
      */
     private void Start() {
-        // Depends on earlier Awake() calls
+        // If we came from the Game scene, keep on same game mode as before.
+        // If we came from main menu, default to Easy
+        if (!GameContext.LevelSelection) {
+            GameContext.GameMode = Mode.EASY;
+        }
         currentPage = GameContext.LevelSelectionPage;
         maxPages = ComputeMaxPages();
-        Theme.SetTheme();
         BlurArrows();
         SetGameModeText();
         CreateLevelButtons();
@@ -77,7 +82,7 @@ public class LevelSelector : MonoBehaviour {
      * before displaying new ones.
      */
     private void RemoveLevelButtons() {
-        Debug.Log("Removing all Level Buttons");
+        // Debug.Log("Removing all Level Buttons");
         GameObject[] allLevelButtons = GameObject.FindGameObjectsWithTag("LevelButton");
         foreach (GameObject levelButton in allLevelButtons) {
             Destroy(levelButton);
@@ -85,12 +90,10 @@ public class LevelSelector : MonoBehaviour {
     }
 
     public void ScrollPageLeft() {
-        Debug.Log("Scroll Page Left");
         ScrollPage("left");
     }
 
     public void ScrollPageRight() {
-        Debug.Log("Scroll Page Right");
         ScrollPage("right");
     }
 
@@ -102,10 +105,14 @@ public class LevelSelector : MonoBehaviour {
         if (direction == "left") {
             if (currentPage != 1) {
                 currentPage -= 1;
+            } else {
+                return;
             }
         } else if (direction == "right") {
             if (currentPage != maxPages) {
                 currentPage += 1;
+            } else {
+                return;
             }
         } else {
             Debug.Log("Unknown scroll direction");
