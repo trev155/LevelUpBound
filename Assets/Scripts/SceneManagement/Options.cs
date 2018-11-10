@@ -82,6 +82,7 @@ public class Options : MonoBehaviour {
      */
     public void VolumeSliderChanged() {
         GameContext.CurrentVolume = volumeSlider.value;
+        AudioManager.Instance.AdjustVolumeLevels();
     }
 
     // Theme Button handlers

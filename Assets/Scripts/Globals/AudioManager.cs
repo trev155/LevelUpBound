@@ -225,4 +225,18 @@ public class AudioManager : MonoBehaviour {
         sources[2].clip = Resources.Load<AudioClip>(path);
         sources[2].Play();
     }
+
+    /*
+     * Should be called whenever the global volume level gets changed. Go through
+     * all audio sources and set the volume.
+     */
+    public void AdjustVolumeLevels() {
+        foreach (AudioSource audioSource in sources) {
+            if (audioSource.name == "ExplosionLayer") {
+                audioSource.volume = GameContext.CurrentVolume / 2;
+            } else {
+                audioSource.volume = GameContext.CurrentVolume;
+            }
+        }
+    }
 }
