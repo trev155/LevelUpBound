@@ -71,6 +71,7 @@ public class AudioManager : MonoBehaviour {
 
         // Audio sources initialize
         sources = GetComponentsInChildren<AudioSource>();
+        AdjustVolumeLevels();
     }
 
     // Sound methods
