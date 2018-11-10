@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Gameplay\ExplosionManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\LevelConstructor.cs" />
     <Compile Include="Assets\Scripts\Gameplay\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Objects\ExplodableTile.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Objects\Goal.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Objects\Key.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Objects\MainGrid.cs" />

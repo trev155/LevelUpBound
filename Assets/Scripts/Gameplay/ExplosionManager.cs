@@ -17,6 +17,9 @@ public class ExplosionManager : MonoBehaviour {
     public MainGrid mainGrid;
     private GameObject[][] gameGrid;
 
+    // Reference to player
+    private Player player;
+
     // Explosion sprite prefabs
     public Transform explosionArchonPrefab;
     public Transform explosionDarkArchonPrefab;
@@ -56,45 +59,47 @@ public class ExplosionManager : MonoBehaviour {
      */
     void Awake() {
         gameGrid = mainGrid.GetGameGrid();
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     /*
      * Wrapper functions for the Explode Coroutine. 
      */
     public void ExplodeTile(int row, int col, string explosionCode) {
-        StartCoroutine(Explode(row, col, explosionCode));
+        Explode(row, col, explosionCode);
     }
 
     public void ExplodeRow(int row, string explosionCode) {
-        StartCoroutine(Explode(row, 0, explosionCode));
-        StartCoroutine(Explode(row, 1, explosionCode));
-        StartCoroutine(Explode(row, 2, explosionCode));
-        StartCoroutine(Explode(row, 3, explosionCode));
-        StartCoroutine(Explode(row, 4, explosionCode));
+        Explode(row, 0, explosionCode);
+        Explode(row, 1, explosionCode);
+        Explode(row, 2, explosionCode);
+        Explode(row, 3, explosionCode);
+        Explode(row, 4, explosionCode);
     }
 
     public void ExplodeColumn(int col, string explosionCode) {
-        StartCoroutine(Explode(0, col, explosionCode));
-        StartCoroutine(Explode(1, col, explosionCode));
-        StartCoroutine(Explode(2, col, explosionCode));
-        StartCoroutine(Explode(3, col, explosionCode));
-        StartCoroutine(Explode(4, col, explosionCode));
+        Explode(0, col, explosionCode);
+        Explode(1, col, explosionCode);
+        Explode(2, col, explosionCode);
+        Explode(3, col, explosionCode);
+        Explode(4, col, explosionCode);
     }
 
     public void ExplodeDiagonalTopLeft(string explosionCode) {
-        StartCoroutine(Explode(4, 0, explosionCode));
-        StartCoroutine(Explode(3, 1, explosionCode));
-        StartCoroutine(Explode(2, 2, explosionCode));
-        StartCoroutine(Explode(1, 3, explosionCode));
-        StartCoroutine(Explode(0, 4, explosionCode));
+        Explode(4, 0, explosionCode);
+        Explode(3, 1, explosionCode);
+        Explode(2, 2, explosionCode);
+        Explode(1, 3, explosionCode);
+        Explode(0, 4, explosionCode);
     }
 
     public void ExplodeDiagonalBottomLeft(string explosionCode) {
-        StartCoroutine(Explode(0, 0, explosionCode));
-        StartCoroutine(Explode(1, 1, explosionCode));
-        StartCoroutine(Explode(2, 2, explosionCode));
-        StartCoroutine(Explode(3, 3, explosionCode));
-        StartCoroutine(Explode(4, 4, explosionCode));
+        Explode(0, 0, explosionCode);
+        Explode(1, 1, explosionCode);
+        Explode(2, 2, explosionCode);
+        Explode(3, 3, explosionCode);
+        Explode(4, 4, explosionCode);
     }
 
     public void ExplodePlus(string explosionCode) {
@@ -104,25 +109,25 @@ public class ExplosionManager : MonoBehaviour {
 
     public void ExplodeFourSquare(int section, string explosionCode) {
         if (section == 0) {
-            StartCoroutine(Explode(0, 0, explosionCode));
-            StartCoroutine(Explode(0, 1, explosionCode));
-            StartCoroutine(Explode(1, 0, explosionCode));
-            StartCoroutine(Explode(1, 1, explosionCode));
+            Explode(0, 0, explosionCode);
+            Explode(0, 1, explosionCode);
+            Explode(1, 0, explosionCode);
+            Explode(1, 1, explosionCode);
         } else if (section == 1) {
-            StartCoroutine(Explode(0, 3, explosionCode));
-            StartCoroutine(Explode(0, 4, explosionCode));
-            StartCoroutine(Explode(1, 3, explosionCode));
-            StartCoroutine(Explode(1, 4, explosionCode));
+            Explode(0, 3, explosionCode);
+            Explode(0, 4, explosionCode);
+            Explode(1, 3, explosionCode);
+            Explode(1, 4, explosionCode);
         } else if (section == 2) {
-            StartCoroutine(Explode(3, 0, explosionCode));
-            StartCoroutine(Explode(3, 1, explosionCode));
-            StartCoroutine(Explode(4, 0, explosionCode));
-            StartCoroutine(Explode(4, 1, explosionCode));
+            Explode(3, 0, explosionCode);
+            Explode(3, 1, explosionCode);
+            Explode(4, 0, explosionCode);
+            Explode(4, 1, explosionCode);
         } else if (section == 3) {
-            StartCoroutine(Explode(3, 3, explosionCode));
-            StartCoroutine(Explode(3, 4, explosionCode));
-            StartCoroutine(Explode(4, 3, explosionCode));
-            StartCoroutine(Explode(4, 4, explosionCode));
+            Explode(3, 3, explosionCode);
+            Explode(3, 4, explosionCode);
+            Explode(4, 3, explosionCode);
+            Explode(4, 4, explosionCode);
         }
     }
 
@@ -131,14 +136,41 @@ public class ExplosionManager : MonoBehaviour {
      * What this means, is to generate a sprite at that tile, and "explode" that tile.
      * Exploding the tile, means to destroy any unit on that tile.
      */
-    private IEnumerator Explode(int row, int col, string explosionCode) {
+    private void Explode(int row, int col, string explosionCode) {
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
         AudioManager.Instance.PlayExplosion(explosionCode);
         StartCoroutine(FadeOutAndDestroy(explosion.gameObject));
 
-        gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = true;
-        yield return new WaitForSeconds(EXPLOSION_COOLDOWN);
-        gameGrid[row][col].GetComponent<BoxCollider2D>().enabled = false;
+        // detect if player in this tile
+        float playerWidth = player.transform.lossyScale.x;
+        float playerHeight = player.transform.lossyScale.y;
+        float playerTop = player.transform.position.y + playerHeight / 2;
+        float playerBottom = player.transform.position.y - playerHeight / 2;
+        float playerRight = player.transform.position.x + playerWidth / 2;
+        float playerLeft = player.transform.position.x - playerWidth / 2;
+        // Debug.Log("Player:");
+        // Debug.Log("Top: " + playerTop + " Bottom: " + playerBottom + " Right: " + playerRight + " Left: " + playerLeft);
+
+        Transform tileTransform = gameGrid[row][col].transform;
+        float tileWidth = tileTransform.lossyScale.x;
+        float tileHeight = tileTransform.lossyScale.y;
+        float tileTop = tileTransform.position.y + tileHeight / 2;
+        float tileBottom = tileTransform.position.y - tileHeight / 2;
+        float tileRight = tileTransform.position.x + tileWidth / 2;
+        float tileLeft = tileTransform.position.x - tileWidth / 2;
+        // Debug.Log("Tile:");
+        //Debug.Log("Top: " + tileTop + " Bottom: " + tileBottom + " Right: " + tileRight + " Left: " + tileLeft);
+
+        bool topInTile = playerTop > tileBottom && playerTop < tileTop;
+        bool botInTile = playerBottom > tileBottom && playerBottom < tileTop;
+        bool rightInTile = playerRight > tileLeft && playerRight < tileRight;
+        bool leftInTile = playerLeft > tileLeft && playerLeft < tileRight;
+        // Debug.Log("Bools:");
+        // Debug.Log("Top: " + topInTile + " Bottom: " + botInTile + " Right: " + rightInTile + " Left: " + leftInTile);
+
+        if ((topInTile && rightInTile) || (topInTile && leftInTile) || (botInTile && rightInTile) || (botInTile && leftInTile)) {
+            player.Death();
+        }
     }
 
     /*
