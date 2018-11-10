@@ -958,7 +958,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2537,6 +2537,7 @@ MonoBehaviour:
   gameModeSelectedText: {fileID: 1870022072}
   leftArrow: {fileID: 1255993}
   rightArrow: {fileID: 80883063}
+  gameModeDescription: {fileID: 323508262}
 --- !u!224 &2128714462
 RectTransform:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour {
     public Text gameModeSelectedText;
     public Image leftArrow;
     public Image rightArrow;
+    public Text gameModeDescription;
 
     /*
      * Initialization
@@ -30,6 +31,7 @@ public class MainMenu : MonoBehaviour {
         // Game Mode Selector
         SetGameModeSelectedModeText();
         BlurArrows();
+        SetGameModeDescriptionText();
     }
 
     /*
@@ -68,6 +70,7 @@ public class MainMenu : MonoBehaviour {
 
         SetGameModeSelectedModeText();
         BlurArrows();
+        SetGameModeDescriptionText();
     }
 
     public void ScrollRight() {
@@ -89,6 +92,7 @@ public class MainMenu : MonoBehaviour {
 
         SetGameModeSelectedModeText();
         BlurArrows();
+        SetGameModeDescriptionText();
     }
 
     private void SetGameModeSelectedModeText() {
@@ -104,6 +108,10 @@ public class MainMenu : MonoBehaviour {
         if (GameContext.MainMenuGameMode == Mode.CHALLENGE) {
             Utils.GrayoutImage(rightArrow);
         }
+    }
+
+    private void SetGameModeDescriptionText() {
+        gameModeDescription.text = GameMode.GetModeDescription(GameContext.MainMenuGameMode);
     }
 
     /*
