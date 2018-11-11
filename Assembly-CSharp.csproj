@@ -296,6 +296,7 @@
     <None Include="Assets\Resources\Data\ExternalObjects\Classic\027.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\060.txt" />
     <None Include="Assets\Resources\Data\Levels\Easy\009.txt" />
+    <None Include="Assets\Resources\Data\Levels\Challenge\009.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\087.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\057.txt" />
     <None Include="Assets\Resources\Data\ExternalObjects\Easy\024.txt" />
