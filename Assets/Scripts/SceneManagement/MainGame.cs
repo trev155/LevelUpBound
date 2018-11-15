@@ -73,11 +73,17 @@ public class MainGame : MonoBehaviour {
         if (GameContext.AudioEnabled) {
             audioEnabledImage.gameObject.SetActive(false);
             audioDisabledImage.gameObject.SetActive(true);
+            AudioManager.Instance.StopBackgroundMusic();
         } else {
             audioEnabledImage.gameObject.SetActive(true);
             audioDisabledImage.gameObject.SetActive(false);
         }
         GameContext.AudioEnabled = !GameContext.AudioEnabled;
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        // if we just turned audio on, start playing BGM
+        if (GameContext.AudioEnabled) {
+            AudioManager.Instance.PlayBackgroundMusic();
+        }
     }
 }

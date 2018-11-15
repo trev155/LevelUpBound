@@ -5,6 +5,8 @@
  * eg) AudioManager.Instance.PlaySound()
  */
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour {
     // Static strings to help callers
@@ -50,6 +52,11 @@ public class AudioManager : MonoBehaviour {
 
     public static readonly string PLAYER_DEATH = "Audio/explosions/zergling";
 
+    private static readonly string BGM_PREFIX = "Audio/BGM";
+    private List<string> bgmTracks = new List<string>();
+    private int bgmCurrentIndex = 0;
+    private Coroutine currentTrackCoroutine;
+
     // private instance variable, public static getter
     private static AudioManager instance = null;
     public static AudioManager Instance {
@@ -57,7 +64,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     // Audio sources
-    public AudioSource[] sources;    
+    private AudioSource[] sources;    
 
     // initialization
     private void Awake() {
@@ -72,6 +79,13 @@ public class AudioManager : MonoBehaviour {
         // Audio sources initialize
         sources = GetComponentsInChildren<AudioSource>();
         AdjustVolumeLevels();
+
+        // Set bgm order, begin playing
+        bgmTracks.Add("01");
+        bgmTracks.Add("02");
+        bgmTracks.Add("03");
+
+        PlayBackgroundMusic();
     }
 
     // Sound methods
@@ -225,6 +239,52 @@ public class AudioManager : MonoBehaviour {
 
         sources[2].clip = Resources.Load<AudioClip>(path);
         sources[2].Play();
+    }
+
+    /*
+     * Start playing the BGM audio clip and its associated coroutine.
+     * There is a selection of audio tracks, which will be looped.
+     */
+    public void PlayBackgroundMusic() {
+        if (!GameContext.AudioEnabled) {
+            return;
+        }
+        currentTrackCoroutine = StartCoroutine("PlayBackgroundMusicCR");
+    }
+
+    /*
+     * Stop the BGM audio clip and its associated coroutine.
+     */
+    public void StopBackgroundMusic() {
+        sources[3].Stop();
+        StopCoroutine(currentTrackCoroutine);
+    }
+
+    private IEnumerator PlayBackgroundMusicCR() {
+        while (true) {
+            // Load audio track
+            string track = BGM_PREFIX + "/" + bgmTracks[bgmCurrentIndex];
+            sources[3].clip = Resources.Load<AudioClip>(track);
+
+            // Play audio track
+            sources[3].Play();
+
+            // Wait for track to finish before advancing
+            float currentTrackLength = sources[3].clip.length;
+            yield return new WaitForSeconds(currentTrackLength);
+            AdvanceTrack();
+        }
+    }
+
+    /*
+     * Advance the index of the background music list.
+     */
+    private void AdvanceTrack() {
+        if (bgmCurrentIndex == bgmTracks.Count - 1) {
+            bgmCurrentIndex = 0;
+        } else {
+            bgmCurrentIndex += 1;
+        }
     }
 
     /*

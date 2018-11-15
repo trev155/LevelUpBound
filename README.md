@@ -11,3 +11,9 @@ In progress...
 In progress...
 
 screenshots, vods, etc.
+
+## Credits
+### Background Music
+Lights - Sappheiros
+Island - MBB
+Leaf - KV

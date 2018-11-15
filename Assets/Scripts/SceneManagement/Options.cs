@@ -56,6 +56,7 @@ public class Options : MonoBehaviour {
             audioText.text = "OFF";
             audioEnabledImage.gameObject.SetActive(false);
             audioDisabledImage.gameObject.SetActive(true);
+            AudioManager.Instance.StopBackgroundMusic();
         } else {
             audioText.text = "ON";
             audioEnabledImage.gameObject.SetActive(true);
@@ -63,6 +64,11 @@ public class Options : MonoBehaviour {
         }
         GameContext.AudioEnabled = !GameContext.AudioEnabled;
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        // if we just turned audio on, start playing BGM
+        if (GameContext.AudioEnabled) {
+            AudioManager.Instance.PlayBackgroundMusic();
+        }
     }
 
     /*
