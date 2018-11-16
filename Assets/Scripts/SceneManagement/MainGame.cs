@@ -85,5 +85,7 @@ public class MainGame : MonoBehaviour {
         if (GameContext.AudioEnabled) {
             AudioManager.Instance.PlayBackgroundMusic();
         }
+
+        Memory.SaveData();
     }
 }

@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4715250387977864}
   - component: {fileID: 212254590722218612}
   - component: {fileID: 61205497851511690}
-  - component: {fileID: 114268764345018624}
   m_Layer: 0
   m_Name: ExplodableTile
   m_TagString: GameTile
@@ -67,18 +66,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &114268764345018624
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1688392207809806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d53cdeb31abdc7b4d9cb1f5d6eb36378, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 114383246024569028, guid: eb4c45692e3f6d04c9e88ef77f20c5ef, type: 2}
 --- !u!212 &212254590722218612
 SpriteRenderer:
   m_ObjectHideFlags: 1

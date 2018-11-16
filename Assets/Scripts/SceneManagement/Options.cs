@@ -69,6 +69,8 @@ public class Options : MonoBehaviour {
         if (GameContext.AudioEnabled) {
             AudioManager.Instance.PlayBackgroundMusic();
         }
+
+        Memory.SaveData();
     }
 
     /*
@@ -89,31 +91,32 @@ public class Options : MonoBehaviour {
     public void VolumeSliderChanged() {
         GameContext.CurrentVolume = volumeSlider.value;
         AudioManager.Instance.AdjustVolumeLevels();
+
+        Memory.SaveData();
     }
 
     // Theme Button handlers
-    public void SetNormalTheme() {
+    private void SetTheme(string theme) {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.Theme = "Normal";
+        GameContext.Theme = theme;
         Theme.SetTheme();
+        Memory.SaveData();
+    }
+
+    public void SetNormalTheme() {
+        SetTheme("Normal");
     }
 
     public void SetLightTheme() {
-        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.Theme = "Light";
-        Theme.SetTheme();
+        SetTheme("Light");
     }
 
     public void SetDarkTheme() {
-        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.Theme = "Dark";
-        Theme.SetTheme();
+        SetTheme("Dark");
     }
 
     public void SetVibrantTheme() {
-        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.Theme = "Vibrant";
-        Theme.SetTheme();
+        SetTheme("Vibrant");
     }
 
     // Control Scheme Buttons
@@ -121,14 +124,15 @@ public class Options : MonoBehaviour {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.ControlScheme = ControlMode.ARROW;
         SetControlSchemeImage();
-        Debug.Log(GameContext.ControlScheme);
+        Memory.SaveData();
+
     }
 
     public void SetClickControls() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.ControlScheme = ControlMode.CLICK;
         SetControlSchemeImage();
-        Debug.Log(GameContext.ControlScheme);
+        Memory.SaveData();
     }
 
     /*

@@ -3,6 +3,7 @@
  */
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public static class GameContext {
     // Game data
@@ -33,10 +34,14 @@ public static class GameContext {
     // Modal Windows
     public static bool ModalActive { get; set; }
 
+    // Completed levels dictionary. Mapping of game mode -> list of integers representing completed level numbers
+    private static Dictionary<Mode, List<int>> CompletedLevels = new Dictionary<Mode, List<int>>();
+
     /*
-     * Static Constructor = Default Values
+     * Static Constructor runs when the game loads.
      */
     static GameContext() {
+        // Set default globals. Some of these can be overriden by Memory class.
         GameMode = Mode.CLASSIC;
         CurrentLevel = 1;
         PreviousPageContext = "MainMenu";
@@ -48,6 +53,8 @@ public static class GameContext {
         Theme = "Normal";
         ControlScheme = ControlMode.ARROW;
         ModalActive = false;
+
+        Memory.LoadData();
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};
