@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
+
 public static class Memory {
     public static readonly string SAVE_ENABLED = "SaveEnabled";
     private static readonly string THEME = "Theme";

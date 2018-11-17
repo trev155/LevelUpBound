@@ -19,6 +19,7 @@ public class LevelSelector : MonoBehaviour {
 
     // prefabs
     public Transform levelButtonPrefab;
+    public Transform levelCompleteButtonPrefab;
 
     // Reference objects
     public Text gameModeText;
@@ -67,7 +68,13 @@ public class LevelSelector : MonoBehaviour {
         int nextLevel = startingLevel;
         Transform[] levelButtonPositions = GameObject.FindGameObjectsWithTag("LevelButtonPosition").Select(gameObject => gameObject.transform).OrderBy(gameObject => gameObject.name).ToArray();
         for (int buttonPositionIndex = 0; buttonPositionIndex < numberOfLevelButtons; buttonPositionIndex++) {
-            Transform levelButtonInstance = Instantiate(levelButtonPrefab, levelButtonPositions[buttonPositionIndex]);
+            Transform levelButtonInstance;
+            if (GameContext.CompletedLevels[GameContext.GameMode].Contains(nextLevel)) {
+                levelButtonInstance = Instantiate(levelCompleteButtonPrefab, levelButtonPositions[buttonPositionIndex]);
+            } else {
+                levelButtonInstance = Instantiate(levelButtonPrefab, levelButtonPositions[buttonPositionIndex]);
+            }
+            
             levelButtonInstance.gameObject.name = "Level_" + LevelString.GetLevelString(nextLevel);
             levelButtonInstance.gameObject.GetComponent<Button>().onClick.AddListener(LevelButtonOnClick);
             Text levelButtonText = levelButtonInstance.GetChild(0).GetComponent<Text>();
