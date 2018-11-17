@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-/*
+﻿/*
  * This class is for everything related to themes.
  */
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 

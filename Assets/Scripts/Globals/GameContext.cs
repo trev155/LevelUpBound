@@ -35,7 +35,7 @@ public static class GameContext {
     public static bool ModalActive { get; set; }
 
     // Completed levels dictionary. Mapping of game mode -> list of integers representing completed level numbers
-    private static Dictionary<Mode, List<int>> CompletedLevels = new Dictionary<Mode, List<int>>();
+    public static Dictionary<Mode, HashSet<int>> CompletedLevels;
 
     /*
      * Static Constructor runs when the game loads.
@@ -53,8 +53,14 @@ public static class GameContext {
         Theme = "Normal";
         ControlScheme = ControlMode.ARROW;
         ModalActive = false;
+        InitializeLevelsCompleted();
 
-        Memory.LoadData();
+        if (PlayerPrefs.GetString(Memory.SAVE_ENABLED).Length > 0) {
+            Memory.LoadData();
+        }
+        
+        // For testing
+        // PlayerPrefs.DeleteAll();
     }
 
     private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};
@@ -72,6 +78,32 @@ public static class GameContext {
             UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
         } else {
             UnityEngine.SceneManagement.SceneManager.LoadScene(PreviousPageContext);
+        }
+    }
+
+    /*
+     * Reset / Initialize the CompletedLevels dictionary.
+     */
+    public static void InitializeLevelsCompleted() {
+        CompletedLevels = new Dictionary<Mode, HashSet<int>> {
+            { Mode.EASY, new HashSet<int>() },
+            { Mode.CLASSIC, new HashSet<int>() },
+            { Mode.ADVANCED, new HashSet<int>() },
+            { Mode.CHALLENGE, new HashSet<int>() }
+        };
+    }
+
+    /*
+     * Record that a level has been completed.
+     */
+    public static void SaveLevelCompleted(Mode mode, int level) {
+        if (mode == Mode.TUTORIAL) {
+            return;
+        }
+        if (CompletedLevels[mode].Contains(level)) {
+            return;
+        } else {
+            CompletedLevels[mode].Add(level);
         }
     }
 }

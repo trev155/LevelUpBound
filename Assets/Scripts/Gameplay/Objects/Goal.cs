@@ -17,6 +17,10 @@ public class Goal : MonoBehaviour {
         if (other.tag == "Player") {
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
 
+            // Record that this level was completed
+            GameContext.SaveLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
+            Memory.SaveData();
+
             // Check if last level. If so, display the celebration modal.
             if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
                 ModalVictory modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<ModalVictory>();

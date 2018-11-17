@@ -148,4 +148,13 @@ public class Options : MonoBehaviour {
             controlSchemeClickImage.gameObject.SetActive(true);
         }
     }
+
+    /*
+     * Reset Data Button
+     */
+    public void ResetProgress() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        Memory.ResetProgress();
+        GameContext.InitializeLevelsCompleted();
+    }
 }
