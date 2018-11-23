@@ -1,19 +1,9 @@
 ﻿/*
- * In order to support multiple resolutions, what we'll do is 
- * adjust the BackgroundPanel on every scene. Each scene should have one
- * of these, holding all canvas elements on the screen.
- * Canvas elements should be anchored to the BackgroundPanel.
+ * This class handles supporting different resolution sizes.
+ * The function AdjustScreen() should be called on every page load.
  * 
- * Whenever a scene is loaded, we should adjust this BackgroundPanel's dimensions.
- * 
- * Note that by default, I'm developing for 18:9. That is, in my Unity editor, everything
- * is initially 18:9, and I will adjust for other dimensions.
- * This is because my personal device is 18:9, so it's a bit more convenient in that sense.
- * 
- * The game will always be in portrait mode, never landscape. 
- * Aim is to support as many possible resolutions as I can.
- * 
- * // TODO this needs to be overhauled! 
+ * The way this works, is we detect what the aspect ratio is using Camera.main.aspect.
+ * Then, we adjust the size of canvas elements accordingly so everything fits on the page.
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -97,7 +87,7 @@ public static class AspectRatioManager {
             ResizeCanvasElement("PlayButton", 400, 150);
             SetAnchoredPosition("PlayButton", 0, -550);
             SetAnchoredPosition("GameModeSelectedDescription", 0, -800);
-            SetFontSize("GameModeSelectedDescription", 30);
+            SetFontSize("GameModeSelectedDescription", 40);
             SetAnchoredPosition("LevelSelector", -250, -900);
             SetAnchoredPosition("LevelEditor", 250, -900);
             SetAnchoredPosition("TutorialText", 0, -1025);
@@ -111,7 +101,21 @@ public static class AspectRatioManager {
      * Main game scene resolution adjustments.
      */
     private static void HandleMainGame(float aspectRatio) {
-
+        Camera.main.orthographicSize = 6.1f;
+        ResizeCanvasElement("BackButton", 100, 100);
+        SetAnchoredPosition("BackButton", 50, -50);
+        ResizeCanvasElement("AudioEnabled", 100, 100);
+        SetAnchoredPosition("AudioEnabled", -50, -50);
+        ResizeCanvasElement("AudioDisabled", 100, 100);
+        SetAnchoredPosition("AudioDisabled", -50, -50);
+        ResizeCanvasElement("UpButton", 200, 200);
+        SetAnchoredPosition("UpButton", 0, 280);
+        ResizeCanvasElement("DownButton", 200, 200);
+        SetAnchoredPosition("DownButton", 0, 100);
+        ResizeCanvasElement("LeftButton", 200, 200);
+        SetAnchoredPosition("LeftButton", -180, 100);
+        ResizeCanvasElement("RightButton", 200, 200);
+        SetAnchoredPosition("RightButton", 180, 100);
     }
 
     /*
@@ -186,43 +190,46 @@ public static class AspectRatioManager {
      * About page resolution adjustments.
      */
     private static void HandleAbout(float aspectRatio) {
-
+        SetAnchoredPosition("TitleText", 0, -60);
+        SetFontSize("TitleText", 70);
+        ResizeCanvasElement("BackButton", 100, 100);
+        SetAnchoredPosition("BackButton", 50, -50);
+        ResizeCanvasElement("Image", 600, 800);
+        SetAnchoredPosition("Image", 0, -550);
+        SetAnchoredPosition("ImageCaption", 0, -1200);
+        SetFontSize("ImageCaption", 35);
+        SetAnchoredPosition("AboutText", 0, -1400);
+        SetFontSize("AboutText", 35);
     }
 
     /*
      * Insturctions page resolution adjustments.
      */
     private static void HandleInstructions(float aspectRatio) {
-
+        SetAnchoredPosition("TitleText", 0, -60);
+        SetFontSize("TitleText", 70);
+        ResizeCanvasElement("BackButton", 100, 100);
+        SetAnchoredPosition("BackButton", 50, -50);
+        ResizeCanvasElement("InstructionsImage", 700, 800);
+        SetAnchoredPosition("InstructionsImage", 0, -550);
+        ResizeCanvasElement("InstructionsText", 800, 300);
+        SetAnchoredPosition("InstructionsText", 0, -1150);
+        SetFontSize("InstructionsText", 35);
+        ResizeCanvasElement("ScrollLeftButton", 120, 120);
+        SetAnchoredPosition("ScrollLeftButton", -300, 150);
+        ResizeCanvasElement("ScrollRightButton", 120, 120);
+        SetAnchoredPosition("ScrollRightButton", 300, 150);
+        SetAnchoredPosition("CurrentPageText", 0, 150);
+        SetFontSize("CurrentPageText", 40);
     }
 
     /* 
      * Level editor page resolution adjustments.
      */
     private static void HandleLevelEditor(float aspectRatio) {
-
+        SetAnchoredPosition("TitleText", 0, -60);
+        SetFontSize("TitleText", 70);
+        ResizeCanvasElement("BackButton", 100, 100);
+        SetAnchoredPosition("BackButton", 50, -50);
     }
-
-
-    // temporarily unused
-    private static void SetBackgroundPanelDimensions(float width, float height) {
-        Debug.Log("Setting dimensions to: " + width + ", " + height);
-        RectTransform backgroundPanel = GameObject.Find("BackgroundPanel").GetComponent<RectTransform>();
-        backgroundPanel.sizeDelta = new Vector2(width, height);
-    }
-
-    /*
-    if (aspectRatio == 0.5f) {
-        // 18:9 portrait
-        SetBackgroundPanelDimensions(1080, 2160);
-    } else if (aspectRatio == 0.5625f) {
-        // 16:9 portrait
-        SetBackgroundPanelDimensions(1080, 1920);
-    } else if (aspectRatio == 0.75) {
-        // 4:3 portrait
-        SetBackgroundPanelDimensions(1080, 1440);
-    } else {
-        Debug.Log("This aspect ratio is not supported yet: " + aspectRatio);
-    }
-    */
 }
