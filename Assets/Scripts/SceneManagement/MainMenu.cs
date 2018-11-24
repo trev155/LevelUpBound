@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour {
      */
     private void Awake() {
         AspectRatioManager.AdjustScreen();
-        Theme.SetTheme();
+        ThemeManager.SetTheme();
     }
 
     /*

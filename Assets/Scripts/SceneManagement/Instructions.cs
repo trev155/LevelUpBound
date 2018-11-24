@@ -21,7 +21,7 @@ public class Instructions : MonoBehaviour {
 
     private void Awake() {
         AspectRatioManager.AdjustScreen();
-        Theme.SetTheme();
+        ThemeManager.SetTheme();
 
         // Initialize instruction data
         instructionImageLocations.Add(1, "InstructionImages/Ins1-1");

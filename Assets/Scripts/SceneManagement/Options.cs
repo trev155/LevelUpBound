@@ -21,7 +21,7 @@ public class Options : MonoBehaviour {
         InitializeAudioUI();
         SetInitialVolume();
         volumeSlider.onValueChanged.AddListener(delegate { VolumeSliderChanged(); });
-        Theme.SetTheme();
+        ThemeManager.SetTheme();
         SetControlSchemeImage();
     }
 
@@ -96,27 +96,27 @@ public class Options : MonoBehaviour {
     }
 
     // Theme Button handlers
-    private void SetTheme(string theme) {
+    private void SetTheme(Theme theme) {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.Theme = theme;
-        Theme.SetTheme();
+        GameContext.GameTheme = theme;
+        ThemeManager.SetTheme();
         Memory.SaveData();
     }
 
     public void SetNormalTheme() {
-        SetTheme("Normal");
+        SetTheme(Theme.NORMAL);
     }
 
     public void SetLightTheme() {
-        SetTheme("Light");
+        SetTheme(Theme.LIGHT);
     }
 
     public void SetDarkTheme() {
-        SetTheme("Dark");
+        SetTheme(Theme.DARK);
     }
 
     public void SetVibrantTheme() {
-        SetTheme("Vibrant");
+        SetTheme(Theme.VIBRANT);
     }
 
     // Control Scheme Buttons

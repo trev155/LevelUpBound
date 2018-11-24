@@ -29,7 +29,7 @@ public class LevelSelector : MonoBehaviour {
      */
     private void Awake() {
         AspectRatioManager.AdjustScreen();
-        Theme.SetTheme();
+        ThemeManager.SetTheme();
     }
 
     /*

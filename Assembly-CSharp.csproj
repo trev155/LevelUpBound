@@ -75,7 +75,7 @@
     <Compile Include="Assets\Scripts\Globals\GameContext.cs" />
     <Compile Include="Assets\Scripts\Globals\GameMode.cs" />
     <Compile Include="Assets\Scripts\Globals\Memory.cs" />
-    <Compile Include="Assets\Scripts\Globals\Theme.cs" />
+    <Compile Include="Assets\Scripts\Globals\ThemeManager.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\About.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\Instructions.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\LevelEditor.cs" />

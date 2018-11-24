@@ -5,7 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public static class Theme {
+public enum Theme {
+    NORMAL,
+    LIGHT,
+    DARK,
+    VIBRANT
+}
+
+public static class ThemeManager {
     /*
      * Adjust the theme. 
      * The main elements of the theme include the background colour, and the game scene tiles.
@@ -13,7 +20,7 @@ public static class Theme {
      */
     public static void SetTheme() {
         string scene = SceneManager.GetActiveScene().name;
-        string theme = GameContext.Theme;
+        Theme theme = GameContext.GameTheme;
         
         SetBackground(scene, theme);
         SetTextElementColours(theme);
@@ -23,16 +30,16 @@ public static class Theme {
     /*
      * Sets the background colour of the scene.
      */
-    private static void SetBackground(string scene, string theme) {
+    private static void SetBackground(string scene, Theme theme) {
         // Determine what the new color should be based on the current theme selection
         Color32 newColor;
-        if (theme.Equals("Normal")) {
+        if (theme == Theme.NORMAL) {
             newColor = new Color32(0, 190, 230, 255);
-        } else if (theme.Equals("Light")) {
+        } else if (theme == Theme.LIGHT) {
             newColor = new Color32(204, 204, 250, 255);
-        } else if (theme.Equals("Dark")) {
+        } else if (theme == Theme.DARK) {
             newColor = new Color32(58, 66, 60, 255);
-        } else if (theme.Equals("Vibrant")) {
+        } else if (theme == Theme.VIBRANT) {
             newColor = new Color32(205, 205, 10, 255);
         } else {
             Debug.Log("Theme name not recognized. Cannot set background colour.");
@@ -54,10 +61,10 @@ public static class Theme {
     /*
      * Sets the colour of all canvas text elements on the current page.
      */
-    private static void SetTextElementColours(string theme) {
+    private static void SetTextElementColours(Theme theme) {
         // Determine what the new color should be based on the current theme selection
         Color32 textColor;
-        if (theme.Equals("Dark")) {
+        if (theme == Theme.DARK) {
             textColor = new Color32(97, 147, 244, 255);
         } else {
             textColor = new Color32(30, 30, 10, 255);
@@ -73,7 +80,7 @@ public static class Theme {
     /*
      * Sets the colour of the main game elements.
      */
-    private static void SetGameElementsColours(string scene, string theme) {
+    private static void SetGameElementsColours(string scene, Theme theme) {
         if (scene != "MainGame") {
             return;
         }
@@ -81,16 +88,16 @@ public static class Theme {
         // Tile colours
         Color32 evenTileColor;
         Color32 oddTileColor;
-        if (theme == "Normal") {
+        if (theme == Theme.NORMAL) {
             evenTileColor = new Color32(176, 166, 138, 255);
             oddTileColor = new Color32(99, 99, 21, 255);
-        } else if (theme == "Light") {
+        } else if (theme == Theme.LIGHT) {
             evenTileColor = new Color32(41, 133, 169, 255);
             oddTileColor = new Color32(187, 243, 250, 255);
-        } else if (theme == "Dark") {
+        } else if (theme == Theme.DARK) {
             evenTileColor = new Color32(50, 10, 100, 255);
             oddTileColor = new Color32(0, 80, 15, 255);
-        } else if (theme == "Vibrant") {
+        } else if (theme == Theme.VIBRANT) {
             evenTileColor = new Color32(179, 248, 169, 255);
             oddTileColor = new Color32(79, 206, 255, 255);
         } else {
@@ -114,7 +121,7 @@ public static class Theme {
         // Arrow Buttons
         if (GameContext.ControlScheme == ControlMode.ARROW) {
             Color32 arrowColor;
-            if (theme == "Dark") {
+            if (theme == Theme.DARK) {
                 arrowColor = new Color32(255, 255, 0, 220);
             } else {
                 arrowColor = new Color32(194, 194, 194, 150);

@@ -17,7 +17,7 @@ public class MainGame : MonoBehaviour {
     private void Awake() {
         AspectRatioManager.AdjustScreen();
         InitializeAudioUI();
-        Theme.SetTheme();
+        ThemeManager.SetTheme();
     }
 
     /*

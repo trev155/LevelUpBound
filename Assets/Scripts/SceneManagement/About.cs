@@ -11,7 +11,7 @@ public class About : MonoBehaviour {
 
     private void Awake() {
         AspectRatioManager.AdjustScreen();
-        Theme.SetTheme();
+        ThemeManager.SetTheme();
 
         image.sprite = Resources.Load<Sprite>("AboutImages/ab1");
         imageCaption.text = "Inspiration for this game can from the popular series of custom maps from SCBW.";

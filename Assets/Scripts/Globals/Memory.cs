@@ -34,7 +34,7 @@ public static class Memory {
         Debug.Log("Saving Data to Memory");
 
         PlayerPrefs.SetString(SAVE_ENABLED, "true");
-        PlayerPrefs.SetString(THEME, GameContext.Theme);
+        PlayerPrefs.SetString(THEME, GameContext.GameTheme.ToString());
         PlayerPrefs.SetString(SCHEME, GameContext.ControlScheme.ToString());
         PlayerPrefs.SetFloat(VOLUME, GameContext.CurrentVolume);
         PlayerPrefs.SetInt(AUDIO_TOGGLE, GameContext.AudioEnabled ? 1 : 0);
@@ -55,7 +55,15 @@ public static class Memory {
 
         string theme = PlayerPrefs.GetString(THEME);
         if (theme.Length > 0) {
-            GameContext.Theme = theme;
+            if (theme.Equals("Normal", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.GameTheme = Theme.NORMAL;
+            } else if (theme.Equals("Light", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.GameTheme = Theme.LIGHT;
+            } else if (theme.Equals("Dark", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.GameTheme = Theme.DARK;
+            } else if (theme.Equals("Vibrant", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.GameTheme = Theme.VIBRANT;
+            }
         }
 
         string scheme = PlayerPrefs.GetString(SCHEME);

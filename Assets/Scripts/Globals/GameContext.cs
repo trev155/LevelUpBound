@@ -26,7 +26,7 @@ public static class GameContext {
     public static bool StopMovement { get; set; }
 
     // Theme Selection
-    public static string Theme { get; set; }
+    public static Theme GameTheme { get; set; }
 
     // Player Control Scheme
     public static ControlMode ControlScheme { get; set; }
@@ -50,7 +50,7 @@ public static class GameContext {
         MainMenuGameMode = Mode.EASY;
         LevelSelection = false;
         LevelSelectionPage = 1;
-        Theme = "Normal";
+        GameTheme = Theme.NORMAL;
         ControlScheme = ControlMode.ARROW;
         ModalActive = false;
         InitializeLevelsCompleted();
@@ -63,13 +63,13 @@ public static class GameContext {
         // PlayerPrefs.DeleteAll();
     }
 
-    private static readonly string[] validPreviousPages = {"MainMenu", "LevelSelector"};
-
     /* 
      * Load the page pointed by the PreviousPageContext.
      * If no page exists, load a default page.
      */
     public static void LoadPreviousPage() {
+        string[] validPreviousPages = { "MainMenu", "LevelSelector" };
+
         if (PreviousPageContext == null || PreviousPageContext == "") {
             Debug.Log("Previous Page Context not set. Loading Default Page");
             UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
