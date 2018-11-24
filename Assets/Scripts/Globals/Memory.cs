@@ -41,6 +41,7 @@ public static class Memory {
 
         string completedLevelsJson = JsonConvert.SerializeObject(GameContext.CompletedLevels);
         PlayerPrefs.SetString(COMPLETED_LEVELS, completedLevelsJson);
+        Debug.Log("Completed Levels Data:");
         Debug.Log(completedLevelsJson);
 
         PlayerPrefs.Save();
@@ -73,6 +74,7 @@ public static class Memory {
         GameContext.AudioEnabled = (audioToggle == 1);
 
         string completedLevelsJson = PlayerPrefs.GetString(COMPLETED_LEVELS);
+        Debug.Log("Completed Levels Data:");
         Debug.Log(completedLevelsJson);
         if (completedLevelsJson.Length > 0) {
             GameContext.CompletedLevels = JsonConvert.DeserializeObject<Dictionary<Mode, HashSet<int>>>(completedLevelsJson);

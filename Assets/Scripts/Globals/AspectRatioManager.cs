@@ -101,21 +101,23 @@ public static class AspectRatioManager {
      * Main game scene resolution adjustments.
      */
     private static void HandleMainGame(float aspectRatio) {
-        Camera.main.orthographicSize = 6.1f;
-        ResizeCanvasElement("BackButton", 100, 100);
-        SetAnchoredPosition("BackButton", 50, -50);
-        ResizeCanvasElement("AudioEnabled", 100, 100);
-        SetAnchoredPosition("AudioEnabled", -50, -50);
-        ResizeCanvasElement("AudioDisabled", 100, 100);
-        SetAnchoredPosition("AudioDisabled", -50, -50);
-        ResizeCanvasElement("UpButton", 200, 200);
-        SetAnchoredPosition("UpButton", 0, 280);
-        ResizeCanvasElement("DownButton", 200, 200);
-        SetAnchoredPosition("DownButton", 0, 100);
-        ResizeCanvasElement("LeftButton", 200, 200);
-        SetAnchoredPosition("LeftButton", -180, 100);
-        ResizeCanvasElement("RightButton", 200, 200);
-        SetAnchoredPosition("RightButton", 180, 100);
+        if (aspectRatio == 0.75) {
+            Camera.main.orthographicSize = 6.1f;
+            ResizeCanvasElement("BackButton", 100, 100);
+            SetAnchoredPosition("BackButton", 50, -50);
+            ResizeCanvasElement("AudioEnabled", 100, 100);
+            SetAnchoredPosition("AudioEnabled", -50, -50);
+            ResizeCanvasElement("AudioDisabled", 100, 100);
+            SetAnchoredPosition("AudioDisabled", -50, -50);
+            ResizeCanvasElement("UpButton", 200, 200);
+            SetAnchoredPosition("UpButton", 0, 280);
+            ResizeCanvasElement("DownButton", 200, 200);
+            SetAnchoredPosition("DownButton", 0, 100);
+            ResizeCanvasElement("LeftButton", 200, 200);
+            SetAnchoredPosition("LeftButton", -180, 100);
+            ResizeCanvasElement("RightButton", 200, 200);
+            SetAnchoredPosition("RightButton", 180, 100);
+        }
     }
 
     /*
@@ -190,46 +192,52 @@ public static class AspectRatioManager {
      * About page resolution adjustments.
      */
     private static void HandleAbout(float aspectRatio) {
-        SetAnchoredPosition("TitleText", 0, -60);
-        SetFontSize("TitleText", 70);
-        ResizeCanvasElement("BackButton", 100, 100);
-        SetAnchoredPosition("BackButton", 50, -50);
-        ResizeCanvasElement("Image", 600, 800);
-        SetAnchoredPosition("Image", 0, -550);
-        SetAnchoredPosition("ImageCaption", 0, -1200);
-        SetFontSize("ImageCaption", 35);
-        SetAnchoredPosition("AboutText", 0, -1400);
-        SetFontSize("AboutText", 35);
+        if (aspectRatio == 0.75) {
+            SetAnchoredPosition("TitleText", 0, -60);
+            SetFontSize("TitleText", 70);
+            ResizeCanvasElement("BackButton", 100, 100);
+            SetAnchoredPosition("BackButton", 50, -50);
+            ResizeCanvasElement("Image", 600, 800);
+            SetAnchoredPosition("Image", 0, -550);
+            SetAnchoredPosition("ImageCaption", 0, -1200);
+            SetFontSize("ImageCaption", 35);
+            SetAnchoredPosition("AboutText", 0, -1400);
+            SetFontSize("AboutText", 35);
+        }
     }
 
     /*
      * Insturctions page resolution adjustments.
      */
     private static void HandleInstructions(float aspectRatio) {
-        SetAnchoredPosition("TitleText", 0, -60);
-        SetFontSize("TitleText", 70);
-        ResizeCanvasElement("BackButton", 100, 100);
-        SetAnchoredPosition("BackButton", 50, -50);
-        ResizeCanvasElement("InstructionsImage", 700, 800);
-        SetAnchoredPosition("InstructionsImage", 0, -550);
-        ResizeCanvasElement("InstructionsText", 800, 300);
-        SetAnchoredPosition("InstructionsText", 0, -1150);
-        SetFontSize("InstructionsText", 35);
-        ResizeCanvasElement("ScrollLeftButton", 120, 120);
-        SetAnchoredPosition("ScrollLeftButton", -300, 150);
-        ResizeCanvasElement("ScrollRightButton", 120, 120);
-        SetAnchoredPosition("ScrollRightButton", 300, 150);
-        SetAnchoredPosition("CurrentPageText", 0, 150);
-        SetFontSize("CurrentPageText", 40);
+        if (aspectRatio == 0.75) {
+            SetAnchoredPosition("TitleText", 0, -60);
+            SetFontSize("TitleText", 70);
+            ResizeCanvasElement("BackButton", 100, 100);
+            SetAnchoredPosition("BackButton", 50, -50);
+            ResizeCanvasElement("InstructionsImage", 700, 800);
+            SetAnchoredPosition("InstructionsImage", 0, -550);
+            ResizeCanvasElement("InstructionsText", 800, 300);
+            SetAnchoredPosition("InstructionsText", 0, -1150);
+            SetFontSize("InstructionsText", 35);
+            ResizeCanvasElement("ScrollLeftButton", 120, 120);
+            SetAnchoredPosition("ScrollLeftButton", -300, 150);
+            ResizeCanvasElement("ScrollRightButton", 120, 120);
+            SetAnchoredPosition("ScrollRightButton", 300, 150);
+            SetAnchoredPosition("CurrentPageText", 0, 150);
+            SetFontSize("CurrentPageText", 40);
+        }
     }
 
     /* 
      * Level editor page resolution adjustments.
      */
     private static void HandleLevelEditor(float aspectRatio) {
-        SetAnchoredPosition("TitleText", 0, -60);
-        SetFontSize("TitleText", 70);
-        ResizeCanvasElement("BackButton", 100, 100);
-        SetAnchoredPosition("BackButton", 50, -50);
+        if (aspectRatio == 0.75) {
+            SetAnchoredPosition("TitleText", 0, -60);
+            SetFontSize("TitleText", 70);
+            ResizeCanvasElement("BackButton", 100, 100);
+            SetAnchoredPosition("BackButton", 50, -50);
+        }
     }
 }
