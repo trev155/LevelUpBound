@@ -16,13 +16,13 @@ public class ExplosionManager : MonoBehaviour {
     private const float EXPLOSION_FADE_VERY_SLOW = 3.0f;
 
     List<string> explosionsToFadeOutFast = new List<string> {
-        "DT", "FB", "HT", "KA", "MU", "PB", "ZL"
+        "DT", "FB", "HT", "KA", "MA", "MU", "PB", "ZL"
     };
     List<string> explosionsToFadeOutSlow = new List<string> {
-        "HY", "IT", "TK", "TS"
+        "DG", "HY", "IT", "TK", "TS"
     };
     List<string> explosionsToFadeOutVerySlow = new List<string> {
-        "DF", "DG", "LU", "MA", "ME", "UL"
+        "DF", "LU", "ME", "UL"
     };
 
     // Reference to the game grid
