@@ -90,9 +90,9 @@ public static class AspectRatioManager {
             SetFontSize("GameModeSelectedDescription", 40);
             SetAnchoredPosition("LevelSelector", -250, -900);
             SetAnchoredPosition("LevelEditor", 250, -900);
-            SetAnchoredPosition("TutorialText", 0, -1025);
-            SetAnchoredPosition("Instructions", 0, -1150);
-            SetAnchoredPosition("Options", -250, -1300);
+            SetAnchoredPosition("Options", 0, -1050);
+            SetAnchoredPosition("TutorialText", 0, -1175);
+            SetAnchoredPosition("Instructions", -250, -1300);
             SetAnchoredPosition("About", 250, -1300);
         }
     }
