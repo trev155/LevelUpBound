@@ -4,14 +4,26 @@
  * Additionally, the explosion turns the Box Collider of the tile on, killing a Player object touching the tile.
  * A sound effect is also played every time an explosion is generated.
  */
-
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ExplosionManager : MonoBehaviour {
-    // constants
-    private const float EXPLOSION_COOLDOWN = 0.1f;
-    private const float FADE_OUT_TIME = 0.4f;
+    // Constants
+    private const float EXPLOSION_FADE_FAST = 0.3f;
+    private const float EXPLOSION_FADE_NORMAL = 0.7f;
+    private const float EXPLOSION_FADE_SLOW = 1.5f;
+    private const float EXPLOSION_FADE_VERY_SLOW = 3.0f;
+
+    List<string> explosionsToFadeOutFast = new List<string> {
+        "DT", "FB", "HT", "KA", "MU", "PB", "ZL"
+    };
+    List<string> explosionsToFadeOutSlow = new List<string> {
+        "HY", "IT", "TK", "TS"
+    };
+    List<string> explosionsToFadeOutVerySlow = new List<string> {
+        "DF", "DG", "LU", "MA", "ME", "UL"
+    };
 
     // Reference to the game grid
     public MainGrid mainGrid;
@@ -59,7 +71,6 @@ public class ExplosionManager : MonoBehaviour {
      */
     void Awake() {
         gameGrid = mainGrid.GetGameGrid();
-
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
@@ -139,7 +150,7 @@ public class ExplosionManager : MonoBehaviour {
     private void Explode(int row, int col, string explosionCode) {
         Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
         AudioManager.Instance.PlayExplosion(explosionCode);
-        StartCoroutine(FadeOutAndDestroy(explosion.gameObject));
+        StartCoroutine(FadeOutAndDestroy(explosion.gameObject, explosionCode));
 
         // detect if player in this tile
         float playerWidth = player.transform.lossyScale.x;
@@ -148,8 +159,6 @@ public class ExplosionManager : MonoBehaviour {
         float playerBottom = player.transform.position.y - playerHeight / 2;
         float playerRight = player.transform.position.x + playerWidth / 2;
         float playerLeft = player.transform.position.x - playerWidth / 2;
-        // Debug.Log("Player:");
-        // Debug.Log("Top: " + playerTop + " Bottom: " + playerBottom + " Right: " + playerRight + " Left: " + playerLeft);
 
         Transform tileTransform = gameGrid[row][col].transform;
         float tileWidth = tileTransform.lossyScale.x;
@@ -158,15 +167,11 @@ public class ExplosionManager : MonoBehaviour {
         float tileBottom = tileTransform.position.y - tileHeight / 2;
         float tileRight = tileTransform.position.x + tileWidth / 2;
         float tileLeft = tileTransform.position.x - tileWidth / 2;
-        // Debug.Log("Tile:");
-        //Debug.Log("Top: " + tileTop + " Bottom: " + tileBottom + " Right: " + tileRight + " Left: " + tileLeft);
 
         bool topInTile = playerTop > tileBottom && playerTop < tileTop;
         bool botInTile = playerBottom > tileBottom && playerBottom < tileTop;
         bool rightInTile = playerRight > tileLeft && playerRight < tileRight;
         bool leftInTile = playerLeft > tileLeft && playerLeft < tileRight;
-        // Debug.Log("Bools:");
-        // Debug.Log("Top: " + topInTile + " Bottom: " + botInTile + " Right: " + rightInTile + " Left: " + leftInTile);
 
         if ((topInTile && rightInTile) || (topInTile && leftInTile) || (botInTile && rightInTile) || (botInTile && leftInTile)) {
             player.Death();
@@ -177,12 +182,22 @@ public class ExplosionManager : MonoBehaviour {
      * Given a Game object, fade out the object by reducing its alpha property repeatedly.
      * After its alpha hits 0, destroy the game object.
      */
-    IEnumerator FadeOutAndDestroy(GameObject explosionGameObject) {
-        SpriteRenderer spriteRenderer = explosionGameObject.GetComponent<SpriteRenderer>();
+    IEnumerator FadeOutAndDestroy(GameObject explosionGameObject, string explosionCode) {
+        float explosionFadeTime;
+        if (explosionsToFadeOutFast.Contains(explosionCode)) {
+            explosionFadeTime = EXPLOSION_FADE_FAST;
+        } else if (explosionsToFadeOutSlow.Contains(explosionCode)) {
+            explosionFadeTime = EXPLOSION_FADE_SLOW;
+        } else if (explosionsToFadeOutVerySlow.Contains(explosionCode)) {
+            explosionFadeTime = EXPLOSION_FADE_VERY_SLOW;
+        } else {
+            explosionFadeTime = EXPLOSION_FADE_NORMAL;
+        }
 
+        SpriteRenderer spriteRenderer = explosionGameObject.GetComponent<SpriteRenderer>();
         Color tmpColor = spriteRenderer.color;
         while (tmpColor.a > 0f) {
-            tmpColor.a -= Time.deltaTime / FADE_OUT_TIME;
+            tmpColor.a -= Time.deltaTime / explosionFadeTime;
             spriteRenderer.color = tmpColor;
             if (tmpColor.a <= 0f) {
                 tmpColor.a = 0f;
