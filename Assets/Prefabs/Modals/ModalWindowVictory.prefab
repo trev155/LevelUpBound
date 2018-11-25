@@ -154,7 +154,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114326071297185804}
-        m_MethodName: CloseModalWindowAndGoBack
+        m_MethodName: CloseAndGoBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

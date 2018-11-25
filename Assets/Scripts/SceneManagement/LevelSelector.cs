@@ -53,7 +53,6 @@ public class LevelSelector : MonoBehaviour {
      * Instantiate level buttons. There are predefined transforms with tag "LevelButtonPosition". 
      */
     private void CreateLevelButtons() {
-        Debug.Log("Creating Level Buttons");
         int numberOfLevelButtons;
         if (currentPage == maxPages) {
             numberOfLevelButtons = GameMode.GetNumberOfLevels(GameContext.GameMode) % LEVELS_PER_PAGE;
@@ -125,7 +124,7 @@ public class LevelSelector : MonoBehaviour {
             Debug.Log("Unknown scroll direction");
             return;
         }
-        Debug.Log("Current Page: " + currentPage);
+        
         if (currentPage == 1 || currentPage == maxPages) {
             BlurArrows();
         } else {

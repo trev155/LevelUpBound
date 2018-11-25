@@ -21,8 +21,8 @@ public class Goal : MonoBehaviour {
             GameContext.SaveLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
             Memory.SaveData();
 
-            // Check if last level. If so, display the celebration modal.
-            if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode)) {
+            // Check if last level. If so, display the celebration modal, but only if we are not in level selector
+            if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode) && !GameContext.LevelSelection) {
                 ModalVictory modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<ModalVictory>();
                 modal.SetModalTextVictory();
                 levelManager.StopLevel();
