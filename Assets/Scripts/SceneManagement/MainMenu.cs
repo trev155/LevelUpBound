@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour {
     // Modals
     public Transform modalContainer;
     public ModalConfirmDeny modalConfirmDeny;
-    private ModalConfirmDeny modal;
+    private ModalConfirmDeny exitModal;
 
     // Game Mode Selection
     public Text gameModeSelectedText;
@@ -52,6 +52,9 @@ public class MainMenu : MonoBehaviour {
     }
    
     public void ScrollLeft() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         if (GameContext.MainMenuGameMode == Mode.TUTORIAL) {
             return;
         }
@@ -74,6 +77,9 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void ScrollRight() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         if (GameContext.MainMenuGameMode == Mode.CHALLENGE) {
             return;
         }
@@ -183,8 +189,8 @@ public class MainMenu : MonoBehaviour {
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
-        modal = Instantiate(modalConfirmDeny, modalContainer);
-        modal.SetModalTextCloseApp();
+        exitModal = Instantiate(modalConfirmDeny, modalContainer);
+        exitModal.SetModalTextCloseApp();
 
         // Set handlers for the Yes / No buttons
         Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
@@ -195,13 +201,13 @@ public class MainMenu : MonoBehaviour {
 
     public void ConfirmExit() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        modal.CloseModalWindow();
+        exitModal.Close();
         ExitApp();
     }
 
     public void DenyExit() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        modal.CloseModalWindow();
+        exitModal.Close();
     }
 
     /*

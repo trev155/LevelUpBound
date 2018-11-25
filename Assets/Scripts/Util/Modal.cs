@@ -15,13 +15,13 @@ public abstract class Modal : MonoBehaviour {
     /*
      * Main function to close the current modal window
      */
-    public void CloseModalWindow() {
+    public void Close() {
         gameObject.SetActive(false);
         GameContext.ModalActive = false;
     }
 
-    public void CloseModalWindowAndGoBack() {
-        CloseModalWindow();
+    public void CloseAndGoBack() {
+        Close();
         GameContext.LoadPreviousPage();
     }
 }

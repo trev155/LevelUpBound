@@ -127,7 +127,7 @@ public class ModalPrelevelInfo : Modal {
      * Callers should ensure they are from the MainGame scene and that a reference to a LevelManager exists.
      */
     public void CloseModalWindowAndStartLevel() {
-        CloseModalWindow();
+        Close();
         levelManager.PlayLevel();
     }
 }

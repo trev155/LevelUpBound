@@ -6,4 +6,8 @@ public class ModalConfirmDeny : Modal {
     public void SetModalTextCloseApp() {
         modalMainText.text = "Are you sure you want to exit?";
     }
+
+    public void SetModalTextResetProgress() {
+        modalMainText.text = "Are you sure you want to reset your progress?";
+    }
 }
