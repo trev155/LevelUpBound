@@ -1,6 +1,6 @@
 ﻿/*
  * Singleton class that handles all audio related functions.
- * Attach this script to some game object.
+ * Attach this script to some game object. It should present on each page.
  * Callers should access instances of this class using the static instance member,
  * eg) AudioManager.Instance.PlaySound()
  */
@@ -78,7 +78,8 @@ public class AudioManager : MonoBehaviour {
 
         // Audio sources initialize
         sources = GetComponentsInChildren<AudioSource>();
-        AdjustVolumeLevels();
+        AdjustBackgroundMusicVolume();
+        AdjustEffectsVolume();
 
         // Set bgm order, begin playing
         bgmTracks.Add("01");
@@ -288,15 +289,23 @@ public class AudioManager : MonoBehaviour {
     }
 
     /*
-     * Should be called whenever the global volume level gets changed. Go through
-     * all audio sources and set the volume.
+     * Set the background music volume.
      */
-    public void AdjustVolumeLevels() {
+    public void AdjustBackgroundMusicVolume() {
         foreach (AudioSource audioSource in sources) {
-            if (audioSource.name == "ExplosionLayer") {
-                audioSource.volume = GameContext.CurrentVolume / 2;
-            } else {
-                audioSource.volume = GameContext.CurrentVolume;
+            if (audioSource.name == "BGM") {
+                audioSource.volume = GameContext.CurrentMusicVolume / 2;
+            }
+        }
+    }
+
+    /*
+     * Set the volume level of all sound effects.
+     */
+    public void AdjustEffectsVolume() {
+        foreach (AudioSource audioSource in sources) {
+            if (audioSource.name != "BGM") {
+                audioSource.volume = GameContext.CurrentEffectsVolume;
             }
         }
     }

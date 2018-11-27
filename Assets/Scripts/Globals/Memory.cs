@@ -23,8 +23,9 @@ public static class Memory {
     public static readonly string SAVE_ENABLED = "SaveEnabled";
     private static readonly string THEME = "Theme";
     private static readonly string SCHEME = "Scheme";
-    private static readonly string VOLUME = "Volume";
     private static readonly string AUDIO_TOGGLE = "AudioToggle";
+    private static readonly string BGM_VOLUME = "BGMVolume";
+    private static readonly string EFFECTS_VOLUME = "EffectsVolume";
     private static readonly string COMPLETED_LEVELS = "CompletedLevels";
 
     /*
@@ -36,7 +37,8 @@ public static class Memory {
         PlayerPrefs.SetString(SAVE_ENABLED, "true");
         PlayerPrefs.SetString(THEME, GameContext.GameTheme.ToString());
         PlayerPrefs.SetString(SCHEME, GameContext.ControlScheme.ToString());
-        PlayerPrefs.SetFloat(VOLUME, GameContext.CurrentVolume);
+        PlayerPrefs.SetFloat(BGM_VOLUME, GameContext.CurrentMusicVolume);
+        PlayerPrefs.SetFloat(EFFECTS_VOLUME, GameContext.CurrentEffectsVolume);
         PlayerPrefs.SetInt(AUDIO_TOGGLE, GameContext.AudioEnabled ? 1 : 0);
 
         string completedLevelsJson = JsonConvert.SerializeObject(GameContext.CompletedLevels);
@@ -75,11 +77,14 @@ public static class Memory {
             GameContext.ControlScheme = ControlMode.ARROW;
         }
 
-        float volume = PlayerPrefs.GetFloat(VOLUME);
-        GameContext.CurrentVolume = volume;
-
         int audioToggle = PlayerPrefs.GetInt(AUDIO_TOGGLE);
         GameContext.AudioEnabled = (audioToggle == 1);
+
+        float bgmVolume = PlayerPrefs.GetFloat(BGM_VOLUME);
+        GameContext.CurrentMusicVolume = bgmVolume;
+
+        float effectsVolume = PlayerPrefs.GetFloat(EFFECTS_VOLUME);
+        GameContext.CurrentEffectsVolume = effectsVolume;
 
         string completedLevelsJson = PlayerPrefs.GetString(COMPLETED_LEVELS);
         Debug.Log("Completed Levels Data:");

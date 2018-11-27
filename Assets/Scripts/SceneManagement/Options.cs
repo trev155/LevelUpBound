@@ -9,7 +9,8 @@ public class Options : MonoBehaviour {
     public Text audioText;
     public Image audioEnabledImage;
     public Image audioDisabledImage;
-    public Slider volumeSlider;
+    public Slider backgroundMusicVolumeSlider;
+    public Slider effectsVolumeSlider;
     public Image controlSchemeArrowImage;
     public Image controlSchemeClickImage;
 
@@ -25,7 +26,8 @@ public class Options : MonoBehaviour {
         AspectRatioManager.AdjustScreen();
         InitializeAudioUI();
         SetInitialVolume();
-        volumeSlider.onValueChanged.AddListener(delegate { VolumeSliderChanged(); });
+        backgroundMusicVolumeSlider.onValueChanged.AddListener(delegate { BackgroundMusicVolumeSliderChanged(); });
+        effectsVolumeSlider.onValueChanged.AddListener(delegate { EffectsVolumeSliderChanged(); });
         ThemeManager.SetTheme();
         SetControlSchemeImage();
     }
@@ -90,24 +92,32 @@ public class Options : MonoBehaviour {
      * Set the initial value of the volume slider based on the game context.
      */
     private void SetInitialVolume() {
-        volumeSlider.value = GameContext.CurrentVolume;
+        backgroundMusicVolumeSlider.value = GameContext.CurrentMusicVolume;
+        effectsVolumeSlider.value = GameContext.CurrentEffectsVolume;
     }
 
     /*
-     * Function should be called whenever the volume slider changes.
-     * Change the volume global variable to the slider value.
-     * Since audio is played on different scenes, we have to set volume levels
-     * of all audio sources on each scene during scene loads. That means
-     * there is minimal work to do here.
-     * Also, the only place where volume can be set right now is on this page.
+     * Handler for the BGM volume slider change.
      */
-    public void VolumeSliderChanged() {
+    public void BackgroundMusicVolumeSliderChanged() {
         if (GameContext.ModalActive) {
             return;
         }
 
-        GameContext.CurrentVolume = volumeSlider.value;
-        AudioManager.Instance.AdjustVolumeLevels();
+        GameContext.CurrentMusicVolume = backgroundMusicVolumeSlider.value;
+        AudioManager.Instance.AdjustBackgroundMusicVolume();
+        Memory.SaveData();
+    }
+
+    /*
+     * Handler for the effects volume slider change.
+     */
+    public void EffectsVolumeSliderChanged() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+        GameContext.CurrentEffectsVolume = effectsVolumeSlider.value;
+        AudioManager.Instance.AdjustEffectsVolume();
         Memory.SaveData();
     }
 
