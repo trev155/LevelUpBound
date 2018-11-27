@@ -3,7 +3,7 @@ This project is an android application game. The game is an arcade-style concept
 
 This game was developed using Unity 2018.
 
-This project was developed for my own interests, and is not monetized whatsoever.
+This project was developed for my own interests.
 
 ## Preview
 // TODO
