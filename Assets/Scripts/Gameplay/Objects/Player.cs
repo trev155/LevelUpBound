@@ -1,25 +1,30 @@
 ﻿/*
- * Class that handles Player controls, and anything else related to the Player.
+ * The Player is the main character of the game that the user controls.
  */
 using UnityEngine;
 
 public class Player : MonoBehaviour {
     public Transform respawnPoint;
 
-    /*
-     * Player death handling.
-     */
     public void Death() {
-        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        playerTransform.transform.position = respawnPoint.transform.position;
+        MovePlayerToSpawn();
         AudioManager.Instance.PlaySound(AudioManager.PLAYER_DEATH);
 
         if (GameContext.ControlScheme == ControlMode.CLICK) {
-            // Stop moving
-            PlayerControl control = playerTransform.gameObject.GetComponent<PlayerControl>();
-            control.clickMoveActive = false;
+            StopMoving();
         }
-    }    
+    }
+
+    private void MovePlayerToSpawn() {
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform.transform.position = respawnPoint.transform.position;
+    }
+
+    private void StopMoving() {
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        PlayerControl control = playerTransform.gameObject.GetComponent<PlayerControl>();
+        control.clickMoveActive = false;
+    }
 }
 
     

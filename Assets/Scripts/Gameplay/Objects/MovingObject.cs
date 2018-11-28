@@ -6,32 +6,22 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour {
     public float speed;
-
-    // Require access to the game grid for waypoint destinations
     private GameObject[][] gameGrid;
-
-    // Waypoints - destinations for the moving object
-    Transform[] objectWaypoints;
+    public Transform[] objectWaypoints;
     private int currentWaypointIndex = 1;
-
-    // whether we should start moving the object
     private bool startMovement = false;
-
-    // Reference to the Player
     public Player player;
 
-    /*
-     * Detect if making contact with the Player.
-     */
     void OnTriggerStay2D(Collider2D other) {
-        if (other.tag == "Player") {
+        if (IsTouchingPlayer(other)) {
             player.Death();
         }
     }
 
-    /*
-     * Initialize this object's waypoints
-     */
+    private bool IsTouchingPlayer(Collider2D other) {
+        return other.tag == "Player";
+    }
+
     public void SetWaypoints(string[] waypoints) {
         objectWaypoints = new Transform[waypoints.Length];
         for (int i = 0; i < waypoints.Length; i++) {
@@ -41,64 +31,47 @@ public class MovingObject : MonoBehaviour {
         }      
     }
 
-    /*
-     * Initialization
-     */
+    public void StartMovement() {
+        startMovement = true;
+    }
+
     private void Awake() {
         MainGrid mainGrid = GameObject.Find("MainGrid").GetComponent<MainGrid>();
         gameGrid = mainGrid.GetGameGrid();
     }
 
-    /*
-     * Want to call this at the start, but has to be after Awake().
-     */
     private void Start() {
-        FlipSprite();
+        SetSpriteOrientation();
     }
 
-    /*
-     * Called once per frame.
-     */
     private void Update() {
         if (startMovement) {
-            Movement();
-            Debug.Log("move");
+            DoMovement();
         }
     }
 
-    /*
-     * Don't start movement until we have our waypoints set.
-     */
-    public void StartMovement() {
-        startMovement = true;
-    }
-
-    /*
-     * Move between the waypoints.
-     */
-    private void Movement() {
-        transform.position = Vector2.MoveTowards(transform.position, objectWaypoints[currentWaypointIndex].position, Time.deltaTime * speed);
-
-        // if reached destination, update waypoint
-        if (transform.position == objectWaypoints[currentWaypointIndex].position) {
+    private void DoMovement() {
+        MoveTowardsWaypoint();
+        if (ReachedWaypoint()) {
             AdvanceWaypointIndex();
-            FlipSprite();
+            SetSpriteOrientation();
         }
     }
 
-    /*
-     * Advance the waypoint index. Go back to 0 if at the end of the array.
-     */
+    private void MoveTowardsWaypoint() {
+        transform.position = Vector2.MoveTowards(transform.position, objectWaypoints[currentWaypointIndex].position, Time.deltaTime * speed);
+    }
+
+    private bool ReachedWaypoint() {
+        return transform.position == objectWaypoints[currentWaypointIndex].position;
+    }
+
     private void AdvanceWaypointIndex() {
         currentWaypointIndex = (currentWaypointIndex + 1) % objectWaypoints.Length;
     }
 
-    /*
-     * Flip sprite based on position and movement direction.
-     */
-    private void FlipSprite() {
+    private void SetSpriteOrientation() {
         // Debug.Log("Current Position: " + transform.position + " Next Position: " + objectWaypoints[currentWaypointIndex].position);
-
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         float currentX = transform.position.x;
         float currentY = transform.position.y;

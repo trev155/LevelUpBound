@@ -1,5 +1,6 @@
 ﻿/*
- * When the Player reaches the Goal, handle appropriately.
+ * The goal is the beacon at the top of the screen that the player is trying to reach. 
+ * When the player touches the goal, the level is completed.
  */
 using UnityEngine;
 
@@ -8,45 +9,62 @@ public class Goal : MonoBehaviour {
     public MainGame mainGame;
     public Transform RespawnPoint;
 
-    // Modals
     public Transform modalContainer;
     public ModalVictory modalWindowVictory;
 
     void OnTriggerEnter2D(Collider2D other) {
-        // Level cleared
-        if (other.tag == "Player") {
+        if (LevelCleared(other)) {
+            Collider2D player = other;
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
-
-            // Record that this level was completed
             GameContext.SaveLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
             Memory.SaveData();
 
-            // Check if last level. If so, display the celebration modal, but only if we are not in level selector
-            if (GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode) && !GameContext.LevelSelection) {
+            if (ShouldDisplayCelebrationModal()) {
                 ModalVictory modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<ModalVictory>();
                 modal.SetModalTextVictory();
                 levelManager.StopLevel();
                 return;
             }
             
-            // Check if this level was played from the level selection page. If so, go back to there.
-            if (GameContext.LevelSelection) {
+            if (CameFromLevelSelector()) {
                 GameContext.LoadPreviousPage();
                 GameContext.PreviousPageContext = "MainMenu";
                 return;
             }
 
-            // Advance level
-            other.transform.position = RespawnPoint.position;
+            MovePlayerToSpawn(player);
             levelManager.AdvanceLevel();
             mainGame.UpdateLevelText();
 
             if (GameContext.ControlScheme == ControlMode.CLICK) {
-                // Stop movement
-                PlayerControl control = other.gameObject.GetComponent<PlayerControl>();
-                control.clickMoveActive = false;
+                StopPlayerMovement(player);
             }
         }
+    }
+
+    private bool LevelCleared(Collider2D other) {
+        return other.tag == "Player";
+    }
+
+    private bool ShouldDisplayCelebrationModal() {
+        return IsLastLevel() && !CameFromLevelSelector();
+    }
+
+    private bool IsLastLevel() {
+        return GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode);
+    }
+
+    private bool CameFromLevelSelector() {
+        return GameContext.LevelSelection;
+    }
+
+    private void MovePlayerToSpawn(Collider2D player) {
+        player.transform.position = RespawnPoint.position;
+    }
+    
+    private void StopPlayerMovement(Collider2D player) {
+        PlayerControl control = player.gameObject.GetComponent<PlayerControl>();
+        control.clickMoveActive = false;
     }
 }
 

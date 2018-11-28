@@ -161,7 +161,7 @@ public class LevelConstructor : MonoBehaviour {
                 wallCol = int.Parse(line.Substring(7, 1));
                 Transform obj = Instantiate(keyPrefab, gameGrid[row][col].transform);
                 Key key = obj.gameObject.GetComponent<Key>();
-                key.InitData(wallRow, wallCol);
+                key.SetWallCoordinates(wallRow, wallCol);
             }
         }
     }

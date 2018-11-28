@@ -1,58 +1,56 @@
 ﻿/*
- * A Key is an object that when the player touches, a "door" is unlocked.
+ * A Key is an object that when the player touches, a "door" is unlocked / destroyed.
  */
 using UnityEngine;
 
 public class Key : MonoBehaviour {
-    // Reference to the coordinates of the wall that this key unlocks (destroys)
     private int wallToDestroyX;
     private int wallToDestroyY;
-
-    // For double walls, we replace with single wall
     public Transform lockedWallPrefab;
 
-    // Reference to the Main Grid
     private MainGrid mainGrid;
     private GameObject[][] gameGrid;
 
-    /*
-     * Initialization
-     */
     private void Awake() {
         mainGrid = GameObject.FindGameObjectWithTag("MainGrid").GetComponent<MainGrid>();
         gameGrid = mainGrid.GetGameGrid();
     }
 
-    /*
-     * When the Player touches the Key, unlock the door/lock that the key refers to.
-     */
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player") {
-            AudioManager.Instance.PlaySound(AudioManager.KEY_PICKUP);
-            Destroy(gameObject);
+    public void SetWallCoordinates(int x, int y) {
+        wallToDestroyX = x;
+        wallToDestroyY = y;
+    }
 
+    void OnTriggerEnter2D(Collider2D other) {
+        if (IsTouchingPlayer(other)) {
+            Destroy(gameObject);
+            AudioManager.Instance.PlaySound(AudioManager.KEY_PICKUP);
             AudioManager.Instance.PlaySound(AudioManager.WALL_UNLOCK);
-            bool isDouble = false;
-            Transform lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)");
-            if (lockedWall == null) {
-                lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("DoubleLockedWall(Clone)");
-                isDouble = true;
-            }
-            
-            if (!isDouble) {
-                Destroy(lockedWall.gameObject);
-            } else {
-                Destroy(lockedWall.gameObject);
-                Instantiate(lockedWallPrefab, gameGrid[wallToDestroyX][wallToDestroyY].transform);
+
+            Transform lockedWall = GetWallObject();
+            Destroy(lockedWall.gameObject);
+            if (IsForDoubleWall()) {
+                Instantiate(lockedWallPrefab, gameGrid[wallToDestroyX][wallToDestroyY].transform);   
             }
         }
     }
 
-    /*
-     * Sets the wall coordinates that the key refers to.
-     */
-    public void InitData(int x, int y) {
-        wallToDestroyX = x;
-        wallToDestroyY = y;
+    private bool IsTouchingPlayer(Collider2D other) {
+        return other.tag == "Player";
+    }
+
+    private Transform GetWallObject() {
+        Transform lockedWall;
+        if (IsForDoubleWall()) {
+            lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("DoubleLockedWall(Clone)");
+        } else {
+            lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)");
+        }
+        return lockedWall;
+    }
+
+    private bool IsForDoubleWall() {
+        Transform lockedWall = gameGrid[wallToDestroyX][wallToDestroyY].transform.Find("LockedWall(Clone)");
+        return lockedWall == null;
     }
 }
