@@ -54,11 +54,7 @@ public static class GameContext {
         ControlScheme = ControlMode.ARROW;
         ModalActive = false;
         InitializeCompletedLevels();
-
-        if (PlayerPrefs.GetString(PersistentStorage.SAVE_ENABLED).Length > 0) {
-            PersistentStorage.LoadData();
-        }
-
+        
         // PlayerPrefs.DeleteAll();     // For testing
     }
 

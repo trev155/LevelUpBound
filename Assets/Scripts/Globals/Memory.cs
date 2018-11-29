@@ -55,6 +55,10 @@ public static class PersistentStorage {
     public static void LoadData() {
         Debug.Log("Loading Data from Memory");
 
+        if (PlayerPrefs.GetString(PersistentStorage.SAVE_ENABLED).Length == 0) {
+            return;
+        }
+
         string theme = PlayerPrefs.GetString(THEME);
         if (theme.Length > 0) {
             if (theme.Equals("Normal", StringComparison.InvariantCultureIgnoreCase)) {

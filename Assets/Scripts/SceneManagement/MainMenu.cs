@@ -15,6 +15,9 @@ public class MainMenu : MonoBehaviour {
     public Text gameModeDescription;
 
     private void Awake() {
+        // TODO think about this
+        PersistentStorage.LoadData();
+
         AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();
     }
