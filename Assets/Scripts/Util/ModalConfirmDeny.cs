@@ -3,11 +3,14 @@
  * Callers should specify OnClick handlers for the Yes/No dynamically, with .onClick.AddListener().
  */
 public class ModalConfirmDeny : Modal {
-    public void SetModalTextCloseApp() {
-        modalMainText.text = "Are you sure you want to exit?";
+    private static readonly string EXIT_APP_TEXT = "Are you sure you want to exit?";
+    private static readonly string RESET_PROGRESS_TEXT = "Are you sure you want to reset your progress?";
+
+    public void InitializeExitModal() {
+        SetMainText(EXIT_APP_TEXT);
     }
 
-    public void SetModalTextResetProgress() {
-        modalMainText.text = "Are you sure you want to reset your progress?";
+    public void InitializeResetProgressModal() {
+        SetMainText(RESET_PROGRESS_TEXT);
     }
 }

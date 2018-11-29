@@ -1688,7 +1688,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1934316553}
-        m_MethodName: ResetProgress
+        m_MethodName: ResetProgressButtonHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

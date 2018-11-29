@@ -22,12 +22,11 @@ public static class GameContext {
     public static Mode MainMenuGameMode { get; set; }
 
     // For the level selection page
-    public static bool LevelSelection { get; set; }
-    public static int LevelSelectionPage { get; set; }
-    public static bool StopMovement { get; set; }
+    public static bool PlayedFromLevelSelector { get; set; }
+    public static int LevelSelectionPageNum { get; set; }
 
     // Theme Selection
-    public static Theme GameTheme { get; set; }
+    public static Theme CurrentTheme { get; set; }
 
     // Player Control Scheme
     public static ControlMode ControlScheme { get; set; }
@@ -39,10 +38,9 @@ public static class GameContext {
     public static Dictionary<Mode, HashSet<int>> CompletedLevels;
 
     /*
-     * Static Constructor runs when the game loads.
+     * Static Constructor runs when the game loads. These represent the default globals.
      */
     static GameContext() {
-        // Set default globals. Some of these can be overriden by Memory class.
         GameMode = Mode.CLASSIC;
         CurrentLevel = 1;
         PreviousPageContext = "MainMenu";
@@ -50,26 +48,21 @@ public static class GameContext {
         CurrentMusicVolume = 0.6f;
         CurrentEffectsVolume = 0.6f;
         MainMenuGameMode = Mode.EASY;
-        LevelSelection = false;
-        LevelSelectionPage = 1;
-        GameTheme = Theme.NORMAL;
+        PlayedFromLevelSelector = false;
+        LevelSelectionPageNum = 1;
+        CurrentTheme = Theme.NORMAL;
         ControlScheme = ControlMode.ARROW;
         ModalActive = false;
-        InitializeLevelsCompleted();
+        InitializeCompletedLevels();
 
-        if (PlayerPrefs.GetString(Memory.SAVE_ENABLED).Length > 0) {
-            Memory.LoadData();
+        if (PlayerPrefs.GetString(PersistentStorage.SAVE_ENABLED).Length > 0) {
+            PersistentStorage.LoadData();
         }
-        
-        // For testing
-        // PlayerPrefs.DeleteAll();
+
+        // PlayerPrefs.DeleteAll();     // For testing
     }
 
-    /* 
-     * Load the page pointed by the PreviousPageContext.
-     * If no page exists, load a default page.
-     */
-    public static void LoadPreviousPage() {
+    public static void LoadPreviousContextPage() {
         string[] validPreviousPages = { "MainMenu", "LevelSelector" };
 
         if (PreviousPageContext == null || PreviousPageContext == "") {
@@ -83,10 +76,7 @@ public static class GameContext {
         }
     }
 
-    /*
-     * Reset / Initialize the CompletedLevels dictionary.
-     */
-    public static void InitializeLevelsCompleted() {
+    public static void InitializeCompletedLevels() {
         CompletedLevels = new Dictionary<Mode, HashSet<int>> {
             { Mode.EASY, new HashSet<int>() },
             { Mode.CLASSIC, new HashSet<int>() },
@@ -95,10 +85,7 @@ public static class GameContext {
         };
     }
 
-    /*
-     * Record that a level has been completed.
-     */
-    public static void SaveLevelCompleted(Mode mode, int level) {
+    public static void RecordLevelCompleted(Mode mode, int level) {
         if (mode == Mode.TUTORIAL) {
             return;
         }

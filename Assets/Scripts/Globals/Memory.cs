@@ -19,7 +19,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 
-public static class Memory {
+public static class PersistentStorage {
     public static readonly string SAVE_ENABLED = "SaveEnabled";
     private static readonly string THEME = "Theme";
     private static readonly string SCHEME = "Scheme";
@@ -35,7 +35,7 @@ public static class Memory {
         Debug.Log("Saving Data to Memory");
 
         PlayerPrefs.SetString(SAVE_ENABLED, "true");
-        PlayerPrefs.SetString(THEME, GameContext.GameTheme.ToString());
+        PlayerPrefs.SetString(THEME, GameContext.CurrentTheme.ToString());
         PlayerPrefs.SetString(SCHEME, GameContext.ControlScheme.ToString());
         PlayerPrefs.SetFloat(BGM_VOLUME, GameContext.CurrentMusicVolume);
         PlayerPrefs.SetFloat(EFFECTS_VOLUME, GameContext.CurrentEffectsVolume);
@@ -58,13 +58,13 @@ public static class Memory {
         string theme = PlayerPrefs.GetString(THEME);
         if (theme.Length > 0) {
             if (theme.Equals("Normal", StringComparison.InvariantCultureIgnoreCase)) {
-                GameContext.GameTheme = Theme.NORMAL;
+                GameContext.CurrentTheme = Theme.NORMAL;
             } else if (theme.Equals("Light", StringComparison.InvariantCultureIgnoreCase)) {
-                GameContext.GameTheme = Theme.LIGHT;
+                GameContext.CurrentTheme = Theme.LIGHT;
             } else if (theme.Equals("Dark", StringComparison.InvariantCultureIgnoreCase)) {
-                GameContext.GameTheme = Theme.DARK;
+                GameContext.CurrentTheme = Theme.DARK;
             } else if (theme.Equals("Vibrant", StringComparison.InvariantCultureIgnoreCase)) {
-                GameContext.GameTheme = Theme.VIBRANT;
+                GameContext.CurrentTheme = Theme.VIBRANT;
             }
         }
 

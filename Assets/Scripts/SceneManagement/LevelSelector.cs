@@ -1,57 +1,39 @@
 ﻿/*
- * The level selector is a "page" with many buttons. 
- * Each button represents a level. 
- * When pressed, we take the user to the specified level. 
+ * The LevelSelector page allows the user to select a specific level they want to play.
  */
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
 
-
 public class LevelSelector : MonoBehaviour {
-    // Constants
     private const int LEVELS_PER_PAGE = 20;
 
-    // Fields
     private int currentPage;
     private float maxPages;
 
-    // prefabs
     public Transform levelButtonPrefab;
     public Transform levelCompleteButtonPrefab;
 
-    // Reference objects
     public Text gameModeText;
 
-    /*
-     * Initialization
-     */
     private void Awake() {
-        AspectRatioManager.AdjustScreen();
+        AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();
     }
 
-    /*
-     * Initialization.
-     * Depends on earlier Awake() calls
-     */
+    // this needs to run after earlier Awake() calls
     private void Start() {
-        // If we came from the Game scene, keep on same game mode as before.
-        // If we came from main menu, default to Easy
-        if (!GameContext.LevelSelection) {
+        if (!GameContext.PlayedFromLevelSelector) {
             GameContext.GameMode = Mode.EASY;
         }
-        currentPage = GameContext.LevelSelectionPage;
-        maxPages = ComputeMaxPages();
+        currentPage = GameContext.LevelSelectionPageNum;
+        maxPages = ComputeMaxPagesForCurrentGameMode();
         BlurArrows();
         SetGameModeText();
         CreateLevelButtons();
     }
 
-    /*
-     * Instantiate level buttons. There are predefined transforms with tag "LevelButtonPosition". 
-     */
     private void CreateLevelButtons() {
         int numberOfLevelButtons;
         if (currentPage == maxPages) {
@@ -88,7 +70,6 @@ public class LevelSelector : MonoBehaviour {
      * before displaying new ones.
      */
     private void RemoveLevelButtons() {
-        // Debug.Log("Removing all Level Buttons");
         GameObject[] allLevelButtons = GameObject.FindGameObjectsWithTag("LevelButton");
         foreach (GameObject levelButton in allLevelButtons) {
             Destroy(levelButton);
@@ -135,16 +116,12 @@ public class LevelSelector : MonoBehaviour {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
     }
 
-
-    /*
-     * This function will play a level by switching scenes to the specified level and game mode.
-     */
     private void PlayLevel(Mode mode, int level) {
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = level;
         GameContext.PreviousPageContext = "LevelSelector";
-        GameContext.LevelSelection = true;
-        GameContext.LevelSelectionPage = currentPage;
+        GameContext.PlayedFromLevelSelector = true;
+        GameContext.LevelSelectionPageNum = currentPage;
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
@@ -160,11 +137,6 @@ public class LevelSelector : MonoBehaviour {
         PlayLevel(GameContext.GameMode, selectedLevel);
     }
 
-    /*
-     * Button Handler for when the game mode toggle is clicked.
-     * The game modes are:
-     * - Tutorial, Easy, Classic, Advanced, Challenge
-     */
     public void ToggleGameMode() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
@@ -180,7 +152,7 @@ public class LevelSelector : MonoBehaviour {
 
         // Refresh
         SetGameModeText();
-        maxPages = ComputeMaxPages();
+        maxPages = ComputeMaxPagesForCurrentGameMode();
         currentPage = 1;
 
         RemoveLevelButtons();
@@ -189,26 +161,16 @@ public class LevelSelector : MonoBehaviour {
         BlurArrows();
     }
 
-    /*
-     * Compute max pages for the current game mode.
-     */
-     private float ComputeMaxPages() {
+     private float ComputeMaxPagesForCurrentGameMode() {
         int numLevels = GameMode.GetNumberOfLevels(GameContext.GameMode);
         float maxPages = Mathf.Ceil(numLevels / (float)LEVELS_PER_PAGE);
         return maxPages;
     }
 
-    /*
-     * Set game mode text according to the current state.
-     */ 
     private void SetGameModeText() {
         gameModeText.text = GameMode.GetName(GameContext.GameMode);
     }
 
-    /*
-     * Blur out a scroll arrow if we are at the leftmost or rightmost page.
-     * Blurring means to reduce the alpha property of the image.
-     */ 
     private void BlurArrows() {
         if (currentPage == 1) {
             Image leftButton = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
@@ -220,9 +182,6 @@ public class LevelSelector : MonoBehaviour {
         }
     }
 
-    /*
-     * Unblur both scroll arrows. Set alpha property of image back to 1.
-     */
     private void UnblurArrows() {
         Image leftButton = GameObject.Find("ScrollLeftButton").GetComponent<Image>();
         Utils.UndoGrayoutImage(leftButton);
@@ -236,6 +195,6 @@ public class LevelSelector : MonoBehaviour {
     */
     public void BackButton() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousPage();
+        GameContext.LoadPreviousContextPage();
     }
 }

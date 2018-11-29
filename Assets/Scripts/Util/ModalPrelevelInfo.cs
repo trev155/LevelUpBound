@@ -12,24 +12,18 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class ModalPrelevelInfo : Modal {
-    // References to game objects
     public Image pageImage;
     public Image backArrow;
     public Image forwardArrow;
     public Image proceedButton;
 
-    // Fields for internal state
     private int currentPage = 1;
     private int numPages;
     private List<string> messages = new List<string>();
     private Dictionary<int, string> images = new Dictionary<int, string>();
+    
+    private LevelManager levelManager;  // Scene requires a LevelManager
 
-    // Scene requires a LevelManager
-    private LevelManager levelManager;
-
-    /*
-     * Initialization
-     */
     private void Awake() {
         GameContext.ModalActive = true;
 
@@ -60,21 +54,21 @@ public class ModalPrelevelInfo : Modal {
      */
     public void SetContents() {
         // Set text on the current page
-        modalMainText.text = messages[currentPage - 1];
+        SetMainText(messages[currentPage - 1]);
         
         // Set image on this page. If an image is not specified, hide the image
         if (images.ContainsKey(currentPage)) {
             pageImage.gameObject.SetActive(true);
-            modalMainText.alignment = TextAnchor.UpperCenter;
-            modalMainText.fontSize = 35;
+            SetMainTextAlignment(TextAnchor.UpperCenter);
+            SetMainTextFontSize(35);
 
             string path = images[currentPage];
             Sprite img = Resources.Load<Sprite>(path);
             pageImage.sprite = img;
         } else {
             pageImage.gameObject.SetActive(false);
-            modalMainText.alignment = TextAnchor.MiddleCenter;
-            modalMainText.fontSize = 45;
+            SetMainTextAlignment(TextAnchor.MiddleCenter);
+            SetMainTextFontSize(45);
         }
 
         // Gray out arrows according to the page number

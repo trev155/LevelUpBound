@@ -10,10 +10,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public static class AspectRatioManager {
-    /*
-     * Adjust the screen elements based on the aspect ratio / resolution of the device that the user has.
-     */
-    public static void AdjustScreen() {
+    public static void AdjustScreenElements() {
         float aspectRatio = Camera.main.aspect;
         Debug.Log("Aspect Ratio: " + aspectRatio);
         Scene scene = SceneManager.GetActiveScene();
@@ -21,59 +18,43 @@ public static class AspectRatioManager {
         // 4:3 portrait
         if (EqualsApprox(aspectRatio, 0.75f, 0.05f)) {
             if (scene.name == "MainMenu") {
-                HandleMainMenu(0.75f);
+                AdjustMainMenuSceneElements(0.75f);
             } else if (scene.name == "MainGame") {
-                HandleMainGame(0.75f);
+                AdjustMainGameSceneElements(0.75f);
             } else if (scene.name == "LevelSelector") {
-                HandleLevelSelector(0.75f);
+                AdjustLevelSelectorSceneElements(0.75f);
             } else if (scene.name == "Options") {
-                HandleOptions(0.75f);
+                AdjustOptionsSceneElements(0.75f);
             } else if (scene.name == "About") {
-                HandleAbout(0.75f);
+                AdjustAboutSceneElements(0.75f);
             } else if (scene.name == "Instructions") {
-                HandleInstructions(0.75f);
+                AdjustInstructionsSceneElements(0.75f);
             } else if (scene.name == "LevelEditor") {
-                HandleLevelEditor(0.75f);
+                AdjustLevelEditorSceneElements(0.75f);
             }
         }
     }
 
-    /*
-     * Set the rect transform size of the canvas element with name gameObject.
-     */
     private static void ResizeCanvasElement(string gameObject, float width, float height) {
         RectTransform element = GameObject.Find(gameObject).GetComponent<RectTransform>();
         element.sizeDelta = new Vector2(width, height);
     }
 
-    /*
-     * Set the rect transform anchored position of the canvas element with name gameObject.
-     */
     private static void SetAnchoredPosition(string gameObject, float x, float y) {
         RectTransform element = GameObject.Find(gameObject).GetComponent<RectTransform>();
         element.anchoredPosition = new Vector2(x, y);
     }
 
-    /*
-     * Set the font size of the canvas Text element with name gameObject.
-     */
     private static void SetFontSize(string gameObject, int size) {
         Text element = GameObject.Find(gameObject).GetComponent<Text>();
         element.fontSize = size;
     }
 
-    /*
-     * Return true if the absolute value between x and y is less than the tolerance.
-     * This is needed because resolutions aren't always exact, for example 4:3 may not be exactly 0.75, maybe 0.7498.
-     */
     private static bool EqualsApprox(float x, float y, float tolerance) {
-        return Mathf.Abs(x - y) < tolerance;
+        return Mathf.Abs(x - y) < tolerance;    // resolutions aren't always exact, for example 4:3 may not be exactly 0.75, maybe 0.7498.
     }
-
-    /*
-     * Main Menu resolution adjustments.
-     */
-    private static void HandleMainMenu(float aspectRatio) {
+ 
+    private static void AdjustMainMenuSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
             ResizeCanvasElement("Logo", 600, 300);
             SetAnchoredPosition("Logo", 300, -150);
@@ -97,10 +78,7 @@ public static class AspectRatioManager {
         }
     }
 
-    /*
-     * Main game scene resolution adjustments.
-     */
-    private static void HandleMainGame(float aspectRatio) {
+    private static void AdjustMainGameSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
             Camera.main.orthographicSize = 6.1f;
             ResizeCanvasElement("BackButton", 100, 100);
@@ -120,10 +98,7 @@ public static class AspectRatioManager {
         }
     }
 
-    /*
-     * Level Selector resolution adjustments.
-     */
-    private static void HandleLevelSelector(float aspectRatio) {
+    private static void AdjustLevelSelectorSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
             ResizeCanvasElement("TitleText", 600, 100);
             SetAnchoredPosition("TitleText", 0, -60);
@@ -144,10 +119,7 @@ public static class AspectRatioManager {
         }
     }
 
-    /*
-     * Options page resolution adjustments.
-     */
-    private static void HandleOptions(float aspectRatio) {
+    private static void AdjustOptionsSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
             ResizeCanvasElement("TitleText", 500, 175);
             SetAnchoredPosition("TitleText", 0, -60);
@@ -197,10 +169,7 @@ public static class AspectRatioManager {
         }
     }
        
-    /*
-     * About page resolution adjustments.
-     */
-    private static void HandleAbout(float aspectRatio) {
+    private static void AdjustAboutSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
             SetAnchoredPosition("TitleText", 0, -60);
             SetFontSize("TitleText", 70);
@@ -215,10 +184,7 @@ public static class AspectRatioManager {
         }
     }
 
-    /*
-     * Insturctions page resolution adjustments.
-     */
-    private static void HandleInstructions(float aspectRatio) {
+    private static void AdjustInstructionsSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
             SetAnchoredPosition("TitleText", 0, -60);
             SetFontSize("TitleText", 70);
@@ -238,10 +204,7 @@ public static class AspectRatioManager {
         }
     }
 
-    /* 
-     * Level editor page resolution adjustments.
-     */
-    private static void HandleLevelEditor(float aspectRatio) {
+    private static void AdjustLevelEditorSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
             SetAnchoredPosition("TitleText", 0, -60);
             SetFontSize("TitleText", 70);

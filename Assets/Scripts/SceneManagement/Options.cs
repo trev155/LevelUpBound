@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Options : MonoBehaviour {
-    // Reference to objects
     public Text audioText;
     public Image audioEnabledImage;
     public Image audioDisabledImage;
@@ -14,16 +13,12 @@ public class Options : MonoBehaviour {
     public Image controlSchemeArrowImage;
     public Image controlSchemeClickImage;
 
-    // Modal for progress reset
     public Transform modalContainer;
     public ModalConfirmDeny modalConfirmDeny;
     private ModalConfirmDeny resetProgressModal;
 
-    /*
-     * Initialization
-     */
     private void Awake() {
-        AspectRatioManager.AdjustScreen();
+        AspectRatioManager.AdjustScreenElements();
         InitializeAudioUI();
         SetInitialVolume();
         backgroundMusicVolumeSlider.onValueChanged.AddListener(delegate { BackgroundMusicVolumeSliderChanged(); });
@@ -32,21 +27,15 @@ public class Options : MonoBehaviour {
         SetControlSchemeImage();
     }
 
-    /*
-     * Back button handler
-     */
     public void BackButton() {
         if (GameContext.ModalActive) {
             return;
         }
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousPage();
+        GameContext.LoadPreviousContextPage();
     }
 
-    /*
-     * When the scene is initialized, decide whether to show the AudioEnabled or the AudioDisabled image.
-     */
     private void InitializeAudioUI() {
         if (GameContext.AudioEnabled) {
             audioText.text = "ON";
@@ -59,9 +48,6 @@ public class Options : MonoBehaviour {
         }
     }
 
-    /*
-     * Toggle audio on / off.
-     */
     public void ToggleAudio() {
         if (GameContext.ModalActive) {
             return;
@@ -85,20 +71,14 @@ public class Options : MonoBehaviour {
             AudioManager.Instance.PlayBackgroundMusic();
         }
 
-        Memory.SaveData();
+        PersistentStorage.SaveData();
     }
 
-    /*
-     * Set the initial value of the volume slider based on the game context.
-     */
     private void SetInitialVolume() {
         backgroundMusicVolumeSlider.value = GameContext.CurrentMusicVolume;
         effectsVolumeSlider.value = GameContext.CurrentEffectsVolume;
     }
 
-    /*
-     * Handler for the BGM volume slider change.
-     */
     public void BackgroundMusicVolumeSliderChanged() {
         if (GameContext.ModalActive) {
             return;
@@ -106,31 +86,27 @@ public class Options : MonoBehaviour {
 
         GameContext.CurrentMusicVolume = backgroundMusicVolumeSlider.value;
         AudioManager.Instance.AdjustBackgroundMusicVolume();
-        Memory.SaveData();
+        PersistentStorage.SaveData();
     }
 
-    /*
-     * Handler for the effects volume slider change.
-     */
     public void EffectsVolumeSliderChanged() {
         if (GameContext.ModalActive) {
             return;
         }
         GameContext.CurrentEffectsVolume = effectsVolumeSlider.value;
         AudioManager.Instance.AdjustEffectsVolume();
-        Memory.SaveData();
+        PersistentStorage.SaveData();
     }
 
-    // Theme Button handlers
     private void SetTheme(Theme theme) {
         if (GameContext.ModalActive) {
             return;
         }
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.GameTheme = theme;
+        GameContext.CurrentTheme = theme;
         ThemeManager.SetTheme();
-        Memory.SaveData();
+        PersistentStorage.SaveData();
     }
 
     public void SetNormalTheme() {
@@ -158,7 +134,7 @@ public class Options : MonoBehaviour {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.ControlScheme = ControlMode.ARROW;
         SetControlSchemeImage();
-        Memory.SaveData();
+        PersistentStorage.SaveData();
 
     }
 
@@ -170,12 +146,9 @@ public class Options : MonoBehaviour {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.ControlScheme = ControlMode.CLICK;
         SetControlSchemeImage();
-        Memory.SaveData();
+        PersistentStorage.SaveData();
     }
 
-    /*
-     * Set the Image sprite for the control scheme.
-     */
     private void SetControlSchemeImage() {
         if (GameContext.ControlScheme == ControlMode.ARROW) {
             controlSchemeArrowImage.gameObject.SetActive(true);
@@ -187,17 +160,14 @@ public class Options : MonoBehaviour {
         }
     }
 
-    /*
-     * Reset Data Button
-     */
-    public void ResetProgress() {
+    public void ResetProgressButtonHandler() {
         if (GameContext.ModalActive) {
             return;
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         resetProgressModal = Instantiate(modalConfirmDeny, modalContainer);
-        resetProgressModal.SetModalTextResetProgress();
+        resetProgressModal.InitializeResetProgressModal();
 
         // Set handlers for the Yes / No buttons
         Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
@@ -208,8 +178,8 @@ public class Options : MonoBehaviour {
 
     private void AllowResetProgress() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        Memory.ResetProgress();
-        GameContext.InitializeLevelsCompleted();
+        PersistentStorage.ResetProgress();
+        GameContext.InitializeCompletedLevels();
         resetProgressModal.Close();
     }
 

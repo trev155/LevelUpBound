@@ -1,57 +1,41 @@
 ﻿/*
- * Class that manages general MainGame things, such as user interface.
+ * Handles MainGame scene activities.
  */
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainGame : MonoBehaviour {
-    // Fields
     public Text currentLevelLabel;
     public Text currentGameModeLabel;
     public Image audioEnabledImage;
     public Image audioDisabledImage;
 
-    /*
-     * Initialization
-     */
     private void Awake() {
-        AspectRatioManager.AdjustScreen();
+        AspectRatioManager.AdjustScreenElements();
         InitializeAudioUI();
         ThemeManager.SetTheme();
     }
 
-    /*
-     * Back button handler. If we came from the LevelSelector, the back button should go back to the MainMenu.
-     */
     public void BackButtonPressed() {
         if (GameContext.ModalActive) {
             return;
         }
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousPage();
+        GameContext.LoadPreviousContextPage();
         if (GameContext.PreviousPageContext == "LevelSelector") {
             GameContext.PreviousPageContext = "MainMenu";
         }
     }
 
-    /* 
-     * Update current level text.
-     */
     public void UpdateLevelText() {
         currentLevelLabel.text = "Current Level: " + GameContext.CurrentLevel;
     }
 
-    /*
-     * Set game mode text.
-     */
     public void UpdateGameModeText() {
         currentGameModeLabel.text = "Game Mode: " + GameMode.GetName(GameContext.GameMode);
     }
 
-    /*
-    * When the scene is initialized, decide whether to show the AudioEnabled or the AudioDisabled image.
-    */
     private void InitializeAudioUI() {
         if (GameContext.AudioEnabled) {
             audioEnabledImage.gameObject.SetActive(true);
@@ -62,9 +46,6 @@ public class MainGame : MonoBehaviour {
         }
     }
 
-    /*
-     * Turn audio on or off.
-     */
     public void ToggleAudio() {
         if (GameContext.ModalActive) {
             return;
@@ -86,6 +67,6 @@ public class MainGame : MonoBehaviour {
             AudioManager.Instance.PlayBackgroundMusic();
         }
 
-        Memory.SaveData();
+        PersistentStorage.SaveData();
     }
 }

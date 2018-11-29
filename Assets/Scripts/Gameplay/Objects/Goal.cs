@@ -16,18 +16,18 @@ public class Goal : MonoBehaviour {
         if (LevelCleared(other)) {
             Collider2D player = other;
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
-            GameContext.SaveLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
-            Memory.SaveData();
+            GameContext.RecordLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
+            PersistentStorage.SaveData();
 
             if (ShouldDisplayCelebrationModal()) {
                 ModalVictory modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<ModalVictory>();
-                modal.SetModalTextVictory();
+                modal.InitializeVictoryModal();
                 levelManager.StopLevel();
                 return;
             }
             
             if (CameFromLevelSelector()) {
-                GameContext.LoadPreviousPage();
+                GameContext.LoadPreviousContextPage();
                 GameContext.PreviousPageContext = "MainMenu";
                 return;
             }
@@ -55,7 +55,7 @@ public class Goal : MonoBehaviour {
     }
 
     private bool CameFromLevelSelector() {
-        return GameContext.LevelSelection;
+        return GameContext.PlayedFromLevelSelector;
     }
 
     private void MovePlayerToSpawn(Collider2D player) {

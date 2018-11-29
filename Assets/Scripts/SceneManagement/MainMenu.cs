@@ -5,40 +5,46 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
-    // Modals
     public Transform modalContainer;
     public ModalConfirmDeny modalConfirmDeny;
     private ModalConfirmDeny exitModal;
 
-    // Game Mode Selection
     public Text gameModeSelectedText;
     public Image leftArrow;
     public Image rightArrow;
     public Text gameModeDescription;
 
-    /*
-     * Initialization
-     */
     private void Awake() {
-        AspectRatioManager.AdjustScreen();
+        AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();
     }
 
-    /*
-     * Initialization, after Awake()
-     */
     private void Start() {
-        // Game Mode Selector
         SetGameModeSelectedModeText();
         BlurArrows();
         SetGameModeDescriptionText();
     }
 
-    /*
-     * Play Button.
-     * Initialize globals and start the game. Loads the MainGame scene.
-     */
-    public void Play() {
+    private void SetGameModeSelectedModeText() {
+        gameModeSelectedText.text = GameMode.GetName(GameContext.MainMenuGameMode);
+    }
+
+    private void BlurArrows() {
+        Utils.UndoGrayoutImage(leftArrow);
+        Utils.UndoGrayoutImage(rightArrow);
+        if (GameContext.MainMenuGameMode == Mode.TUTORIAL) {
+            Utils.GrayoutImage(leftArrow);
+        }
+        if (GameContext.MainMenuGameMode == Mode.CHALLENGE) {
+            Utils.GrayoutImage(rightArrow);
+        }
+    }
+
+    private void SetGameModeDescriptionText() {
+        gameModeDescription.text = GameMode.GetModeDescription(GameContext.MainMenuGameMode);
+    }
+
+    public void PlayButtonHandler() {
         if (GameContext.ModalActive) {
             return;
         }
@@ -47,7 +53,7 @@ public class MainMenu : MonoBehaviour {
         GameContext.GameMode = GameContext.MainMenuGameMode;
         GameContext.CurrentLevel = 1;
         GameContext.PreviousPageContext = "MainMenu";
-        GameContext.LevelSelection = false;
+        GameContext.PlayedFromLevelSelector = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
    
@@ -101,28 +107,7 @@ public class MainMenu : MonoBehaviour {
         SetGameModeDescriptionText();
     }
 
-    private void SetGameModeSelectedModeText() {
-        gameModeSelectedText.text = GameMode.GetName(GameContext.MainMenuGameMode);
-    }
-
-    private void BlurArrows() {
-        Utils.UndoGrayoutImage(leftArrow);
-        Utils.UndoGrayoutImage(rightArrow);
-        if (GameContext.MainMenuGameMode == Mode.TUTORIAL) {
-            Utils.GrayoutImage(leftArrow);
-        }
-        if (GameContext.MainMenuGameMode == Mode.CHALLENGE) {
-            Utils.GrayoutImage(rightArrow);
-        }
-    }
-
-    private void SetGameModeDescriptionText() {
-        gameModeDescription.text = GameMode.GetModeDescription(GameContext.MainMenuGameMode);
-    }
-
-    /*
-     * Load the LevelSelector scene.
-     */
+    // Button handlers for the different scenes
     public void LevelSelector() {
         if (GameContext.ModalActive) {
             return;
@@ -132,9 +117,6 @@ public class MainMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelector");
     }
 
-    /*
-     * Load the Level Editor scene.
-     */
     public void LevelEditor() {
         if (GameContext.ModalActive) {
             return;
@@ -144,9 +126,6 @@ public class MainMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene("LevelEditor");
     }
 
-    /*
-    * Load the Instructions page.
-    */
     public void Instructions() {
         if (GameContext.ModalActive) {
             return;
@@ -156,9 +135,6 @@ public class MainMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Instructions");
     }
 
-    /*
-     * Load the Options scene.
-     */
     public void Options() {
         if (GameContext.ModalActive) {
             return;
@@ -168,9 +144,6 @@ public class MainMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
     }
     
-    /*
-     * Load the About page.
-     */
     public void About() {
         if (GameContext.ModalActive) {
             return;
@@ -181,8 +154,8 @@ public class MainMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene("About");
     }
 
-    // Close Button handlers
-    public void ExitButton() {
+    // Exit App Button Handling
+    public void ExitAppButton() {
         if (GameContext.ModalActive) {
             return;
         }
@@ -190,7 +163,7 @@ public class MainMenu : MonoBehaviour {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         exitModal = Instantiate(modalConfirmDeny, modalContainer);
-        exitModal.SetModalTextCloseApp();
+        exitModal.InitializeExitModal();
 
         // Set handlers for the Yes / No buttons
         Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
@@ -210,10 +183,7 @@ public class MainMenu : MonoBehaviour {
         exitModal.Close();
     }
 
-    /*
-     * Exit the application.
-     */
-    public void ExitApp() {
+    private void ExitApp() {
         Debug.Log("Exiting the Application");
         Application.Quit();
     }

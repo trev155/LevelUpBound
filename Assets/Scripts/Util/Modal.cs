@@ -1,6 +1,5 @@
 ﻿/*
  * Class that handles modal windows.
- * This is a parent class. Every modal will have basic functions and fields defined in this class.
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,9 +11,18 @@ public abstract class Modal : MonoBehaviour {
         GameContext.ModalActive = true;
     }
 
-    /*
-     * Main function to close the current modal window
-     */
+    public void SetMainText(string text) {
+        modalMainText.text = text;
+    }
+
+    public void SetMainTextAlignment(TextAnchor textAnchor) {
+        modalMainText.alignment = textAnchor;
+    }
+
+    public void SetMainTextFontSize(int size) {
+        modalMainText.fontSize = size;
+    }
+
     public void Close() {
         gameObject.SetActive(false);
         GameContext.ModalActive = false;
@@ -22,6 +30,6 @@ public abstract class Modal : MonoBehaviour {
 
     public void CloseAndGoBack() {
         Close();
-        GameContext.LoadPreviousPage();
+        GameContext.LoadPreviousContextPage();
     }
 }

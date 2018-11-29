@@ -6,24 +6,27 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class Instructions : MonoBehaviour {
-    // References to canvas elements
     public Image instructionsImage;
     public Image leftArrowButton;
     public Image rightArrowButton;
     public Text instructionsText;
     public Text pageText;
 
-    // Internal fields
     private int currentPage = 1;
     private readonly int numPages = 6;
     private Dictionary<int, string> instructionImageLocations = new Dictionary<int, string>();
     private Dictionary<int, string> instructionTextValues = new Dictionary<int, string>();
 
     private void Awake() {
-        AspectRatioManager.AdjustScreen();
+        AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();
 
-        // Initialize instruction data
+        InitializeInstructionData();
+        SetPageContents();
+        BlurArrows();
+    }
+
+    private void InitializeInstructionData() {
         instructionImageLocations.Add(1, "InstructionImages/Ins1-1");
         instructionTextValues.Add(1, "Welcome! Level Up Bound is a top-down arcade style game where the objective is to move your player to the goal.");
         instructionImageLocations.Add(2, "InstructionImages/Ins1-2");
@@ -36,23 +39,14 @@ public class Instructions : MonoBehaviour {
         instructionTextValues.Add(5, "Some levels contain external elements, such as walls, key doors, and more.");
         instructionImageLocations.Add(6, "InstructionImages/Ins1-6");
         instructionTextValues.Add(6, "Have fun bounding!");
-
-        SetPageContents();
-        BlurArrows();
     }
 
-    /*
-     * Set the image and text elements of this page according to the current page value.
-     */
     private void SetPageContents() {
         instructionsImage.sprite = Resources.Load<Sprite>(instructionImageLocations[currentPage]);
         instructionsText.text = instructionTextValues[currentPage];
         pageText.text = currentPage + " of " + numPages;
     }
 
-    /* 
-     * Blur arrow images based on current page.
-     */
     private void BlurArrows() {
         Utils.UndoGrayoutImage(leftArrowButton);
         Utils.UndoGrayoutImage(rightArrowButton);
@@ -87,7 +81,7 @@ public class Instructions : MonoBehaviour {
 
     public void BackButton() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousPage();
+        GameContext.LoadPreviousContextPage();
     }
 }
 

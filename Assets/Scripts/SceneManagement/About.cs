@@ -10,7 +10,7 @@ public class About : MonoBehaviour {
     public Text aboutText;
 
     private void Awake() {
-        AspectRatioManager.AdjustScreen();
+        AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();
 
         image.sprite = Resources.Load<Sprite>("AboutImages/ab1");
@@ -20,6 +20,6 @@ public class About : MonoBehaviour {
 
     public void BackButton() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousPage();
+        GameContext.LoadPreviousContextPage();
     }
 }

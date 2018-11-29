@@ -1,5 +1,5 @@
 ﻿/*
- * This class is for everything related to themes.
+ * A "Theme" is just the color scheme of each scene in the game.
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,25 +13,16 @@ public enum Theme {
 }
 
 public static class ThemeManager {
-    /*
-     * Adjust the theme. 
-     * The main elements of the theme include the background colour, and the game scene tiles.
-     * Whenever a scene is loaded, this should be called. Or, if the theme is explicitly set from the Options page.
-     */
     public static void SetTheme() {
         string scene = SceneManager.GetActiveScene().name;
-        Theme theme = GameContext.GameTheme;
+        Theme theme = GameContext.CurrentTheme;
         
         SetBackground(scene, theme);
         SetTextElementColours(theme);
-        SetGameElementsColours(scene, theme);
+        SetMainGameElementColours(scene, theme);
     }
     
-    /*
-     * Sets the background colour of the scene.
-     */
     private static void SetBackground(string scene, Theme theme) {
-        // Determine what the new color should be based on the current theme selection
         Color32 newColor;
         if (theme == Theme.NORMAL) {
             newColor = new Color32(0, 190, 230, 255);
@@ -46,7 +37,6 @@ public static class ThemeManager {
             return;
         }
 
-        // Set the background color to the new color. For the MainGame scene, we use the Main Camera
         if (scene == "MainGame") {
             Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
             camera.backgroundColor = newColor;
@@ -58,11 +48,7 @@ public static class ThemeManager {
         Debug.Log("Setting theme to: " + theme + ", in scene: " + scene);
     }
 
-    /*
-     * Sets the colour of all canvas text elements on the current page.
-     */
     private static void SetTextElementColours(Theme theme) {
-        // Determine what the new color should be based on the current theme selection
         Color32 textColor;
         if (theme == Theme.DARK) {
             textColor = new Color32(97, 147, 244, 255);
@@ -70,17 +56,13 @@ public static class ThemeManager {
             textColor = new Color32(30, 30, 10, 255);
         }
 
-        // Set text colors
         Text[] textGameObjects = Object.FindObjectsOfType<Text>();
         foreach (Text textObject in textGameObjects) {
             textObject.color = textColor;
         }
     }
 
-    /*
-     * Sets the colour of the main game elements.
-     */
-    private static void SetGameElementsColours(string scene, Theme theme) {
+    private static void SetMainGameElementColours(string scene, Theme theme) {
         if (scene != "MainGame") {
             return;
         }

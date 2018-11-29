@@ -1,5 +1,5 @@
 ﻿/* 
- * Utility functions.
+ * Various Utility functions that don't quite fit anywhere else.
  */
 using UnityEngine;
 using UnityEngine.UI;
