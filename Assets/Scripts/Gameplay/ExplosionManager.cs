@@ -1,19 +1,15 @@
 ﻿/*
  * This class handles the generation and display of our explosions.
- * An explosion involes the instantiation of a prefab, which is essentially just an image sprite.
- * Additionally, the explosion turns the Box Collider of the tile on, killing a Player object touching the tile.
- * A sound effect is also played every time an explosion is generated.
  */
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class ExplosionManager : MonoBehaviour {
-    // Constants
-    private const float EXPLOSION_FADE_FAST = 0.3f;
-    private const float EXPLOSION_FADE_NORMAL = 0.7f;
-    private const float EXPLOSION_FADE_SLOW = 1.5f;
-    private const float EXPLOSION_FADE_VERY_SLOW = 3.0f;
+    private const float EXPLOSION_FADE_FAST_TIME = 0.3f;
+    private const float EXPLOSION_FADE_NORMAL_TIME = 0.7f;
+    private const float EXPLOSION_FADE_SLOW_TIME = 1.5f;
+    private const float EXPLOSION_FADE_VERY_SLOW_TIME = 3.0f;
 
     List<string> explosionsToFadeOutFast = new List<string> {
         "DT", "FB", "HT", "KA", "MA", "MU", "PB", "ZL"
@@ -25,14 +21,10 @@ public class ExplosionManager : MonoBehaviour {
         "DF", "LU", "ME", "UL"
     };
 
-    // Reference to the game grid
     public MainGrid mainGrid;
     private GameObject[][] gameGrid;
-
-    // Reference to player
     private Player player;
 
-    // Explosion sprite prefabs
     public Transform explosionArchonPrefab;
     public Transform explosionDarkArchonPrefab;
     public Transform explosionDefilerPrefab;
@@ -66,51 +58,41 @@ public class ExplosionManager : MonoBehaviour {
     public Transform explosionWraithPrefab;
     public Transform explosionZealotPrefab;
 
-    /*
-     * Initialization
-     */
     void Awake() {
         gameGrid = mainGrid.GetGameGrid();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    /*
-     * Wrapper functions for the Explode Coroutine. 
-     */
-    public void ExplodeTile(int row, int col, string explosionCode) {
-        Explode(row, col, explosionCode);
-    }
-
     public void ExplodeRow(int row, string explosionCode) {
-        Explode(row, 0, explosionCode);
-        Explode(row, 1, explosionCode);
-        Explode(row, 2, explosionCode);
-        Explode(row, 3, explosionCode);
-        Explode(row, 4, explosionCode);
+        ExplodeTile(row, 0, explosionCode);
+        ExplodeTile(row, 1, explosionCode);
+        ExplodeTile(row, 2, explosionCode);
+        ExplodeTile(row, 3, explosionCode);
+        ExplodeTile(row, 4, explosionCode);
     }
 
     public void ExplodeColumn(int col, string explosionCode) {
-        Explode(0, col, explosionCode);
-        Explode(1, col, explosionCode);
-        Explode(2, col, explosionCode);
-        Explode(3, col, explosionCode);
-        Explode(4, col, explosionCode);
+        ExplodeTile(0, col, explosionCode);
+        ExplodeTile(1, col, explosionCode);
+        ExplodeTile(2, col, explosionCode);
+        ExplodeTile(3, col, explosionCode);
+        ExplodeTile(4, col, explosionCode);
     }
 
     public void ExplodeDiagonalTopLeft(string explosionCode) {
-        Explode(4, 0, explosionCode);
-        Explode(3, 1, explosionCode);
-        Explode(2, 2, explosionCode);
-        Explode(1, 3, explosionCode);
-        Explode(0, 4, explosionCode);
+        ExplodeTile(4, 0, explosionCode);
+        ExplodeTile(3, 1, explosionCode);
+        ExplodeTile(2, 2, explosionCode);
+        ExplodeTile(1, 3, explosionCode);
+        ExplodeTile(0, 4, explosionCode);
     }
 
     public void ExplodeDiagonalBottomLeft(string explosionCode) {
-        Explode(0, 0, explosionCode);
-        Explode(1, 1, explosionCode);
-        Explode(2, 2, explosionCode);
-        Explode(3, 3, explosionCode);
-        Explode(4, 4, explosionCode);
+        ExplodeTile(0, 0, explosionCode);
+        ExplodeTile(1, 1, explosionCode);
+        ExplodeTile(2, 2, explosionCode);
+        ExplodeTile(3, 3, explosionCode);
+        ExplodeTile(4, 4, explosionCode);
     }
 
     public void ExplodePlus(string explosionCode) {
@@ -120,39 +102,39 @@ public class ExplosionManager : MonoBehaviour {
 
     public void ExplodeFourSquare(int section, string explosionCode) {
         if (section == 0) {
-            Explode(0, 0, explosionCode);
-            Explode(0, 1, explosionCode);
-            Explode(1, 0, explosionCode);
-            Explode(1, 1, explosionCode);
+            ExplodeTile(0, 0, explosionCode);
+            ExplodeTile(0, 1, explosionCode);
+            ExplodeTile(1, 0, explosionCode);
+            ExplodeTile(1, 1, explosionCode);
         } else if (section == 1) {
-            Explode(0, 3, explosionCode);
-            Explode(0, 4, explosionCode);
-            Explode(1, 3, explosionCode);
-            Explode(1, 4, explosionCode);
+            ExplodeTile(0, 3, explosionCode);
+            ExplodeTile(0, 4, explosionCode);
+            ExplodeTile(1, 3, explosionCode);
+            ExplodeTile(1, 4, explosionCode);
         } else if (section == 2) {
-            Explode(3, 0, explosionCode);
-            Explode(3, 1, explosionCode);
-            Explode(4, 0, explosionCode);
-            Explode(4, 1, explosionCode);
+            ExplodeTile(3, 0, explosionCode);
+            ExplodeTile(3, 1, explosionCode);
+            ExplodeTile(4, 0, explosionCode);
+            ExplodeTile(4, 1, explosionCode);
         } else if (section == 3) {
-            Explode(3, 3, explosionCode);
-            Explode(3, 4, explosionCode);
-            Explode(4, 3, explosionCode);
-            Explode(4, 4, explosionCode);
+            ExplodeTile(3, 3, explosionCode);
+            ExplodeTile(3, 4, explosionCode);
+            ExplodeTile(4, 3, explosionCode);
+            ExplodeTile(4, 4, explosionCode);
         }
     }
 
-    /*
-     * Trigger the tile at the specified row and column positions. 
-     * What this means, is to generate a sprite at that tile, and "explode" that tile.
-     * Exploding the tile, means to destroy any unit on that tile.
-     */
-    private void Explode(int row, int col, string explosionCode) {
-        Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
+    public void ExplodeTile(int row, int col, string explosionCode) {
         AudioManager.Instance.PlayExplosion(explosionCode);
+        Transform explosion = InstantiateUnit(explosionCode, gameGrid[row][col].transform);
         StartCoroutine(FadeOutAndDestroy(explosion.gameObject, explosionCode));
+        
+        if (PlayerIsTouchingTile(row, col)) {
+            player.Death();
+        }
+    }
 
-        // detect if player in this tile
+    private bool PlayerIsTouchingTile(int tileRow, int tileCol) {
         float playerWidth = player.transform.lossyScale.x;
         float playerHeight = player.transform.lossyScale.y;
         float playerTop = player.transform.position.y + playerHeight / 2;
@@ -160,7 +142,7 @@ public class ExplosionManager : MonoBehaviour {
         float playerRight = player.transform.position.x + playerWidth / 2;
         float playerLeft = player.transform.position.x - playerWidth / 2;
 
-        Transform tileTransform = gameGrid[row][col].transform;
+        Transform tileTransform = gameGrid[tileRow][tileCol].transform;
         float tileWidth = tileTransform.lossyScale.x;
         float tileHeight = tileTransform.lossyScale.y;
         float tileTop = tileTransform.position.y + tileHeight / 2;
@@ -173,44 +155,39 @@ public class ExplosionManager : MonoBehaviour {
         bool rightInTile = playerRight > tileLeft && playerRight < tileRight;
         bool leftInTile = playerLeft > tileLeft && playerLeft < tileRight;
 
-        if ((topInTile && rightInTile) || (topInTile && leftInTile) || (botInTile && rightInTile) || (botInTile && leftInTile)) {
-            player.Death();
-        }
+        return (topInTile && rightInTile) || (topInTile && leftInTile) || (botInTile && rightInTile) || (botInTile && leftInTile);
     }
 
-    /*
-     * Given a Game object, fade out the object by reducing its alpha property repeatedly.
-     * After its alpha hits 0, destroy the game object.
-     */
-    IEnumerator FadeOutAndDestroy(GameObject explosionGameObject, string explosionCode) {
-        float explosionFadeTime;
-        if (explosionsToFadeOutFast.Contains(explosionCode)) {
-            explosionFadeTime = EXPLOSION_FADE_FAST;
-        } else if (explosionsToFadeOutSlow.Contains(explosionCode)) {
-            explosionFadeTime = EXPLOSION_FADE_SLOW;
-        } else if (explosionsToFadeOutVerySlow.Contains(explosionCode)) {
-            explosionFadeTime = EXPLOSION_FADE_VERY_SLOW;
-        } else {
-            explosionFadeTime = EXPLOSION_FADE_NORMAL;
-        }
-
-        SpriteRenderer spriteRenderer = explosionGameObject.GetComponent<SpriteRenderer>();
-        Color tmpColor = spriteRenderer.color;
-        while (tmpColor.a > 0f) {
-            tmpColor.a -= Time.deltaTime / explosionFadeTime;
-            spriteRenderer.color = tmpColor;
-            if (tmpColor.a <= 0f) {
-                tmpColor.a = 0f;
+    private IEnumerator FadeOutAndDestroy(GameObject objectToDestroy, string explosionCode) {
+        float explosionFadeTime = GetExplosionFadeTime(explosionCode);
+        SpriteRenderer objectSpriteRenderer = objectToDestroy.GetComponent<SpriteRenderer>();
+        Color objectColor = objectSpriteRenderer.color;
+        while (objectColor.a > 0f) {
+            objectColor.a -= Time.deltaTime / explosionFadeTime;
+            objectSpriteRenderer.color = objectColor;
+            if (objectColor.a <= 0f) {
+                objectColor.a = 0f;
             }
             yield return null;
         }
-        spriteRenderer.color = tmpColor;
-        Destroy(explosionGameObject);
+        objectSpriteRenderer.color = objectColor;
+        Destroy(objectToDestroy);
     }
 
-    /*
-     * Instantiate a prefab of the unit corresponding to the string code at specified location.
-     */
+    private float GetExplosionFadeTime(string explosionCode) {
+        float explosionFadeTime;
+        if (explosionsToFadeOutFast.Contains(explosionCode)) {
+            explosionFadeTime = EXPLOSION_FADE_FAST_TIME;
+        } else if (explosionsToFadeOutSlow.Contains(explosionCode)) {
+            explosionFadeTime = EXPLOSION_FADE_SLOW_TIME;
+        } else if (explosionsToFadeOutVerySlow.Contains(explosionCode)) {
+            explosionFadeTime = EXPLOSION_FADE_VERY_SLOW_TIME;
+        } else {
+            explosionFadeTime = EXPLOSION_FADE_NORMAL_TIME;
+        }
+        return explosionFadeTime;
+    }
+
     private Transform InstantiateUnit(string code, Transform location) {
         Transform explosion;
         switch (code) {
@@ -321,15 +298,39 @@ public class ExplosionManager : MonoBehaviour {
         return explosion;
     }
 
-    /*
-     * Vaccum feature, first pass. 
-     * When this is called, find the Player and pull it towards the middle tile.
-     */
     private void Vaccum() {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector3 playerPosition = player.transform.position;
-        if (playerPosition.x > -2.7 && playerPosition.x < 2.7 && playerPosition.y > -2.7 && playerPosition.y < 2.7) {
-            player.transform.position = Vector2.MoveTowards(player.transform.position, new Vector2(gameGrid[2][2].transform.position.x, gameGrid[2][2].transform.position.y), Time.deltaTime * 12);
+        if (PlayerIsInGameGridBounds(playerPosition)) {
+            MovePlayerTowardsCenter();
         }
+    }
+
+    private bool PlayerIsInGameGridBounds(Vector3 playerPosition) {
+        return playerPosition.x > GetLeftBound() && playerPosition.x < GetRightBound() && playerPosition.y > GetBottomBound() && playerPosition.y < GetTopBound();
+    }
+
+    private float GetBottomBound() {
+        Transform bottomTile = GameObject.Find("0,0").GetComponent<Transform>();
+        return bottomTile.position.y - (bottomTile.lossyScale.y / 2);
+    } 
+    
+    private float GetTopBound() {
+        Transform topTile = GameObject.Find("4,4").GetComponent<Transform>();
+        return topTile.position.y + (topTile.lossyScale.y / 2);
+    }
+
+    private float GetLeftBound() {
+        Transform leftTile = GameObject.Find("0,0").GetComponent<Transform>();
+        return leftTile.position.x - (leftTile.lossyScale.x / 2);
+    }
+
+    private float GetRightBound() {
+        Transform rightTile = GameObject.Find("4,4").GetComponent<Transform>();
+        return rightTile.position.x + (rightTile.lossyScale.x / 2);
+    }
+
+    private void MovePlayerTowardsCenter() {
+        player.transform.position = Vector2.MoveTowards(player.transform.position, new Vector2(gameGrid[2][2].transform.position.x, gameGrid[2][2].transform.position.y), Time.deltaTime * 12);
     }
 }

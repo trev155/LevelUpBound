@@ -33,7 +33,7 @@ public class Goal : MonoBehaviour {
             }
 
             MovePlayerToSpawn(player);
-            levelManager.AdvanceLevel();
+            levelManager.LevelCompleted();
             mainGame.UpdateLevelText();
 
             if (GameContext.ControlScheme == ControlMode.CLICK) {

@@ -1,8 +1,5 @@
 ﻿/*
- * This class handles level management. This includes things like,
- * - starting levels
- * - stopping levels
- * - keeping track of the current level and current level data
+ * Handling levels, such as starting a level, stopping a level, and more.
  */
 
 using UnityEngine;
@@ -10,29 +7,79 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
-    // Constants
     private const string LEVEL_OBJECT_TYPE = "level";
     private const string EXTERNAL_OBJECT_TYPE = "external";
 
-    // Level construction manager object
     public LevelConstructor levelConstructor;
-    // UI Management
     public MainGame mainGame;
 
-    // Keep track of the current level's coroutine so that we can stop it when we need to
     private IEnumerator currentLevelCoroutine;
-    // Levels that require external objects
     HashSet<int> levelsWithExternals = new HashSet<int>();
 
-    // Tutorial mode requires extra support
     public ModalPrelevelInfo modalPrelevelInfo;
     public Transform modalContainer;
 
-    /*
-     * Initialization.
-     */
+
     private void Awake() {
-        // load data regarding which levels have external objects
+        LoadLevelsWithExternals();
+    }
+
+    void Start() {
+        if (GameContext.GameMode == Mode.TUTORIAL) {
+            PlayTutorialLevel();
+            return;
+        }
+        PlayLevel();
+    }
+
+    public void PlayLevel() {
+        currentLevelCoroutine = LoadLevelCoroutine();
+        LoadExternalObjects();
+        levelConstructor.StartCoroutine(currentLevelCoroutine);
+        UpdateUIElements();
+    }
+
+    private IEnumerator LoadLevelCoroutine() {
+        string levelPrefix = GameMode.GetLevelPrefix(GameContext.GameMode);
+        string levelFilepath = LevelStringConstructor.GetFilepathString(GameContext.CurrentLevel, levelPrefix);
+        currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
+        if (currentLevelCoroutine == null) {
+            throw new UnityException("Current Level Coroutine was null, cannot play level");
+        }
+        return currentLevelCoroutine;
+    }
+
+    private void LoadExternalObjects() {
+        string externalPrefix = GameMode.GetExternalPrefix(GameContext.GameMode);
+        string externalsFilepath = LevelStringConstructor.GetFilepathString(GameContext.CurrentLevel, externalPrefix);
+        if (levelsWithExternals.Contains(GameContext.CurrentLevel)) {
+            levelConstructor.LoadExternalObjects(externalsFilepath);
+        }
+    }
+
+    private void UpdateUIElements() {
+        mainGame.UpdateLevelText();
+        mainGame.UpdateGameModeText();
+    }
+
+    public void StopLevel() {
+        levelConstructor.StopCoroutine(currentLevelCoroutine);
+    }
+
+    public void LevelCompleted() {
+        StopLevel();
+        levelConstructor.RemoveExternalObjectsFromScene();
+        GameContext.CurrentLevel += 1;
+        StartCoroutine(InitiateWaitBeforeAdvancingLevel());
+
+        if (GameContext.GameMode == Mode.TUTORIAL) {
+            PlayTutorialLevel();
+            return;
+        }
+        PlayLevel();
+    }
+
+    private void LoadLevelsWithExternals() {
         string datafile = GameMode.GetExternalListPath(GameContext.GameMode);
         TextAsset externalLevelsTextAsset = Resources.Load<TextAsset>(datafile);
         string externalLevelsText = externalLevelsTextAsset.text;
@@ -44,91 +91,12 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    /*
-     * Startup.
-     */
-    void Start() {
-        if (GameContext.GameMode == Mode.TUTORIAL) {
-            PlayTutorialLevel();
-            return;
-        }
-
-        PlayLevel();
-    }
-
-    /*
-     * Play the current level.
-     */
-    public void PlayLevel() {
-        // File locations to read from depends on the game mode
-        string levelPrefix = GameMode.GetLevelPrefix(GameContext.GameMode);
-        string externalPrefix = GameMode.GetExternalPrefix(GameContext.GameMode);
-
-        // Load the current level data 
-        string levelFilepath = LevelString.GetFilepathString(GameContext.CurrentLevel, levelPrefix);
-        currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
-        if (currentLevelCoroutine == null) {
-            return;
-        }
-
-        // Check if there are any other things we need to initialize for this level
-        string externalsFilepath = LevelString.GetFilepathString(GameContext.CurrentLevel, externalPrefix);
-        if (levelsWithExternals.Contains(GameContext.CurrentLevel)) {
-            levelConstructor.LoadExternalObjects(externalsFilepath);
-        }
-        
-        // Start the current level
-        levelConstructor.StartCoroutine(currentLevelCoroutine);
-
-        // Update the UI
-        mainGame.UpdateLevelText();
-        mainGame.UpdateGameModeText();
-
-        Debug.Log("Current Level: " + GameContext.CurrentLevel);
-    }
-
-    /*
-     * Wrapper for playing a tutorial level.
-     */
-    public void PlayTutorialLevel() {
-        TutorialModeHandler();
-    }
-
-    /*
-     * Stop the current level. 
-     */
-    public void StopLevel() {
-        levelConstructor.StopCoroutine(currentLevelCoroutine);
-    }
-
-    /*
-     * Level completed. Stop the current level, and start the next one.
-     */
-    public void AdvanceLevel() {
-        StopLevel();
-        levelConstructor.RemoveExternalObjects();
-        GameContext.CurrentLevel += 1;
-        StartCoroutine(PauseBetweenLevels());
-
-        if (GameContext.GameMode == Mode.TUTORIAL) {
-            PlayTutorialLevel();
-            return;
-        }
-        PlayLevel();
-    }
-
-    /*
-     * Wait for some time.
-     */
-    private IEnumerator PauseBetweenLevels() {
+    private IEnumerator InitiateWaitBeforeAdvancingLevel() {
         yield return new WaitForSeconds(2.0f);
     }
 
-    /*
-     * Tutorial Mode handler
-     */
-    private void TutorialModeHandler() {
-        ModalPrelevelInfo modal = Instantiate(modalPrelevelInfo, modalContainer);
+    public void PlayTutorialLevel() {
+        ModalPrelevelInfo tutorialModal = Instantiate(modalPrelevelInfo, modalContainer);
         List<string> messages = new List<string>();
         Dictionary<int, string> imageLevelToPaths = new Dictionary<int, string>();
         if (GameContext.CurrentLevel == 1) {
@@ -148,12 +116,12 @@ public class LevelManager : MonoBehaviour {
         }
         if (GameContext.CurrentLevel == 4) {
             messages.Add("Key levels are also quite common. In these levels, you have to fetch the key to unlock the sealed wall.");
-            imageLevelToPaths.Add(1,"TutorialImages/tut4-1");
+            imageLevelToPaths.Add(1, "TutorialImages/tut4-1");
         }
         if (GameContext.CurrentLevel == 5) {
             messages.Add("Nice! Now use your skills to complete the final level of the Tutorial.");
         }
-        modal.Initialize(messages, imageLevelToPaths);
+        tutorialModal.Initialize(messages, imageLevelToPaths);
         return;
     }
 }

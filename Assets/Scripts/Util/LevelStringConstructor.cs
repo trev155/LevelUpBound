@@ -1,7 +1,7 @@
 ﻿/*
  * Utility functions for constructing level filepaths / strings.
  */
-public static class LevelString {
+public static class LevelStringConstructor {
     /*
     * Filepath: eg) /Assets/Scripts/Levels/008
     */

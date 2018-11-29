@@ -74,7 +74,7 @@ public class LevelSelector : MonoBehaviour {
                 levelButtonInstance = Instantiate(levelButtonPrefab, levelButtonPositions[buttonPositionIndex]);
             }
             
-            levelButtonInstance.gameObject.name = "Level_" + LevelString.GetLevelString(nextLevel);
+            levelButtonInstance.gameObject.name = "Level_" + LevelStringConstructor.GetLevelString(nextLevel);
             levelButtonInstance.gameObject.GetComponent<Button>().onClick.AddListener(LevelButtonOnClick);
             Text levelButtonText = levelButtonInstance.GetChild(0).GetComponent<Text>();
             levelButtonText.text = nextLevel.ToString();

@@ -1,18 +1,15 @@
 ﻿/*
- * The LevelConstructor is responsible for reading files and constructing
- * a level coroutine based on the file contents.
+ * The LevelConstructor is responsible for reading files and constructing a level coroutine based on the file contents.
  */
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class LevelConstructor : MonoBehaviour {
-    // Script that manages generating the explosions
     public ExplosionManager em;
-    // Reference to the game grid
     public MainGrid mainGrid;
     private GameObject[][] gameGrid;
-    // External objects
+    
     public Transform wallPrefab;
     public Transform lockedWallPrefab;
     public Transform doubleLockedWallPrefab;
@@ -23,17 +20,10 @@ public class LevelConstructor : MonoBehaviour {
     public Transform movingObjectPrefab;
     public Transform keyPrefab;
 
-    /*
-     * Initialization.
-     */
     void Awake() {
         gameGrid = mainGrid.GetGameGrid();
     }
 
-    /*
-     * Load a level coroutine from a given filepath.
-     * The filepath points to a file containing level directives. We use this data to construct a Level coroutine.
-     */
     public IEnumerator LoadLevelFromFilepath(string levelFilepath) {
         List<string> commands = new List<string>();
         TextAsset levelTextAsset = Resources.Load<TextAsset>(levelFilepath);
@@ -47,10 +37,7 @@ public class LevelConstructor : MonoBehaviour {
     }
 
     /*
-     * The LevelConstructor is responsible for creating a Level. 
-     * It returns a Coroutine, which loops an obstacle sequence.
-     * The Level is constructed by reading a list of string commands.
-     * These commands are all pre-formatted so they can be interpreted properly.
+     * Creates a looping Coroutine, which represents a level.
      */
     private IEnumerator BuildLevel(List<string> commands) {
         if (commands.Count == 0) {
@@ -95,12 +82,6 @@ public class LevelConstructor : MonoBehaviour {
         }
     }
 
-    /*
-     * For some levels, there are external objects that we need to implement.
-     * Specifically - walls and keys.
-     * 
-     * Read this data from an external file.
-     */
     public void LoadExternalObjects(string externalsFilepath) {
         List<string> lines = new List<string>();
         TextAsset externalsTextAsset = Resources.Load<TextAsset>(externalsFilepath);
@@ -112,9 +93,6 @@ public class LevelConstructor : MonoBehaviour {
         ConstructExternalObjects(lines);
     }
 
-    /*
-     * Construct external objects.
-     */
     public void ConstructExternalObjects(List<string> data) {
         foreach (string line in data) {
             int wallRow; 
@@ -166,12 +144,8 @@ public class LevelConstructor : MonoBehaviour {
         }
     }
 
-    /*
-     * Remove all external objects.
-     */
-     public void RemoveExternalObjects() {
-        GameObject[] gameObjectsToRemove;
-        gameObjectsToRemove = GameObject.FindGameObjectsWithTag("External");
+     public void RemoveExternalObjectsFromScene() {
+        GameObject[] gameObjectsToRemove = GameObject.FindGameObjectsWithTag("External");
         foreach (GameObject obj in gameObjectsToRemove) {
             Destroy(obj);
         }

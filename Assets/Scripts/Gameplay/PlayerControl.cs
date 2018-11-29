@@ -1,5 +1,5 @@
 ﻿/*
- * This class handles the Player Controls.
+ * Handles the Player Control and movement.
  */
 using UnityEngine;
 using System.Collections;
@@ -10,32 +10,23 @@ public enum ControlMode {
 }
 
 public class PlayerControl : MonoBehaviour {
-    // sprite rotation
-    private float currentRotation = 0;
+    private float currentSpriteRotation = 0;
 
-    // fields for arrow controls
     public float arrowSpeed;
-    private readonly float distance = 1.0f;
+    private readonly float moveDistance = 1.0f;
     private bool enableMoveUp;
     private bool enableMoveDown;
     private bool enableMoveLeft;
     private bool enableMoveRight;
 
-    // fields for click controls
     public float clickSpeed;
     public bool clickMoveActive;
     private Vector3 touchDestination;
 
-    // Objects
     private Transform playerTransform;
-
-    // Click circle
     public Transform clickCircleLocation;
     public Transform clickCirclePrefab;
 
-    /* 
-     * Initialization
-     */
     private void Awake() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -46,25 +37,25 @@ public class PlayerControl : MonoBehaviour {
 
         clickMoveActive = false;
 
-        // If control mode is click, disable the arrow buttons
         if (GameContext.ControlScheme == ControlMode.CLICK) {
-            GameObject[] arrows = GameObject.FindGameObjectsWithTag("ControlArrow");
-            foreach (GameObject arrow in arrows) {
-                arrow.SetActive(false);
-            }
+            DisableCanvasArrows();
+        }
+    }
+   
+    private void DisableCanvasArrows() {
+        GameObject[] arrows = GameObject.FindGameObjectsWithTag("ControlArrow");
+        foreach (GameObject arrow in arrows) {
+            arrow.SetActive(false);
         }
     }
 
-    /*
-    * Called on every frame.
-    */
     private void Update() {
         if (GameContext.ModalActive) {
             return;
         }
 
         PreventZRotation();
-        transform.Rotate(Vector3.forward * currentRotation);
+        transform.Rotate(Vector3.forward * currentSpriteRotation);
 
         if (GameContext.ControlScheme == ControlMode.ARROW) {
             ArrowMovement();
@@ -75,9 +66,12 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    /*
-     * Player movement
-     */
+    private void PreventZRotation() {
+        if (playerTransform.rotation.z != 0) {
+            playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.x, playerTransform.rotation.y, 0);
+        }
+    }
+
     private void ArrowMovement() {
         bool up = enableMoveUp || Input.GetAxisRaw("Vertical") > 0;
         bool down = enableMoveDown || Input.GetAxisRaw("Vertical") < 0;
@@ -85,39 +79,38 @@ public class PlayerControl : MonoBehaviour {
         bool right = enableMoveRight || Input.GetAxisRaw("Horizontal") > 0;
 
         if (up) {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + distance), Time.deltaTime * arrowSpeed);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + moveDistance), Time.deltaTime * arrowSpeed);
         }
         if (down) {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y - distance), Time.deltaTime * arrowSpeed);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y - moveDistance), Time.deltaTime * arrowSpeed);
         }
         if (left) {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x - distance, transform.position.y), Time.deltaTime * arrowSpeed);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x - moveDistance, transform.position.y), Time.deltaTime * arrowSpeed);
         }
         if (right) {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + distance, transform.position.y), Time.deltaTime * arrowSpeed);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + moveDistance, transform.position.y), Time.deltaTime * arrowSpeed);
         }
 
-        // Rotations
         if (up && right) {
-            currentRotation = 315;
+            currentSpriteRotation = 315;
         } else if (right && down) {
-            currentRotation = 225;
+            currentSpriteRotation = 225;
         } else if (down && left) {
-            currentRotation = 135;
+            currentSpriteRotation = 135;
         } else if (left && up) {
-            currentRotation = 45;
+            currentSpriteRotation = 45;
         } else if (up) {
-            currentRotation = 360;
+            currentSpriteRotation = 360;
         } else if (right) {
-            currentRotation = 270;
+            currentSpriteRotation = 270;
         } else if (down) {
-            currentRotation = 180;
+            currentSpriteRotation = 180;
         } else if (left) {
-            currentRotation = 90;
+            currentSpriteRotation = 90;
         }
     }
 
-    // Button event handlers
+    // Button Handlers for arrow movement
     public void StartMoveUp() {
         enableMoveUp = true;
     }
@@ -150,52 +143,42 @@ public class PlayerControl : MonoBehaviour {
         enableMoveRight = false;
     }
 
-    /*
-     * Movement for the Click control scheme.
-     */
+
     private void ClickMovement() {
-        // Listen for clicks
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
-            // Set new destination
-            clickMoveActive = true;
-            Touch touch = Input.GetTouch(0);
-            Vector3 touchPoint = Camera.main.ScreenToWorldPoint(touch.position);
-            touchPoint.z = 0.0f;
-            touchDestination = touchPoint;
-
-            // Visual Indication
-            clickCircleLocation.position = touchPoint;
-            GameObject circle = Instantiate(clickCirclePrefab, clickCircleLocation).gameObject;
-            StartCoroutine(FadeOutAndDestroy(circle));
-            
-            Debug.Log("Touch - Set New Destination at: " + touchDestination);
-
-            // Rotation
-            Vector2 delta = touchDestination - transform.position;
-            Quaternion look = Quaternion.LookRotation(delta);
-            float vertical = look.eulerAngles.x;
-            float horizontal = look.eulerAngles.y;
-            if (horizontal < 180) {
-                currentRotation = ((vertical + 90) % 360) * -1;
-            } else {
-                currentRotation = vertical + 90;
-            }
+        if (HasClicked()) {
+            SetNewClickDestination();
+            RotateSprite();
         }
 
         if (clickMoveActive) {
             transform.position = Vector3.MoveTowards(transform.position, touchDestination, Time.deltaTime * clickSpeed);
-
-            if (transform.position.Equals(touchDestination)) {
-                Debug.Log("Reached destination at " + touchDestination);
+            if (ReachedTouchDestination()) {
                 clickMoveActive = false;
             }
         }
     }
 
-    /*
-     * Given a Game object, fade out the object by reducing its alpha property repeatedly.
-     * After its alpha hits 0, destroy the game object.
-     */
+    private bool HasClicked() {
+        return Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
+    }
+
+    private void SetNewClickDestination() {
+        Touch touch = Input.GetTouch(0);
+        Vector3 touchPoint = Camera.main.ScreenToWorldPoint(touch.position);
+        touchPoint.z = 0.0f;
+
+        clickMoveActive = true;
+        touchDestination = touchPoint;
+
+        DisplayDestinationCircle(touchPoint);
+    }
+
+    private void DisplayDestinationCircle(Vector3 touchPoint) {
+        clickCircleLocation.position = touchPoint;
+        GameObject circle = Instantiate(clickCirclePrefab, clickCircleLocation).gameObject;
+        StartCoroutine(FadeOutAndDestroy(circle));
+    }
+
     IEnumerator FadeOutAndDestroy(GameObject explosionGameObject) {
         float fadeOutTime = 1.0f;
         SpriteRenderer spriteRenderer = explosionGameObject.GetComponent<SpriteRenderer>();
@@ -213,12 +196,19 @@ public class PlayerControl : MonoBehaviour {
         Destroy(explosionGameObject);
     }
 
-    /*
-    * Prevent Z-axis rotation.
-    */
-    private void PreventZRotation() {
-        if (playerTransform.rotation.z != 0) {
-            playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.x, playerTransform.rotation.y, 0);
+    private void RotateSprite() {
+        Vector2 delta = touchDestination - transform.position;
+        Quaternion look = Quaternion.LookRotation(delta);
+        float vertical = look.eulerAngles.x;
+        float horizontal = look.eulerAngles.y;
+        if (horizontal < 180) {
+            currentSpriteRotation = ((vertical + 90) % 360) * -1;
+        } else {
+            currentSpriteRotation = vertical + 90;
         }
+    }
+
+    private bool ReachedTouchDestination() {
+        return transform.position.Equals(touchDestination);
     }
 }
