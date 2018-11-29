@@ -1,5 +1,6 @@
 ﻿/*
- * Class that handles MainMenu actions.
+ * Class that handles MainMenu actions. 
+ * The MainMenu is the main "landing page" for the application.
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,8 +16,7 @@ public class MainMenu : MonoBehaviour {
     public Text gameModeDescription;
 
     private void Awake() {
-        // TODO think about this
-        PersistentStorage.LoadData();
+        PersistentStorage.LoadData();   // Load saved data here, as it is the main landing page for the app
 
         AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();
