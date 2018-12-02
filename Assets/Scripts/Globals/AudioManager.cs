@@ -294,7 +294,7 @@ public class AudioManager : MonoBehaviour {
     public void AdjustBackgroundMusicVolume() {
         foreach (AudioSource audioSource in sources) {
             if (audioSource.name == "BGM") {
-                audioSource.volume = GameContext.CurrentMusicVolume / 2;
+                audioSource.volume = GameContext.CurrentMusicVolume;
             }
         }
     }

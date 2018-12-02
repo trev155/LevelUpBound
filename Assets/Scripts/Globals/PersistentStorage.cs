@@ -86,9 +86,11 @@ public static class PersistentStorage {
 
         float bgmVolume = PlayerPrefs.GetFloat(BGM_VOLUME);
         GameContext.CurrentMusicVolume = bgmVolume;
+        AudioManager.Instance.AdjustBackgroundMusicVolume();
 
         float effectsVolume = PlayerPrefs.GetFloat(EFFECTS_VOLUME);
         GameContext.CurrentEffectsVolume = effectsVolume;
+        AudioManager.Instance.AdjustEffectsVolume();
 
         string completedLevelsJson = PlayerPrefs.GetString(COMPLETED_LEVELS);
         Debug.Log("Completed Levels Data:");
