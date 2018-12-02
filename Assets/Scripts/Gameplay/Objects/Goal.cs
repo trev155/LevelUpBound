@@ -16,7 +16,7 @@ public class Goal : MonoBehaviour {
         if (LevelCleared(other)) {
             Collider2D player = other;
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
-            GameContext.RecordLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
+            LevelManager.RecordLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
             PersistentStorage.SaveData();
 
             if (ShouldDisplayCelebrationModal()) {

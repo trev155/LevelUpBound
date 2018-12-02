@@ -116,7 +116,7 @@ public class MainMenu : MonoBehaviour {
             return;
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.PreviousPageContext = SceneName.LEVEL_SELECTOR;
+        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_SELECTOR));
     }
 

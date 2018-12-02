@@ -64,15 +64,4 @@ public static class GameContext {
             { Mode.CHALLENGE, new HashSet<int>() }
         };
     }
-
-    public static void RecordLevelCompleted(Mode mode, int level) {
-        if (mode == Mode.TUTORIAL) {
-            return;
-        }
-        if (CompletedLevels[mode].Contains(level)) {
-            return;
-        } else {
-            CompletedLevels[mode].Add(level);
-        }
-    }
 }

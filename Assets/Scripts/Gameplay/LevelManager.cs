@@ -124,4 +124,15 @@ public class LevelManager : MonoBehaviour {
         tutorialModal.Initialize(messages, imageLevelToPaths);
         return;
     }
+
+    public static void RecordLevelCompleted(Mode mode, int level) {
+        if (mode == Mode.TUTORIAL) {
+            return;
+        }
+        if (GameContext.CompletedLevels[mode].Contains(level)) {
+            return;
+        } else {
+            GameContext.CompletedLevels[mode].Add(level);
+        }
+    }
 }
