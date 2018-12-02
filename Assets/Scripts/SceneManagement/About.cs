@@ -20,6 +20,6 @@ public class About : MonoBehaviour {
 
     public void BackButton() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousContextPage();
+        SceneManager.LoadPreviousContextPage();
     }
 }

@@ -119,12 +119,12 @@ public class LevelSelector : MonoBehaviour {
     private void PlayLevel(Mode mode, int level) {
         GameContext.GameMode = mode;
         GameContext.CurrentLevel = level;
-        GameContext.PreviousPageContext = "LevelSelector";
+        GameContext.PreviousPageContext = SceneName.LEVEL_SELECTOR;
         GameContext.PlayedFromLevelSelector = true;
         GameContext.LevelSelectionPageNum = currentPage;
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.MAIN_GAME));
     }
 
     /*
@@ -195,6 +195,6 @@ public class LevelSelector : MonoBehaviour {
     */
     public void BackButton() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousContextPage();
+        SceneManager.LoadPreviousContextPage();
     }
 }

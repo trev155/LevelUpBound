@@ -55,9 +55,9 @@ public class MainMenu : MonoBehaviour {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.GameMode = GameContext.MainMenuGameMode;
         GameContext.CurrentLevel = 1;
-        GameContext.PreviousPageContext = "MainMenu";
+        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
         GameContext.PlayedFromLevelSelector = false;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.MAIN_GAME));
     }
    
     public void ScrollLeft() {
@@ -116,8 +116,8 @@ public class MainMenu : MonoBehaviour {
             return;
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.PreviousPageContext = "MainMenu";
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelector");
+        GameContext.PreviousPageContext = SceneName.LEVEL_SELECTOR;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_SELECTOR));
     }
 
     public void LevelEditor() {
@@ -125,8 +125,8 @@ public class MainMenu : MonoBehaviour {
             return;
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.PreviousPageContext = "MainMenu";
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelEditor");
+        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR));
     }
 
     public void Instructions() {
@@ -134,8 +134,8 @@ public class MainMenu : MonoBehaviour {
             return;
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.PreviousPageContext = "MainMenu";
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Instructions");
+        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.INSTRUCTIONS));
     }
 
     public void Options() {
@@ -143,8 +143,8 @@ public class MainMenu : MonoBehaviour {
             return;
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.PreviousPageContext = "MainMenu";
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
+        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.OPTIONS));
     }
     
     public void About() {
@@ -153,8 +153,8 @@ public class MainMenu : MonoBehaviour {
         }
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.PreviousPageContext = "MainMenu";
-        UnityEngine.SceneManagement.SceneManager.LoadScene("About");
+        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.ABOUT));
     }
 
     // Exit App Button Handling

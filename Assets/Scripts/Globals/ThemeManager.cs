@@ -14,7 +14,7 @@ public enum Theme {
 
 public static class ThemeManager {
     public static void SetTheme() {
-        string scene = SceneManager.GetActiveScene().name;
+        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         Theme theme = GameContext.CurrentTheme;
         
         SetBackground(scene, theme);
@@ -37,7 +37,7 @@ public static class ThemeManager {
             return;
         }
 
-        if (scene == "MainGame") {
+        if (scene == SceneManager.GetSceneNameString(SceneName.MAIN_GAME)) {
             Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
             camera.backgroundColor = newColor;
         } else {
@@ -63,7 +63,7 @@ public static class ThemeManager {
     }
 
     private static void SetMainGameElementColours(string scene, Theme theme) {
-        if (scene != "MainGame") {
+        if (scene != SceneManager.GetSceneNameString(SceneName.MAIN_GAME)) {
             return;
         }
 

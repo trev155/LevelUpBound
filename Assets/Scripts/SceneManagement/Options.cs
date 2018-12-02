@@ -33,7 +33,7 @@ public class Options : MonoBehaviour {
         }
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousContextPage();
+        SceneManager.LoadPreviousContextPage();
     }
 
     private void InitializeAudioUI() {

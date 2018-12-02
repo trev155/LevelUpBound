@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Globals\GameContext.cs" />
     <Compile Include="Assets\Scripts\Globals\GameMode.cs" />
     <Compile Include="Assets\Scripts\Globals\PersistentStorage.cs" />
+    <Compile Include="Assets\Scripts\Globals\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Globals\ThemeManager.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\About.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\Instructions.cs" />

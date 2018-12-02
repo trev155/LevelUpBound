@@ -1,8 +1,6 @@
 ﻿/*
  * This class holds global data that can be used across scenes.
  */
-using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 public static class GameContext {
@@ -10,8 +8,8 @@ public static class GameContext {
     public static Mode GameMode { get; set; }
     public static int CurrentLevel { get; set; }
 
-    // Used for the Back button
-    public static string PreviousPageContext { get; set; }
+    // Keep track of what page the back button should refer to
+    public static SceneName PreviousPageContext { get; set; }
 
     // Audio controls
     public static bool AudioEnabled { get; set; }
@@ -43,7 +41,7 @@ public static class GameContext {
     static GameContext() {
         GameMode = Mode.CLASSIC;
         CurrentLevel = 1;
-        PreviousPageContext = "MainMenu";
+        PreviousPageContext = SceneName.MAIN_MENU;
         AudioEnabled = true;
         CurrentMusicVolume = 0.6f;
         CurrentEffectsVolume = 0.6f;
@@ -56,20 +54,6 @@ public static class GameContext {
         InitializeCompletedLevels();
         
         // PlayerPrefs.DeleteAll();     // For testing
-    }
-
-    public static void LoadPreviousContextPage() {
-        string[] validPreviousPages = { "MainMenu", "LevelSelector" };
-
-        if (PreviousPageContext == null || PreviousPageContext == "") {
-            Debug.Log("Previous Page Context not set. Loading Default Page");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
-        } else if (Array.IndexOf(validPreviousPages, PreviousPageContext) == -1) {
-            Debug.Log("Previous Page Context is invalid. Loading Default Page");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
-        } else {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(PreviousPageContext);
-        }
     }
 
     public static void InitializeCompletedLevels() {

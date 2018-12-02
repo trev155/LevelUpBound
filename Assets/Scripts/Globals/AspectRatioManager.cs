@@ -13,23 +13,23 @@ public static class AspectRatioManager {
     public static void AdjustScreenElements() {
         float aspectRatio = Camera.main.aspect;
         Debug.Log("Aspect Ratio: " + aspectRatio);
-        Scene scene = SceneManager.GetActiveScene();
+        Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
         // 4:3 portrait
         if (EqualsApprox(aspectRatio, 0.75f, 0.05f)) {
-            if (scene.name == "MainMenu") {
+            if (scene.name == SceneManager.GetSceneNameString(SceneName.MAIN_MENU)) {
                 AdjustMainMenuSceneElements(0.75f);
-            } else if (scene.name == "MainGame") {
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.MAIN_GAME)) {
                 AdjustMainGameSceneElements(0.75f);
-            } else if (scene.name == "LevelSelector") {
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.LEVEL_SELECTOR)) {
                 AdjustLevelSelectorSceneElements(0.75f);
-            } else if (scene.name == "Options") {
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.OPTIONS)) {
                 AdjustOptionsSceneElements(0.75f);
-            } else if (scene.name == "About") {
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.ABOUT)) {
                 AdjustAboutSceneElements(0.75f);
-            } else if (scene.name == "Instructions") {
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.INSTRUCTIONS)) {
                 AdjustInstructionsSceneElements(0.75f);
-            } else if (scene.name == "LevelEditor") {
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR)) {
                 AdjustLevelEditorSceneElements(0.75f);
             }
         }

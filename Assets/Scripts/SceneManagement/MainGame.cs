@@ -22,9 +22,9 @@ public class MainGame : MonoBehaviour {
         }
 
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        GameContext.LoadPreviousContextPage();
-        if (GameContext.PreviousPageContext == "LevelSelector") {
-            GameContext.PreviousPageContext = "MainMenu";
+        SceneManager.LoadPreviousContextPage();
+        if (GameContext.PreviousPageContext == SceneName.LEVEL_SELECTOR) {
+            GameContext.PreviousPageContext = SceneName.MAIN_MENU;
         }
     }
 

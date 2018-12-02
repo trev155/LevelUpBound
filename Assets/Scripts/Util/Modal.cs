@@ -30,6 +30,6 @@ public abstract class Modal : MonoBehaviour {
 
     public void CloseAndGoBack() {
         Close();
-        GameContext.LoadPreviousContextPage();
+        SceneManager.LoadPreviousContextPage();
     }
 }

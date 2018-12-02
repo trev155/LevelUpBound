@@ -27,8 +27,8 @@ public class Goal : MonoBehaviour {
             }
             
             if (CameFromLevelSelector()) {
-                GameContext.LoadPreviousContextPage();
-                GameContext.PreviousPageContext = "MainMenu";
+                SceneManager.LoadPreviousContextPage();
+                GameContext.PreviousPageContext = SceneName.MAIN_MENU;
                 return;
             }
 
