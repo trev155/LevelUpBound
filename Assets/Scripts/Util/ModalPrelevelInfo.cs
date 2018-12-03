@@ -60,7 +60,7 @@ public class ModalPrelevelInfo : Modal {
         if (images.ContainsKey(currentPage)) {
             pageImage.gameObject.SetActive(true);
             SetMainTextAlignment(TextAnchor.UpperCenter);
-            SetMainTextFontSize(35);
+            SetMainTextFontSize(40);
 
             string path = images[currentPage];
             Sprite img = Resources.Load<Sprite>(path);
@@ -68,7 +68,7 @@ public class ModalPrelevelInfo : Modal {
         } else {
             pageImage.gameObject.SetActive(false);
             SetMainTextAlignment(TextAnchor.MiddleCenter);
-            SetMainTextFontSize(45);
+            SetMainTextFontSize(50);
         }
 
         // Gray out arrows according to the page number

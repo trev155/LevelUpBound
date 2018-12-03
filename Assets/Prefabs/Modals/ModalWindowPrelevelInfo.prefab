@@ -260,8 +260,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 35
+    m_Font: {fileID: 12800000, guid: 9ba5367779079a04ab52091aca3f1325, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -289,10 +289,6 @@ MonoBehaviour:
   backArrow: {fileID: 114911053637414858}
   forwardArrow: {fileID: 114162798493997554}
   proceedButton: {fileID: 114335898009898006}
-  currentPage: 1
-  numPages: 0
-  messages: []
-  levelManager: {fileID: 0}
 --- !u!114 &114663203308231762
 MonoBehaviour:
   m_ObjectHideFlags: 1
