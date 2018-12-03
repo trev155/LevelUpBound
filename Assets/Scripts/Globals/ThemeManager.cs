@@ -25,7 +25,7 @@ public static class ThemeManager {
     private static void SetBackground(string scene, Theme theme) {
         Color32 newColor;
         if (theme == Theme.NORMAL) {
-            newColor = new Color32(0, 190, 230, 255);
+            newColor = new Color32(8, 150, 180, 255);
         } else if (theme == Theme.LIGHT) {
             newColor = new Color32(204, 204, 250, 255);
         } else if (theme == Theme.DARK) {
