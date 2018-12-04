@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 114773936620109648}
   - component: {fileID: 114326071297185804}
   m_Layer: 5
-  m_Name: ModalWindowVictory
+  m_Name: ModalWindowInfo
   m_TagString: Modal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,6 +365,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: 0, y: -200}
+  m_SizeDelta: {x: 400, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}

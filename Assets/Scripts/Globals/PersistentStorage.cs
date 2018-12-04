@@ -27,6 +27,8 @@ public static class PersistentStorage {
     private static readonly string BGM_VOLUME = "BGMVolume";
     private static readonly string EFFECTS_VOLUME = "EffectsVolume";
     private static readonly string COMPLETED_LEVELS = "CompletedLevels";
+    private static readonly string SAVED_GAME_MODE = "SavedGameMode";
+    private static readonly string SAVED_GAME_LEVEL = "SavedGameLevel";
 
     /*
      * Save data to PlayerPrefs. 
@@ -46,6 +48,9 @@ public static class PersistentStorage {
         Debug.Log("Completed Levels Data:");
         Debug.Log(completedLevelsJson);
 
+        PlayerPrefs.SetString(SAVED_GAME_MODE, GameContext.SavedGameMode.ToString());
+        PlayerPrefs.SetInt(SAVED_GAME_LEVEL, GameContext.SavedGameLevel);
+
         PlayerPrefs.Save();
     }
 
@@ -55,7 +60,7 @@ public static class PersistentStorage {
     public static void LoadData() {
         Debug.Log("Loading Data from Memory");
 
-        if (PlayerPrefs.GetString(PersistentStorage.SAVE_ENABLED).Length == 0) {
+        if (PlayerPrefs.GetString(SAVE_ENABLED).Length == 0) {
             return;
         }
 
@@ -98,13 +103,32 @@ public static class PersistentStorage {
         if (completedLevelsJson.Length > 0) {
             GameContext.CompletedLevels = JsonConvert.DeserializeObject<Dictionary<Mode, HashSet<int>>>(completedLevelsJson);
         }
+
+        string savedGameMode = PlayerPrefs.GetString(SAVED_GAME_MODE);
+        if (savedGameMode.Length > 0) {
+            if (savedGameMode.Equals("Easy", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.SavedGameMode = Mode.EASY;
+            } else if (savedGameMode.Equals("Classic", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.SavedGameMode = Mode.CLASSIC;
+            } else if (savedGameMode.Equals("Advanced", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.SavedGameMode = Mode.ADVANCED;
+            } else if (savedGameMode.Equals("Challenge", StringComparison.InvariantCultureIgnoreCase)) {
+                GameContext.SavedGameMode = Mode.CHALLENGE;
+            }
+        }
+        int savedGameLevel = PlayerPrefs.GetInt(SAVED_GAME_LEVEL);
+        GameContext.SavedGameLevel = savedGameLevel;
     }
 
     /*
      * Delete all completed level data.
      */
     public static void ResetProgress() {
-        Debug.Log("Deleting all completed level data.");
+        Debug.Log("Resetting Progress - Completed Levels, Saved Game Data");
         PlayerPrefs.DeleteKey(COMPLETED_LEVELS);
+
+        PlayerPrefs.DeleteKey(SAVED_GAME_MODE);
+        PlayerPrefs.DeleteKey(SAVED_GAME_LEVEL);
+        SavedGameManager.ClearSavedGameData();
     }
 }

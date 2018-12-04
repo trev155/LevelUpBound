@@ -67,6 +67,7 @@ public static class AspectRatioManager {
             SetAnchoredPosition("SelectedModeText", 0, -400);
             ResizeCanvasElement("PlayButton", 400, 150);
             SetAnchoredPosition("PlayButton", 0, -550);
+            SetAnchoredPosition("LoadButton", 400, -550);
             SetAnchoredPosition("GameModeSelectedDescription", 0, -800);
             SetFontSize("GameModeSelectedDescription", 40);
             SetAnchoredPosition("LevelSelector", -250, -900);

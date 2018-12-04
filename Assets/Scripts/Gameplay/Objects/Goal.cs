@@ -10,52 +10,48 @@ public class Goal : MonoBehaviour {
     public Transform RespawnPoint;
 
     public Transform modalContainer;
-    public ModalVictory modalWindowVictory;
+    public ModalInfo modalWindowVictory;
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (LevelCleared(other)) {
+        if (LevelIsCleared(other)) {
             Collider2D player = other;
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
             LevelManager.RecordLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
-            PersistentStorage.SaveData();
 
-            if (ShouldDisplayCelebrationModal()) {
-                ModalVictory modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<ModalVictory>();
-                modal.InitializeVictoryModal();
-                levelManager.StopLevel();
-                return;
-            }
-            
-            if (CameFromLevelSelector()) {
+            if (LevelManager.CameFromLevelSelector()) {
                 SceneManager.LoadPreviousContextPage();
                 GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+                PersistentStorage.SaveData();
+                return;
+            }
+
+            if (LevelManager.CompletedAllLevelsInGameMode()) {
+                ModalInfo modal = Instantiate(modalWindowVictory, modalContainer).GetComponent<ModalInfo>();
+                modal.InitializeVictoryModal();
+                levelManager.StopLevel();
+                if (GameContext.GameMode != Mode.TUTORIAL) {
+                    SavedGameManager.ClearSavedGameData();
+                }
+                PersistentStorage.SaveData();
                 return;
             }
 
             MovePlayerToSpawn(player);
-            levelManager.LevelCompleted();
+            levelManager.LevelCompletedHandler();
             mainGame.UpdateLevelText();
-
+            if (GameContext.GameMode != Mode.TUTORIAL) {
+                SavedGameManager.UpdateSavedGameData();
+            }
             if (GameContext.ControlScheme == ControlMode.CLICK) {
                 StopPlayerMovement(player);
             }
+
+            PersistentStorage.SaveData();
         }
     }
 
-    private bool LevelCleared(Collider2D other) {
+    private bool LevelIsCleared(Collider2D other) {
         return other.tag == "Player";
-    }
-
-    private bool ShouldDisplayCelebrationModal() {
-        return IsLastLevel() && !CameFromLevelSelector();
-    }
-
-    private bool IsLastLevel() {
-        return GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode);
-    }
-
-    private bool CameFromLevelSelector() {
-        return GameContext.PlayedFromLevelSelector;
     }
 
     private void MovePlayerToSpawn(Collider2D player) {
@@ -67,4 +63,3 @@ public class Goal : MonoBehaviour {
         control.clickMoveActive = false;
     }
 }
-

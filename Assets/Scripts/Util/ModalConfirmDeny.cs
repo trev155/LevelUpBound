@@ -5,6 +5,7 @@
 public class ModalConfirmDeny : Modal {
     private static readonly string EXIT_APP_TEXT = "Are you sure you want to exit?";
     private static readonly string RESET_PROGRESS_TEXT = "Are you sure you want to reset your progress?";
+    private static readonly string SAVE_OVERWRITE_TEXT = "There is already a saved game. Are you sure you want to overwrite it?";
 
     public void InitializeExitModal() {
         SetMainText(EXIT_APP_TEXT);
@@ -12,5 +13,9 @@ public class ModalConfirmDeny : Modal {
 
     public void InitializeResetProgressModal() {
         SetMainText(RESET_PROGRESS_TEXT);
+    }
+
+    public void InitializePlaySaveOverwriteModal(Mode mode, int level) {
+        SetMainText(SAVE_OVERWRITE_TEXT + " (" + GameMode.GetName(mode) + ": " + level.ToString() + ")");
     }
 }

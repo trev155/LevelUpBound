@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Globals\GameContext.cs" />
     <Compile Include="Assets\Scripts\Globals\GameMode.cs" />
     <Compile Include="Assets\Scripts\Globals\PersistentStorage.cs" />
+    <Compile Include="Assets\Scripts\Globals\SavedGameManager.cs" />
     <Compile Include="Assets\Scripts\Globals\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Globals\ThemeManager.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\About.cs" />
@@ -87,8 +88,8 @@
     <Compile Include="Assets\Scripts\Util\LevelStringConstructor.cs" />
     <Compile Include="Assets\Scripts\Util\Modal.cs" />
     <Compile Include="Assets\Scripts\Util\ModalConfirmDeny.cs" />
+    <Compile Include="Assets\Scripts\Util\ModalInfo.cs" />
     <Compile Include="Assets\Scripts\Util\ModalPrelevelInfo.cs" />
-    <Compile Include="Assets\Scripts\Util\ModalVictory.cs" />
     <Compile Include="Assets\Scripts\Util\Utils.cs" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\014.txt" />
     <None Include="Assets\Resources\Data\Levels\Advanced\032.txt" />

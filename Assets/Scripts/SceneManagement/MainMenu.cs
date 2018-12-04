@@ -1,6 +1,5 @@
 ﻿/*
  * Class that handles MainMenu actions. 
- * The MainMenu is the main "landing page" for the application.
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +7,10 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour {
     public Transform modalContainer;
     public ModalConfirmDeny modalConfirmDeny;
+    public ModalInfo modalInfo;
     private ModalConfirmDeny exitModal;
+    private ModalConfirmDeny saveOverwriteModal;
+    private ModalInfo saveNotFoundModal;
 
     public Text gameModeSelectedText;
     public Image leftArrow;
@@ -46,20 +48,81 @@ public class MainMenu : MonoBehaviour {
     private void SetGameModeDescriptionText() {
         gameModeDescription.text = GameMode.GetModeDescription(GameContext.MainMenuGameMode);
     }
-
+    
+    //--------------
+    // Play Button
+    //--------------
     public void PlayButtonHandler() {
         if (GameContext.ModalActive) {
             return;
         }
-
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        if (SavedGameManager.SavedGameExists() && GameContext.MainMenuGameMode != Mode.TUTORIAL) {
+            OpenSavedGameOverwriteModal();
+        } else {
+            Play();
+        }
+    }
+
+    private void OpenSavedGameOverwriteModal() {
+        saveOverwriteModal = Instantiate(modalConfirmDeny, modalContainer);
+        saveOverwriteModal.InitializePlaySaveOverwriteModal(GameContext.SavedGameMode, GameContext.SavedGameLevel);
+
+        Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
+        yesButton.onClick.AddListener(ConfirmPlayModal);
+        Button noButton = GameObject.Find("NoButton").GetComponent<Button>();
+        noButton.onClick.AddListener(ClosePlayModal);
+    }
+
+    private void Play() {
         GameContext.GameMode = GameContext.MainMenuGameMode;
         GameContext.CurrentLevel = 1;
         GameContext.PreviousPageContext = SceneName.MAIN_MENU;
         GameContext.PlayedFromLevelSelector = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.MAIN_GAME));
     }
-   
+
+    private void ConfirmPlayModal() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        saveOverwriteModal.Close();
+        Play();
+    }
+
+    private void ClosePlayModal() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        saveOverwriteModal.Close();
+    }
+
+    //--------------
+    // Load Button
+    //--------------
+    public void LoadButtonHandler() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        if (SavedGameManager.SavedGameExists()) {
+            GameContext.GameMode = GameContext.SavedGameMode;
+            GameContext.CurrentLevel = GameContext.SavedGameLevel;
+            GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+            GameContext.PlayedFromLevelSelector = false;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.MAIN_GAME));
+        } else {
+            OpenLoadGameSaveNotFoundModal();
+        }
+    }
+
+    private void OpenLoadGameSaveNotFoundModal() {
+        saveNotFoundModal = Instantiate(modalInfo, modalContainer);
+        saveNotFoundModal.InitializeLoadModal();
+    }
+
+    //------------------
+    // Scroll Game Mode
+    //------------------
     public void ScrollLeft() {
         if (GameContext.ModalActive) {
             return;
@@ -110,7 +173,9 @@ public class MainMenu : MonoBehaviour {
         SetGameModeDescriptionText();
     }
 
+    //------------------------------------------
     // Button handlers for the different scenes
+    //------------------------------------------
     public void LevelSelector() {
         if (GameContext.ModalActive) {
             return;
@@ -157,18 +222,20 @@ public class MainMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.ABOUT));
     }
 
-    // Exit App Button Handling
+    //-------------
+    // Exit Button
+    //-------------
     public void ExitAppButton() {
         if (GameContext.ModalActive) {
             return;
         }
-
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        OpenExitModal();
+    }
 
+    private void OpenExitModal() {
         exitModal = Instantiate(modalConfirmDeny, modalContainer);
         exitModal.InitializeExitModal();
-
-        // Set handlers for the Yes / No buttons
         Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
         yesButton.onClick.AddListener(ConfirmExit);
         Button noButton = GameObject.Find("NoButton").GetComponent<Button>();

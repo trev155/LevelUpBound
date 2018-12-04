@@ -11,7 +11,8 @@ public enum Mode {
     EASY,
     CLASSIC,
     ADVANCED,
-    CHALLENGE
+    CHALLENGE,
+    NONE
 }
 
 public static class GameMode {

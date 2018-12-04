@@ -35,6 +35,10 @@ public static class GameContext {
     // Completed levels dictionary. Mapping of game mode -> list of integers representing completed level numbers
     public static Dictionary<Mode, HashSet<int>> CompletedLevels;
 
+    // Keep track of saved games
+    public static Mode SavedGameMode { get; set; }
+    public static int SavedGameLevel { get; set; }
+
     /*
      * Static Constructor runs when the game loads. These represent the default globals.
      */
@@ -52,6 +56,8 @@ public static class GameContext {
         ControlScheme = ControlMode.ARROW;
         ModalActive = false;
         InitializeCompletedLevels();
+        SavedGameMode = Mode.NONE;
+        SavedGameLevel = 0;
         
         // PlayerPrefs.DeleteAll();     // For testing
     }

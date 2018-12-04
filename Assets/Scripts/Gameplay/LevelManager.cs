@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour {
         levelConstructor.StopCoroutine(currentLevelCoroutine);
     }
 
-    public void LevelCompleted() {
+    public void LevelCompletedHandler() {
         StopLevel();
         levelConstructor.RemoveExternalObjectsFromScene();
         GameContext.CurrentLevel += 1;
@@ -125,6 +125,9 @@ public class LevelManager : MonoBehaviour {
         return;
     }
 
+    //----------------
+    // Static Methods
+    //----------------
     public static void RecordLevelCompleted(Mode mode, int level) {
         if (mode == Mode.TUTORIAL) {
             return;
@@ -134,5 +137,17 @@ public class LevelManager : MonoBehaviour {
         } else {
             GameContext.CompletedLevels[mode].Add(level);
         }
+    }
+
+    public static bool CompletedAllLevelsInGameMode() {
+        return IsLastLevel() && !CameFromLevelSelector();
+    }
+
+    public static bool IsLastLevel() {
+        return GameContext.CurrentLevel == GameMode.GetNumberOfLevels(GameContext.GameMode);
+    }
+
+    public static bool CameFromLevelSelector() {
+        return GameContext.PlayedFromLevelSelector;
     }
 }
