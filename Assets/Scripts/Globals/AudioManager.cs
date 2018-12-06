@@ -85,6 +85,7 @@ public class AudioManager : MonoBehaviour {
         bgmTracks.Add("01");
         bgmTracks.Add("02");
         bgmTracks.Add("03");
+        bgmTracks = Utils.ShuffleList(bgmTracks);
 
         PlayBackgroundMusic();
     }
