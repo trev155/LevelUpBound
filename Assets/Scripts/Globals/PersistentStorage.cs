@@ -45,8 +45,8 @@ public static class PersistentStorage {
 
         string completedLevelsJson = JsonConvert.SerializeObject(GameContext.CompletedLevels);
         PlayerPrefs.SetString(COMPLETED_LEVELS, completedLevelsJson);
-        Debug.Log("Completed Levels Data:");
-        Debug.Log(completedLevelsJson);
+        // Debug.Log("Completed Levels Data:");
+        // Debug.Log(completedLevelsJson);
 
         PlayerPrefs.SetString(SAVED_GAME_MODE, GameContext.SavedGameMode.ToString());
         PlayerPrefs.SetInt(SAVED_GAME_LEVEL, GameContext.SavedGameLevel);
@@ -58,7 +58,7 @@ public static class PersistentStorage {
      * Load data from PlayerPrefs.
      */
     public static void LoadData() {
-        Debug.Log("Loading Data from Memory");
+        Debug.Log("Loading Data from Memory...");
 
         if (PlayerPrefs.GetString(SAVE_ENABLED).Length == 0) {
             return;
@@ -98,8 +98,8 @@ public static class PersistentStorage {
         AudioManager.Instance.AdjustEffectsVolume();
 
         string completedLevelsJson = PlayerPrefs.GetString(COMPLETED_LEVELS);
-        Debug.Log("Completed Levels Data:");
-        Debug.Log(completedLevelsJson);
+        // Debug.Log("Completed Levels Data:");
+        // Debug.Log(completedLevelsJson);
         if (completedLevelsJson.Length > 0) {
             GameContext.CompletedLevels = JsonConvert.DeserializeObject<Dictionary<Mode, HashSet<int>>>(completedLevelsJson);
         }

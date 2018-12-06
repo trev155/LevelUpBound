@@ -45,7 +45,7 @@ public static class ThemeManager {
             backgroundPanelImage.color = newColor;
         }
 
-        Debug.Log("Setting theme to: " + theme + ", in scene: " + scene);
+        // Debug.Log("Setting theme to: " + theme + ", in scene: " + scene);
     }
 
     private static void SetTextElementColours(Theme theme) {
