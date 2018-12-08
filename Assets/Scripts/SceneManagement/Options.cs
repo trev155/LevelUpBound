@@ -16,6 +16,7 @@ public class Options : MonoBehaviour {
     public Transform modalContainer;
     public ModalConfirmDeny modalConfirmDeny;
     private ModalConfirmDeny resetProgressModal;
+    private ModalConfirmDeny resetOptionsModal;
 
     private void Awake() {
         AspectRatioManager.AdjustScreenElements();
@@ -36,6 +37,9 @@ public class Options : MonoBehaviour {
         SceneManager.LoadPreviousContextPage();
     }
 
+    //-------
+    // Audio
+    //-------
     private void InitializeAudioUI() {
         if (GameContext.AudioEnabled) {
             audioText.text = "ON";
@@ -98,6 +102,9 @@ public class Options : MonoBehaviour {
         PersistentStorage.SaveData();
     }
 
+    //--------
+    // Themes
+    //--------
     private void SetTheme(Theme theme) {
         if (GameContext.ModalActive) {
             return;
@@ -125,7 +132,9 @@ public class Options : MonoBehaviour {
         SetTheme(Theme.VIBRANT);
     }
 
+    //------------------------
     // Control Scheme Buttons
+    //------------------------
     public void SetArrowControls() {
         if (GameContext.ModalActive) {
             return;
@@ -160,6 +169,9 @@ public class Options : MonoBehaviour {
         }
     }
 
+    //---------------------------------
+    // Reset Level Completion Progress
+    //---------------------------------
     public void ResetProgressButtonHandler() {
         if (GameContext.ModalActive) {
             return;
@@ -186,5 +198,40 @@ public class Options : MonoBehaviour {
     private void DenyResetProgress() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         resetProgressModal.Close();
+    }
+
+    //--------------------------
+    // Reset to default options
+    //--------------------------
+    public void ResetDefaultOptionsButtonHandler() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        resetOptionsModal = Instantiate(modalConfirmDeny, modalContainer);
+        resetOptionsModal.InitializeResetOptionsModal();
+
+        // Set handlers for the Yes / No button
+        Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
+        yesButton.onClick.AddListener(AllowResetOptions);
+        Button noButton = GameObject.Find("NoButton").GetComponent<Button>();
+        noButton.onClick.AddListener(DenyResetOptions);
+    }
+
+    private void AllowResetOptions() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        GameContext.SetDefaultGameContextValues();
+        PersistentStorage.SaveData();
+        SceneManager.LoadPreviousContextPage();
+        if (!AudioManager.Instance.IsBackgroundMusicPlaying()) {
+            AudioManager.Instance.PlayBackgroundMusic();
+        }
+        resetOptionsModal.Close();
+    }
+
+    private void DenyResetOptions() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        resetOptionsModal.Close();
     }
 }

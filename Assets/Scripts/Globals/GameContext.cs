@@ -43,6 +43,10 @@ public static class GameContext {
      * Static Constructor runs when the game loads. These represent the default globals.
      */
     static GameContext() {
+        SetDefaultGameContextValues();
+    }
+
+    public static void SetDefaultGameContextValues() {
         GameMode = Mode.CLASSIC;
         CurrentLevel = 1;
         PreviousPageContext = SceneName.MAIN_MENU;
@@ -58,8 +62,6 @@ public static class GameContext {
         InitializeCompletedLevels();
         SavedGameMode = Mode.NONE;
         SavedGameLevel = 0;
-        
-        // PlayerPrefs.DeleteAll();     // For testing
     }
 
     public static void InitializeCompletedLevels() {

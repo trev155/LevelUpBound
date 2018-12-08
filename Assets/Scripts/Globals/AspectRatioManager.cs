@@ -166,7 +166,9 @@ public static class AspectRatioManager {
             SetAnchoredPosition("DataLabel", 0, -1250);
             SetFontSize("DataLabel", 45);
             ResizeCanvasElement("ResetData", 300, 125);
-            SetAnchoredPosition("ResetData", 0, -1330);
+            SetAnchoredPosition("ResetData", -200, -1330);
+            ResizeCanvasElement("ResetOptions", 300, 125);
+            SetAnchoredPosition("ResetOptions", 200, -1330);
         }
     }
        

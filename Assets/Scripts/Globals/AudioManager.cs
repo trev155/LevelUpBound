@@ -56,6 +56,7 @@ public class AudioManager : MonoBehaviour {
     private List<string> bgmTracks = new List<string>();
     private int bgmCurrentIndex = 0;
     private Coroutine currentTrackCoroutine;
+    private bool bgmIsPlaying = false;
 
     // private instance variable, public static getter
     private static AudioManager instance = null;
@@ -86,7 +87,6 @@ public class AudioManager : MonoBehaviour {
         bgmTracks.Add("02");
         bgmTracks.Add("03");
         bgmTracks = Utils.ShuffleList(bgmTracks);
-
         PlayBackgroundMusic();
     }
 
@@ -252,6 +252,7 @@ public class AudioManager : MonoBehaviour {
             return;
         }
         currentTrackCoroutine = StartCoroutine("PlayBackgroundMusicCR");
+        bgmIsPlaying = true;
     }
 
     /*
@@ -260,6 +261,7 @@ public class AudioManager : MonoBehaviour {
     public void StopBackgroundMusic() {
         sources[3].Stop();
         StopCoroutine(currentTrackCoroutine);
+        bgmIsPlaying = false;
     }
 
     private IEnumerator PlayBackgroundMusicCR() {
@@ -276,6 +278,10 @@ public class AudioManager : MonoBehaviour {
             yield return new WaitForSeconds(currentTrackLength);
             AdvanceTrack();
         }
+    }
+
+    public bool IsBackgroundMusicPlaying() {
+        return bgmIsPlaying;   
     }
 
     /*
