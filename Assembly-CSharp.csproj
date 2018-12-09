@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Globals\ThemeManager.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\About.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\Instructions.cs" />
+    <Compile Include="Assets\Scripts\SceneManagement\Intro.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\LevelEditor.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\LevelSelector.cs" />
     <Compile Include="Assets\Scripts\SceneManagement\MainGame.cs" />

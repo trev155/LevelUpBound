@@ -18,7 +18,8 @@ public class MainMenu : MonoBehaviour {
     public Text gameModeDescription;
 
     private void Awake() {
-        PersistentStorage.LoadData();   // Load saved data here, as it is the main landing page for the app
+        // for local testing. this is already being called in the Intro scene, but that's fine because intro scene doesn't change game context at all
+        PersistentStorage.LoadData();
 
         AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();

@@ -1,6 +1,7 @@
 ﻿/*
  * This class holds global data that can be used across scenes.
  */
+using UnityEngine;
 using System.Collections.Generic;
 
 public static class GameContext {
@@ -40,13 +41,14 @@ public static class GameContext {
     public static int SavedGameLevel { get; set; }
 
     /*
-     * Static Constructor runs when the game loads. These represent the default globals.
+     * Static Constructor runs when the game loads, before Awake(). These represent the default globals.
      */
     static GameContext() {
         SetDefaultGameContextValues();
     }
 
     public static void SetDefaultGameContextValues() {
+        Debug.Log("Setting Default Game Context");
         GameMode = Mode.CLASSIC;
         CurrentLevel = 1;
         PreviousPageContext = SceneName.MAIN_MENU;

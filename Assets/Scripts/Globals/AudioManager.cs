@@ -10,6 +10,8 @@ using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour {
     // Static strings to help callers
+    public static readonly string INTRO_MUSIC = "Audio/intro_levelup";
+
     public static readonly string WALL_UNLOCK = "Audio/debris";
     public static readonly string LEVEL_UP = "Audio/levelup";
     public static readonly string KEY_PICKUP = "Audio/itempickup";
@@ -87,10 +89,15 @@ public class AudioManager : MonoBehaviour {
         bgmTracks.Add("02");
         bgmTracks.Add("03");
         bgmTracks = Utils.ShuffleList(bgmTracks);
-        PlayBackgroundMusic();
+        
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Intro") {
+            PlayBackgroundMusic();
+        }
     }
 
+    //---------------
     // Sound methods
+    //---------------
     /*
      * Play a sound by loading in a resource as an audio clip from the specified path.
      * Plays at full volume, regular pitch.
@@ -295,6 +302,9 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    //---------------
+    // Volume Levels
+    //---------------
     /*
      * Set the background music volume.
      */
@@ -311,7 +321,7 @@ public class AudioManager : MonoBehaviour {
      */
     public void AdjustEffectsVolume() {
         foreach (AudioSource audioSource in sources) {
-            if (audioSource.name != "BGM") {
+            if (audioSource.name != "BGM" && audioSource.name != "AlwaysPlay") {
                 audioSource.volume = GameContext.CurrentEffectsVolume;
             }
         }

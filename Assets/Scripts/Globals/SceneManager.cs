@@ -7,6 +7,7 @@ using System;
 public enum SceneName {
     ABOUT,
     INSTRUCTIONS,
+    INTRO,
     LEVEL_EDITOR,
     LEVEL_SELECTOR,
     MAIN_GAME,
@@ -21,6 +22,8 @@ public static class SceneManager {
                 return "About";
             case SceneName.INSTRUCTIONS:
                 return "Instructions";
+            case SceneName.INTRO:
+                return "Intro";
             case SceneName.LEVEL_EDITOR:
                 return "LevelEditor";
             case SceneName.LEVEL_SELECTOR:
