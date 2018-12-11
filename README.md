@@ -15,3 +15,8 @@ No copyright infringement is intended. Since these tracks were found on the Yout
 Lights - Sappheiros  
 Island - MBB  
 Leaf - KV  
+
+### Fonts
+Caviar Dreams
+Colab
+Belleza

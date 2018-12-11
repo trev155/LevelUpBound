@@ -31,6 +31,8 @@ public static class AspectRatioManager {
                 AdjustInstructionsSceneElements(0.75f);
             } else if (scene.name == SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR)) {
                 AdjustLevelEditorSceneElements(0.75f);
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.INTRO)) {
+                AdjustIntroSceneElements(0.75f);
             }
         }
     }
@@ -56,10 +58,8 @@ public static class AspectRatioManager {
  
     private static void AdjustMainMenuSceneElements(float aspectRatio) {
         if (aspectRatio == 0.75) {
-            ResizeCanvasElement("Logo", 600, 300);
-            SetAnchoredPosition("Logo", 300, -150);
-            ResizeCanvasElement("TitleText", 500, 175);
-            SetAnchoredPosition("TitleText", 225, -150);
+            ResizeCanvasElement("TitleText", 1000, 200);
+            SetAnchoredPosition("TitleText", 0, -150);
             ResizeCanvasElement("ScrollLeftButton", 125, 125);
             SetAnchoredPosition("ScrollLeftButton", -400, -400);
             ResizeCanvasElement("ScrollRightButton", 125, 125);
@@ -88,14 +88,16 @@ public static class AspectRatioManager {
             SetAnchoredPosition("AudioEnabled", -50, -50);
             ResizeCanvasElement("AudioDisabled", 100, 100);
             SetAnchoredPosition("AudioDisabled", -50, -50);
-            ResizeCanvasElement("UpButton", 200, 200);
-            SetAnchoredPosition("UpButton", 0, 280);
-            ResizeCanvasElement("DownButton", 200, 200);
-            SetAnchoredPosition("DownButton", 0, 100);
-            ResizeCanvasElement("LeftButton", 200, 200);
-            SetAnchoredPosition("LeftButton", -180, 100);
-            ResizeCanvasElement("RightButton", 200, 200);
-            SetAnchoredPosition("RightButton", 180, 100);
+            if (GameContext.ControlScheme == ControlMode.ARROW) {
+                ResizeCanvasElement("UpButton", 200, 200);
+                SetAnchoredPosition("UpButton", 0, 280);
+                ResizeCanvasElement("DownButton", 200, 200);
+                SetAnchoredPosition("DownButton", 0, 100);
+                ResizeCanvasElement("LeftButton", 200, 200);
+                SetAnchoredPosition("LeftButton", -180, 100);
+                ResizeCanvasElement("RightButton", 200, 200);
+                SetAnchoredPosition("RightButton", 180, 100);
+            }
         }
     }
 
@@ -213,6 +215,16 @@ public static class AspectRatioManager {
             SetFontSize("TitleText", 70);
             ResizeCanvasElement("BackButton", 100, 100);
             SetAnchoredPosition("BackButton", 50, -50);
+        }
+    }
+
+    private static void AdjustIntroSceneElements(float aspectRatio) {
+        if (aspectRatio == 0.75) {
+            ResizeCanvasElement("CloudOutline", 900, 700);
+            SetAnchoredPosition("CloudOutline", 0, -380);
+            SetFontSize("TitleText", 120);
+            ResizeCanvasElement("TitleText", 600, 500);
+            ResizeCanvasElement("Arrow", 400, 400);
         }
     }
 }

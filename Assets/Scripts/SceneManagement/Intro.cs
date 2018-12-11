@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Intro : MonoBehaviour {
+    public Image titleTextImage;
     public Text titleText;
     public Image arrowImage;
     public Text continueText;
@@ -15,6 +16,7 @@ public class Intro : MonoBehaviour {
 
     private void Awake() {
         PersistentStorage.LoadData();   // Load saved data here, as it is the main landing page for the app
+        AspectRatioManager.AdjustScreenElements();
     }
 
     private void Start() {
@@ -24,7 +26,7 @@ public class Intro : MonoBehaviour {
 
     private void Update() {
         if (fadeInComplete && checkForFadeInComplete) {
-            continueText.gameObject.SetActive(true);
+            StartCoroutine(FadeInGradually(continueText));
             checkForFadeInComplete = false;
             listenForContinueTap = true;
         }
@@ -45,6 +47,7 @@ public class Intro : MonoBehaviour {
 
     private IEnumerator FadeInCanvasElementsAfterDelay(float seconds) {
         yield return new WaitForSeconds(seconds);
+        StartCoroutine(FadeInGradually(titleTextImage));
         StartCoroutine(FadeInGradually(titleText));
         StartCoroutine(FadeInGradually(arrowImage));
     }
