@@ -17,6 +17,6 @@ Island - MBB
 Leaf - KV  
 
 ### Fonts
-Caviar Dreams
-Colab
-Belleza
+Caviar Dreams  
+Colab  
+Belleza   
