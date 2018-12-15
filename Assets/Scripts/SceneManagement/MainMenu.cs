@@ -186,13 +186,13 @@ public class MainMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_SELECTOR));
     }
 
-    public void LevelEditor() {
+    public void LevelEditorMenu() {
         if (GameContext.ModalActive) {
             return;
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         GameContext.PreviousPageContext = SceneName.MAIN_MENU;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR));
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR_MENU));
     }
 
     public void Instructions() {

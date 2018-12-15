@@ -312,7 +312,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2128714461}
-        m_MethodName: LevelEditor
+        m_MethodName: LevelEditorMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

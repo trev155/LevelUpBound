@@ -29,7 +29,7 @@ public static class AspectRatioManager {
                 AdjustAboutSceneElements(0.75f);
             } else if (scene.name == SceneManager.GetSceneNameString(SceneName.INSTRUCTIONS)) {
                 AdjustInstructionsSceneElements(0.75f);
-            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR)) {
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR_MENU)) {
                 AdjustLevelEditorSceneElements(0.75f);
             } else if (scene.name == SceneManager.GetSceneNameString(SceneName.INTRO)) {
                 AdjustIntroSceneElements(0.75f);

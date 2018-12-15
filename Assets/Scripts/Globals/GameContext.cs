@@ -40,6 +40,9 @@ public static class GameContext {
     public static Mode SavedGameMode { get; set; }
     public static int SavedGameLevel { get; set; }
 
+    // Level Editor
+    public static int LevelEditorSlotSelection { get; set; }
+
     /*
      * Static Constructor runs when the game loads, before Awake(). These represent the default globals.
      */
@@ -64,6 +67,7 @@ public static class GameContext {
         InitializeCompletedLevels();
         SavedGameMode = Mode.NONE;
         SavedGameLevel = 0;
+        LevelEditorSlotSelection = 1;
     }
 
     public static void InitializeCompletedLevels() {
