@@ -131,4 +131,21 @@ public static class PersistentStorage {
         PlayerPrefs.DeleteKey(SAVED_GAME_LEVEL);
         SavedGameManager.ClearSavedGameData();
     }
+
+    //-------------------
+    // Custom Level Data
+    //-------------------
+    public static bool IsLevelSlotOccupied(int levelSlot) {
+        return PlayerPrefs.GetString(levelSlot + "_CUSTOM").Length > 0;
+    }
+
+    public static void SaveCustomLevel(int levelSlot, string levelString, string externalsString) {
+        PlayerPrefs.SetString(levelSlot + "_CUSTOM", levelString);
+        PlayerPrefs.SetString(levelSlot + "_EXTERNALS", externalsString);
+    }
+
+    public static void DeleteCustomLevel(int levelSlot) {
+        PlayerPrefs.DeleteKey(levelSlot + "_CUSTOM");
+        PlayerPrefs.DeleteKey(levelSlot + "_EXTERNALS");
+    }
 }

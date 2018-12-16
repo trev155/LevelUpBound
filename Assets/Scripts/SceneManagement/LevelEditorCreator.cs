@@ -181,8 +181,7 @@ public class LevelEditorCreator : MonoBehaviour {
         }
         string levelStringToSave = GenerateLevelExplosionStringToSave(levelLinesToSave);
 
-        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_CUSTOM", levelStringToSave);
-        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_EXTERNALS", levelExternalsText.text);
+        PersistentStorage.SaveCustomLevel(GameContext.LevelEditorSlotSelection, levelStringToSave, levelExternalsText.text);
 
         outputText.text = SAVE_SUCCESS_TEXT;
     }

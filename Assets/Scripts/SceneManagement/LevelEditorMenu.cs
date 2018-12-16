@@ -15,6 +15,7 @@ public class LevelEditorMenu : MonoBehaviour {
     private const string LEVEL_DOES_NOT_EXIST_TEXT = "Level does not exist.";
     private int currentSelectedLevel;
     private ModalConfirmDeny modalOverwriteWarning;
+    private ModalConfirmDeny modalDeleteWarning;
 
     private void Awake() {
         AspectRatioManager.AdjustScreenElements();
@@ -63,15 +64,11 @@ public class LevelEditorMenu : MonoBehaviour {
     }
 
     private void SetLevelSlotOccupiedText(int levelSlot) {
-        if (IsLevelSlotOccupied(levelSlot)) {
+        if (PersistentStorage.IsLevelSlotOccupied(levelSlot)) {
             levelSlotOccupiedText.text = "(Level Slot currently holds a level)";
         } else {
             levelSlotOccupiedText.text = "";
         }
-    }
-
-    private bool IsLevelSlotOccupied(int levelSlot) {
-        return PlayerPrefs.GetString(levelSlot + "_CUSTOM").Length > 0;
     }
 
     //-----------------
@@ -98,10 +95,10 @@ public class LevelEditorMenu : MonoBehaviour {
     }
 
     private bool CreationWouldBeAnOverwrite() {
-        return IsLevelSlotOccupied(currentSelectedLevel);
+        return PersistentStorage.IsLevelSlotOccupied(currentSelectedLevel);
     }
 
-    public void ConfirmWarning() {
+    private void ConfirmWarning() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         modalOverwriteWarning.Close();
 
@@ -109,7 +106,7 @@ public class LevelEditorMenu : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR_CREATOR));
     }
 
-    public void DenyWarning() {
+    private void DenyWarning() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         modalOverwriteWarning.Close();
     }
@@ -121,7 +118,7 @@ public class LevelEditorMenu : MonoBehaviour {
 
         AudioManager.Instance.PlaySound(AudioManager.BUTTON_DING);
 
-        if (PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_CUSTOM").Length <= 0) {
+        if (!PersistentStorage.IsLevelSlotOccupied(currentSelectedLevel)) {
             outputText.text = LEVEL_DOES_NOT_EXIST_TEXT;
             return;
         }
@@ -129,5 +126,47 @@ public class LevelEditorMenu : MonoBehaviour {
         GameContext.GameMode = Mode.CUSTOM;
         GameContext.PreviousPageContext = SceneName.LEVEL_EDITOR_MENU;
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.MAIN_GAME));
+    }
+
+    public void EditButton() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        // TODO
+        // check if slot even exists. if not, output message
+    }
+    
+    public void DeleteButton() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        if (PersistentStorage.IsLevelSlotOccupied(currentSelectedLevel)) {
+            modalDeleteWarning = Instantiate(modalConfirmDeny, modalContainer);
+            modalDeleteWarning.InitializeLevelEditorDeletionModal();
+
+            Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
+            yesButton.onClick.AddListener(ConfirmDelete);
+            Button noButton = GameObject.Find("NoButton").GetComponent<Button>();
+            noButton.onClick.AddListener(DenyDelete);
+        } else {
+            outputText.text = LEVEL_DOES_NOT_EXIST_TEXT;
+        }
+    }
+
+    private void ConfirmDelete() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        modalDeleteWarning.Close();
+
+        PersistentStorage.DeleteCustomLevel(currentSelectedLevel);
+        SetLevelSlotOccupiedText(currentSelectedLevel);
+    }
+
+    private void DenyDelete() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        modalDeleteWarning.Close();
     }
 }
