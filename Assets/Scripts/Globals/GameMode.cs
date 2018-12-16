@@ -12,6 +12,7 @@ public enum Mode {
     CLASSIC,
     ADVANCED,
     CHALLENGE,
+    CUSTOM,
     NONE
 }
 

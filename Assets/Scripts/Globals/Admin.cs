@@ -34,7 +34,11 @@ public class Admin : MonoBehaviour {
 
     private void LogTempCustom() {
         Debug.Log("Completed Levels: " + JsonConvert.SerializeObject(GameContext.CompletedLevels));
+
+        Debug.Log(PlayerPrefs.GetString("1_CUSTOM"));
+        Debug.Log(PlayerPrefs.GetString("2_CUSTOM"));
+        Debug.Log(PlayerPrefs.GetString("3_CUSTOM"));
+        Debug.Log(PlayerPrefs.GetString("4_CUSTOM"));
+        Debug.Log(PlayerPrefs.GetString("5_CUSTOM"));
     }
 }
-
-

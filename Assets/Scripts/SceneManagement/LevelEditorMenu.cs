@@ -7,14 +7,18 @@ using UnityEngine.UI;
 
 
 public class LevelEditorMenu : MonoBehaviour {
+    public Text outputText;
+
+    private const string LEVEL_DOES_NOT_EXIST_TEXT = "Level does not exist.";
     private int currentSelectedLevel;
-    
 
     private void Awake() {
         AspectRatioManager.AdjustScreenElements();
         ThemeManager.SetTheme();
 
         currentSelectedLevel = 1;
+        GameContext.LevelEditorSlotSelection = currentSelectedLevel;
+        outputText.text = "";
     }
 
     /*
@@ -30,8 +34,11 @@ public class LevelEditorMenu : MonoBehaviour {
     // Level Slot Selection
     //----------------------
     public void LevelSlotSelection() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
         int levelSelected = GetLevelSlotSelected();
         currentSelectedLevel = levelSelected;
+        GameContext.LevelEditorSlotSelection = currentSelectedLevel;
         SetLevelSlotSelectedText(levelSelected);       
     }
 
@@ -52,12 +59,20 @@ public class LevelEditorMenu : MonoBehaviour {
     public void CreateButton() {
         AudioManager.Instance.PlaySound(AudioManager.BUTTON_DING);
         GameContext.PreviousPageContext = SceneName.LEVEL_EDITOR_MENU;
-        GameContext.LevelEditorSlotSelection = currentSelectedLevel;
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR_CREATOR));
     }
 
     public void PlayButton() {
         AudioManager.Instance.PlaySound(AudioManager.BUTTON_DING);
-        // go to game scene
+
+        // Check if level even exists
+        if (PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_CUSTOM").Length <= 0) {
+            outputText.text = LEVEL_DOES_NOT_EXIST_TEXT;
+            return;
+        }
+       
+        GameContext.GameMode = Mode.CUSTOM;
+        GameContext.PreviousPageContext = SceneName.LEVEL_EDITOR_MENU;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.MAIN_GAME));
     }
 }

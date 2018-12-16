@@ -36,6 +36,11 @@ public class LevelConstructor : MonoBehaviour {
         return level;
     }
 
+    public IEnumerator LoadLevelFromList(List<string> levelList) {
+        IEnumerator level = BuildLevel(levelList);
+        return level;
+    }
+
     /*
      * Creates a looping Coroutine, which represents a level.
      */

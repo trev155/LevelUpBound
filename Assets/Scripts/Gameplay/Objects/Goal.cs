@@ -18,6 +18,12 @@ public class Goal : MonoBehaviour {
             AudioManager.Instance.PlaySound(AudioManager.LEVEL_UP);
             LevelManager.RecordLevelCompleted(GameContext.GameMode, GameContext.CurrentLevel);
 
+            if (LevelManager.CameFromCustomLevelEditor()) {
+                SceneManager.LoadPreviousContextPage();
+                GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+                return;
+            }
+
             if (LevelManager.CameFromLevelSelector()) {
                 SceneManager.LoadPreviousContextPage();
                 GameContext.PreviousPageContext = SceneName.MAIN_MENU;

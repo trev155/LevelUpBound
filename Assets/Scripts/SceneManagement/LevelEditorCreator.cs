@@ -4,8 +4,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
+
 
 public class LevelEditorCreator : MonoBehaviour {
     public Text levelExplosionsText;
@@ -181,7 +181,7 @@ public class LevelEditorCreator : MonoBehaviour {
         bool hasExplosion = false;
         foreach (string levelTextLine in levelTextLines) {
             if (!levelTextLine.Contains("W")) {
-                levelLinesToSave.Add(levelTextLine + " AR");
+                levelLinesToSave.Add("T" + levelTextLine + " AR");
                 hasExplosion = true;
             } else {
                 levelLinesToSave.Add(levelTextLine);
@@ -191,7 +191,7 @@ public class LevelEditorCreator : MonoBehaviour {
 
         // verify there is at least one delay, explosion
         if (!hasDelay || !hasExplosion) {
-            SetAndFadeOutputText(SAVE_FAILED_REQUIRED_ELEMENTS_TEXT);
+            outputText.text = SAVE_FAILED_REQUIRED_ELEMENTS_TEXT;
             return;
         }
 
@@ -202,31 +202,10 @@ public class LevelEditorCreator : MonoBehaviour {
         }
         levelStringToSave = levelStringToSave.TrimEnd();
 
-        // Save to resources file
-        Debug.Log(levelStringToSave);
+        // Save
+        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_CUSTOM", levelStringToSave);
+        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_EXTERNALS", levelExternalsText.text);
 
-        SetAndFadeOutputText(SAVE_SUCCESS_TEXT);
-    }
-
-    //------------------
-    // Message Handling
-    //------------------
-    private void SetAndFadeOutputText(string message) {
-        outputText.text = message;
-        StartCoroutine(FadeOutText(outputText, 5.0f));
-    }
-
-    IEnumerator FadeOutText(Text textObject, float fadeTime) {
-        Color textColor = textObject.color;
-        Color tmpColor = textObject.color;
-        while (tmpColor.a > 0f) {
-            tmpColor.a -= Time.deltaTime / fadeTime;
-            textObject.color = tmpColor;
-            if (tmpColor.a <= 0f) {
-                tmpColor.a = 0f;
-            }
-            yield return null;
-        }
-        textObject.color = tmpColor;
+        outputText.text = SAVE_SUCCESS_TEXT;
     }
 }

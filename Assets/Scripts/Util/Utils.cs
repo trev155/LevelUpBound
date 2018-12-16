@@ -1,7 +1,6 @@
 ﻿/* 
  * Various Utility functions that don't quite fit anywhere else.
  */
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

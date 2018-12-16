@@ -21,7 +21,9 @@ public class LevelManager : MonoBehaviour {
 
 
     private void Awake() {
-        LoadLevelsWithExternals();
+        if (GameContext.GameMode != Mode.CUSTOM) {
+            LoadLevelsWithExternals();
+        }
     }
 
     void Start() {
@@ -29,6 +31,11 @@ public class LevelManager : MonoBehaviour {
             PlayTutorialLevel();
             return;
         }
+        if (GameContext.GameMode == Mode.CUSTOM) {
+            PlayCustomLevel();
+            return;
+        }
+
         PlayLevel();
     }
 
@@ -125,13 +132,38 @@ public class LevelManager : MonoBehaviour {
         return;
     }
 
+    private void PlayCustomLevel() {
+        string customLevelExplosions = PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_CUSTOM");
+        string customLevelExternals = PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_EXTERNALS");
+
+        List<string> customLevelExplosionsList = new List<string>();
+        foreach (string line in customLevelExplosions.Split('\n')) {
+            customLevelExplosionsList.Add(line);
+        }
+        currentLevelCoroutine = levelConstructor.LoadLevelFromList(customLevelExplosionsList);
+        if (currentLevelCoroutine == null) {
+            Debug.Log("Current Level Coroutine was null, cannot play");
+        }
+
+        List<string> customLevelExternalsList = new List<string>();
+        foreach (string line in customLevelExternals.Split('\n')) {
+            customLevelExternalsList.Add(line);
+        }
+        levelConstructor.ConstructExternalObjects(customLevelExternalsList);
+
+        levelConstructor.StartCoroutine(currentLevelCoroutine);
+        
+        // update UI
+    }
+
     //----------------
     // Static Methods
     //----------------
     public static void RecordLevelCompleted(Mode mode, int level) {
-        if (mode == Mode.TUTORIAL) {
+        if (mode == Mode.TUTORIAL || mode == Mode.CUSTOM) {
             return;
         }
+
         if (GameContext.CompletedLevels[mode].Contains(level)) {
             return;
         } else {
@@ -149,5 +181,9 @@ public class LevelManager : MonoBehaviour {
 
     public static bool CameFromLevelSelector() {
         return GameContext.PlayedFromLevelSelector;
+    }
+
+    public static bool CameFromCustomLevelEditor() {
+        return GameContext.GameMode == Mode.CUSTOM;
     }
 }
