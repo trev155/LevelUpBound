@@ -1,5 +1,5 @@
 ﻿/*
- * Handles the LevelEditor page.
+ * Handles the Level Editor Menu.
  */
 using UnityEngine;
 using UnityEngine.EventSystems;

@@ -1,5 +1,5 @@
 ﻿/*
- * Handles the LevelEditor page.
+ * Handles the Level editor creation page.
  */
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,15 +8,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LevelEditorCreator : MonoBehaviour {
-    public Text levelText;
+    public Text levelExplosionsText;
+    public Text levelExternalsText;
     public Text outputText;
+    public Text delayText;
+    
 
     private const string SAVE_FAILED_REQUIRED_ELEMENTS_TEXT = "Save failed!\nYour level must have at least one explosion and one delay element!";
+    private const string SAVE_SUCCESS_TEXT = "Save Successful!";
 
     private const int GRID_DIMENSION = 5;
     private List<List<bool>> tileActivationStates;
-    private Color32 activatedTileColor;
-    private Color32 deactivatedTileColor;
+    private Color32 activatedTileColor = new Color32(140, 130, 201, 255);
+    private Color32 deactivatedTileColor = new Color32(172, 209, 255, 255);
+    private int currentDelayTimeSetting = 500;
 
     private void Awake() {
         AspectRatioManager.AdjustScreenElements();
@@ -25,10 +30,9 @@ public class LevelEditorCreator : MonoBehaviour {
 
     private void Start() {
         InitializeTileActivationStates();
-        levelText.text = "";
+        levelExplosionsText.text = "";
+        levelExternalsText.text = "";
         outputText.text = "";
-        activatedTileColor = new Color32(140, 130, 201, 255);
-        deactivatedTileColor = new Color32(172, 209, 255, 255);
     }
 
     private void InitializeTileActivationStates() {
@@ -47,8 +51,8 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     /*
-    * Back button handler
-    */
+     * Back button handler
+     */
     public void BackButton() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         SceneManager.LoadPreviousContextPage();
@@ -84,7 +88,7 @@ public class LevelEditorCreator : MonoBehaviour {
         tileImage.color = newColor;
     }
 
-    public void SubmitLevelSection() {
+    public void AddExplosionSelection() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
         string levelTextToAdd = "";
         for (int row = 0; row < GRID_DIMENSION; row++) {
@@ -97,16 +101,74 @@ public class LevelEditorCreator : MonoBehaviour {
                 }
             }
         }
-        levelText.text += levelTextToAdd;
+        levelExplosionsText.text += levelTextToAdd;
+    }
+
+    public void AddWallsSelection() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        string externalsTextToAdd = "";
+        for (int row = 0; row < GRID_DIMENSION; row++) {
+            for (int col = 0; col < GRID_DIMENSION; col++) {
+                if (tileActivationStates[row][col]) {
+                    GameObject tileToAdd = GameObject.Find(row.ToString() + "," + col.ToString());
+                    tileActivationStates[row][col] = false;
+                    ToggleTileColour(tileToAdd, row, col);
+                    externalsTextToAdd += "W" + tileToAdd.name + "\n";
+                }
+            }
+        }
+        levelExternalsText.text += externalsTextToAdd;
     }
 
     public void AddDelay() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);        
+        levelExplosionsText.text += "W" + currentDelayTimeSetting + "\n";
+    }
+
+    public void RemoveLastLineExplosions() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
-        // keyboard input
+        string newLevelText = "";
+        string[] levelLines = levelExplosionsText.text.Split('\n');
+        for (int levelLineIndex = 0; levelLineIndex < levelLines.Length - 2; levelLineIndex++) {
+            string line = levelLines[levelLineIndex];
+            newLevelText += line + "\n";
+        }
 
-        // add to level text
+        levelExplosionsText.text = newLevelText;
+    }
 
+    public void RemoveLastLineExternals() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        string newLevelText = "";
+        string[] levelLines = levelExternalsText.text.Split('\n');
+        for (int levelLineIndex = 0; levelLineIndex < levelLines.Length - 2; levelLineIndex++) {
+            string line = levelLines[levelLineIndex];
+            newLevelText += line + "\n";
+        }
+
+        levelExternalsText.text = newLevelText;
+    }
+
+    public void DecreaseCurrentDelayValue() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        if (currentDelayTimeSetting > 50) {
+            currentDelayTimeSetting -= 50;
+        }
+
+        delayText.text = "Add Delay\n(" + currentDelayTimeSetting + " ms)";
+    }
+
+    public void IncreaseCurrentDelayValue() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
+        if (currentDelayTimeSetting < 10000) {
+            currentDelayTimeSetting += 50;
+        }
+
+        delayText.text = "Add Delay\n(" + currentDelayTimeSetting + " ms)";
     }
 
     public void SaveLevel() {
@@ -114,7 +176,7 @@ public class LevelEditorCreator : MonoBehaviour {
 
         // formatting level text
         List<string> levelLinesToSave = new List<string>();
-        string[] levelTextLines = levelText.text.TrimEnd().Split('\n');
+        string[] levelTextLines = levelExplosionsText.text.TrimEnd().Split('\n');
         bool hasDelay = false;
         bool hasExplosion = false;
         foreach (string levelTextLine in levelTextLines) {
@@ -142,8 +204,9 @@ public class LevelEditorCreator : MonoBehaviour {
 
         // Save to resources file
         Debug.Log(levelStringToSave);
-    }
 
+        SetAndFadeOutputText(SAVE_SUCCESS_TEXT);
+    }
 
     //------------------
     // Message Handling
