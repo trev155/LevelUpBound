@@ -29,7 +29,14 @@ public class MainGame : MonoBehaviour {
     }
 
     public void UpdateLevelText() {
-        currentLevelLabel.text = "Current Level: " + GameContext.CurrentLevel;
+        string levelText;
+        if (GameContext.GameMode == Mode.CUSTOM) {
+            levelText = "Cus" + GameContext.LevelEditorSlotSelection;
+        } else {
+            levelText = GameContext.CurrentLevel + "";
+        }
+
+        currentLevelLabel.text = "Current Level: " + levelText;
     }
 
     public void UpdateGameModeText() {

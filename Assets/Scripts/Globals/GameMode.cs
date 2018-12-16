@@ -31,6 +31,7 @@ public static class GameMode {
         ModeNames.Add(Mode.CLASSIC, "Classic");
         ModeNames.Add(Mode.ADVANCED, "Advanced");
         ModeNames.Add(Mode.CHALLENGE, "Challenge");
+        ModeNames.Add(Mode.CUSTOM, "Custom");
 
         // Locations of the level files
         LevelPrefixes.Add(Mode.TUTORIAL, "Data/Levels/Tutorial");

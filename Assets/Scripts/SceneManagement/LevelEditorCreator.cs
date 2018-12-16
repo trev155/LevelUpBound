@@ -174,7 +174,20 @@ public class LevelEditorCreator : MonoBehaviour {
     public void SaveLevel() {
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
-        // formatting level text
+        List<string> levelLinesToSave = GetFormattedLevelTextList(levelExplosionsText);
+        if (levelLinesToSave == null) {
+            outputText.text = SAVE_FAILED_REQUIRED_ELEMENTS_TEXT;
+            return;
+        }
+        string levelStringToSave = GenerateLevelExplosionStringToSave(levelLinesToSave);
+
+        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_CUSTOM", levelStringToSave);
+        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_EXTERNALS", levelExternalsText.text);
+
+        outputText.text = SAVE_SUCCESS_TEXT;
+    }
+
+    private List<string> GetFormattedLevelTextList(Text text) {
         List<string> levelLinesToSave = new List<string>();
         string[] levelTextLines = levelExplosionsText.text.TrimEnd().Split('\n');
         bool hasDelay = false;
@@ -188,24 +201,21 @@ public class LevelEditorCreator : MonoBehaviour {
                 hasDelay = true;
             }
         }
-
-        // verify there is at least one delay, explosion
+        
         if (!hasDelay || !hasExplosion) {
-            outputText.text = SAVE_FAILED_REQUIRED_ELEMENTS_TEXT;
-            return;
+            Debug.Log("Cannot save - level does not have at least one explosion and one delay.");
+            return null;
         }
 
-        // generate final string to save to file
+        return levelLinesToSave;
+    }
+
+    private string GenerateLevelExplosionStringToSave(List<string> levelLinesToSave) {
         string levelStringToSave = "";
         foreach (string line in levelLinesToSave) {
             levelStringToSave += line + "\n";
         }
         levelStringToSave = levelStringToSave.TrimEnd();
-
-        // Save
-        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_CUSTOM", levelStringToSave);
-        PlayerPrefs.SetString(GameContext.LevelEditorSlotSelection + "_EXTERNALS", levelExternalsText.text);
-
-        outputText.text = SAVE_SUCCESS_TEXT;
+        return levelStringToSave;
     }
 }

@@ -31,29 +31,36 @@ public class LevelManager : MonoBehaviour {
             PlayTutorialLevel();
             return;
         }
-        if (GameContext.GameMode == Mode.CUSTOM) {
-            PlayCustomLevel();
-            return;
-        }
-
         PlayLevel();
     }
 
     public void PlayLevel() {
-        currentLevelCoroutine = LoadLevelCoroutine();
-        LoadExternalObjects();
-        levelConstructor.StartCoroutine(currentLevelCoroutine);
-        UpdateUIElements();
-    }
+        if (GameContext.GameMode == Mode.CUSTOM) {
+            string customLevelExplosions = PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_CUSTOM");
+            string customLevelExternals = PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_EXTERNALS");
+            List<string> customLevelExplosionsList = new List<string>();
+            foreach (string line in customLevelExplosions.Split('\n')) {
+                customLevelExplosionsList.Add(line);
+            }
+            currentLevelCoroutine = levelConstructor.LoadLevelFromList(customLevelExplosionsList);
 
-    private IEnumerator LoadLevelCoroutine() {
-        string levelPrefix = GameMode.GetLevelPrefix(GameContext.GameMode);
-        string levelFilepath = LevelStringConstructor.GetFilepathString(GameContext.CurrentLevel, levelPrefix);
-        currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
+            List<string> customLevelExternalsList = new List<string>();
+            foreach (string line in customLevelExternals.Split('\n')) {
+                customLevelExternalsList.Add(line);
+            }
+            levelConstructor.ConstructExternalObjects(customLevelExternalsList);
+        } else {
+            string levelPrefix = GameMode.GetLevelPrefix(GameContext.GameMode);
+            string levelFilepath = LevelStringConstructor.GetFilepathString(GameContext.CurrentLevel, levelPrefix);
+            currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
+        }
+
         if (currentLevelCoroutine == null) {
             throw new UnityException("Current Level Coroutine was null, cannot play level");
         }
-        return currentLevelCoroutine;
+
+        levelConstructor.StartCoroutine(currentLevelCoroutine);
+        UpdateUIElements();
     }
 
     private void LoadExternalObjects() {
@@ -130,30 +137,6 @@ public class LevelManager : MonoBehaviour {
         }
         tutorialModal.Initialize(messages, imageLevelToPaths);
         return;
-    }
-
-    private void PlayCustomLevel() {
-        string customLevelExplosions = PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_CUSTOM");
-        string customLevelExternals = PlayerPrefs.GetString(GameContext.LevelEditorSlotSelection + "_EXTERNALS");
-
-        List<string> customLevelExplosionsList = new List<string>();
-        foreach (string line in customLevelExplosions.Split('\n')) {
-            customLevelExplosionsList.Add(line);
-        }
-        currentLevelCoroutine = levelConstructor.LoadLevelFromList(customLevelExplosionsList);
-        if (currentLevelCoroutine == null) {
-            Debug.Log("Current Level Coroutine was null, cannot play");
-        }
-
-        List<string> customLevelExternalsList = new List<string>();
-        foreach (string line in customLevelExternals.Split('\n')) {
-            customLevelExternalsList.Add(line);
-        }
-        levelConstructor.ConstructExternalObjects(customLevelExternalsList);
-
-        levelConstructor.StartCoroutine(currentLevelCoroutine);
-        
-        // update UI
     }
 
     //----------------
