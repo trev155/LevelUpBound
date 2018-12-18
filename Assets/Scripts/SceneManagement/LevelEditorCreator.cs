@@ -33,6 +33,11 @@ public class LevelEditorCreator : MonoBehaviour {
         levelExplosionsText.text = "";
         levelExternalsText.text = "";
         outputText.text = "";
+
+        if (PersistentStorage.IsLevelSlotOccupied(GameContext.LevelEditorSlotSelection)) {
+            levelExplosionsText.text = PersistentStorage.LoadCustomLevelExplosions(GameContext.LevelEditorSlotSelection);
+            levelExternalsText.text = PersistentStorage.LoadCustomLevelExternals(GameContext.LevelEditorSlotSelection);
+        }
     }
 
     private void InitializeTileActivationStates() {

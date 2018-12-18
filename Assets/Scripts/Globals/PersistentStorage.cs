@@ -148,4 +148,49 @@ public static class PersistentStorage {
         PlayerPrefs.DeleteKey(levelSlot + "_CUSTOM");
         PlayerPrefs.DeleteKey(levelSlot + "_EXTERNALS");
     }
+
+    public static string LoadCustomLevelExplosions(int levelSlot) {
+        string levelData = PlayerPrefs.GetString(levelSlot + "_CUSTOM");
+        string formattedData = FormatCustomLevelData(levelData);
+        return formattedData;
+    }
+    
+    /*
+     * Expected input:
+     * T0,0 AR
+     * T1,2 AR
+     * T4,3 AR
+     * W500
+     * T1,2 AR
+     * T1,4 AR
+     * W500
+     * etc.
+     *
+     * Expected output:
+     * 0,0
+     * 1,2
+     * 4,3
+     * W500
+     * 1,2
+     * 1,4
+     * W500
+     * etc.
+     */
+    private static string FormatCustomLevelData(string data) {
+        string[] lines = data.Split('\n');
+        string formattedData = "";
+        foreach (string line in lines) {
+            if (line.Contains("AR")) {
+                formattedData += line.Substring(1, 3);
+            } else {
+                formattedData += line;
+            }
+            formattedData += "\n";
+        }
+        return formattedData;
+    }
+
+    public static string LoadCustomLevelExternals(int levelSlot) {
+        return PlayerPrefs.GetString(levelSlot + "_EXTERNALS");
+    }
 }

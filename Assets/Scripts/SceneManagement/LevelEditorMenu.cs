@@ -134,8 +134,13 @@ public class LevelEditorMenu : MonoBehaviour {
         }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
-        // TODO
-        // check if slot even exists. if not, output message
+        if (!PersistentStorage.IsLevelSlotOccupied(currentSelectedLevel)) {
+            outputText.text = LEVEL_DOES_NOT_EXIST_TEXT;
+            return;
+        }
+
+        GameContext.PreviousPageContext = SceneName.LEVEL_EDITOR_MENU;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR_CREATOR));
     }
     
     public void DeleteButton() {

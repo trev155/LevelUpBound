@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour {
             string levelPrefix = GameMode.GetLevelPrefix(GameContext.GameMode);
             string levelFilepath = LevelStringConstructor.GetFilepathString(GameContext.CurrentLevel, levelPrefix);
             currentLevelCoroutine = levelConstructor.LoadLevelFromFilepath(levelFilepath);
+            LoadExternalObjects();
         }
 
         if (currentLevelCoroutine == null) {
