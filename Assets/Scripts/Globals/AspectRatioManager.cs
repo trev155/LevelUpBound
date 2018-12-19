@@ -33,6 +33,8 @@ public static class AspectRatioManager {
                 AdjustLevelEditorSceneElements(0.75f);
             } else if (scene.name == SceneManager.GetSceneNameString(SceneName.INTRO)) {
                 AdjustIntroSceneElements(0.75f);
+            } else if (scene.name == SceneManager.GetSceneNameString(SceneName.LEVEL_EDITOR_CREATOR)) {
+                AdjustLevelCreatorSceneElements(0.75f);
             }
         }
     }
@@ -225,6 +227,43 @@ public static class AspectRatioManager {
             SetFontSize("TitleText", 120);
             ResizeCanvasElement("TitleText", 600, 500);
             ResizeCanvasElement("Arrow", 400, 400);
+        }
+    }
+
+    private static void AdjustLevelCreatorSceneElements(float aspectRatio) {
+        if (aspectRatio == 0.75) {
+            ResizeCanvasElement("GridContainer", 720, 720);
+            SetAnchoredPosition("GridContainer", 0, -400);
+            SetAnchoredPosition("0,0", 80, 80);
+            SetAnchoredPosition("0,1", 220, 80);
+            SetAnchoredPosition("0,2", 360, 80);
+            SetAnchoredPosition("0,3", 500, 80);
+            SetAnchoredPosition("0,4", 640, 80);
+            SetAnchoredPosition("1,0", 80, 220);
+            SetAnchoredPosition("1,1", 220, 220);
+            SetAnchoredPosition("1,2", 360, 220);
+            SetAnchoredPosition("1,3", 500, 220);
+            SetAnchoredPosition("1,4", 640, 220);
+            SetAnchoredPosition("2,0", 80, 360);
+            SetAnchoredPosition("2,1", 220, 360);
+            SetAnchoredPosition("2,2", 360, 360);
+            SetAnchoredPosition("2,3", 500, 360);
+            SetAnchoredPosition("2,4", 640, 360);
+            SetAnchoredPosition("3,0", 80, 500);
+            SetAnchoredPosition("3,1", 220, 500);
+            SetAnchoredPosition("3,2", 360, 500);
+            SetAnchoredPosition("3,3", 500, 500);
+            SetAnchoredPosition("3,4", 640, 500);
+            SetAnchoredPosition("4,0", 80, 640);
+            SetAnchoredPosition("4,1", 220, 640);
+            SetAnchoredPosition("4,2", 360, 640);
+            SetAnchoredPosition("4,3", 500, 640);
+            SetAnchoredPosition("4,4", 640, 640);
+
+            SetAnchoredPosition("LevelDefinitionPanel", -300, -1050);
+            SetAnchoredPosition("ControlPanel", 220, -1050);
+
+            SetAnchoredPosition("FooterPanel", 220, -1340);
         }
     }
 }
