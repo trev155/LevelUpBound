@@ -2471,10 +2471,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3b0eb0baee3474cb11a0384ce35e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelExplosionsText: {fileID: 0}
-  levelExternalsText: {fileID: 0}
+  levelExplosionsText: {fileID: 1243441160}
+  levelExternalsText: {fileID: 2118772536}
   outputText: {fileID: 106249391}
   delayText: {fileID: 703574688}
+  modalPages: {fileID: 114839353534785160, guid: 73a0c1c57a92a0b4fb2591dffb7dfe25,
+    type: 2}
+  modalContainer: {fileID: 757501133}
 --- !u!1 &655880018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3915,6 +3918,12 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1211500443}
   m_CullTransparentMesh: 0
+--- !u!114 &1243441160 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114777485624284020, guid: e67caeeafd472eb4baf56724dae7c106,
+    type: 2}
+  m_PrefabInternal: {fileID: 491890734}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1274741786
 Prefab:
   m_ObjectHideFlags: 0
@@ -4619,7 +4628,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1493573288}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 623366376}
+        m_MethodName: InstructionsButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1493573288
@@ -6426,3 +6446,9 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2110282828}
   m_CullTransparentMesh: 0
+--- !u!114 &2118772536 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114777485624284020, guid: e67caeeafd472eb4baf56724dae7c106,
+    type: 2}
+  m_PrefabInternal: {fileID: 406763487}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}

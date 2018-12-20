@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Util\Modal.cs" />
     <Compile Include="Assets\Scripts\Util\ModalConfirmDeny.cs" />
     <Compile Include="Assets\Scripts\Util\ModalInfo.cs" />
+    <Compile Include="Assets\Scripts\Util\ModalPages.cs" />
     <Compile Include="Assets\Scripts\Util\ModalPrelevelInfo.cs" />
     <Compile Include="Assets\Scripts\Util\Utils.cs" />
     <None Include="Assets\Resources\Data\ExternalObjects\Advanced\014.txt" />

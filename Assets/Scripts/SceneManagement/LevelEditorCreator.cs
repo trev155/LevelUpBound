@@ -12,7 +12,10 @@ public class LevelEditorCreator : MonoBehaviour {
     public Text levelExternalsText;
     public Text outputText;
     public Text delayText;
-    
+    public ModalPages modalPages;
+    public Transform modalContainer;
+
+    private ModalPages levelEditorInstructionsModal;
 
     private const string SAVE_FAILED_REQUIRED_ELEMENTS_TEXT = "Save failed!\nYour level must have at least one explosion and one delay element!";
     private const string SAVE_SUCCESS_TEXT = "Save Successful!";
@@ -55,19 +58,14 @@ public class LevelEditorCreator : MonoBehaviour {
         }
     }
 
-    /*
-     * Back button handler
-     */
-    public void BackButton() {
-        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
-        SceneManager.LoadPreviousContextPage();
-        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
-    }
-
     //--------------------
     // Level Construction
     //--------------------
     public void GameTilePressed() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         GameObject tilePressed = EventSystem.current.currentSelectedGameObject;
@@ -94,7 +92,12 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     public void AddExplosionSelection() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
         string levelTextToAdd = "";
         for (int row = 0; row < GRID_DIMENSION; row++) {
             for (int col = 0; col < GRID_DIMENSION; col++) {
@@ -110,7 +113,12 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     public void AddWallsSelection() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+
         string externalsTextToAdd = "";
         for (int row = 0; row < GRID_DIMENSION; row++) {
             for (int col = 0; col < GRID_DIMENSION; col++) {
@@ -126,11 +134,17 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     public void AddDelay() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);        
         levelExplosionsText.text += "W" + currentDelayTimeSetting + "\n";
     }
 
     public void RemoveLastLineExplosions() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         string newLevelText = "";
@@ -144,6 +158,9 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     public void RemoveLastLineExternals() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         string newLevelText = "";
@@ -157,6 +174,9 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     public void DecreaseCurrentDelayValue() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         if (currentDelayTimeSetting > 50) {
@@ -167,6 +187,9 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     public void IncreaseCurrentDelayValue() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         if (currentDelayTimeSetting < 10000) {
@@ -177,6 +200,9 @@ public class LevelEditorCreator : MonoBehaviour {
     }
 
     public void SaveLevel() {
+        if (GameContext.ModalActive) {
+            return;
+        }
         AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
 
         List<string> levelLinesToSave = GetFormattedLevelTextList(levelExplosionsText);
@@ -221,5 +247,34 @@ public class LevelEditorCreator : MonoBehaviour {
         }
         levelStringToSave = levelStringToSave.TrimEnd();
         return levelStringToSave;
+    }
+
+    //-------
+    // Other
+    //-------
+    public void BackButton() {
+        if (GameContext.ModalActive) {
+            return;
+        }
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+        SceneManager.LoadPreviousContextPage();
+        GameContext.PreviousPageContext = SceneName.MAIN_MENU;
+    }
+
+    public void InstructionsButton() {
+        AudioManager.Instance.PlayUISound(AudioManager.BUTTON_DING);
+       
+        levelEditorInstructionsModal = Instantiate(modalPages, modalContainer);
+
+        List<string> messages = new List<string>();
+        Dictionary<int, string> imageLevelToPaths = new Dictionary<int, string>();
+        messages.Add("Page One");
+        messages.Add("Page Two");
+        messages.Add("Page Three");
+        imageLevelToPaths.Add(2, "TutorialImages/tut1-2");
+        imageLevelToPaths.Add(3, "TutorialImages/tut1-3");
+       
+        levelEditorInstructionsModal.Initialize(messages, imageLevelToPaths);
+        return;
     }
 }
