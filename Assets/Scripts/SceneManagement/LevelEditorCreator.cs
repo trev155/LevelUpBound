@@ -268,12 +268,18 @@ public class LevelEditorCreator : MonoBehaviour {
 
         List<string> messages = new List<string>();
         Dictionary<int, string> imageLevelToPaths = new Dictionary<int, string>();
-        messages.Add("Page One");
-        messages.Add("Page Two");
-        messages.Add("Page Three");
-        imageLevelToPaths.Add(2, "TutorialImages/tut1-2");
-        imageLevelToPaths.Add(3, "TutorialImages/tut1-3");
-       
+        messages.Add("The Level Editor allows you to create your own levels. A level consists of several components: explosions, delays, and optional external objects.");
+        messages.Add("By tapping on the tiles above you can toggle which tiles will create explosions. For example if you want to explode the middle column, you would tap on the tiles shown below.");
+        messages.Add("Once you have selected the tiles you want to trigger as explosions, select the 'Add Explosions' button");
+        messages.Add("After adding explosions, you'll want to introduce a delay using the 'Add Delay' button. You can also adjust the delay time with the given controls.");
+        messages.Add("You can also add walls to your level. Select the tiles you want to add as walls, and then click 'Add As Walls'");
+        messages.Add("You can see a text-based representation of your level in the text areas below left. You can also remove lines from your level if you make a mistake.");
+        messages.Add("A few final notes: coordinates of 0,0 represents the bottom left tile, 0,4 is the bottom right tile, 4,4 is the top right, and so on. \n Also don't forget to save your level when you are done!");
+        imageLevelToPaths.Add(2, "EditorInstructionImages/ins2");
+        imageLevelToPaths.Add(3, "EditorInstructionImages/ins3");
+        imageLevelToPaths.Add(4, "EditorInstructionImages/ins4");
+        imageLevelToPaths.Add(5, "EditorInstructionImages/ins5");
+        imageLevelToPaths.Add(6, "EditorInstructionImages/ins6");
         levelEditorInstructionsModal.Initialize(messages, imageLevelToPaths);
         return;
     }
