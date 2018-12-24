@@ -117,9 +117,14 @@ public class LevelManager : MonoBehaviour {
         if (GameContext.CurrentLevel == 1) {
             messages.Add("Welcome to Level Up Bound! This game is a top-down arcade style game where you dodge obstacles.");
             messages.Add("Your objective is to reach the goal circle at the top of the screen.");
-            messages.Add("Make your way to the top by tapping on the control arrows, and don't get caught in the explosions!");
             imageLevelToPaths.Add(2, "TutorialImages/tut1-2");
-            imageLevelToPaths.Add(3, "TutorialImages/tut1-3");
+            if (GameContext.ControlScheme == ControlMode.ARROW) {
+                messages.Add("Make your way to the top by tapping on the control arrows, and don't get caught in the explosions!");
+                imageLevelToPaths.Add(3, "TutorialImages/tut1-3a");
+            } else {
+                messages.Add("Make your way to the top by tapping on the screen where you want to go, and don't get caught in the explosions!");
+                imageLevelToPaths.Add(3, "TutorialImages/tut1-3b");
+            }   
         }
         if (GameContext.CurrentLevel == 2) {
             messages.Add("Great work! Different levels have different explosion patterns. Try to analyze what the pattern is before you start moving!");
