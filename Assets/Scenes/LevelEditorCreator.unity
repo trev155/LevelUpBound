@@ -1739,6 +1739,26 @@ Prefab:
 
         W4,0'
       objectReference: {fileID: 0}
+    - target: {fileID: 114033714182184672, guid: e67caeeafd472eb4baf56724dae7c106,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114033714182184672, guid: e67caeeafd472eb4baf56724dae7c106,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114278198435190154, guid: e67caeeafd472eb4baf56724dae7c106,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114278198435190154, guid: e67caeeafd472eb4baf56724dae7c106,
+        type: 2}
+      propertyPath: m_ShowMaskGraphic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e67caeeafd472eb4baf56724dae7c106, type: 2}
   m_IsPrefabAsset: 0
@@ -2060,6 +2080,16 @@ Prefab:
     - target: {fileID: 1359582370172090, guid: e67caeeafd472eb4baf56724dae7c106, type: 2}
       propertyPath: m_Name
       value: LevelExplosionScrollArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 114033714182184672, guid: e67caeeafd472eb4baf56724dae7c106,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114033714182184672, guid: e67caeeafd472eb4baf56724dae7c106,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e67caeeafd472eb4baf56724dae7c106, type: 2}
