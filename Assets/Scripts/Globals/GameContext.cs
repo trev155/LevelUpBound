@@ -48,6 +48,7 @@ public static class GameContext {
      */
     static GameContext() {
         SetDefaultGameContextValues();
+        Screen.fullScreen = false;
     }
 
     public static void SetDefaultGameContextValues() {

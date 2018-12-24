@@ -14,7 +14,7 @@ public class About : MonoBehaviour {
         ThemeManager.SetTheme();
 
         image.sprite = Resources.Load<Sprite>("AboutImages/ab1");
-        imageCaption.text = "Inspiration for this game can from the popular series of custom maps from SCBW.";
+        imageCaption.text = "Inspiration for this game came from the popular series of custom maps from SCBW.";
         aboutText.text = "This game was made mostly for fun. For more information, see: https://github.com/trev155/LevelUpBound";
     }
 
