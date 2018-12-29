@@ -7,14 +7,14 @@ This game was developed using Unity 2018 (2018.2.15f1)
 Here is a youtube video depicting some gameplay:
 [https://www.youtube.com/watch?v=cAfTYKNe7z8](https://www.youtube.com/watch?v=cAfTYKNe7z8)
 
-Some screens:
-![](promo/promo1.png)  
-![](promo/promo2.png)  
-![](promo/promo3.png)  
-![](promo/promo4.png)  
-![](promo/promo5.png)  
-![](promo/promo6.png)  
-![](promo/promo7.png)  
+Some screens:  
+<img src="promo/promo1.png" width="400" height="700">  
+<img src="promo/promo2.png" width="400" height="700">  
+<img src="promo/promo3.png" width="400" height="700">  
+<img src="promo/promo4.png" width="400" height="700">  
+<img src="promo/promo5.png" width="400" height="700">  
+<img src="promo/promo6.png" width="400" height="700">  
+<img src="promo/promo7.png" width="400" height="700">  
 
 ## Credits
 This project was developed for my own interests. I do not monetize any of this, there are no ads.
@@ -28,8 +28,8 @@ These tracks were found on the Youtube Audio Library.
 
 ### Fonts
 Caviar Dreams  
-Colab
-Belleza   
+Colab  
+Belleza  
 
 ### Inspiration
 This game closely resembles the "Level Up Bound" map from SCBW. Credit goes to the maker, Mp(U).
