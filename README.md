@@ -1,5 +1,5 @@
 # Level Up Bound
-This project is an android application game. The game is an arcade-style concept based around the popular series of SCBW maps. It contains a lot of hand-eye cooordination, where you have to navigate different types of levels that feature varying patterns. Level patterns vary widely in difficulty and style, which creates a unique gameplay experience throughout.
+This project is an android application game. The game is an arcade-style concept based around the popular series of SCBW maps. It contains a lot of hand-eye co-ordination, where you have to navigate different types of levels that feature varying patterns. Level patterns vary widely in difficulty and style, which creates a unique gameplay experience throughout.
 
 This game was developed using Unity 2018 (2018.2.15f1)
 
