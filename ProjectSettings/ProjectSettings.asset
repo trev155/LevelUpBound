@@ -244,7 +244,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Trevor/Documents/LevelUpBound/user.keystore
+  AndroidKeystoreName: C:/Users/Trevor/Desktop/Files/programming/LevelUpBound/lub.keystore
   AndroidKeyaliasName: mykey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
